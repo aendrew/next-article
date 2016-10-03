@@ -53,7 +53,7 @@ function positionComponent ($, position) {
 module.exports = function ($, flags, options = {}) {
 	if (flags && flags.nextFtTour && flags.nextFtTourTipArticlePage && !options.fragment) {
 		removeInsignificantElsFromChain($('*'), options);
-		positionComponent($, 1);
+		positionComponent($, 6);
 	}
 	return $;
 };
