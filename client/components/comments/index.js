@@ -74,9 +74,13 @@ module.exports = {
 		commentsSkeleton.init();
 
 		let loadOpts = {lazy: false};
-		// before turning on lazy loading check first that lazy loading is enabled
-		// and the user has not followed a link to the comments section
-		if (commentsEl.getAttribute('data-comments-lazy-load') === 'true' && !/#lf-content|#comments|#lf-comments/.test(window.location.hash)) {
+		// if the user has followed a link to the comments section don't lazy load
+		if (/#lf-content|#comments|#lf-comments/.test(window.location.hash)) {
+			// fix for double hash bug https://jira.ft.com/browse/NFT-598
+			location.hash = location.hash.replace(/.*(#lf-content|#comments|#lf-comments)/, '$1');
+		} else if (location.search.indexOf('lf-content') > -1) {
+			// do nothing
+		} else {
 			const initialEngagement = tracking.getInitialEngagement();
 			if (['default', 'S'].indexOf(oGrid.getCurrentLayout()) > -1) {
 				if (initialEngagement !== 'active') {
@@ -87,6 +91,7 @@ module.exports = {
 					};
 				}
 			} else {
+
 				if (initialEngagement !== 'active') {
 					loadOpts = {
 						targetSelector: '#comments',
