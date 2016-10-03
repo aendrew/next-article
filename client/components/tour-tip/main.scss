@@ -12,4 +12,5 @@
 	margin-bottom: $spacing-unit;
 	border: 1px solid getColorFor(card, border);
 	display: block;
+	clear: left;
 }
