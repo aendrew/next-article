@@ -64,7 +64,8 @@ const getAdJson = (data) => {
 	if(markup && markup.length && markup.indexOf(delimiter) >= 0) {
 
 		try {
-			const adCustomJson = JSON.parse(markup.split(delimiter)[1]);
+			const jsonString = markup.split(delimiter)[1];
+			const adCustomJson = JSON.parse(jsonString.replace(/\n/g, ''));
 			adCustomJson.id = jsonResponse[adUnitKey]['_creative_ids_'][0];
 			adCustomJson.lineItemId = jsonResponse[adUnitKey]['_adgroup2_ids_'][0];
 			return adCustomJson;
@@ -82,7 +83,9 @@ const handleResponse = (el, response) => {
 		return;
 	}
 
-	document.querySelector('.promoted-content').classList.add('promoted-content--loaded');
+	const container = document.querySelector('.promoted-content')
+	container.classList.add('promoted-content--loaded');
+	container.classList.add(`promoted-content--${response.type}`);
 
 	const props = {
 		data: {
