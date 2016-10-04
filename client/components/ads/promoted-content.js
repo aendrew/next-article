@@ -92,7 +92,7 @@ const handleResponse = (el, response) => {
 			content: [ response ]
 		},
 		itemIndex: 0,
-		image: response.image && response.image.url ? {
+		image: response.image && response.image.url && response.type !== 'special-report' ? {
 			position: {
 				default: 'embedded'
 			},
@@ -143,6 +143,7 @@ function initPaidPost (el, flags, ads) {
 
 
 			if(data.type === 'special-report' && !secondEl.textContent) {
+				skipSmartmatch = true;
 				el.setAttribute('data-o-grid-colspan', '12 M6');
 				secondEl.setAttribute('data-o-grid-colspan', '12 M6');
 				initPaidPost(secondEl, flags, ads);

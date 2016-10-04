@@ -63,6 +63,37 @@ $ad-medium-breakpoint: 760px;
 
 .promoted-content {
 	display: none;
+	border: 1px solid getColor('pink-tint3');
+	margin: 32px 0;
+
+	.card {
+		margin-top: 0;
+		&:before {
+			display: none;
+		}
+		&:after {
+			top: 12px;
+			bottom: 12px;
+		}
+	}
+
+	.section__column__inner:before {
+		display: none;
+	}
+
+	.card.card--paid-post,
+	.card.card--smartmatch {
+		margin-top: 0;
+		.card__content {
+			margin: 0;
+			&:after {
+				bottom: 15px;
+				right: 15px;
+			}
+		}
+	}
+
+
 }
 
 .promoted-content--loaded {
