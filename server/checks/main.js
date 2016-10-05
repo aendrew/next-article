@@ -42,6 +42,7 @@ function pingServices () {
 function buildStatus (version) {
 	return {
 		getStatus: () => ({
+			id: 'elastic-fetch',
 			name: `elastic:${version} responded successfully.`,
 			ok: statuses.elastic[version],
 			businessImpact: 'Users may not see article content.',
@@ -55,6 +56,7 @@ function buildStatus (version) {
 function livefyreStatus () {
 	return {
 		getStatus: () => ({
+			id: 'livefyre-fetch',
 			name: 'session-user-data.webservices.ft.com (livefyre) responded successfully.',
 			ok: statuses.livefyre,
 			businessImpact: 'Users may not see comments at bottom of article',
@@ -74,6 +76,7 @@ module.exports = {
 	esv3: buildStatus('v3'),
 	livefyre: livefyreStatus(),
 	errorRate: nHealth.runCheck({
+			id: '500-rate',
 			type: 'graphiteSpike',
 			numerator: `heroku.article.*${process.env.REGION || ''}.express.default_route_GET.res.status.5**.count`,
 			divisor: `heroku.article.*${process.env.REGION || ''}.express.default_route_GET.res.status.*.count`,
