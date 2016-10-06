@@ -75,7 +75,7 @@ module.exports = function negotiationController (req, res, next) {
 				}
 			}
 
-			return shellpromise(`curl -s http://www.ft.com/cms/s/${req.params.id}.html -H 'Cookie: sticky=no-match' -I | grep -i location || echo`, { verbose: true })
+			return shellpromise(`curl -s http://www.ft.com/cms/s/${req.params.id}.html -H 'FT-Site: falcon' -I | grep -i location || echo`, { verbose: true })
 				.then(response => {
 					const webUrl = response.replace(/^Location:/i, '').trim();
 
