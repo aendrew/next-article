@@ -6,11 +6,11 @@
 	}
 @include nUiCriticalEnd();
 
-
 .tour-tip--article-page {
 	@include nContentBoxInline();
-	margin-bottom: $spacing-unit;
 	border: 1px solid getColorFor(card, border);
-	display: block;
 	clear: left;
+	display: block;
+	margin-bottom: $spacing-unit;
+	position: relative;
 }

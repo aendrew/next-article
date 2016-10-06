@@ -3,6 +3,7 @@ const OVideo = require('o-video');
 const lightSignup = require('o-email-only-signup');
 const expander = require('n-ui/expander');
 const nUiConfig = require('./n-ui-config');
+const tipDismisser = require('n-ui/tour-tip/lib/dismiss.js');
 import {bootstrap} from 'n-ui';
 // import cacheJourney from './components/cache-journey/cache-journey';
 import {init as commentsInit} from './components/comments';
@@ -49,6 +50,12 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 		lightSignup.init();
 		expander.init();
 		promotedContent(flags);
+
+		tipDismisser(flags, {
+			tipContainer: '.tour-tip--article-page',
+			appendDismisserTo: '.tour-tip--article-page',
+			localStorageKey: 'tour-tip-article-dismissed'
+		});
 
 		const videos = document.querySelectorAll('[data-o-component="o-video"]');
 		Array.from(videos).forEach(video => {
