@@ -3,7 +3,7 @@
   "dependencies": {
     "n-content-body": "^2.0.5",
     "n-email-article": "^1.2.9",
-    "n-image": "^4.1.4",
+    "n-image": "^4.3.0",
     "n-section": "^6.1.2",
     "n-service-worker": "^1.1.0",
     "n-ui": "^2.11.0",

@@ -1,7 +1,6 @@
 // modules that need to be compiled by babel
 const es6Modules = [
 	'@financial-times/n-card',
-	'@financial-times/n-image',
 	'@financial-times/n-section',
 	'@financial-times/n-ui',
 	'o-date'
