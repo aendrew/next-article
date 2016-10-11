@@ -33,21 +33,20 @@ function removeInsignificantElsFromChain (els, options) {
 }
 
 function positionComponent ($, position) {
-	$('p').each((index, par) => {
+	const paragraphs = $('p')
 
-		const indexMatches = ((index + 1) >= position);
-		const isOrphan = !par.parent;
+	const match = paragraphs.filter(i => {
+		if (i + 1 < position) return false;
 
-		const hasTwoFollowingPs = par.next && par.next.next && par.next.name === 'p' && par.next.next.name === 'p';
-		const secondPIsNotJustIntroForQuote = par.next && par.next.next && (!par.next.next.next || par.next.next.next.name !== 'blockquote');
-		const prevIsPOrNothing = index <= 1 || !par.prev || par.prev.name === 'p';
-		const prevPrevIsPOrNothing = index <= 2 || !par.prev || !par.prev.prev || par.prev.prev.name === 'p';
+		const p = paragraphs.eq(i);
 
-		if (indexMatches && isOrphan && hasTwoFollowingPs && secondPIsNotJustIntroForQuote && prevIsPOrNothing && prevPrevIsPOrNothing) {
-			$(par).after(getRandomTourTipHtml());
-			return false;
-		}
+		const hasThreeFollowingPs = p.nextUntil(':not(p)').length >= 3;
+		const prevIsPOrNothing = p.prev().length === 0 || p.prev().is('p');
+
+		return hasThreeFollowingPs && prevIsPOrNothing;
 	});
+
+	match.first().after(getRandomTourTipHtml());
 }
 
 module.exports = function ($, flags, options = {}) {

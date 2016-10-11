@@ -12,9 +12,9 @@ describe('Tour tip component inside body', function () {
 		const flags = {nextFtTour: true, nextFtTourTipArticlePage: true};
 
 		it('should insert the component after the 6th paragraph', () => {
-			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p>');
+			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p>');
 			tourTipTransform($, flags);
-			expect($.html()).to.equal(`<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>${mockTourTipHtml}<p>7</p><p>8</p>`);
+			expect($.html()).to.equal(`<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>${mockTourTipHtml}<p>7</p><p>8</p><p>9</p><p>10</p>`);
 		});
 
 
@@ -49,11 +49,11 @@ describe('Tour tip component inside body', function () {
 		});
 
 		it('should play nicely with light signup when user is anonymous', () => {
-			const $ = cheerio.load(`<p>1</p>${lightSignupHtml}<p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p>`);
+			const $ = cheerio.load(`<p>1</p>${lightSignupHtml}<p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p>`);
 			tourTipTransform($, flags, {
 				userIsAnonymous: true
 			});
-			expect($.html()).to.equal(`<p>1</p>${lightSignupHtml}<p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>${mockTourTipHtml}<p>7</p><p>8</p>`);
+			expect($.html()).to.equal(`<p>1</p>${lightSignupHtml}<p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>${mockTourTipHtml}<p>7</p><p>8</p><p>9</p><p>10</p>`);
 		});
 
 	});
