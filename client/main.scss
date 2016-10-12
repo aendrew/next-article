@@ -13,7 +13,7 @@ $n-ui-output-critical: $output-critical;
 
 @include nUiCriticalStart();
 	@import 'n-image/main';
-	@import 'n-card/components/classifier';
+	@import 'n-card/src/components/classifier';
 
 	[data-o-grid-colspan~=Loffset1] {
 		@include oGridRespondTo(L) {
