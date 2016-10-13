@@ -64,7 +64,9 @@ $ad-medium-breakpoint: 760px;
 .promoted-content {
 	display: none;
 	border: 1px solid getColor('pink-tint3');
-	margin: 32px 0;
+	.related-content & {
+		margin: 32px 0;
+	}
 
 	.card {
 		margin-top: 0;
@@ -81,15 +83,12 @@ $ad-medium-breakpoint: 760px;
 		display: none;
 	}
 
+	.card.card--promoted-content,
 	.card.card--paid-post,
 	.card.card--smartmatch {
 		margin-top: 0;
 		.card__content {
 			margin: 0;
-			&:after {
-				bottom: 15px;
-				right: 15px;
-			}
 		}
 	}
 
