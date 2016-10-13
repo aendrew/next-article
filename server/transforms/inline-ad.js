@@ -31,7 +31,9 @@ module.exports = function ($, flags) {
 
 	if(flags.threeAdProposition && pars.length <= 3) {
 		//If article shorter than three pars, insert an ad right at the end
-		$('p').last().after(midAd);
+		if ($('*').last()[0].name === 'p'){
+			$('*').last().after(midAd);
+		}
 	} else {
 
 		const maxAdsToRender = 2;

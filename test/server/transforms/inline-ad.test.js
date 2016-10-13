@@ -17,9 +17,15 @@ describe('Inline ad inside body', function () {
 	});
 
 	it('should insert an ad at the end of the doc if there are three paragraphs', function () {
+		const $ = cheerio.load('<p>1</p><img><p>2</p><p>3</p>', { decodeEntities: false });
+		inlineAdTransform($, { threeAdProposition: true }, {adsLayout: 'default'});
+		expect($.html()).to.equal(`<p>1</p><img><p>2</p><p>3</p>${adHtmlWithoutResponsive}`);
+	});
+
+	it('should not insert an ad at the end of the doc if there are three paragraphs but the last element is not a paragraph', function () {
 		const $ = cheerio.load('<p>1</p><img><p>2</p><p>3</p><img>', { decodeEntities: false });
 		inlineAdTransform($, { threeAdProposition: true }, {adsLayout: 'default'});
-		expect($.html()).to.equal(`<p>1</p><img><p>2</p><p>3</p><img>${adHtmlWithoutResponsive}`);
+		expect($.html()).to.equal('<p>1</p><img><p>2</p><p>3</p><img>');
 	});
 
 	it('should not insert an ad at the end of the doc if there are three paragraphs and the flag is off', function () {
