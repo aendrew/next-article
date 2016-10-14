@@ -49,7 +49,6 @@
 				class="n-content-tag n-content-tag--with-follow">{{name}}</a>
 			{{#if @root.flags.myFtApi}}
 				{{>n-ui/myft/templates/follow version='3' conceptId=id}}
-				{{#if @root.flags.myftQrCodeFollow}}<img class="myft-ui__qr-code" src="/__myft/api/offsite/followed/concept/{{id}}?method=put&amp;name={{name}}&amp;taxonomy={{taxonomy}}&amp;format=qr-code">{{/if}}
 			{{/if}}
 		</li>
 		{{/each}}
