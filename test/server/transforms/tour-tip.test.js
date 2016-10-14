@@ -10,19 +10,19 @@ describe('Tour tip component inside body', function () {
 	describe('Position component', function () {
 		const flags = { nextFtTour: true, nextFtTourTipArticlePage: true };
 
-		it('should insert the component after the 6th paragraph', () => {
+		it('should insert the tip after the 6th paragraph', () => {
 			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p>');
 			tourTipTransform($, flags, { userIsAnonymous: false });
 			expect($.html()).to.equal(`<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>${mockTourTipHtml}<p>7</p><p>8</p><p>9</p><p>10</p>`);
 		});
 
-		it('should not insert the component if there are only 6 paragraphs', () => {
+		it('should not insert the tip if there are only 6 paragraphs', () => {
 			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><img>');
 			tourTipTransform($, flags, { userIsAnonymous: false });
 			expect($.html()).to.equal('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><img>');
 		});
 
-		it('should not insert the component if there are fewer than 2 paras after the proposed place', () => {
+		it('should not insert the tip if there are fewer than 2 paras after the proposed place', () => {
 			// this fixes problems where there isn't enough text between the tip and e.g. an add and we get loads of
 			// whitespace
 			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p>');
@@ -30,7 +30,7 @@ describe('Tour tip component inside body', function () {
 			expect($.html()).to.equal('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p>');
 		});
 
-		it('should not insert the component if follow two paras are followed by a quote', () => {
+		it('should not insert the tip if follow two paras are followed by a quote', () => {
 			// this fixes case where there are two paras between the tip and a quote but on of the paras is like an intro
 			// to the quote so its really small and we end up with loads of whitespace
 			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><blockquote>do or do not there is no try</blockquote><p>4</p><p>5</p>');
@@ -38,7 +38,7 @@ describe('Tour tip component inside body', function () {
 			expect($.html()).to.equal('<p>1</p><p>2</p><p>3</p><blockquote>do or do not there is no try</blockquote><p>4</p><p>5</p>');
 		});
 
-		it('should not insert the component if follow two paras are followed by a quote', () => {
+		it('should not insert the tip if follow two paras are followed by a quote', () => {
 			// this fixes case where there are two paras between the tip and a quote but on of the paras is like an intro
 			// to the quote so its really small and we end up with loads of whitespace
 			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><blockquote>do or do not there is no try</blockquote><p>4</p><p>5</p>');
@@ -46,7 +46,7 @@ describe('Tour tip component inside body', function () {
 			expect($.html()).to.equal('<p>1</p><p>2</p><p>3</p><blockquote>do or do not there is no try</blockquote><p>4</p><p>5</p>');
 		});
 
-		it('should not insert the component when user is anonymous', () => {
+		it('should not insert the tip when user is anonymous', () => {
 			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p>');
 			tourTipTransform($, flags, {
 				userIsAnonymous: true
@@ -54,10 +54,16 @@ describe('Tour tip component inside body', function () {
 			expect($.html()).to.equal('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p>');
 		});
 
-		it('should not insert the component when userIsAnonymous property isn’t passed through', () => {
+		it('should not insert the tip when userIsAnonymous property isn’t passed through', () => {
 			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p>');
 			tourTipTransform($, flags);
 			expect($.html()).to.equal('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p>');
+		});
+
+		it('should not insert the tip into any nested elements', () => {
+			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><aside><p>6</p><p>7</p><p>8</p><p>9</p></aside><p>10</p><p>11</p><p>12</p><p>13</p><p>14</p>');
+			tourTipTransform($, flags, { userIsAnonymous: false });
+			expect($.html()).to.equal(`<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><aside><p>6</p><p>7</p><p>8</p><p>9</p></aside><p>10</p><p>11</p>${mockTourTipHtml}<p>12</p><p>13</p><p>14</p>`);
 		});
 
 	});

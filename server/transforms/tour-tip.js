@@ -33,7 +33,7 @@ function removeInsignificantElsFromChain (els, options) {
 }
 
 function positionComponent ($, position) {
-	const paragraphs = $('p')
+	const paragraphs = $.root().children('p');
 
 	const match = paragraphs.filter(i => {
 		if (i + 1 < position) return false;
