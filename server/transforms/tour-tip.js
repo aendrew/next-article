@@ -50,7 +50,10 @@ function positionComponent ($, position) {
 }
 
 module.exports = function ($, flags, options = {}) {
-	if (flags && flags.nextFtTour && flags.nextFtTourTipArticlePage && !options.fragment) {
+	const flagsOn = flags && flags.nextFtTour && flags.nextFtTourTipArticlePage;
+	const anonymous = typeof options.userIsAnonymous === 'undefined' || options.userIsAnonymous;
+
+	if (flagsOn && !options.fragment && !anonymous) {
 		removeInsignificantElsFromChain($('*'), options);
 		positionComponent($, 6);
 	}
