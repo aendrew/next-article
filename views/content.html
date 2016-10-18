@@ -10,9 +10,11 @@
 {{/defineBlock}}
 <article id="site-content" role="main" class="article{{#if designGenre}} article--brand {{#if designGenre.headshot}}article--brand--headshot{{/if}}{{/if}}" data-content-id="{{id}}" data-content-sources="{{#if articleV1}}v1{{/if}} {{#if articleV2}}v2{{/if}}">
 
-	{{#defineBlock 'above-header'}}
-		{{> ads/top}}
-	{{/defineBlock}}
+	{{#if @root.flags.stickyHeaderAd}}
+		{{#defineBlock 'sticky-advert'}}{{> ads/top }}{{/defineBlock}}
+	{{else}}
+		{{#defineBlock 'above-header'}}{{> ads/top }}{{/defineBlock}}
+	{{/if}}
 
 	{{> header/content-header}}
 	<div class="article__wrapper {{#if mainImageHtml}}article__wrapper--main-image{{/if}}">
