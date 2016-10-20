@@ -28,6 +28,8 @@ $n-ui-output-critical: $output-critical;
 	}
 	@import 'helpers';
 	@import 'n-content-body/main';
+	$o-teaser-is-silent: false;
+	@import 'o-teaser/main';
 
 	@import 'components/article/main';
 	@import 'components/classifier/main';
