@@ -44,7 +44,7 @@ const getSmartmatchData = (adUnit, dfpResponse) => {
 			//add the DFP impression URL to smartmatch impression URLS
 			data.impressionURL = [].concat(data.impressionURL, dfpResponse.impressionURL);
 			// TODO change placeholder to cache buster value
-			data.impressionURL.forEach(function(url) {
+			data.impressionURL.forEach(function (url) {
 					url = url.replace(/UNKNOWN_CACHE_BUSTER/g, smCacheBuster);
 			});
 			if(dfpResponse.clickTrackingPrefix) {
