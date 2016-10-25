@@ -40,7 +40,11 @@ function positionComponent ($, position) {
 
 		const p = paragraphs.eq(i);
 
-		const hasThreeFollowingPs = p.nextUntil(':not(p)').length >= 3;
+		const hasThreeFollowingPs = p.nextUntil(':not(p)')
+				.slice(0,3)
+				//ensure paras doesn't contain anything that isn't text
+				.filter((i, el) => $(el).children().length === 0).length >= 3;
+
 		const prevIsPOrNothing = p.prev().length === 0 || p.prev().is('p');
 
 		return hasThreeFollowingPs && prevIsPOrNothing;
