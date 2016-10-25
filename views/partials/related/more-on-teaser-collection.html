@@ -1,0 +1,14 @@
+<div class="o-teaser-collection" data-o-component="o-teaser-collection">
+	<ol class="o-teaser-collection__items">
+		{{#slice items offset=0 limit=1}}
+		<li class="o-teaser-collection__item">
+			{{>n-teaser/templates/heavy size="large"}}
+		</li>
+		{{/slice}}
+		{{#slice items offset=1 limit=3}}
+		<li class="o-teaser-collection__item">
+			{{>n-teaser/templates/standard}}
+		</li>
+		{{/slice}}
+	</ol>
+</div>

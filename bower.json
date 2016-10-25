@@ -6,7 +6,7 @@
     "n-image": "^4.3.0",
     "n-section": "^6.1.2",
     "n-service-worker": "^1.1.0",
-	"n-teaser": "master",
+    "n-teaser": "master",
     "n-ui": "^2.11.0",
     "o-comment-api": "^2.1.0",
     "o-comment-count": "^0.2.1",
@@ -15,7 +15,9 @@
     "o-email-only-signup": "^3.2.3",
     "o-gallery": "^1.7.4",
     "o-share": "^2.1.2",
-    "superstore": "^2.1.0"
+    "superstore": "^2.1.0",
+    "n-teaser-collection": "^0.0.1",
+    "o-teaser-collection": "*"
   },
   "resolutions": {
     "o-typography": "^4.1.0",
@@ -23,4 +25,3 @@
     "o-hoverable": "^3.0.0"
   }
 }
-	

@@ -75,15 +75,7 @@ module.exports = function (req, res, next) {
 			moreOnArticlesArray[moreOnIndex] = dedupe(moreOnArticlesArray[moreOnIndex])
 				.map(article => Object.assign(article, contentDecorator(article)));
 
-				const sectionProps = getSection(
-					'onward-journey',
-					{content: moreOnArticlesArray[moreOnIndex]},
-					res.locals.flags,
-					{trackScrollEvent: `more-on-${moreOnIndex}`}
-				);
-				const sectionHtml = ReactServer.renderToStaticMarkup(<Section {...sectionProps} />);
-
-			return res.send(sectionHtml);
+			return res.render('partials/related/more-on-teaser-collection', { items: moreOnArticlesArray[moreOnIndex] }); 
 
 		})
 		.catch(function (err) {

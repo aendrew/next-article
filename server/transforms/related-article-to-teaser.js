@@ -36,10 +36,7 @@ module.exports = function ($, flags) {
 		const teaserHTML = teaser({
 			title,
 			summary,
-			url,
-			image: {
-				url: imageUrl
-			}
+			url
 		});
 
 		$el.html($.html($boxTitle) + teaserHTML);
