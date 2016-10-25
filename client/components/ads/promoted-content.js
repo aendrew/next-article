@@ -1,9 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import oDate from 'o-date';
 import crossDomainFetch from 'o-fetch-jsonp';
 
-import * as components from '@financial-times/n-section';
+const teaserTemplate = require('../../../bower_components/n-teaser/templates/heavy.html');
 
 function correlator (len) {
 	len = len || 16;
@@ -87,26 +85,7 @@ const handleResponse = (el, response) => {
 	container.classList.add('promoted-content--loaded');
 	container.classList.add(`promoted-content--${response.type}`);
 
-	const props = {
-		data: {
-			content: [ response ]
-		},
-		itemIndex: 0,
-		image: response.image && response.image.url && response.type !== 'special-report' ? {
-			position: {
-				default: 'embedded'
-			},
-			widths: [166, 281],
-			sizes: {
-				default: '166px',
-				M: '281px'
-			}
-		} : null,
-		size: 'small',
-		standfirst: { show: { default: true } }
-	};
-
-	ReactDOM.render(<components.Content {...props} />, el);
+	el.innerHTML = teaserTemplate(response);
 	oDate.init(el);
 };
 
