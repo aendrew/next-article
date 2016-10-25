@@ -11,11 +11,11 @@ const subject = proxyquire('../../../../server/controllers/related/special-repor
 });
 
 const articlesSpecialReport = [
-	{id: '117bbe2c-9417-11e5-b190-291e94b77c8f', primaryTag: {idV1: '1', prefLabel: 'Special Report'}},
+	{id: '117bbe2c-9417-11e5-b190-291e94b77c8f', primaryTag: {idV1: '1', prefLabel: 'Not Special Report', taxonomy: 'genre'}},
 	{id: '79d6ce3a-93bd-11e5-bd82-c1fb87bef7af', mainImage: 'first'},
 	{id: 'eecf7c4a-92d3-11e5-bd82-c1fb87bef7af', mainImage: 'second'},
 	{id: '64492528-91d2-11e5-94e6-c5413829caa5', parent: true},
-	{id: '6f8c134e-91d9-11e5-bd82-c1fb87bef7af'},
+	{id: '6f8c134e-91d9-11e5-bd82-c1fb87bef7af', primaryTag: {idV1: '5', prefLabel: 'Special Report', taxonomy: 'specialReports'}},
 	{id: '5149fd6a-91fc-11e5-bd82-c1fb87bef7af'}
 ];
 
@@ -65,9 +65,9 @@ describe('Special Report', () => {
 			result.image.should.equal('first');
 		});
 
-		it('should get the special report id and name from the first article', () => {
-			result.id.should.eql(articlesSpecialReport[0].primaryTag.idV1);
-			result.name.should.equal(articlesSpecialReport[0].primaryTag.prefLabel);
+		it('should get the special report id and name from the first article with a primaryTag with taxonomy specialReports', () => {
+			result.id.should.eql('5');
+			result.name.should.equal('Special Report');
 		});
 
 		it('should not return the parent article in the list', () => {
