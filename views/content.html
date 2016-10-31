@@ -36,6 +36,11 @@
 							<p class="article__byline">{{#ifEquals contentType 'article'}}by: {{/ifEquals}}{{{byline}}}</p>
 						{{/if}}
 					</div>
+
+					{{#if @root.flags.ftlabsSpokenLayer}}
+						{{> ftlabsSpokenLayerPlayer}}
+					{{/if}}
+
 					{{#ifEquals contentType 'article'}}
 						{{#if tocHTML}}
 							<div class="article__body--toc">

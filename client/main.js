@@ -18,6 +18,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const toc = require('./components/toc/main');
 	const share = require('./components/share/main');
 	const promotedContent = require('./components/ads/promoted-content');
+	const ftlabsSpokenLayer = require('./components/ftlabsSpokenLayer/main');
 
 	// cacheJourney();
 
@@ -72,6 +73,11 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 		if (flags.get('articleComments') && document.querySelector('#comments')) {
 			commentsInit();
 		}
+
+		if (flags.get('ftlabsSpokenLayer')){
+			ftlabsSpokenLayer(flags);
+		}
+
 	});
 
 });
