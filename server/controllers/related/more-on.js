@@ -77,7 +77,7 @@ module.exports = function (req, res, next) {
 				
 			if(res.locals.flags.nTeaserArticle) {
 
-				return res.render('partials/teaser-collections/1-2', { items: moreOnArticlesArray[moreOnIndex] });
+				return res.render('partials/teaser-collections/1-3', { items: moreOnArticlesArray[moreOnIndex] });
 			} else {
 				const sectionProps = getSection(
 					'onward-journey',

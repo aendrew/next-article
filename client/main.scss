@@ -152,3 +152,7 @@ $o-video-is-silent: false;
 	@include font-size(18, 20);
 	font-family: $o-typography-sans;
 }
+
+.o-teaser .n-image-wrapper--placeholder {
+	height: 0;
+}
