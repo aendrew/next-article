@@ -13,7 +13,7 @@ function getArticles (tagId, count, parentId) {
 			'id',
 			'title',
 			'metadata',
-			'summaries',
+			'subheading',
 			'mainImage',
 			'publishedDate'
 		]
