@@ -1,0 +1,11 @@
+{{#if hideTitle}}
+	<h2 class="n-util-visually-hidden">{{title}}</h2>
+{{else}}
+	<h2 class="o-teaser-collection__heading{{#if fullWidth}} o-teaser-collection__heading--full-width{{/if}}">
+		{{#if url}}
+			<a href="{{url}}" data-trackable="section-title">{{title}}</a>
+		{{else}}
+			{{title}}
+		{{/if}}
+	</h2>
+{{/if}}

@@ -4,7 +4,11 @@
 	{{{tocHTML}}}
 
 	{{#if @root.flags.articleSuggestedRead}}
-		{{> right-hand/suggested-reads articles=readNextArticles topic=readNextTopic }}
+		{{#if @root.flags.nTeaserArticle}}
+			{{> right-hand/suggested-reads-teaser-collection items=readNextArticles topic=readNextTopic }}
+		{{else}}
+			{{> right-hand/suggested-reads articles=readNextArticles topic=readNextTopic }}
+		{{/if}}
 	{{/if}}
 
 </div>

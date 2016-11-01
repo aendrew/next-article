@@ -140,32 +140,15 @@ $o-video-is-silent: false;
 			padding-left: 0;
 		}
 	}
+}
 
-	.more-ons-tags--qr-code {
-		width: 100%;
-		max-width: 100%;
+//TODO: tidy this up once teasers are live
 
-		.more-ons-tags {
-			display: block;
-		}
+.article__aside .o-teaser-collection {
+	margin-top: 16px;
+}
 
-		.n-content-tag__list-item--with-follow {
-			float: left;
-			padding: 10px;
-		}
-
-		.n-content-tag__list-item--with-follow:nth-child(4) ~ * {
-			display: none;
-		}
-
-		.myft-ui__qr-code {
-			display: block;
-			height: 100pt;
-			width: 100pt;
-		}
-
-		.n-content-tags__product-tour {
-			clear: both;
-		}
-	}
+.standalone-teaser-heading {
+	@include font-size(18, 20);
+	font-family: $o-typography-sans;
 }

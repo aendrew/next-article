@@ -1,7 +1,10 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import oDate from 'o-date';
 import crossDomainFetch from 'o-fetch-jsonp';
 
-const teaserTemplate = require('../../../bower_components/n-teaser/templates/heavy.html');
+import * as components from '@financial-times/n-section';
+//const teaserTemplate = require('n-teaser/templates/heavy.html');
 
 function correlator (len) {
 	len = len || 16;
@@ -75,7 +78,7 @@ const getAdJson = (data) => {
 	}
 }
 
-const handleResponse = (el, response) => {
+const handleResponse = (el, response, flags) => {
 
 	if(!(el && response && response.title)) {
 		return;
@@ -85,8 +88,39 @@ const handleResponse = (el, response) => {
 	container.classList.add('promoted-content--loaded');
 	container.classList.add(`promoted-content--${response.type}`);
 
-	el.innerHTML = teaserTemplate(response);
+	if(response.type === 'special-report') {
+		delete response.image;
+	}
+
+	const propsForReact = {
+		data: {
+			content: [ response ]
+		},
+		itemIndex: 0,
+		image: response.image && response.image.url && response.type !== 'special-report' ? {
+			position: {
+				default: 'embedded'
+			},
+			widths: [166, 281],
+			sizes: {
+				default: '166px',
+				M: '281px'
+			}
+		} : null,
+		size: 'small',
+		standfirst: { show: { default: true } }
+	};
+
+
+	if(flags.nTeaserArticle) {
+		//el.innerHTML = teaserTemplate(response);
+		ReactDOM.render(<components.Content {...propsForReact} />, el);
+	} else {
+		ReactDOM.render(<components.Content {...propsForReact} />, el);
+	}
+
 	oDate.init(el);
+
 };
 
 function initPaidPost (el, flags, ads) {
@@ -118,7 +152,7 @@ function initPaidPost (el, flags, ads) {
 		if(data && data.type && data.title && data.type !== 'smartmatch') {
 			const secondEl = document.querySelector('.promoted-content__second');
 
-			handleResponse(el, data);
+			handleResponse(el, data, flags);
 
 
 			if(data.type === 'special-report' && !secondEl.textContent) {
@@ -130,7 +164,7 @@ function initPaidPost (el, flags, ads) {
 		} else if (data && data.type === 'smartmatch') {
 			getSmartmatchData(adUnit, data)
 			.then(smartmatchResponse => {
-				handleResponse(el, smartmatchResponse);
+				handleResponse(el, smartmatchResponse, flags);
 			})
 			.catch(() => {
 				//no smartmatch results - make another ad call

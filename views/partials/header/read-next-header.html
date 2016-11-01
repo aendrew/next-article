@@ -2,24 +2,19 @@
 	<aside class="article__aside o-grid-remove-gutters--XL" data-o-grid-colspan="hide L4 XL3 XLoffset1" role="complementary" aria-hidden="true">
 		<div class="next-up next-up__header" data-trackable="next-up | top">
 			<h3 class="next-up__intro next-up__intro__header">{{#if moreRecent}}Read latest:{{else}}Read next:{{/if}}</h3>
-
-			{{#if @root.flags.nTeaserArticle}}
-				{{>n-teaser/templates/extra-light}}
-			{{else}}
-				<article>
-					<a href="{{url}}" class="next-up__headline" data-trackable="headline{{#if moreRecent}} | more-recent{{/if}}">
-						<span class="card__classifier-gap">
-							<span class="next-up__headline-text">{{title}}</span>
-						</span>
-						{{#ifAll @root.flags.premiumContentIndicator isPremium}}
-							<span class="article-classifier">Premium</span>
-						{{/ifAll}}
-					</a>
-					<time class="next-up__timestamp {{#if moreRecent}}next-up__timestamp__more-recent{{/if}} o-date" data-o-component="o-date" datetime="{{#dateformat}}{{lastPublished}}{{/dateformat}}" data-o-date-js>
-						{{#dateformat "dddd, d mmmm, yyyy"}}{{lastPublished}}{{/dateformat}}
-					</time>
-				</article>
-			{{/if}}
+			<article>
+				<a href="{{url}}" class="next-up__headline" data-trackable="headline{{#if moreRecent}} | more-recent{{/if}}">
+					<span class="card__classifier-gap">
+						<span class="next-up__headline-text">{{title}}</span>
+					</span>
+					{{#ifAll @root.flags.premiumContentIndicator isPremium}}
+						<span class="article-classifier">Premium</span>
+					{{/ifAll}}
+				</a>
+				<time class="next-up__timestamp {{#if moreRecent}}next-up__timestamp__more-recent{{/if}} o-date" data-o-component="o-date" datetime="{{#dateformat}}{{lastPublished}}{{/dateformat}}" data-o-date-js>
+					{{#dateformat "dddd, d mmmm, yyyy"}}{{lastPublished}}{{/dateformat}}
+				</time>
+			</article>
 		</div>
 	</aside>
 {{/with}}

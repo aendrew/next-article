@@ -74,8 +74,20 @@ module.exports = function (req, res, next) {
 			}
 			moreOnArticlesArray[moreOnIndex] = dedupe(moreOnArticlesArray[moreOnIndex])
 				.map(article => Object.assign(article, contentDecorator(article)));
+				
+			if(res.locals.flags.nTeaserArticle) {
 
-			return res.render('partials/related/more-on-teaser-collection', { items: moreOnArticlesArray[moreOnIndex] }); 
+				return res.render('partials/teaser-collections/1-2', { items: moreOnArticlesArray[moreOnIndex] });
+			} else {
+				const sectionProps = getSection(
+					'onward-journey',
+					{content: moreOnArticlesArray[moreOnIndex]},
+					res.locals.flags,
+					{trackScrollEvent: `more-on-${moreOnIndex}`}
+				);
+				const sectionHtml = ReactServer.renderToStaticMarkup(<Section {...sectionProps} />);
+			}
+
 
 		})
 		.catch(function (err) {

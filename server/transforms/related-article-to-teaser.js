@@ -1,11 +1,6 @@
 const cheerio = require('cheerio');
 
-const fs = require('fs');
-const path = require('path');
-const Handlebars = require('handlebars');
-const template = fs.readFileSync(path.resolve('bower_components/n-teaser/templates/heavy.html'), {encoding:'utf8'});
-const teaser = Handlebars.compile(template);
-
+const teaser = require('../../bower_components/n-teaser/templates/heavy.html')
 module.exports = function ($, flags) {
 
 	if(!flags.nTeaserArticle) {
@@ -16,7 +11,7 @@ module.exports = function ($, flags) {
 
 	$relatedBox.replaceWith(i => {
 		let $el = cheerio($relatedBox.eq(i)).clone();
-		let $boxTitle = $el.find('.n-content-related-box__title');
+		let $boxTitle = $el.find('.n-content-related-box__title-text');
 		const $headline = $el.find('.n-content-related-box__headline-link');
 		if($headline.length !== 1) {
 			return $el;
@@ -36,10 +31,20 @@ module.exports = function ($, flags) {
 		const teaserHTML = teaser({
 			title,
 			summary,
-			url
+			url,
+			size: "large",
+			image: {
+				url: imageUrl
+			},
+			colspan: '{"default": 12, "L": 4}',
+			position: '{"default": "bottom"}',
+			widths: "[500, 332]"
 		});
 
-		$el.html($.html($boxTitle) + teaserHTML);
+		$el.addClass('n-content-related-box--no-border');
+		let boxTitle = $boxTitle.length > 0 ? $boxTitle.text() : "Related article";
+
+		$el.html(`<h2 class="standalone-teaser-heading">${boxTitle}</h2>${teaserHTML}`);
 		return $el;
 
 	});
