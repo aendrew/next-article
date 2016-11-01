@@ -32,17 +32,17 @@ module.exports = function ($, flags) {
 			title,
 			summary,
 			url,
-			size: "large",
+			size: 'large',
 			image: {
 				url: imageUrl
 			},
 			colspan: '{"default": 12, "L": 4}',
 			position: '{"default": "bottom"}',
-			widths: "[500, 332]"
+			widths: '[500, 332]'
 		});
 
 		$el.addClass('n-content-related-box--no-border');
-		let boxTitle = $boxTitle.length > 0 ? $boxTitle.text() : "Related article";
+		let boxTitle = $boxTitle.length > 0 ? $boxTitle.text() : 'Related article';
 
 		$el.html(`<h2 class="standalone-teaser-heading">${boxTitle}</h2>${teaserHTML}`);
 		return $el;
