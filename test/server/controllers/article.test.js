@@ -58,10 +58,6 @@ describe('Article Controller', () => {
 			expect(response.statusCode).to.equal(200);
 		});
 
-		it('maps data for compatibility with legacy templates', () => {
-			expect(result.standFirst).to.not.be.undefined;
-		});
-
 		it('provides more on data for related content', () => {
 			expect(result.moreOns.length).to.equal(2);
 

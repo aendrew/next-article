@@ -8,8 +8,7 @@ describe('Article Pod Mapping V3', () => {
 	let result = subject(fixture);
 
 	it('decorates article with extras for pod presentation', () => {
-		expect(result).to.include.keys('url', 'subheading', 'primaryTag');
-		expect(fixture.summaries).to.contain(result.subheading);
+		expect(result).to.include.keys('url', 'primaryTag');
 	});
 
 	it('selects the article primary tag', () => {

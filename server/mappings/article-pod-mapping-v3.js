@@ -6,8 +6,7 @@ const createSize = (sizes, breakpoint) =>
 
 module.exports = function articlePodMapping (article) {
 	let decoration = {
-		url: `/content/${article.id}`,
-		subheading: Array.isArray(article.summaries) ? article.summaries[0] : null
+		url: `/content/${article.id}`
 	};
 
 	if (article.mainImage && Object.keys(article.mainImage).length > 0) {

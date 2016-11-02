@@ -9,13 +9,8 @@
 			"_source": {
 				"id": "6adb986e-339a-3f14-ab82-ed48bd883b84",
 				"title": "Linde CFO Denoke out a day after Praxair deal talks end",
-				"titles": [
-				"Linde CFO Denoke out a day after Praxair deal talks end"
-				],
-				"bodyXML": "<p>Linde has dismissed its long-serving finance director Georg Denoke, one day after his opposition to a potential $60bn merger with US rival Praxair was identified as a major stumbling block to the failed talks.</p><p>The 12-member supervisory board of the German industrial gas company held a meeting on Tuesday and voted to let go of Mr Denoke, according to a company statement, <strong>write Patrick McGee and Arash Massoudi.</strong></p><p>By removing him, some people close to Praxair and Linde hope that the merger talks can eventually be revived.</p><p>While both companies on Monday said “preliminary” talks had ended, the three-month period of talks had produced 90 per cent of the terms until discord within Linde drove them to a halt.</p><p>On Monday it became clear Mr Denoke was the key executive fighting the deal from going through.</p><p>Mr Denoke joined Linde in 2004 and was appointed its finance chief in 2006. He was said to have had a good relationship with Wolfgang Reitzle, the current chairman and long-time chief executive from 2003 to 2014, but their relationship deteriorated when he was passed over as a successor in 2014.</p><p>The job instead went to Wolfgang Büchele, who at the time was head of Kemira Oyj, a Finnish chemicals group. Linde has issued two profit warnings since Mr Büchele took over and the idea to join forces with Praxair was originally his, people familiar said.</p><p>One person familiar with the deal contests that Mr Denoke was against the merger for personal reasons. “He’d be a bad CFO if he didn’t scrutinise everything,” this person said, adding that the labour side of the supervisory board was also upset that a merged Praxair-Linde would be headquartered in Danbury, Conn.</p><p>Sven Schneider, head of treasury at Linde, is to be interim CFO.</p>",
-				"summaries": [
-				
-				],
+				"alternativeTitles": { },
+				"subheading": "Linde has dismissed its long-serving finance director Georg Denoke, one day after his opposition to a potential $60bn merger with US rival Praxair was identified as a major stumbling block to the failed talks.",
 				"initialPublishedDate": "2016-09-13T15:04:08Z",
 				"publishedDate": "2016-09-13T15:04:08Z",
 				"webUrl": "http://www.ft.com/fastft/2016/09/13/linde-cfo-denoke-out-a-day-after-praxair-deal-talks-end/",
@@ -24,16 +19,15 @@
 				"http://api.ft.com/enrichedcontent/6adb986e-339a-3f14-ab82-ed48bd883b84"
 				],
 				"storyPackage": [
-				
+
 				],
 				"originatingParty": "FT",
 				"byline": "Patrick McGee",
 				"comments": {
 				"enabled": false
 				},
-				"openingXML": "<p>Linde has dismissed its long-serving finance director Georg Denoke, one day after his opposition to a potential $60bn merger with US rival Praxair was identified as a major stumbling block to the failed talks.</p>",
 				"standout": {
-				
+
 				},
 				"metadata": [
 				{
@@ -42,7 +36,7 @@
 					"taxonomy": "genre",
 					"primary": "section",
 					"attributes": [
-					
+
 					],
 					"url": "https://www.ft.com/news"
 				},
@@ -52,7 +46,7 @@
 					"taxonomy": "brand",
 					"primary": "brand",
 					"attributes": [
-					
+
 					],
 					"url": "https://www.ft.com/fastft"
 				},
@@ -61,7 +55,7 @@
 					"prefLabel": "Patrick McGee",
 					"taxonomy": "authors",
 					"attributes": [
-					
+
 					],
 					"url": "https://www.ft.com/stream/authorsId/Q0ItMDMzNTY4OA==-QXV0aG9ycw=="
 				},
@@ -114,7 +108,7 @@
 					"prefLabel": "Wolfgang Reitzle",
 					"taxonomy": "people",
 					"attributes": [
-					
+
 					],
 					"url": "https://www.ft.com/stream/peopleId/Yjc3OTM3ODgtZmM1NC00YjJmLThmOGUtYmVkMTY3MzIyY2Jk-UE4="
 				},
@@ -123,7 +117,7 @@
 					"prefLabel": "United States of America",
 					"taxonomy": "regions",
 					"attributes": [
-					
+
 					],
 					"url": "https://www.ft.com/topics/places/United_States_of_America"
 				},
@@ -132,7 +126,7 @@
 					"prefLabel": "Danbury, Connecticut",
 					"taxonomy": "regions",
 					"attributes": [
-					
+
 					],
 					"url": "https://www.ft.com/stream/regionsId/TnN0ZWluX0dMX1VTX0NUX011bmljaXBhbGl0eV8yMDY1ODA=-R0w="
 				},
@@ -141,7 +135,7 @@
 					"prefLabel": "Companies",
 					"taxonomy": "sections",
 					"attributes": [
-					
+
 					],
 					"url": "https://www.ft.com/companies"
 				},
@@ -150,7 +144,7 @@
 					"prefLabel": "Industrials",
 					"taxonomy": "sections",
 					"attributes": [
-					
+
 					],
 					"url": "https://www.ft.com/companies/industrials"
 				},
@@ -159,7 +153,7 @@
 					"prefLabel": "Chemicals",
 					"taxonomy": "sections",
 					"attributes": [
-					
+
 					],
 					"url": "https://www.ft.com/companies/chemicals"
 				},
@@ -168,7 +162,7 @@
 					"prefLabel": "Mergers & Acquisitions",
 					"taxonomy": "topics",
 					"attributes": [
-					
+
 					],
 					"url": "https://www.ft.com/topics/themes/Mergers_and_Acquisitions"
 				}
@@ -179,7 +173,7 @@
 					"prefLabel": "fastFT",
 					"directType": "http://www.ft.com/ontology/product/Brand",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -187,7 +181,7 @@
 					"prefLabel": "Financial Times",
 					"directType": "http://www.ft.com/ontology/product/Brand",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -195,7 +189,7 @@
 					"prefLabel": "Praxair, Inc.",
 					"directType": "http://www.ft.com/ontology/company/PublicCompany",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -203,7 +197,7 @@
 					"prefLabel": "Linde AG",
 					"directType": "http://www.ft.com/ontology/company/PublicCompany",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -211,7 +205,7 @@
 					"prefLabel": "Wolfgang Heinz Büchele",
 					"directType": "http://www.ft.com/ontology/person/Person",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -219,7 +213,7 @@
 					"prefLabel": "Wolfgang W. Reitzle",
 					"directType": "http://www.ft.com/ontology/person/Person",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -227,7 +221,7 @@
 					"prefLabel": "Sven Schneider",
 					"directType": "http://www.ft.com/ontology/person/Person",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -235,7 +229,7 @@
 					"prefLabel": "Kemira Oyj",
 					"directType": "http://www.ft.com/ontology/company/PublicCompany",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -243,7 +237,7 @@
 					"prefLabel": "Georg Denoke",
 					"directType": "http://www.ft.com/ontology/person/Person",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -251,7 +245,7 @@
 					"prefLabel": "Danbury, Connecticut",
 					"directType": "http://www.ft.com/ontology/Location",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -259,7 +253,7 @@
 					"prefLabel": "Chemicals",
 					"directType": "http://www.ft.com/ontology/Section",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -267,7 +261,7 @@
 					"prefLabel": "General News",
 					"directType": "http://www.ft.com/ontology/Subject",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -275,7 +269,7 @@
 					"prefLabel": "News",
 					"directType": "http://www.ft.com/ontology/Genre",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -283,7 +277,7 @@
 					"prefLabel": "Mergers & Acquisitions",
 					"directType": "http://www.ft.com/ontology/Topic",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -291,7 +285,7 @@
 					"prefLabel": "Mergers & Acquisitions",
 					"directType": "http://www.ft.com/ontology/Subject",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -299,7 +293,7 @@
 					"prefLabel": "Industrials",
 					"directType": "http://www.ft.com/ontology/Section",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -307,7 +301,7 @@
 					"prefLabel": "Companies",
 					"directType": "http://www.ft.com/ontology/Section",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -315,7 +309,7 @@
 					"prefLabel": "United States of America",
 					"directType": "http://www.ft.com/ontology/Location",
 					"attributes": [
-					
+
 					]
 				},
 				{
@@ -323,7 +317,7 @@
 					"prefLabel": "Profit Warnings",
 					"directType": "http://www.ft.com/ontology/Subject",
 					"attributes": [
-					
+
 					]
 				}
 				],
