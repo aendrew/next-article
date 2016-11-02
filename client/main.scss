@@ -1,5 +1,7 @@
 $output-critical: true !default;
 
+
+
 @import 'n-ui/configure';
 $n-ui-output-critical: $output-critical;
 @include nUiConfigure(
@@ -10,11 +12,9 @@ $n-ui-output-critical: $output-critical;
 	$preset: 'complete'
 );
 @import 'n-ui/bootstrap';
-
 @include nUiCriticalStart();
 	@import 'n-image/main';
 	@import 'n-card/src/components/classifier';
-
 	[data-o-grid-colspan~=Loffset1] {
 		@include oGridRespondTo(L) {
 			@include oGridOffset(1);
@@ -152,6 +152,15 @@ $o-video-is-silent: false;
 	@include font-size(18, 20);
 	font-family: $o-typography-sans;
 	margin: 0 0 8px;
+	&:after {
+		content: '';
+		display: block;
+		width: 60px;
+		margin-top: 5px;
+		margin-bottom: 10px;
+		border-bottom: 4px solid oColorsGetPaletteColor(black);
+}
+
 }
 
 .o-teaser .n-image-wrapper--placeholder {
@@ -171,4 +180,8 @@ $o-video-is-silent: false;
 	.n-content-tag__list-item--with-follow {
 		margin: 0;
 	}
+}
+
+.read-next-bottom {
+	margin-bottom: 30px;
 }

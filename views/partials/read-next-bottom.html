@@ -3,9 +3,6 @@
 		<div class="next-up next-up__bottom" data-trackable="next-up | bottom" data-o-grid-colspan="12 XLoffset1">
 			<h3 class="next-up__intro">Read latest:</h3>
 			{{#with article}}
-			{{#if @root.flags.nTeaserArticle}}
-				{{>n-teaser/templates/extra-light}}
-			{{else}}
 
 				<article>
 					<a href="{{url}}" class="next-up__headline" data-trackable="headline">
@@ -20,7 +17,6 @@
 						{{#dateformat "dddd, d mmmm, yyyy"}}{{lastPublished}}{{/dateformat}}
 					</time>
 				</article>
-			{{/if}}
 			{{/with}}
 		</div>
 	</div>
