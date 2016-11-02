@@ -10,7 +10,7 @@ describe('Related Article to Teaser Transform', () => {
 
 	before(() => {
 		relatedArticleToTeaserTransform = proxyquire('../../../server/transforms/related-article-to-teaser', {
-			'handlebars': { compile: () => teaserStub }
+			'../../bower_components/n-teaser/templates/heavy.html': teaserStub
 		});
 	});
 
@@ -62,19 +62,20 @@ describe('Related Article to Teaser Transform', () => {
 			);
 			const transformed$ = relatedArticleToTeaserTransform($, { nTeaserArticle: true });
 			sinon.assert.calledWith(teaserStub, {
+				colspan: '{"default": 12, "L": 4}',
 				image: {
 					url: 'http://com.ft.imagepublish.prod.s3.amazonaws.com/c0bce01a-9663-11e6-a1dc-bdf38d484582'
 				},
+				position: '{"default": "bottom"}',
+				size: 'large',
 				summary: 'Graham Tatomer worked at Austrian Riesling producer Emmerich Knoll and now fashions this example from the old vines of the Kick-on Ranch in Santa Barbara (£26.95, Roberson)',
 				title: 'Donald Trump fails to keep election suspense alive',
-				url: '/content/18c31cb8-967b-11e6-a1dc-bdf38d484582'
+				url: '/content/18c31cb8-967b-11e6-a1dc-bdf38d484582',
+				widths: '[500, 332]'
 			});
 
 			transformed$.html().should.equal(
-				'<aside class="n-content-related-box" data-trackable="related-box" role="complementary">' +
-				'<div class="n-content-related-box__title"><div class="n-content-related-box__title-text">Tatomer Riesling 2012</div></div>' +
-				'[teaser-placeholder]' +
-				'</aside>'
+				'<aside class="n-content-related-box n-content-related-box--no-border" data-trackable="related-box" role="complementary"><h2 class="standalone-teaser-heading">Tatomer Riesling 2012</h2>[teaser-placeholder]</aside>'
 			);
 		});
 

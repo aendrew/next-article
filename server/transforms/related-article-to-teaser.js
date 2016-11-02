@@ -1,6 +1,7 @@
 const cheerio = require('cheerio');
 
-const teaser = require('../../bower_components/n-teaser/templates/heavy.html')
+const teaser = require('../../bower_components/n-teaser/templates/heavy.html');
+
 module.exports = function ($, flags) {
 
 	if(!flags.nTeaserArticle) {
