@@ -151,17 +151,24 @@ $o-video-is-silent: false;
 .standalone-teaser-heading {
 	@include font-size(18, 20);
 	font-family: $o-typography-sans;
+	margin: 0 0 8px;
 }
 
 .o-teaser .n-image-wrapper--placeholder {
 	height: 0;
 }
 
-//HACK - force the collection heading icons smaller because we're still using the old icon set
-.o-teaser-collection__heading:after {
-	width: 24px;
-}
-
-.o-teaser-collection__heading--small:after {
-	width: 16px;
+//make the myFT follow box look okay with collection styles
+.o-teaser-collection {
+	.article__myft-logo {
+		width: 48px;
+		height: 24px;
+	}
+	.n-content-tags__intro {
+		padding-top: 0;
+		margin: 0;
+	}
+	.n-content-tag__list-item--with-follow{
+		margin: 0;
+	}
 }

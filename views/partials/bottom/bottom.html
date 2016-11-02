@@ -44,7 +44,11 @@
 			</div>
 			{{#ifAll @root.flags.myFtApi tags}}
 				<div data-o-grid-colspan="12 L4 XL3">
-					{{> related/more-ons-tags}}
+					{{#if @root.flags.nTeaserArticle}}
+						{{> related/more-ons-tags-collection}}
+					{{else}}
+						{{> related/more-ons-tags}}
+					{{/if}}
 				</div>
 			{{/ifAll}}
 		{{/if}}
