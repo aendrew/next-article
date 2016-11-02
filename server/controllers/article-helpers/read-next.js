@@ -25,7 +25,7 @@ module.exports = function (articleId, storyPackageIds, primaryTag, publishedDate
 				'url',
 				'title',
 				'metadata',
-				'summaries',
+				'subheading',
 				'mainImage',
 				'publishedDate',
 				'webUrl'

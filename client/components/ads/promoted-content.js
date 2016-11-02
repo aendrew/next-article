@@ -15,6 +15,9 @@ function correlator (len) {
 	return (new Date().getTime() + '' + genRand(16) + Math.random().toString(34).slice(2)).toString().substr(0, len);
 }
 
+// cachebuster to smartology must be the same across all impressions and clicks
+const smCacheBuster = correlator(64);
+
 const pageCorrelator = correlator(); // get correlator once for the page ad calls
 const MAX_ATTEMPTS = 5; //stop after five total ad calls. This will prevent accidental infinite loops with trying to get a smartmatch ad that doesn't exist.
 let attempts = 0;
@@ -27,7 +30,7 @@ const getSmartmatchData = (adUnit, dfpResponse) => {
 	const contentUrl = encodeURIComponent(encodeURIComponent(`ft.com/content/${uuid}`));
 	const splitAdUnit = adUnit.split('/');
 	const section = splitAdUnit[splitAdUnit.length - 1];
-	const url = `https://c.smartonomi.net/static/creative/${dfpResponse.creativeID}/key/${dfpResponse.smartmatchKey}/pcid/${contentUrl}/sct=${encodeURIComponent(section)};encode=false;?cacheBuster=${correlator(64)}`
+	const url = `https://c.smartonomi.net/static/creative/${dfpResponse.creativeID}/key/${dfpResponse.smartmatchKey}/pcid/${contentUrl}/sct=${encodeURIComponent(section)};encode=false;?cacheBuster=${smCacheBuster}`
 	return crossDomainFetch(url, {
 		timeout: 4000,
 		mode: 'cors'
@@ -41,8 +44,10 @@ const getSmartmatchData = (adUnit, dfpResponse) => {
 		if(data && data.type && data.title) {
 			//add the DFP impression URL to smartmatch impression URLS
 			data.impressionURL = [].concat(data.impressionURL, dfpResponse.impressionURL);
+			// change placeholder to cache buster value
+			data.impressionURL = data.impressionURL.map(url => url.replace(/UNKNOWN_CACHE_BUSTER/g, smCacheBuster));
 			if(dfpResponse.clickTrackingPrefix) {
-				data.url = dfpResponse.clickTrackingPrefix + data.url;
+				data.url = dfpResponse.clickTrackingPrefix + data.url.replace(/UNKNOWN_CACHE_BUSTER/g, smCacheBuster);
 			}
 			return data;
 		} else {

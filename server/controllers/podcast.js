@@ -17,7 +17,7 @@ module.exports = function podcastLegacyController (req, res, next, payload) {
 	payload.thisYear = new Date().getFullYear();
 
 	// TODO: move this to template or re-name subheading
-	payload.standFirst = payload.summaries ? payload.summaries[0] : '';
+	payload.standfirst = payload.subheading || '';
 
 	// Append podcast specific data
 	payload.externalLinks = externalPodcastLinksUtil(payload.provenance[0]);

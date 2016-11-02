@@ -36,6 +36,11 @@
 							<p class="article__byline">{{#ifEquals contentType 'article'}}by: {{/ifEquals}}{{{byline}}}</p>
 						{{/if}}
 					</div>
+
+					{{#if @root.flags.ftlabsSpokenLayer}}
+						{{> ftlabsSpokenLayerPlayer}}
+					{{/if}}
+
 					{{#ifEquals contentType 'article'}}
 						{{#if tocHTML}}
 							<div class="article__body--toc">
@@ -48,9 +53,9 @@
 						{{/if}}
 					{{/ifEquals}}
 					{{#ifEquals contentType 'podcast'}}
-						{{#if standFirst}}
+						{{#if standfirst}}
 							<div class="article__body n-content-body" data-trackable="article-body">
-								<p>{{{standFirst}}}</p>
+								<p>{{{standfirst}}}</p>
 							</div>
 						{{/if}}
 						<div class="article__media">

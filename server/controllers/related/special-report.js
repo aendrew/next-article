@@ -13,7 +13,7 @@ function getArticles (tagId, count, parentId) {
 			'id',
 			'title',
 			'metadata',
-			'summaries',
+			'subheading',
 			'mainImage',
 			'publishedDate'
 		]
@@ -44,9 +44,11 @@ module.exports = function (req, res, next) {
 	return getArticles(tagId, count, parentId)
 		.then(specialReportArticles => {
 			let articleWithImage = specialReportArticles.find(article => article.mainImage);
+			let articleWithSpecialReportPrimary = specialReportArticles
+				.find(article => article.primaryTag && article.primaryTag.taxonomy === 'specialReports');
 			return res.render('related/special-report', {
-				id: specialReportArticles[0].primaryTag.idV1,
-				name: specialReportArticles[0].primaryTag.prefLabel,
+				id: articleWithSpecialReportPrimary ? articleWithSpecialReportPrimary.primaryTag.idV1 : null,
+				name: articleWithSpecialReportPrimary ? articleWithSpecialReportPrimary.primaryTag.prefLabel : null,
 				image: articleWithImage ? articleWithImage.mainImage : null,
 				articles: specialReportArticles
 			});

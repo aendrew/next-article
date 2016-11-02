@@ -95,12 +95,7 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	content.isSpecialReport = content.primaryTag && content.primaryTag.taxonomy === 'specialReports';
 
 	// Setup the description field
-	content.description = '';
-	if (content.standfirst) {
-		content.description = content.standfirst;
-	} else if (content.summaries) {
-		content.description = content.summaries[0];
-	}
+	content.description = content.subheading || '';
 
 	// Set the canonical URL, it's needed by Open Graph'
 	content.canonicalUrl = getCanonicalUrl(content.webUrl, content.id);
@@ -110,18 +105,13 @@ module.exports = function articleV3Controller (req, res, next, content) {
 		res.set('X-Robots-Tag', 'noindex');
 	}
 
-	// If no bodyHTML, revert to using bodyXML
-	const contentToTransform = content.bodyHTML || content.bodyXML;
-
 	// Apply content and article specific transforms to bodyHTML
-	if (contentToTransform) {
-		Object.assign(content, transformArticleBody(contentToTransform, res.locals.flags, {
-				fragment: req.query.fragment,
-				adsLayout: content.adsLayout,
-				userIsAnonymous: res.locals.anon && res.locals.anon.userIsAnonymous
-			}
-		));
-	}
+	Object.assign(content, transformArticleBody(content.bodyHTML, res.locals.flags, {
+			fragment: req.query.fragment,
+			adsLayout: content.adsLayout,
+			userIsAnonymous: res.locals.anon && res.locals.anon.userIsAnonymous
+		}
+	));
 
 	content.designGenre = articleBranding(content.metadata);
 
@@ -130,9 +120,6 @@ module.exports = function articleV3Controller (req, res, next, content) {
 
 	content.articleV1 = isCapiV1(content);
 	content.articleV2 = isCapiV2(content);
-
-	// TODO: move this to template or re-name subheading
-	content.standFirst = content.summaries ? content.summaries[0] : '';
 
 	content.byline = bylineTransform(content.byline, content.metadata.filter(item => item.taxonomy === 'authors'));
 
