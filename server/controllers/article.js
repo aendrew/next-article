@@ -8,6 +8,7 @@ const decorateMetadataHelper = require('./article-helpers/decorate-metadata');
 const openGraphHelper = require('./article-helpers/open-graph');
 const bylineTransform = require('../transforms/byline');
 const getMoreOnTags = require('./article-helpers/get-more-on-tags');
+const addTagTitlePrefix = require('./article-helpers/tag-title-prefix');
 const getAdsLayout = require('../utils/get-ads-layout');
 
 function isCapiV1 (article) {
@@ -159,7 +160,7 @@ module.exports = function articleV3Controller (req, res, next, content) {
 			)
 		);
 
-		content.readNextTopic = content.primaryTag;
+		content.readNextTopic = addTagTitlePrefix(content.primaryTag);
 	}
 
 	if (req.get('FT-Labs-Gift') === 'GRANTED') {

@@ -156,3 +156,12 @@ $o-video-is-silent: false;
 .o-teaser .n-image-wrapper--placeholder {
 	height: 0;
 }
+
+//HACK - force the collection heading icons smaller because we're still using the old icon set
+.o-teaser-collection__heading:after {
+	width: 24px;
+}
+
+.o-teaser-collection__heading--small:after {
+	width: 16px;
+}
