@@ -104,18 +104,13 @@ module.exports = function articleV3Controller (req, res, next, content) {
 		res.set('X-Robots-Tag', 'noindex');
 	}
 
-	// If no bodyHTML, revert to using bodyXML
-	const contentToTransform = content.bodyHTML || content.bodyXML;
-
 	// Apply content and article specific transforms to bodyHTML
-	if (contentToTransform) {
-		Object.assign(content, transformArticleBody(contentToTransform, res.locals.flags, {
-				fragment: req.query.fragment,
-				adsLayout: content.adsLayout,
-				userIsAnonymous: res.locals.anon && res.locals.anon.userIsAnonymous
-			}
-		));
-	}
+	Object.assign(content, transformArticleBody(content.bodyHTML, res.locals.flags, {
+			fragment: req.query.fragment,
+			adsLayout: content.adsLayout,
+			userIsAnonymous: res.locals.anon && res.locals.anon.userIsAnonymous
+		}
+	));
 
 	content.designGenre = articleBranding(content.metadata);
 

@@ -7,7 +7,6 @@ const fixtureEsFound = require('../../../fixtures/v3-elastic-article-found').doc
 
 const subject = proxyquire('../../../../server/controllers/article', {
 	'./article-helpers/suggested': () => Promise.resolve(),
-	'../transforms/article-xslt': (article) => Promise.resolve(article.bodyXML),
 	'../transforms/body': (articleHtml) => { return { html: () => articleHtml } }
 });
 
