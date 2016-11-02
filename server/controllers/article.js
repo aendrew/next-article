@@ -179,6 +179,7 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
 			content.contentType = 'article';
+			content.shouldRenderMyftHint = true;
 			if (req.query.fragment) {
 				res.render('fragment', content);
 			} else {
