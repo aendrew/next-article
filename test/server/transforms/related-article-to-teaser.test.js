@@ -67,7 +67,7 @@ describe('Related Article to Teaser Transform', () => {
 					url: 'http://com.ft.imagepublish.prod.s3.amazonaws.com/c0bce01a-9663-11e6-a1dc-bdf38d484582'
 				},
 				position: '{"default": "bottom"}',
-				mods: ['large'],
+				mods: ['large-portrait'],
 				summary: 'Graham Tatomer worked at Austrian Riesling producer Emmerich Knoll and now fashions this example from the old vines of the Kick-on Ranch in Santa Barbara (£26.95, Roberson)',
 				title: 'Donald Trump fails to keep election suspense alive',
 				url: '/content/18c31cb8-967b-11e6-a1dc-bdf38d484582',
