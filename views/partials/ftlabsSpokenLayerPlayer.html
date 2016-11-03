@@ -1,1 +1,11 @@
-<div id="spokenlayer-audio-player-container"></div>
+<div class="ftlabsspokenlayerholder">
+	<div id="spokenlayer-audio-player-container"></div>
+	<a href="/audio-articles">Find more articles to listen to</a>
+	<script>
+			document.body.dispatchEvent( new CustomEvent('oTracking.page', {
+				detail: {
+					url: document.URL
+					eventType : 'ftlabsSpokenLayerArticle'
+				}, bubbles: true} ) );
+	</script>
+</div>

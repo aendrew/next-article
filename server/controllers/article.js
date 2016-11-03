@@ -150,11 +150,6 @@ module.exports = function articleV3Controller (req, res, next, content) {
 		content.readNextTopic = addTagTitlePrefix(content.primaryTag);
 	}
 
-	if (req.get('FT-Labs-Gift') === 'GRANTED') {
-		content.shared = true;
-		res.vary('FT-Labs-Gift');
-	}
-
 	content.signedIn = isUserSignedIn(req);
 	content.freeArticle = isFreeArticle(content.webUrl);
 	content.premiumArticle = isPremiumArticle(content.webUrl);
@@ -163,6 +158,10 @@ module.exports = function articleV3Controller (req, res, next, content) {
 		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && res.locals.flags.lightSignupInArticle,
 		isInferred: res.locals.flags.lsuInferredTopic
 	};
+
+	if(res.locals.flags.ftlabsSpokenLayer){
+		content.isAudioArticle = content.metadata.some(tag => tag.idV1 === 'MjgwYzIyNjUtMmQ1ZC00NTNiLTgyMTQtMWU5ZDc3YzIzNWUy-VG9waWNz');
+	}
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
