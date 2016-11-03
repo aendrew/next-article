@@ -1,3 +1,7 @@
+require('handlebars');
+// hook up .html to Handlebars
+require.extensions['.html'] = require.extensions['.handlebars'];
+
 // modules that need to be compiled by babel
 const es6Modules = [
 	'@financial-times/n-section',

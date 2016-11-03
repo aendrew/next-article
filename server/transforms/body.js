@@ -1,6 +1,7 @@
 const cheerio = require('cheerio');
 
 const relatedBoxExpander = require('./related-box-expander');
+const relatedArticleToTeaser = require('./related-article-to-teaser');
 const tableOfContents = require('./table-of-contents');
 const lightSignup = require('./light-sign-up');
 const inlineAd = require('./inline-ad');
@@ -24,6 +25,7 @@ module.exports = function (body, flags, options) {
 
 	const $bodyHTML = cheerio.load(body, { decodeEntities: false });
 	transform($bodyHTML, flags, options)
+		.with(relatedArticleToTeaser)
 		.with(relatedBoxExpander)
 		.with(tableOfContents)
 		.with(inlineAd)

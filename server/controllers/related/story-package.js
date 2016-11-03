@@ -30,20 +30,27 @@ module.exports = function (req, res, next) {
 		})
 		.then(articles => {
 
-			const sectionProps = getSection(
-				'onward-journey',
-				{content: articles},
-				res.locals.flags,
-				{
-					trackScrollEvent: 'story-package',
-					name: {
-						title: 'Related stories'
-					}
-				}
-			);
-			const sectionHtml = ReactServer.renderToStaticMarkup(<Section {...sectionProps} />);
+			if(res.locals.flags.nTeaserArticle) {
 
-			return res.send(sectionHtml);
+				return res.render('partials/related/story-package', { items: articles });
+			} else {
+				const sectionProps = getSection(
+					'onward-journey',
+					{content: articles},
+					res.locals.flags,
+					{
+						trackScrollEvent: 'story-package',
+						name: {
+							title: 'Related stories'
+						}
+					}
+				);
+				const sectionHtml = ReactServer.renderToStaticMarkup(<Section {...sectionProps} />);
+
+				return res.send(sectionHtml);
+
+			}
+
 
 		})
 		.catch(function (err) {

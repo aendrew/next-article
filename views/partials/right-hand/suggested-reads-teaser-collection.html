@@ -1,0 +1,9 @@
+{{#if items.length}}
+	<div class="o-teaser-collection" role="group" aria-labelledby="suggested-reads__title" data-trackable="suggested-reads">
+		{{#with topic}}
+			{{> teaser-collections/heading title=(concat 'Latest ' title ' ' name) mod="small"}}
+		{{/with}}
+
+		{{> teaser-collections/list-extra-light}}
+	</div>
+{{/if}}

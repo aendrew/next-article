@@ -92,7 +92,11 @@ const handleResponse = (el, response) => {
 	container.classList.add('promoted-content--loaded');
 	container.classList.add(`promoted-content--${response.type}`);
 
-	const props = {
+	if(response.type === 'special-report') {
+		delete response.image;
+	}
+
+	const propsForReact = {
 		data: {
 			content: [ response ]
 		},
@@ -111,8 +115,10 @@ const handleResponse = (el, response) => {
 		standfirst: { show: { default: true } }
 	};
 
-	ReactDOM.render(<components.Content {...props} />, el);
+
+	ReactDOM.render(<components.Content {...propsForReact} />, el);
 	oDate.init(el);
+
 };
 
 function initPaidPost (el, flags, ads) {

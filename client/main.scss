@@ -1,5 +1,7 @@
 $output-critical: true !default;
 
+
+
 @import 'n-ui/configure';
 $n-ui-output-critical: $output-critical;
 @include nUiConfigure(
@@ -10,11 +12,9 @@ $n-ui-output-critical: $output-critical;
 	$preset: 'complete'
 );
 @import 'n-ui/bootstrap';
-
 @include nUiCriticalStart();
 	@import 'n-image/main';
 	@import 'n-card/src/components/classifier';
-
 	[data-o-grid-colspan~=Loffset1] {
 		@include oGridRespondTo(L) {
 			@include oGridOffset(1);
@@ -28,6 +28,11 @@ $n-ui-output-critical: $output-critical;
 	}
 	@import 'helpers';
 	@import 'n-content-body/main';
+
+	$o-teaser-is-silent: false;
+	@import 'o-teaser/main';
+	$o-teaser-collection-is-silent: false;
+	@import 'o-teaser-collection/main';
 
 	@import 'components/article/main';
 	@import 'components/classifier/main';
@@ -135,32 +140,62 @@ $o-video-is-silent: false;
 			padding-left: 0;
 		}
 	}
+}
 
-	.more-ons-tags--qr-code {
-		width: 100%;
-		max-width: 100%;
+//TODO: Putting all the teaser-related CSS here.
+//Can tidy up/put in the corrrect places once everything else is deleted
 
-		.more-ons-tags {
-			display: block;
-		}
+.article__aside .o-teaser-collection {
+	margin-top: 16px;
+}
 
-		.n-content-tag__list-item--with-follow {
-			float: left;
-			padding: 10px;
-		}
+.standalone-teaser-heading {
+	@include font-size(18, 20);
+	font-family: $o-typography-sans;
+	margin: 0 0 8px;
+	&:after {
+		content: '';
+		display: block;
+		width: 60px;
+		margin-top: 5px;
+		margin-bottom: 10px;
+		border-bottom: 4px solid oColorsGetPaletteColor(black);
+}
 
-		.n-content-tag__list-item--with-follow:nth-child(4) ~ * {
-			display: none;
-		}
+}
 
-		.myft-ui__qr-code {
-			display: block;
-			height: 100pt;
-			width: 100pt;
-		}
+.o-teaser .n-image-wrapper--placeholder {
+	height: 0;
+}
 
-		.n-content-tags__product-tour {
-			clear: both;
-		}
+//make the myFT follow box look okay with collection styles
+.o-teaser-collection {
+	.article__myft-logo {
+		width: 48px;
+		height: 24px;
 	}
+	.n-content-tags__intro {
+		margin: 0;
+	}
+	.o-teaser-collection__heading + .n-content-tags__intro {
+		padding-top: 0;
+	}
+	.n-content-tag__list-item--with-follow {
+		margin: 0;
+	}
+}
+
+.read-next-bottom {
+	margin-bottom: 30px;
+}
+
+
+.n-content-related-box .o-teaser {
+	margin: 8px 0;
+}
+
+.n-content-related-box--no-border {
+	border: 0;
+	margin-top: 0;
+	padding: 0;
 }

@@ -1,0 +1,61 @@
+
+<div
+	role="region"
+	class="o-teaser-collection"
+	data-trackable="mentions"
+	aria-labelledby="my-ft-title">
+		<h3 class="o-teaser-collection__heading o-teaser-collection__heading--small">
+			<i class="article__myft-logo"></i>
+			<span class="n-util-visually-hidden">myFT</span>
+		</h3>
+	{{#if tags}}
+	<div class="n-content-tags__intro">
+		{{#ifEquals contentType 'podcast'}}
+			<p>Follow the topics related to this show</p>
+		{{else}}
+			<p>Follow the topics mentioned in this {{contentType}}</p>
+		{{/ifEquals}}
+	</div>
+	<ul class="n-content-tags__list--myft">
+		{{#each tags}}
+		<li class="n-content-tag__list-item--with-follow">
+			<a
+				href="{{url}}"
+				data-trackable="topic"
+				class="n-content-tag n-content-tag--with-follow">{{name}}</a>
+			{{#if @root.flags.myFtApi}}
+				{{>n-ui/myft/templates/follow version='3' conceptId=id}}
+			{{/if}}
+		</li>
+		{{/each}}
+	</ul>
+	{{/if}}
+	{{#if authors}}
+	<div class="n-content-tags__intro">
+		{{#ifEquals contentType 'podcast'}}
+			<p>Follow the authors related to this show</p>
+		{{else}}
+			<p>Follow the authors of this {{contentType}}</p>
+		{{/ifEquals}}
+	</div>
+	<ul class="n-content-tags__list--myft">
+		{{#each authors}}
+		<li class="n-content-tag__list-item--with-follow">
+			<a
+				href="{{url}}"
+				data-trackable="author"
+				class="n-content-tag n-content-tag--with-follow">{{name}}</a>
+			{{#if @root.flags.myFtApi}}
+				{{>n-ui/myft/templates/follow version='3' conceptId=id}}
+			{{/if}}
+		</li>
+		{{/each}}
+	</ul>
+	{{/if}}
+	<div class="n-content-tags__product-tour">
+		<a
+			href="/myft/product-tour"
+			data-trackable="product-tour"
+			class="n-content-tags__product-tour-link">Take a tour of myFT</a>
+	</div>
+</div>
