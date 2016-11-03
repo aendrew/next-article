@@ -33,7 +33,7 @@ module.exports = function ($, flags) {
 			title,
 			summary,
 			url,
-			size: 'large',
+			mods: ['large'],
 			image: {
 				url: imageUrl
 			},

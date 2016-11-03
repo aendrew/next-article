@@ -142,7 +142,8 @@ $o-video-is-silent: false;
 	}
 }
 
-//TODO: tidy this up once teasers are live
+//TODO: Putting all the teaser-related CSS here.
+//Can tidy up/put in the corrrect places once everything else is deleted
 
 .article__aside .o-teaser-collection {
 	margin-top: 16px;
@@ -174,8 +175,10 @@ $o-video-is-silent: false;
 		height: 24px;
 	}
 	.n-content-tags__intro {
-		padding-top: 0;
 		margin: 0;
+	}
+	.o-teaser-collection__heading + .n-content-tags__intro {
+		padding-top: 0;
 	}
 	.n-content-tag__list-item--with-follow {
 		margin: 0;
@@ -184,4 +187,15 @@ $o-video-is-silent: false;
 
 .read-next-bottom {
 	margin-bottom: 30px;
+}
+
+
+.n-content-related-box .o-teaser {
+	margin: 8px 0;
+}
+
+.n-content-related-box--no-border {
+	border: 0;
+	margin-top: 0;
+	padding: 0;
 }
