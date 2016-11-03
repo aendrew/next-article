@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@financial-times/n-heroku-tools": "^6.12.0",
-    "@financial-times/n-webpack": "^1.12.0",
+    "@financial-times/n-webpack": "^2.0.0",
     "autoprefixer": "^6.3.6",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-es2015-classes": "^6.8.0",
@@ -55,6 +55,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "fetch-mock": "^3.0.1",
     "haikro": "^2.3.2",
+    "handlebars-loader": "^1.4.0",
     "imports-loader": "^0.6.5",
     "isomorphic-fetch": "^2.0.2",
     "istanbul": "^0.4.2",
