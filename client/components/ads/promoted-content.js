@@ -4,7 +4,6 @@ import oDate from 'o-date';
 import crossDomainFetch from 'o-fetch-jsonp';
 
 import * as components from '@financial-times/n-section';
-//const teaserTemplate = require('n-teaser/templates/heavy.html');
 
 function correlator (len) {
 	len = len || 16;
@@ -117,13 +116,7 @@ const handleResponse = (el, response, flags) => {
 	};
 
 
-	if(flags.nTeaserArticle) {
-		//el.innerHTML = teaserTemplate(response);
-		ReactDOM.render(<components.Content {...propsForReact} />, el);
-	} else {
-		ReactDOM.render(<components.Content {...propsForReact} />, el);
-	}
-
+	ReactDOM.render(<components.Content {...propsForReact} />, el);
 	oDate.init(el);
 
 };
