@@ -82,7 +82,7 @@ const getAdJson = (data) => {
 	}
 }
 
-const handleResponse = (el, response, flags) => {
+const handleResponse = (el, response) => {
 
 	if(!(el && response && response.title)) {
 		return;
@@ -150,7 +150,7 @@ function initPaidPost (el, flags, ads) {
 		if(data && data.type && data.title && data.type !== 'smartmatch') {
 			const secondEl = document.querySelector('.promoted-content__second');
 
-			handleResponse(el, data, flags);
+			handleResponse(el, data);
 
 
 			if(data.type === 'special-report' && !secondEl.textContent) {
@@ -162,7 +162,7 @@ function initPaidPost (el, flags, ads) {
 		} else if (data && data.type === 'smartmatch') {
 			getSmartmatchData(adUnit, data)
 			.then(smartmatchResponse => {
-				handleResponse(el, smartmatchResponse, flags);
+				handleResponse(el, smartmatchResponse);
 			})
 			.catch(() => {
 				//no smartmatch results - make another ad call
