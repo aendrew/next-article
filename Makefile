@@ -41,7 +41,7 @@ _deploy_whitesource:
 clean-deploy: clean install deploy
 
 tidy:
-	nht destroy ${TEST_APP}
+#	nht destroy ${TEST_APP}
 
 provision:
 	nht deploy-hashed-assets
