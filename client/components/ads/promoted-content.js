@@ -122,7 +122,7 @@ const handleResponse = (el, response, flags) => {
 		size: 'small',
 		standfirst: { show: { default: true } }
 	};
-	
+
 	if(flags.nTeaserArticle) {
 		response.colspan = '{"default": 12, "L": 6}';
 		response.position = '{"default": "embedded"}';
