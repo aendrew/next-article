@@ -29,7 +29,8 @@ const getSmartmatchData = (adUnit, dfpResponse) => {
 	const contentUrl = encodeURIComponent(encodeURIComponent(`ft.com/content/${uuid}`));
 	const splitAdUnit = adUnit.split('/');
 	const section = splitAdUnit[splitAdUnit.length - 1];
-	const url = `https://c.smartonomi.net/static/creative/${dfpResponse.creativeID}/key/${dfpResponse.smartmatchKey}/pcid/${contentUrl}/sct=${encodeURIComponent(section)};encode=false;?cacheBuster=${smCacheBuster}`
+	const domain = dfpResponse.smartmatchHost || 'https://c.smartology.co';
+	const url = `${domain}/static/creative/${dfpResponse.creativeID}/key/${dfpResponse.smartmatchKey}/pcid/${contentUrl}/sct=${encodeURIComponent(section)};encode=false;?cacheBuster=${smCacheBuster}`
 	return crossDomainFetch(url, {
 		timeout: 4000,
 		mode: 'cors'
