@@ -19,6 +19,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const share = require('./components/share/main');
 	const promotedContent = require('./components/ads/promoted-content');
 	const ftlabsSpokenLayer = require('./components/ftlabsSpokenLayer/main');
+	const legalCopy = require('./components/legal-copy/main');
 
 	// cacheJourney();
 
