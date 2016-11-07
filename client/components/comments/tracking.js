@@ -63,12 +63,10 @@ module.exports = {
 				broadcast('oTracking.event', {
 					action: 'view',
 					category: 'comments',
-					context: {
-						product: 'next',
-						source: 'next-article',
-						uiIsDelayed: !window.FT.commentsRumLoaded,
-						userEngagement: initialCommentEngagement
-					}
+					product: 'next',
+					source: 'next-article',
+					uiIsDelayed: !window.FT.commentsRumLoaded,
+					userEngagement: initialCommentEngagement
 				});
 				logCommentEngagement('passive')
 				rumObserver.unobserve(rumIndicatorEl);
@@ -83,12 +81,10 @@ module.exports = {
 			broadcast('oTracking.event', {
 				category: 'comments',
 				action: 'ready',
-				context: {
-					timeToLoad: window.FT.commentsRumLoaded - window.FT.commentsRumLoadStart,
-					userIsViewing: !!window.FT.commentsRumInView,
-					timeUserWaitedToView: window.FT.commentsRumInView ? window.FT.commentsRumLoaded - window.FT.commentsRumInView : 0,
-					userEngagement: initialCommentEngagement
-				}
+				timeToLoad: window.FT.commentsRumLoaded - window.FT.commentsRumLoadStart,
+				userIsViewing: !!window.FT.commentsRumInView,
+				timeUserWaitedToView: window.FT.commentsRumInView ? window.FT.commentsRumLoaded - window.FT.commentsRumInView : 0,
+				userEngagement: initialCommentEngagement
 			});
 		})
 
