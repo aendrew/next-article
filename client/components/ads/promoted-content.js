@@ -95,15 +95,6 @@ const handleResponse = (el, response, flags) => {
 	container.classList.add('promoted-content--loaded');
 	container.classList.add(`promoted-content--${response.type}`);
 
-	if(response.advertiser) {
-		response.promotedByPrefix = response.type === 'paid-post' ? 'Paid Post' : 'Promoted content';
-	};
-	response.mods = [response.type, 'small'];
-
-	if(response.image && !response.image.url) {
-		delete response.image;
-	}
-
 	const propsForReact = {
 		data: {
 			content: [ response ]
@@ -127,7 +118,17 @@ const handleResponse = (el, response, flags) => {
 		response.colspan = '{"default": 12, "L": 6}';
 		response.position = '{"default": "embedded"}';
 		response.widths = '[500, 332]';
+		response.type = response.type === 'smartmatch' ? 'promoted-content' : response.type;
+		response.mods = [response.type, 'small'];
+		if(response.advertiser) {
+			response.promotedByPrefix = response.type === 'paid-post' ? 'Paid Post' : 'Promoted content';
+		};
+
+		if(response.image && !response.image.url) {
+			delete response.image;
+		}
 		el.innerHTML = template(response);
+
 		[].concat(response.impressionURL).forEach(url => {
 			//drop all the impression tracking pixels
 			const image = new Image();
