@@ -45,6 +45,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 	toc.init(flags);
 	scrollDepth(flags);
+	legalCopy(flags);
 
 	mainCss.then(() => {
 		slideshow(document.querySelectorAll('.article ft-slideshow'));
