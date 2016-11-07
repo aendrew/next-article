@@ -153,14 +153,15 @@ $o-video-is-silent: false;
 .standalone-teaser-heading {
 	@include font-size(18, 20);
 	font-family: $o-typography-sans;
-	margin: 0 0 8px;
+	margin: 0 0 20px;
 	&:after {
 		content: '';
 		display: block;
 		width: 60px;
 		margin-top: 5px;
-		margin-bottom: 10px;
 		border-bottom: 4px solid oColorsGetPaletteColor(black);
+		position: absolute;
+		z-index: 1;
 }
 
 }
@@ -193,6 +194,10 @@ $o-video-is-silent: false;
 
 .n-content-related-box .o-teaser {
 	margin: 8px 0;
+}
+
+.n-content-related-box .standalone-teaser-heading {
+	margin-bottom: 0px;
 }
 
 .n-content-related-box--no-border {
