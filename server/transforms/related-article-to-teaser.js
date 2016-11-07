@@ -34,9 +34,9 @@ module.exports = function ($, flags) {
 			summary,
 			url,
 			mods: ['large-portrait'],
-			image: {
+			image: imageUrl ? {
 				url: imageUrl
-			},
+			} : null,
 			colspan: '{"default": 12, "L": 4}',
 			position: '{"default": "bottom"}',
 			widths: '[500, 332]'
