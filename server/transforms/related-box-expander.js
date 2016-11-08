@@ -22,6 +22,8 @@ module.exports = function ($) {
 		const hasImage = $img.length;
 		if (hasImage) {
 			$img
+				.attr('alt','')
+				.attr('role','presentation')
 				// lazy load the image
 				.addClass('n-image--lazy-loading')
 				// and the wrapper

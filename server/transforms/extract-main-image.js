@@ -8,6 +8,9 @@ module.exports = function (bodyHTML) {
 	const $firstMainImage = $('figure.n-content-image--full, figure.n-content-image--center, ft-slideshow').eq(0);
 	let mainImageHTML;
 
+	$firstMainImage.attr('alt', '');
+	$firstMainImage.attr('role', 'presentation');
+
 	// check that it is the first element in the body
 	if (
 		$firstMainImage.length &&
