@@ -9,7 +9,7 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 			'<body>' +
 				'<figure class="n-content-image n-content-image--full" style="width:700px;">' +
 					'<div class="n-content-image__placeholder" style="padding-top:56.25%;">' +
-						'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F4dd6d624-98cf-11e5-9228-87e603d47bdc?source=next&amp;fit=scale-down&amp;width=700">' +
+						'<img alt="" src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F4dd6d624-98cf-11e5-9228-87e603d47bdc?source=next&amp;fit=scale-down&amp;width=700">' +
 					'</div>' +
 				'</figure>' +
 				'<p>test test test</p>' +
@@ -19,7 +19,7 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 		resultObject.mainImageHTML.should.equal(
 			'<figure class="n-content-image n-content-image--full" style="width:700px;" alt="" role="presentation">' +
 				'<div class="n-content-image__placeholder" style="padding-top:56.25%;">' +
-					'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F4dd6d624-98cf-11e5-9228-87e603d47bdc?source=next&amp;fit=scale-down&amp;width=700">' +
+					'<img alt="" src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F4dd6d624-98cf-11e5-9228-87e603d47bdc?source=next&amp;fit=scale-down&amp;width=700">' +
 				'</div>' +
 			'</figure>'
 		);
@@ -35,7 +35,7 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 			'<body>' +
 				'<figure class="n-content-image n-content-image--center" style="width:600px;" alt="" role="presentation">' +
 					'<div class="n-content-image__placeholder" style="padding-top:43%;">' +
-						'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2Faee47340-9307-11e5-bd82-c1fb87bef7af?source=next&amp;fit=scale-down&amp;width=600">' +
+						'<img alt="" src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2Faee47340-9307-11e5-bd82-c1fb87bef7af?source=next&amp;fit=scale-down&amp;width=600">' +
 					'</div>' +
 				'</figure>' +
 				'<p>test test test</p>' +
@@ -45,7 +45,7 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 		resultObject.mainImageHTML.should.equal(
 			'<figure class="n-content-image n-content-image--center" style="width:600px;" alt="" role="presentation">' +
 				'<div class="n-content-image__placeholder" style="padding-top:43%;">' +
-					'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2Faee47340-9307-11e5-bd82-c1fb87bef7af?source=next&amp;fit=scale-down&amp;width=600">' +
+					'<img alt="" src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2Faee47340-9307-11e5-bd82-c1fb87bef7af?source=next&amp;fit=scale-down&amp;width=600">' +
 				'</div>' +
 			'</figure>'
 		);
@@ -70,7 +70,7 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 			'<body>' +
 				'<figure class="n-content-image n-content-image--inline" style="width:700px;">' +
 					'<div class="n-content-image__placeholder" style="padding-top:56.25%;">' +
-						'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F4dd6d624-98cf-11e5-9228-87e603d47bdc?source=next&amp;fit=scale-down&amp;width=700">' +
+						'<img alt="" src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F4dd6d624-98cf-11e5-9228-87e603d47bdc?source=next&amp;fit=scale-down&amp;width=700">' +
 					'</div>' +
 				'</figure>' +
 				'<p>test test test</p>' +
@@ -82,7 +82,7 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 			'<body>' +
 				'<figure class="n-content-image n-content-image--inline" style="width:700px;">' +
 					'<div class="n-content-image__placeholder" style="padding-top:56.25%;">' +
-						'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F4dd6d624-98cf-11e5-9228-87e603d47bdc?source=next&amp;fit=scale-down&amp;width=700">' +
+						'<img alt="" src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F4dd6d624-98cf-11e5-9228-87e603d47bdc?source=next&amp;fit=scale-down&amp;width=700">' +
 					'</div>' +
 				'</figure>' +
 				'<p>test test test</p>' +
@@ -95,7 +95,7 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 			'<body>' +
 				'<figure class="n-content-image n-content-image--thin" style="width:100px;">' +
 					'<div class="n-content-image__placeholder" style="padding-top:120%;">' +
-						'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F8d8589a4-94d9-11e5-bd82-c1fb87bef7af?source=next&amp;fit=scale-down&amp;width=100">' +
+						'<img alt="" src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F8d8589a4-94d9-11e5-bd82-c1fb87bef7af?source=next&amp;fit=scale-down&amp;width=100">' +
 					'</div>' +
 				'</figure>' +
 				'<p>test test test</p>' +
@@ -107,7 +107,7 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 			'<body>' +
 				'<figure class="n-content-image n-content-image--thin" style="width:100px;">' +
 					'<div class="n-content-image__placeholder" style="padding-top:120%;">' +
-						'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F8d8589a4-94d9-11e5-bd82-c1fb87bef7af?source=next&amp;fit=scale-down&amp;width=100">' +
+						'<img alt="" src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F8d8589a4-94d9-11e5-bd82-c1fb87bef7af?source=next&amp;fit=scale-down&amp;width=100">' +
 					'</div>' +
 				'</figure>' +
 				'<p>test test test</p>' +
@@ -121,7 +121,7 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 				'<p>test test test</p>' +
 				'<figure class="n-content-image n-content-image--full" style="width:700px;" alt="" role="presentation">' +
 					'<div class="n-content-image__placeholder" style="padding-top:56.25%;">' +
-						'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F4dd6d624-98cf-11e5-9228-87e603d47bdc?source=next&amp;fit=scale-down&amp;width=700">' +
+						'<img alt="" src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F4dd6d624-98cf-11e5-9228-87e603d47bdc?source=next&amp;fit=scale-down&amp;width=700">' +
 					'</div>' +
 				'</figure>' +
 			'</body>'
@@ -133,7 +133,7 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 				'<p>test test test</p>' +
 				'<figure class="n-content-image n-content-image--full" style="width:700px;" alt="" role="presentation">' +
 					'<div class="n-content-image__placeholder" style="padding-top:56.25%;">' +
-						'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F4dd6d624-98cf-11e5-9228-87e603d47bdc?source=next&amp;fit=scale-down&amp;width=700">' +
+						'<img alt="" src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fcom.ft.imagepublish.prod.s3.amazonaws.com%2F4dd6d624-98cf-11e5-9228-87e603d47bdc?source=next&amp;fit=scale-down&amp;width=700">' +
 					'</div>' +
 				'</figure>' +
 			'</body>'
@@ -146,7 +146,7 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 				'<p>The co-founding Zoman, Deepinder Goyal, that is took time for a chat with us last week about the change going on in Indias start-up world.</p>' +
 				'<blockquote class="article__quote article__quote--full-quote aside--content c-box u-border--left u-padding--left-right">' +
 					'<figure class="article-image article-image--center" style="width:354px;"><div class="article-image__placeholder" style="padding-top:75.9887005649718%;">' +
-						'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fftalphaville.ft.com%2Ffiles%2F2016%2F02%2FScreen-Shot-2016-02-08-at-16.08.47-590x448.png?source=next&amp;fit=scale-down&amp;width=354">' +
+						'<img alt="" src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fftalphaville.ft.com%2Ffiles%2F2016%2F02%2FScreen-Shot-2016-02-08-at-16.08.47-590x448.png?source=next&amp;fit=scale-down&amp;width=354">' +
 						'</div>' +
 					'</figure>' +
 				'</blockquote>' +
@@ -159,7 +159,7 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 				'<p>The co-founding Zoman, Deepinder Goyal, that is took time for a chat with us last week about the change going on in Indias start-up world.</p>' +
 				'<blockquote class="article__quote article__quote--full-quote aside--content c-box u-border--left u-padding--left-right">' +
 					'<figure class="article-image article-image--center" style="width:354px;"><div class="article-image__placeholder" style="padding-top:75.9887005649718%;">' +
-						'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fftalphaville.ft.com%2Ffiles%2F2016%2F02%2FScreen-Shot-2016-02-08-at-16.08.47-590x448.png?source=next&amp;fit=scale-down&amp;width=354">' +
+						'<img alt="" src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fftalphaville.ft.com%2Ffiles%2F2016%2F02%2FScreen-Shot-2016-02-08-at-16.08.47-590x448.png?source=next&amp;fit=scale-down&amp;width=354">' +
 						'</div>' +
 					'</figure>' +
 				'</blockquote>' +
@@ -172,7 +172,7 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 		const bodyHTML = (
 			'<body>' +
 				'<figure class="article-image article-image--center" style="width:354px;"><div class="article-image__placeholder" style="padding-top:75.9887005649718%;">' +
-					'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fftalphaville.ft.com%2Ffiles%2F2016%2F02%2FScreen-Shot-2016-02-08-at-16.08.47-590x448.png?source=next&amp;fit=scale-down&amp;width=354">' +
+					'<img alt="" src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fftalphaville.ft.com%2Ffiles%2F2016%2F02%2FScreen-Shot-2016-02-08-at-16.08.47-590x448.png?source=next&amp;fit=scale-down&amp;width=354">' +
 					'</div>' +
 				'</figure>' +
 			'</body>'
@@ -181,7 +181,7 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 		resultObject.bodyHTML.should.equal(
 			'<body>' +
 				'<figure class="article-image article-image--center" style="width:354px;"><div class="article-image__placeholder" style="padding-top:75.9887005649718%;">' +
-					'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fftalphaville.ft.com%2Ffiles%2F2016%2F02%2FScreen-Shot-2016-02-08-at-16.08.47-590x448.png?source=next&amp;fit=scale-down&amp;width=354">' +
+					'<img alt="" src="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fftalphaville.ft.com%2Ffiles%2F2016%2F02%2FScreen-Shot-2016-02-08-at-16.08.47-590x448.png?source=next&amp;fit=scale-down&amp;width=354">' +
 					'</div>' +
 				'</figure>' +
 			'</body>'
