@@ -13,7 +13,7 @@ describe('Podcast Main Image', () => {
 	const validImageHtml =
 		'<figure class="n-content-image n-content-image--center" style="width: 394px; max-width: 100%;">' +
 			'<div class="n-image-wrapper n-image-wrapper--placeholder" style="padding-bottom: 100%;">' +
-				'<img alt="" class="n-image" role="presentation" srcset="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fimage.jpg?source=next&fit=scale-down&width=394 394w" sizes="(min-width: 46.25em) 394px, calc(100vw - 20px)">' +
+				'<img alt="" class="n-image" role="presentation" srcset="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fimage.jpg?source=next&fit=scale-down&width=394 394w" sizes="(min-width: 46.25em) 394px, calc(100vw - 20px)">' +
 			'</div>' +
 		'</figure>';
 
