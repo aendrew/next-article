@@ -5,6 +5,8 @@ import crossDomainFetch from 'o-fetch-jsonp';
 
 import * as components from '@financial-times/n-section';
 
+const template = require('../../../bower_components/n-teaser/templates/heavy.html');
+
 function correlator (len) {
 	len = len || 16;
 	function genRand (sig) {
@@ -83,7 +85,7 @@ const getAdJson = (data) => {
 	}
 }
 
-const handleResponse = (el, response) => {
+const handleResponse = (el, response, flags) => {
 
 	if(!(el && response && response.title)) {
 		return;
@@ -92,10 +94,6 @@ const handleResponse = (el, response) => {
 	const container = document.querySelector('.promoted-content')
 	container.classList.add('promoted-content--loaded');
 	container.classList.add(`promoted-content--${response.type}`);
-
-	if(response.type === 'special-report') {
-		delete response.image;
-	}
 
 	const propsForReact = {
 		data: {
@@ -116,8 +114,30 @@ const handleResponse = (el, response) => {
 		standfirst: { show: { default: true } }
 	};
 
+	if(flags.nTeaserArticle) {
+		response.colspan = '{"default": 12, "L": 6}';
+		response.position = '{"default": "embedded"}';
+		response.widths = '[500, 332]';
+		response.type = response.type === 'smartmatch' ? 'promoted-content' : response.type;
+		response.mods = [response.type, 'small'];
+		if(response.advertiser) {
+			response.promotedByPrefix = response.type === 'paid-post' ? 'Paid Post' : 'Promoted content';
+		};
 
-	ReactDOM.render(<components.Content {...propsForReact} />, el);
+		if(response.image && !response.image.url) {
+			delete response.image;
+		}
+		el.innerHTML = template(response);
+
+		[].concat(response.impressionURL).forEach(url => {
+			//drop all the impression tracking pixels
+			const image = new Image();
+			image.src = url;
+		});
+	} else {
+		ReactDOM.render(<components.Content {...propsForReact} />, el);
+	}
+
 	oDate.init(el);
 
 };
@@ -151,7 +171,7 @@ function initPaidPost (el, flags, ads) {
 		if(data && data.type && data.title && data.type !== 'smartmatch') {
 			const secondEl = document.querySelector('.promoted-content__second');
 
-			handleResponse(el, data);
+			handleResponse(el, data, flags);
 
 
 			if(data.type === 'special-report' && !secondEl.textContent) {
@@ -163,7 +183,7 @@ function initPaidPost (el, flags, ads) {
 		} else if (data && data.type === 'smartmatch') {
 			getSmartmatchData(adUnit, data)
 			.then(smartmatchResponse => {
-				handleResponse(el, smartmatchResponse);
+				handleResponse(el, smartmatchResponse, flags);
 			})
 			.catch(() => {
 				//no smartmatch results - make another ad call
