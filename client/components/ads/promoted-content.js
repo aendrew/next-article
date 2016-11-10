@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import oDate from 'o-date';
 import crossDomainFetch from 'o-fetch-jsonp';
-
 import * as components from '@financial-times/n-section';
 
+const nImage = require('n-image');
 const template = require('../../../bower_components/n-teaser/templates/heavy.html');
 
 function correlator (len) {
@@ -133,6 +133,7 @@ const handleResponse = (el, response, flags) => {
 			response.genreTag = {
 				prefLabel: 'Special Report'
 			};
+			delete response.image;
 		}
 		el.innerHTML = template(response);
 
@@ -141,6 +142,9 @@ const handleResponse = (el, response, flags) => {
 			const image = new Image();
 			image.src = url;
 		});
+
+		nImage.lazyLoad({ root: el });
+
 	} else {
 		ReactDOM.render(<components.Content {...propsForReact} />, el);
 	}
