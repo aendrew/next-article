@@ -119,7 +119,7 @@ const handleResponse = (el, response, flags) => {
 		response.position = '{"default": "embedded"}';
 		response.widths = '[500, 332]';
 		response.type = response.type === 'smartmatch' ? 'promoted-content' : response.type;
-		response.mods = [response.type, 'small', 'streteched'];
+		response.mods = [response.type, 'small', 'stretched'];
 
 		if(response.advertiser) {
 			response.promotedByPrefix = response.type === 'paid-post' ? 'Paid Post' : 'Promoted content';
