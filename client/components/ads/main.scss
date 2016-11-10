@@ -65,7 +65,7 @@ $ad-medium-breakpoint: 760px;
 	display: none;
 	border: 1px solid getColor('pink-tint3');
 	.related-content & {
-		margin: 32px 0;
+		margin: 50px 0;
 	}
 
 	.card {
@@ -95,8 +95,6 @@ $ad-medium-breakpoint: 760px;
 	.o-teaser {
 		margin: 10px;
 	}
-
-
 }
 
 .promoted-content--loaded {
