@@ -119,13 +119,20 @@ const handleResponse = (el, response, flags) => {
 		response.position = '{"default": "embedded"}';
 		response.widths = '[500, 332]';
 		response.type = response.type === 'smartmatch' ? 'promoted-content' : response.type;
-		response.mods = [response.type, 'small'];
+		response.mods = [response.type, 'small', 'streteched'];
+
 		if(response.advertiser) {
 			response.promotedByPrefix = response.type === 'paid-post' ? 'Paid Post' : 'Promoted content';
 		};
 
 		if(response.image && !response.image.url) {
 			delete response.image;
+		}
+
+		if(response.type === 'special-report') {
+			response.genreTag = {
+				prefLabel: 'Special Report'
+			};
 		}
 		el.innerHTML = template(response);
 
