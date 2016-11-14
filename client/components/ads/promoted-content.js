@@ -187,8 +187,8 @@ function initPaidPost (el, flags, ads) {
 
 			if(data.type === 'special-report' && !secondEl.textContent) {
 				skipSmartmatch = true;
-				el.setAttribute('data-o-grid-colspan', '12 M6');
-				secondEl.setAttribute('data-o-grid-colspan', '12 M6');
+				el.setAttribute('data-o-grid-colspan', (flags.nTeaserArticle) ? '12 L6': '12 M6');
+				secondEl.setAttribute('data-o-grid-colspan', (flags.nTeaserArticle) ? '12 L6': '12 M6');
 				initPaidPost(secondEl, flags, ads);
 			}
 		} else if (data && data.type === 'smartmatch') {
