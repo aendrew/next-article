@@ -172,6 +172,8 @@ $o-video-is-silent: false;
 
 //make the myFT follow box look okay with collection styles
 .o-teaser-collection {
+	position: relative;
+
 	.article__myft-logo {
 		width: 48px;
 		height: 24px;
@@ -184,6 +186,18 @@ $o-video-is-silent: false;
 	}
 	.n-content-tag__list-item--with-follow {
 		margin: 0;
+	}
+}
+
+//make more-on buttons look okay with teaser headings
+.o-teaser-collection__heading + .n-myft-ui--follow {
+	margin: 0 0 10px;
+
+	@include oGridRespondTo('M') {
+		margin: 0;
+		position: absolute;
+		right: 0;
+		top: 10px;
 	}
 }
 
