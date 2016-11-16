@@ -6,7 +6,7 @@
     "n-image": "^4.3.0",
     "n-section": "^6.1.2",
     "n-service-worker": "^1.1.0",
-    "n-teaser": "master",
+    "n-teaser": "^0.1.0",
     "n-teaser-collection": "master",
     "o-teaser-collection": "#design-debt",
     "n-ui": "^2.11.0",
