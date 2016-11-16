@@ -141,6 +141,13 @@ $o-video-is-silent: false;
 			padding-left: 0;
 		}
 	}
+
+	// We’re already printing the headline URL, so no point showing it again for the image
+	// scss-lint:disable QualifyingElement
+	.o-teaser__image-container a[href^='/']:after {
+		content: '';
+	}
+	// scss-lint:enable QualifyingElement
 }
 
 //TODO: Putting all the teaser-related CSS here.
