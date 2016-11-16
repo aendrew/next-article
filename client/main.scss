@@ -141,6 +141,11 @@ $o-video-is-silent: false;
 			padding-left: 0;
 		}
 	}
+
+	// We’re already printing the headline URL, so no point showing it again for the image
+	.o-teaser__image-container a[href^='/']:after {
+		content: '';
+	}
 }
 
 //TODO: Putting all the teaser-related CSS here.
