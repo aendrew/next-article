@@ -17,7 +17,7 @@ module.exports = function (articleId, storyPackageIds, primaryTag, publishedDate
 
 	if (primaryTag) {
 		topicArticleFetch = api.search({
-			filter: ['metadata.idV1', primaryTag.id],
+			filter: ['metadata.idV1', primaryTag.idV1],
 			// Get an extra so we can de-dupe
 			count: 2,
 			fields: [

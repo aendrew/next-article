@@ -1,11 +1,15 @@
 const addTagTitlePrefix = require('./tag-title-prefix');
 
-module.exports = function (primaryTheme, primarySection, primaryBrand) {
+module.exports = function (content) {
 	const moreOnTags = [];
 
-	primaryTheme && moreOnTags.push(primaryTheme);
-	primarySection && moreOnTags.push(primarySection);
-	primaryBrand && moreOnTags.push(primaryBrand);
+	if (content.isSpecialReport) {
+		content.primaryTag && moreOnTags.push(content.primaryTag);
+	} else {
+		content.primaryThemeTag && moreOnTags.push(content.primaryThemeTag);
+		content.primarySectionTag && moreOnTags.push(content.primarySectionTag);
+		content.primaryBrandTag && moreOnTags.push(content.primaryBrandTag);
+	}
 
 	if (!moreOnTags.length) {
 		return;

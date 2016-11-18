@@ -66,8 +66,8 @@ describe('Special Report', () => {
 		});
 
 		it('should get the special report id and name from the first article with a primaryTag with taxonomy specialReports', () => {
-			result.id.should.eql('5');
-			result.name.should.equal('Special Report');
+			result.idV1.should.eql('5');
+			result.prefLabel.should.equal('Special Report');
 		});
 
 		it('should not return the parent article in the list', () => {

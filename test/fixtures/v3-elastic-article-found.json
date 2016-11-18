@@ -33,6 +33,7 @@
 						"prefLabel":"Cyber Security",
 						"taxonomy":"topics",
 						"primary":"theme",
+						"primaryTag": true,
 						"attributes":[
 
 						],

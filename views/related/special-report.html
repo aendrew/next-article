@@ -2,10 +2,10 @@
 	<h3>More from this report</h3>
 	<div class="stream-card__wrapper" {{#if image}}style="background-image: url('{{#resize 710}}{{image.url}}{{/resize}}')"{{/if}}>
 		<div class="stream-card__overview">
-			<a class="stream-card__title" href="/special-reports/{{id}}" data-trackable="header">
+			<a class="stream-card__title" href="/special-reports/{{idV1}}" data-trackable="header">
 				<span class="stream-card__title__kicker">Special Report</span>
 				<br />
-				<span class="stream-card__title__text">{{name}}</span>
+				<span class="stream-card__title__text">{{prefLabel}}</span>
 			</a>
 		</div>
 		<div class="stream-card__articles">

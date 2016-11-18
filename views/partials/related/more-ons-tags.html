@@ -22,11 +22,11 @@
 		{{#each tags}}
 		<li class="n-content-tag__list-item--with-follow">
 			<a
-				href="{{url}}"
+				href="{{relativeUrl}}"
 				data-trackable="topic"
-				class="n-content-tag n-content-tag--with-follow">{{name}}</a>
+				class="n-content-tag n-content-tag--with-follow">{{prefLabel}}</a>
 			{{#if @root.flags.myFtApi}}
-				{{>n-ui/myft/templates/follow version='3' conceptId=id}}
+				{{>n-ui/myft/templates/follow version='3' conceptId=idV1 name=prefLabel}}
 			{{/if}}
 		</li>
 		{{/each}}
@@ -44,11 +44,11 @@
 		{{#each authors}}
 		<li class="n-content-tag__list-item--with-follow">
 			<a
-				href="{{url}}"
+				href="{{relativeUrl}}"
 				data-trackable="author"
-				class="n-content-tag n-content-tag--with-follow">{{name}}</a>
+				class="n-content-tag n-content-tag--with-follow">{{prefLabel}}</a>
 			{{#if @root.flags.myFtApi}}
-				{{>n-ui/myft/templates/follow version='3' conceptId=id}}
+				{{>n-ui/myft/templates/follow version='3' conceptId=idV1 name=prefLabel}}
 			{{/if}}
 		</li>
 		{{/each}}

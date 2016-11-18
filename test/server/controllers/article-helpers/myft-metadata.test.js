@@ -40,8 +40,8 @@ describe('myFT metadata', () => {
 	});
 
 	it('it should promote users myft tags to be displayed', () => {
-		expect(result.tags.find(tag => tag.id === 'NTc=-U2VjdGlvbnM=')).to.exist;
-		expect(result.tags.find(tag => tag.id === 'NTQ=-U2VjdGlvbnM=')).to.exist;
+		expect(result.tags.find(tag => tag.idV1 === 'NTc=-U2VjdGlvbnM=')).to.exist;
+		expect(result.tags.find(tag => tag.idV1 === 'NTQ=-U2VjdGlvbnM=')).to.exist;
 	});
 
 });

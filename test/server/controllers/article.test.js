@@ -70,19 +70,12 @@ describe('Article Controller', () => {
 			expect(result.dehydratedMetadata).to.include.keys('moreOns', 'package');
 
 			result.dehydratedMetadata.moreOns.forEach(
-				tag => expect(tag).to.include.keys('id', 'name', 'taxonomy')
+				tag => expect(tag).to.include.keys('idV1', 'prefLabel', 'taxonomy')
 			);
 
-			expect(result.dehydratedMetadata.moreOns[0].id).to.equal('M2Y3OGJkYjQtMzQ5OC00NTM2LTg0YzUtY2JmNzZiY2JhZDQz-VG9waWNz');
-			expect(result.dehydratedMetadata.moreOns[1].id).to.equal('NTg=-U2VjdGlvbnM=');
+			expect(result.dehydratedMetadata.moreOns[0].idV1).to.equal('M2Y3OGJkYjQtMzQ5OC00NTM2LTg0YzUtY2JmNzZiY2JhZDQz-VG9waWNz');
+			expect(result.dehydratedMetadata.moreOns[1].idV1).to.equal('NTg=-U2VjdGlvbnM=');
 			expect(result.dehydratedMetadata.package).to.be.an.instanceOf(Array);
-		});
-
-		it('adds premiumArticle=true if article is premium', () => {
-			return createInstance(null, { openGraph: true }, fixturePremium).then(() => {
-				let result = response._getRenderData()
-				expect(result.premiumArticle).to.equal(true);
-			});
 		});
 
 		it('does not add X-Robots-Tag headers for Methode articles', () => {
@@ -115,9 +108,11 @@ describe('Article Controller', () => {
 			});
 		});
 
-		it('adds premiumArticle=false if article is not premium', () => {
-			expect(result.premiumArticle).to.equal(false);
+
+		it('adds isPremium=false if article is not premium', () => {
+			expect(result.isPremium).to.equal(false);
 		});
+
 	});
 
 	context('fragment layout', () => {

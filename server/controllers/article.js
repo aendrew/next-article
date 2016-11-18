@@ -11,14 +11,14 @@ const getMoreOnTags = require('./article-helpers/get-more-on-tags');
 const addTagTitlePrefix = require('./article-helpers/tag-title-prefix');
 const getAdsLayout = require('../utils/get-ads-layout');
 
-function isCapiV1 (article) {
-	return article.provenance.find(
+function isCapiV1 (provenance) {
+	return provenance.find(
 			source => source.includes('http://api.ft.com/content/items/v1/')
 	);
 }
 
-function isCapiV2 (article) {
-	return article.provenance.find(
+function isCapiV2 (provenance) {
+	return provenance.find(
 		source => source.includes('http://api.ft.com/enrichedcontent/')
 	);
 }
@@ -36,7 +36,7 @@ function isFreeArticle (webUrl) {
 	return webUrl.search('/cms/s/2') !== -1
 }
 
-function isPremiumArticle (webUrl) {
+function isPremium (webUrl) {
 	return webUrl.search('/cms/s/3') !== -1
 }
 
@@ -118,10 +118,10 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	content.designGenre = articleBranding(content.metadata);
 
 	// Decorate with related stuff
-	content.moreOns = getMoreOnTags(content.primaryTheme, content.primarySection, content.primaryBrand);
+	content.moreOns = getMoreOnTags(content);
 
-	content.articleV1 = isCapiV1(content);
-	content.articleV2 = isCapiV2(content);
+	content.articleV1 = isCapiV1(content.provenance);
+	content.articleV2 = isCapiV2(content.provenance);
 
 	content.byline = bylineTransform(content.byline, content.metadata.filter(item => item.taxonomy === 'authors'));
 
@@ -154,7 +154,7 @@ module.exports = function articleV3Controller (req, res, next, content) {
 
 	content.signedIn = isUserSignedIn(req);
 	content.freeArticle = isFreeArticle(content.webUrl);
-	content.premiumArticle = isPremiumArticle(content.webUrl);
+	content.isPremium = isPremium(content.webUrl);
 	content.withGcs = showGcs(req, res, content.freeArticle);
 	content.lightSignup = {
 		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && res.locals.flags.lightSignupInArticle,

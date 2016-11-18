@@ -17,48 +17,25 @@ describe('Metadata', () => {
 
 		it('fills the metadata with CAPI V1 compatible properties', () => {
 			result.metadata.forEach(
-				tag => expect(tag).to.include.keys('id', 'name', 'taxonomy', 'url')
+				tag => expect(tag).to.include.keys('idV1', 'prefLabel', 'taxonomy', 'relativeUrl')
 			);
 		});
 
 		it('decorates the given article with primary theme, section and brand', () => {
-			expect(result.primaryTheme.prefLabel).to.equal('Cyber Security');
-			expect(result.primarySection.prefLabel).to.equal('Banks');
-			expect(result.primaryBrand.prefLabel).to.equal('Lex');
+			expect(result.primaryThemeTag.prefLabel).to.equal('Cyber Security');
+			expect(result.primarySectionTag.prefLabel).to.equal('Banks');
+			expect(result.primaryBrandTag.prefLabel).to.equal('Lex');
 		});
 
-		it('selects the primary tag with themes taking precendence over sections', () => {
+		it('selects the primary tag based on the primaryTag indicator', () => {
 			expect(result.primaryTag.prefLabel).to.equal('Cyber Security');
 		});
 
 		it('selects tags for display', () => {
 			result.tags.forEach(tag => {
-				expect(tag.id).not.to.equal(result.primaryTag.id);
+				expect(tag.idV1).not.to.equal(result.primaryTag.idV1);
 				expect([ 'iptc', 'icb' ]).not.to.contain(tag.taxonomy);
 			});
-		});
-
-	});
-
-	context('for an article with a primary section that takes precedence over primary theme', () => {
-
-		beforeEach(() => {
-			// Subject modifies the data given to it so always start fresh
-			fixtureData = JSON.parse(JSON.stringify(fixtureEsFound));
-
-			fixtureData.metadata.unshift({
-				prefLabel: 'My super important tag',
-				taxonomy: 'specialReports',
-				primary: 'section',
-				id: '123',
-				url: 'https://www.ft.com/stream/specialReportsId/123'
-			});
-
-			result = subject(fixtureData);
-		});
-
-		it('selects the primary section as the primary tag', () => {
-			expect(result.primaryTag.prefLabel).to.equal('My super important tag');
 		});
 
 	});
@@ -91,7 +68,7 @@ describe('Metadata', () => {
 			expect(result.authors).to.be.an('array');
 			expect(result.authors.length).to.equal(1);
 			// Martin Arnold’s concept uuid
-			expect(result.authors[0].id).to.equal('Q0ItMDAwMDcyMw==-QXV0aG9ycw==');
+			expect(result.authors[0].idV1).to.equal('Q0ItMDAwMDcyMw==-QXV0aG9ycw==');
 		});
 
 		it('excludes authors from the tags array', () => {

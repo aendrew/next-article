@@ -47,8 +47,8 @@ module.exports = function (req, res, next) {
 			let articleWithSpecialReportPrimary = specialReportArticles
 				.find(article => article.primaryTag && article.primaryTag.taxonomy === 'specialReports');
 			return res.render('related/special-report', {
-				id: articleWithSpecialReportPrimary ? articleWithSpecialReportPrimary.primaryTag.idV1 : null,
-				name: articleWithSpecialReportPrimary ? articleWithSpecialReportPrimary.primaryTag.prefLabel : null,
+				idV1: articleWithSpecialReportPrimary ? articleWithSpecialReportPrimary.primaryTag.idV1 : null,
+				prefLabel: articleWithSpecialReportPrimary ? articleWithSpecialReportPrimary.primaryTag.prefLabel : null,
 				image: articleWithImage ? articleWithImage.mainImage : null,
 				articles: specialReportArticles
 			});

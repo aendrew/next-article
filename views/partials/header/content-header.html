@@ -8,7 +8,7 @@
 						{{#if isSpecialReport}}
 							<p class="article__primary-theme">
 								Special Report:
-								<a href="/special-reports/{{primaryTag.id}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="section-link" aria-label="posted in category {{primaryTag.name}}" data-concept-id="{{primaryTag.id}}">{{primaryTag.name}}</a>
+								<a href="/special-reports/{{primaryTag.idV1}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="section-link" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
 							</p>
 						{{else}}
 							{{#if primaryTag}}
@@ -17,7 +17,7 @@
 						{{/if}}
 						<h1 class="article-headline">
 							<span class="article-classifier__gap">{{title}}</span>
-							{{#ifAll @root.flags.premiumContentIndicator premiumArticle}}
+							{{#ifAll @root.flags.premiumContentIndicator isPremium}}
 								<span class="article-classifier">Premium</span>
 							{{/ifAll}}
 						</h1>
@@ -30,7 +30,7 @@
 						{{/ifEquals}}
 						{{#if designGenre}}
 							<div class="article__brand--wrapper">
-								<a class="article__brand--title	n-content-tag" href={{designGenre.url}} data-trackable="brand" aria-label="part of the {{designGenre.name}} column">{{designGenre.name}}</a>
+								<a class="article__brand--title	n-content-tag" href={{designGenre.relativeUrl}} data-trackable="brand" aria-label="part of the {{designGenre.prefLabel}} column">{{designGenre.prefLabel}}</a>
 							</div>
 						{{/if}}
 					</div>
@@ -40,7 +40,7 @@
 					<img
 						class="article__header-headshot--image"
 						src="{{designGenre.headshot}}?source=next&amp;fit=scale-down&amp;width=150&amp;compression=best&amp;format=png&amp;quality=highest&amp;dpr=2"
-						alt="Image of {{designGenre.name}}">
+						alt="Image of {{designGenre.prefLabel}}">
 				</div>
 				{{/if}}
 			</div>

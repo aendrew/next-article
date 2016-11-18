@@ -7,9 +7,9 @@
 		{{#each tags}}
 		<li class="n-content-tag__list-item--vertical">
 			<a
-				href="{{url}}"
+				href="{{relativeUrl}}"
 				data-trackable="tag"
-				{{#if id}}data-concept-id="{{id}}"{{/if}}>{{name}}</a>
+				{{#if idV1}}data-concept-id="{{idV1}}"{{/if}}>{{prefLabel}}</a>
 		</li>
 		{{/each}}
 	</ul>

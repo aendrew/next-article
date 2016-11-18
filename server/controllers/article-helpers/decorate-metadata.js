@@ -1,86 +1,65 @@
 const addTagTitlePrefix = require('./tag-title-prefix');
 
-function fillProperties (article) {
-	article.metadata = article.metadata.map(tag => {
-		let v1 = {
-			id: tag.idV1,
-			name: tag.prefLabel,
-			url: String(tag.url || '').replace('https://www.ft.com', '')
-		};
-
-		return Object.assign(tag, v1);
+const addRelativeUrl = (article) => {
+	article.metadata.map(tag => {
+		tag.relativeUrl = tag.url.replace(/https:\/\/www.ft.com/, '');
 	});
+};
+
+const selectPrimaries = (article) => {
+	const primaryTypes = ['theme', 'section', 'brand'];
+	primaryTypes.map((primary) => {
+		const primaryName = `primary${primary.charAt(0).toUpperCase() + primary.slice(1)}Tag`;
+		article[primaryName] = article.metadata.find(tag => tag.primary === primary);
+	});
+};
+
+const selectPrimaryTag = (article) => {
+	article.primaryTag = article.metadata.find(tag => tag.primaryTag);
 }
 
-function selectPrimaryTheme (article) {
-	article.primaryTheme = article.metadata.find(tag => tag.primary === 'theme');
+const isNotPrimaryTag = (article) => {
+	return (tag) => (!article.primaryTag || article.primaryTag.idV1 !== tag.idV1);
 }
 
-function selectPrimarySection (article) {
-	article.primarySection = article.metadata.find(tag => tag.primary === 'section');
-}
-
-function selectPrimaryBrand (article) {
-	article.primaryBrand = article.metadata.find(tag => tag.primary === 'brand');
-}
-
-function selectPrimaryTag (article) {
-	let precedence = [ 'specialReports' ];
-	let primaryTag;
-
-	if (article.primarySection && precedence.indexOf(article.primarySection.taxonomy) > -1) {
-		primaryTag = article.primarySection;
-	} else {
-		primaryTag = article.primaryTheme || article.primarySection || null;
-	}
-
-	article.primaryTag = primaryTag;
-}
-
-function isPrimaryTag (article) {
-	return (tag) => (!article.primaryTag || article.primaryTag.id !== tag.id);
-}
-
-function selectTagsMyftTagsForDisplay (article) {
+const selectTagsMyftTagsForDisplay = (article) => {
 	let myftTopics = article.myftTopics || [];
 
 	return article.metadata
-		.filter(isPrimaryTag(article))
-		.filter(tag => myftTopics.some(id => id === tag.id))
+		.filter(isNotPrimaryTag(article))
+		.filter(tag => myftTopics.some(id => id === tag.idV1))
 		.filter(tag => tag.taxonomy !== 'authors');
 }
 
-function selectTagsForDisplay (article) {
+const selectTagsForDisplay = (article) => {
 	let ignore = [ 'genre', 'mediaType', 'iptc', 'icb', 'authors' ];
 	let myftTopics = selectTagsMyftTagsForDisplay(article);
 	let defaultTopics = article.metadata
-		.filter(tag => !myftTopics.some(myftTag => myftTag.id === tag.id))
+		.filter(tag => !myftTopics.some(myftTag => myftTag.idV1 === tag.idV1))
 		.filter(tag => !ignore.find(taxonomy => taxonomy === tag.taxonomy))
-		.filter(isPrimaryTag(article));
+		.filter(isNotPrimaryTag(article));
 
 	article.tags = myftTopics.concat(defaultTopics).slice(0,5);
 }
 
-function selectAuthorsForDisplay (article) {
+const selectAuthorsForDisplay = (article) => {
 	article.authors = article.metadata.filter(tag => tag.taxonomy === 'authors');
 }
 
-function selectTagToFollow (article) {
+const selectTagToFollow = (article) => {
 	if(!article.tagToFollow) {
 		return;
 	}
 
 	article.tagToFollow = article.metadata
-		.find(tag => tag.id === article.tagToFollow);
+		.find(tag => tag.idV1 === article.tagToFollow);
 
 	addTagTitlePrefix(article.tagToFollow);
 }
 
 module.exports = function (article) {
-	fillProperties(article);
-	selectPrimaryTheme(article);
-	selectPrimarySection(article);
-	selectPrimaryBrand(article);
+	addRelativeUrl(article);
+	selectPrimaries(article);
 	selectPrimaryTag(article);
 	selectTagsForDisplay(article);
 	selectTagToFollow(article);

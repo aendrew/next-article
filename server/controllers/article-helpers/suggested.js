@@ -7,7 +7,7 @@ module.exports = function (articleId, storyPackageIds, primaryTag) {
 
 	if (primaryTag && storyPackageIds.length < 5) {
 		suggestedArticleFetch = api.search({
-			filter: ['metadata.idV1', primaryTag.id],
+			filter: ['metadata.idV1', primaryTag.idV1],
 			fields: ['id'],
 			// Get extras so de-dupe against article and story package
 			count: 5 + storyPackageIds.length + 1
@@ -15,7 +15,7 @@ module.exports = function (articleId, storyPackageIds, primaryTag) {
 			.then(
 				articles => storyPackageIds.concat(
 					articles
-						.filter(article => article.id !== articleId && storyPackageIds.indexOf(article.id) === -1)
+						.filter(article => article.id !== articleId && !storyPackageIds.includes(article.id))
 						.map(article => article.id)
 				)
 			);

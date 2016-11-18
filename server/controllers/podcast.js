@@ -31,7 +31,7 @@ module.exports = function podcastLegacyController (req, res, next, payload) {
 	payload.primaryBrand = payload.tags
 		.find(tag => tag.id === 'NjI2MWZlMTEtMTE2NS00ZmI0LWFkMzMtNDhiYjA3YjcxYzIy-U2VjdGlvbnM=');
 
-	payload.moreOns = getMoreOnTags(payload.primaryTheme, payload.primarySection, payload.primaryBrand);
+	payload.moreOns = getMoreOnTags(payload);
 	payload.dehydratedMetadata = {
 		moreOns: payload.moreOns
 	};
