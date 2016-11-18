@@ -1,6 +1,7 @@
-const api = require('next-ft-api-client');
 const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
+const fetchGraphQlData = require('../../lib/fetch-graphql-data');
+const relatedContentQuery = require('../../graphql-queries/related-content');
 const NoRelatedResultsException = require('../../lib/no-related-results-exception');
 const contentDecorator = require('@financial-times/n-content-decorator');
 const ReactServer = require('react-dom/server');
@@ -8,21 +9,20 @@ const React = require('react');
 const getSection = require('../../../config/sections');
 const Section = require('@financial-times/n-section').Section;
 
-
 const getArticles = (tagId, count, parentId) => {
-	return api.search({
-		filter: [ 'metadata.idV1', tagId ],
-		// Get +1 for de-duping parent article
-		count: count + 1
-	})
-		.then(articles => {
+	return fetchGraphQlData(relatedContentQuery, { tagId, limit: count + 1 })
+		.then(({ search: articles = [] } = {}) => {
 			if (!articles.length) {
 				throw new NoRelatedResultsException();
 			}
 			return articles
 				.filter(article => article.id !== parentId)
 				.slice(0, count)
-		});
+		})
+		.catch(err => {
+			logger.error(err);
+			return [];
+		})
 };
 
 const allSettled = (promises) => {
