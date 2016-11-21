@@ -1,29 +1,12 @@
 const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
-const fetchGraphQlData = require('../../lib/fetch-graphql-data');
-const relatedContentQuery = require('../../graphql-queries/related-content');
 const NoRelatedResultsException = require('../../lib/no-related-results-exception');
 const contentDecorator = require('@financial-times/n-content-decorator');
 const ReactServer = require('react-dom/server');
 const React = require('react');
 const getSection = require('../../../config/sections');
 const Section = require('@financial-times/n-section').Section;
-
-const getArticles = (tagId, count, parentId) => {
-	return fetchGraphQlData(relatedContentQuery, { tagId, limit: count + 1 })
-		.then(({ search: articles = [] } = {}) => {
-			if (!articles.length) {
-				throw new NoRelatedResultsException();
-			}
-			return articles
-				.filter(article => article.id !== parentId)
-				.slice(0, count)
-		})
-		.catch(err => {
-			logger.error(err);
-			return [];
-		})
-};
+const getRelatedArticles = require('../../lib/get-related-articles');
 
 const allSettled = (promises) => {
 	let resolveWhenSettled = function (promise) {
@@ -63,7 +46,7 @@ module.exports = function (req, res, next) {
 
 	// get predecessor more-on tag articles for deduping
 	tagIdArray.slice(0,(moreOnIndex + 1)).forEach((tagId, i) => {
-		getArticlesPromises.push(getArticles(tagId, count * (i + 1), parentId));
+		getArticlesPromises.push(getRelatedArticles(tagId, (count * (i + 1)) + 1, parentId));
 	});
 
 	return allSettled(getArticlesPromises)

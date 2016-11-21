@@ -2,10 +2,9 @@ const expect = require('chai').expect;
 const sinon = require('sinon');
 const proxyquire = require('proxyquire');
 const httpMocks = require('node-mocks-http');
-const relatedContentQuery = require('../../../../server/graphql-queries/related-content');
 
 const stubs = {
-	api: sinon.stub(),
+	getRelatedArticles: sinon.stub(),
 	ReactServer: {
 		renderToStaticMarkup: sinon.stub()
 	},
@@ -13,7 +12,7 @@ const stubs = {
 	getSection: sinon.stub()
 };
 const subject = proxyquire('../../../../server/controllers/related/more-on', {
-	'../../lib/fetch-graphql-data': stubs.api,
+	'../../lib/get-related-articles': stubs.getRelatedArticles,
 	'@financial-times/n-content-decorator': stubs.contentDecorator,
 	'react-dom/server': stubs.ReactServer,
 	'../../../config/sections': stubs.getSection
@@ -24,58 +23,48 @@ stubs.ReactServer.renderToStaticMarkup.returns('section');
 stubs.getSection.returns('sectionProps');
 
 const resetStubs = () => {
-	stubs.api.reset();
+	stubs.getRelatedArticles.reset();
 	stubs.ReactServer.renderToStaticMarkup.reset();
 	stubs.contentDecorator.reset();
 	stubs.getSection.reset();
 };
 
-const articlesMoreOnOne = {
-	search: [
-		{ id: '117bbe2c-9417-11e5-b190-291e94b77c8f', mainImage: true },
-		{ id: '79d6ce3a-93bd-11e5-bd82-c1fb87bef7af', mainImage: true },
-		{ id: 'eecf7c4a-92d3-11e5-bd82-c1fb87bef7af' },
-		{ id: '64492528-91d2-11e5-94e6-c5413829caa5', parent: true },
-		{ id: '6f8c134e-91d9-11e5-bd82-c1fb87bef7af' },
-		{ id: '5149fd6a-91fc-11e5-bd82-c1fb87bef7af' }
-	]
-};
-const articlesMoreOnTwo = {
-	search: [
-		{ id: '34afedae-92f1-11e5-9e3e-eb48769cecab', moreOnTwo: true },
-		{ id: '42b8ab40-93cb-11e5-9e3e-eb48769cecab', mainImage: true, moreOnTwo: true },
-		{ id: '79d6ce3a-93bd-11e5-bd82-c1fb87bef7af', dupe: true, moreOnTwo: true },
-		{ id: '3f4f748a-9375-11e5-9e3e-eb48769cecab', moreOnTwo: true },
-		{ id: '64492528-91d2-11e5-94e6-c5413829caa5', parent: true, moreOnTwo: true },
-		{ id: 'cd24b80e-92c8-11e5-94e6-c5413829caa5', moreOnTwo: true },
-		{ id: '6f8c134e-91d9-11e5-bd82-c1fb87bef7af', dupe: true, moreOnTwo: true },
-		{ id: '5149fd6a-91fc-11e5-bd82-c1fb87bef7af', dupe: true, moreOnTwo: true },
-		{ id: 'c7baeed0-91f9-11e5-94e6-c5413829caa5', moreOnTwo: true },
-		{ id: '915fe6b6-91c6-11e5-bd82-c1fb87bef7af', moreOnTwo: true },
-		{ id: 'cd99c5f0-91b9-11e5-94e6-c5413829caa5', moreOnTwo: true }
-	]
-};
-const articlesMoreOnThree = {
-	search: [
-		{ id: '34afedae-92f1-11e5-9e3e-eb48769cecab', dupe: true, moreOnThree: true },
-		{ id: '42b8ab40-93cb-11e5-9e3e-eb48769aaaaa', mainImage: true, moreOnThree: true },
-		{ id: '79d6ce3a-93bd-11e5-bd82-c1fb87bef7af', dupe: true, moreOnThree: true },
-		{ id: '3f4f748a-9375-11e5-9e3e-eb48769cecab', dupe: true, moreOnThree: true },
-		{ id: '64492528-91d2-11e5-94e6-c5413829caa5', parent: true, moreOnThree: true },
-		{ id: 'cd24b80e-92c8-11e5-94e6-c5413829aaaa', moreOnThree: true },
-		{ id: '6f8c134e-91d9-11e5-bd82-c1fb87bef7af', dupe: true, moreOnThree: true },
-		{ id: '5149fd6a-91fc-11e5-bd82-c1fb87bef7af', dupe: true, moreOnThree: true },
-		{ id: 'c7baeed0-91f9-11e5-94e6-c5413829caa5', dupe: true, moreOnThree: true },
-		{ id: '915fe6b6-91c6-11e5-bd82-c1fb87beaaaa', moreOnThree: true },
-		{ id: 'cd99c5f0-91b9-11e5-94e6-c5413829aaaa', moreOnThree: true },
-		{ id: '117bbe2c-9417-11e5-b190-291e94b77c8f', dupe: true, moreOnThree: true },
-		{ id: '79d6ce3a-93bd-11e5-bd82-c1fb87beaaaa', moreOnThree: true },
-		{ id: 'eecf7c4a-92d3-11e5-bd82-c1fb87bef7af', dupe: true, moreOnThree: true },
-		{ id: '64492528-91d2-11e5-94e6-c5413829aaaa', moreOnThree: true },
-		{ id: '6f8c134e-91d9-11e5-bd82-c1fb87bef7af', dupe: true, moreOnThree: true },
-		{ id: '5149fd6a-91fc-11e5-bd82-c1fb87beaaaa', moreOnThree: true }
-	]
-};
+const articlesMoreOnOne = [
+	{ id: '117bbe2c-9417-11e5-b190-291e94b77c8f' },
+	{ id: '79d6ce3a-93bd-11e5-bd82-c1fb87bef7af' },
+	{ id: 'eecf7c4a-92d3-11e5-bd82-c1fb87bef7af' },
+	{ id: '6f8c134e-91d9-11e5-bd82-c1fb87bef7af' },
+	{ id: '5149fd6a-91fc-11e5-bd82-c1fb87bef7af' }
+];
+const articlesMoreOnTwo = [
+	{ id: '34afedae-92f1-11e5-9e3e-eb48769cecab', moreOnTwo: true },
+	{ id: '42b8ab40-93cb-11e5-9e3e-eb48769cecab', moreOnTwo: true },
+	{ id: '79d6ce3a-93bd-11e5-bd82-c1fb87bef7af', dupe: true, moreOnTwo: true },
+	{ id: '3f4f748a-9375-11e5-9e3e-eb48769cecab', moreOnTwo: true },
+	{ id: 'cd24b80e-92c8-11e5-94e6-c5413829caa5', moreOnTwo: true },
+	{ id: '6f8c134e-91d9-11e5-bd82-c1fb87bef7af', dupe: true, moreOnTwo: true },
+	{ id: '5149fd6a-91fc-11e5-bd82-c1fb87bef7af', dupe: true, moreOnTwo: true },
+	{ id: 'c7baeed0-91f9-11e5-94e6-c5413829caa5', moreOnTwo: true },
+	{ id: '915fe6b6-91c6-11e5-bd82-c1fb87bef7af', moreOnTwo: true },
+	{ id: 'cd99c5f0-91b9-11e5-94e6-c5413829caa5', moreOnTwo: true }
+];
+const articlesMoreOnThree = [
+	{ id: '34afedae-92f1-11e5-9e3e-eb48769cecab', dupe: true, moreOnThree: true },
+	{ id: '42b8ab40-93cb-11e5-9e3e-eb48769aaaaa', moreOnThree: true },
+	{ id: '79d6ce3a-93bd-11e5-bd82-c1fb87bef7af', dupe: true, moreOnThree: true },
+	{ id: '3f4f748a-9375-11e5-9e3e-eb48769cecab', dupe: true, moreOnThree: true },
+	{ id: 'cd24b80e-92c8-11e5-94e6-c5413829aaaa', moreOnThree: true },
+	{ id: '6f8c134e-91d9-11e5-bd82-c1fb87bef7af', dupe: true, moreOnThree: true },
+	{ id: '5149fd6a-91fc-11e5-bd82-c1fb87bef7af', dupe: true, moreOnThree: true },
+	{ id: 'c7baeed0-91f9-11e5-94e6-c5413829caa5', dupe: true, moreOnThree: true },
+	{ id: '915fe6b6-91c6-11e5-bd82-c1fb87beaaaa', moreOnThree: true },
+	{ id: 'cd99c5f0-91b9-11e5-94e6-c5413829aaaa', moreOnThree: true },
+	{ id: '117bbe2c-9417-11e5-b190-291e94b77c8f', dupe: true, moreOnThree: true },
+	{ id: '79d6ce3a-93bd-11e5-bd82-c1fb87beaaaa', moreOnThree: true },
+	{ id: 'eecf7c4a-92d3-11e5-bd82-c1fb87bef7af', dupe: true, moreOnThree: true },
+	{ id: '64492528-91d2-11e5-94e6-c5413829aaaa', moreOnThree: true },
+	{ id: '6f8c134e-91d9-11e5-bd82-c1fb87bef7af', dupe: true, moreOnThree: true }
+];
 
 describe('More Ons', () => {
 
@@ -100,7 +89,7 @@ describe('More Ons', () => {
 
 			resetStubs();
 
-			stubs.api.returns(
+			stubs.getRelatedArticles.returns(
 				Promise.resolve(articlesMoreOnOne)
 			);
 			options = {
@@ -116,19 +105,8 @@ describe('More Ons', () => {
 
 		});
 
-		it('call makes one call to fetch-graphql-data module', () => {
-			expect(stubs.api.callCount).to.eql(1);
-		});
-
-		it('return 5 articles per more-on', () => {
-			expect(stubs.contentDecorator.callCount).to.equal(5);
-		});
-
-		it('should not contain the parent article', () => {
-			for (let articleCount = 1; articleCount < stubs.contentDecorator.callCount; articleCount++) {
-				const article = stubs.contentDecorator.getCall(articleCount).args[0];
-				expect(article.parent).to.not.exist;
-			}
+		it('call makes one call to get-related-articles module', () => {
+			expect(stubs.getRelatedArticles.callCount).to.eql(1);
 		});
 
 		it('should get the section setup', () => {
@@ -149,8 +127,8 @@ describe('More Ons', () => {
 
 			let options;
 
-			stubs.api.onCall(0).returns(Promise.resolve(articlesMoreOnOne));
-			stubs.api.onCall(1).returns(Promise.resolve(articlesMoreOnTwo));
+			stubs.getRelatedArticles.onCall(0).returns(Promise.resolve(articlesMoreOnOne));
+			stubs.getRelatedArticles.onCall(1).returns(Promise.resolve(articlesMoreOnTwo));
 
 			options = {
 				params: { id: '64492528-91d2-11e5-94e6-c5413829caa5' },
@@ -165,19 +143,12 @@ describe('More Ons', () => {
 
 		});
 
-		it('call makes two calls to fetch-graphql-data module', () => {
-			expect(stubs.api.callCount).to.equal(2);
+		it('call makes two calls to get-related-articles module', () => {
+			expect(stubs.getRelatedArticles.callCount).to.equal(2);
 		});
 
 		it('return 5 articles per more-on', () => {
 			expect(stubs.contentDecorator.callCount).to.equal(5);
-		});
-
-		it('it should not contain the parent article', () => {
-			for (let articleCount = 1; articleCount < stubs.contentDecorator.callCount; articleCount++) {
-				const article = stubs.contentDecorator.getCall(articleCount).args[0];
-				expect(article.parent).to.not.exist;
-			}
 		});
 
 		it('it should dedupe articles between more-ons', () => {
@@ -204,9 +175,9 @@ describe('More Ons', () => {
 
 			let options;
 
-			stubs.api.onCall(0).returns(Promise.resolve(articlesMoreOnOne));
-			stubs.api.onCall(1).returns(Promise.resolve(articlesMoreOnTwo));
-			stubs.api.onCall(2).returns(Promise.resolve(articlesMoreOnThree));
+			stubs.getRelatedArticles.onCall(0).returns(Promise.resolve(articlesMoreOnOne));
+			stubs.getRelatedArticles.onCall(1).returns(Promise.resolve(articlesMoreOnTwo));
+			stubs.getRelatedArticles.onCall(2).returns(Promise.resolve(articlesMoreOnThree));
 
 			options = {
 				params: { id: '64492528-91d2-11e5-94e6-c5413829caa5' },
@@ -222,7 +193,7 @@ describe('More Ons', () => {
 		});
 
 		it('call makes three calls to fetch-graphql-data module', () => {
-			expect(stubs.api.callCount).to.equal(3);
+			expect(stubs.getRelatedArticles.callCount).to.equal(3);
 		});
 
 		it('return 5 articles per more-on', () => {
@@ -248,10 +219,6 @@ describe('More Ons', () => {
 				const article = stubs.contentDecorator.getCall(articleCount).args[0];
 				expect(article.moreOnThree).to.be.true;
 			}
-		});
-
-		it('should get the section setup', () => {
-			expect()
 		});
 
 	});
@@ -283,13 +250,9 @@ describe('More Ons', () => {
 
 	describe('limiting the number of articles per more on', () => {
 
-		let expectedFetchGraphQlDataArgs = { tagId: 'TnN0ZWluX0dMX0FS-R0w=', limit: 11 };
-
 		before(() => {
 
 			resetStubs();
-
-			stubs.api.returns(Promise.resolve(articlesMoreOnOne));
 
 			options = {
 				params: { id: '64492528-91d2-11e5-94e6-c5413829caa5' },
@@ -304,7 +267,7 @@ describe('More Ons', () => {
 		});
 
 		it('should limit the request to 10 (+ 1 for deduping purposes) if more than 10 articles per more on are requested', () => {
-			expect(stubs.api.calledWithExactly(relatedContentQuery, expectedFetchGraphQlDataArgs)).to.be.true;
+			expect(stubs.getRelatedArticles.calledWithExactly('TnN0ZWluX0dMX0FS-R0w=', 11, '64492528-91d2-11e5-94e6-c5413829caa5')).to.be.true;
 		});
 
 	});
