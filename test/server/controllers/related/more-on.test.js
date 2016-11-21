@@ -117,6 +117,10 @@ describe('More Ons', () => {
 			expect(stubs.ReactServer.renderToStaticMarkup.calledOnce).to.be.true;
 		});
 
+		it('sets surrogate-key', () => {
+			expect(response._headers['surrogate-key']).to.equal('idV1:TnN0ZWluX0dMX0FS-R0w= idV1:MjY=-U2VjdGlvbnM=');
+		})
+
 	});
 
 	describe('second more-on', () => {
@@ -165,6 +169,9 @@ describe('More Ons', () => {
 			}
 		});
 
+		it('sets surrogate-key', () => {
+			expect(response._headers['surrogate-key']).to.equal('idV1:TnN0ZWluX0dMX0FS-R0w= idV1:MjY=-U2VjdGlvbnM=');
+		})
 	});
 
 	describe('third more-on', () => {
@@ -221,6 +228,9 @@ describe('More Ons', () => {
 			}
 		});
 
+		it('sets surrogate-key', () => {
+			expect(response._headers['surrogate-key']).to.equal('idV1:TnN0ZWluX0dMX0FS-R0w= idV1:MjY=-U2VjdGlvbnM= idV1:Th1rdM0re0n1D=');
+		})
 	});
 
 	describe('limiting the number of more-ons that can be requested', () => {

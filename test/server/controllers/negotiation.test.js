@@ -39,6 +39,16 @@ describe('Negotiation Controller', function () {
 		return subject(request, response, next);
 	}
 
+	it('sets surrogate-key', () => {
+		createInstance({
+			params: {
+				id: '012f81d6-2e2b-11e5-8873-775ba7c2ea3d'
+			}
+		})
+		expect(response._headers['surrogate-key']).to.equal('contentId:012f81d6-2e2b-11e5-8873-775ba7c2ea3d');
+		dependencyStubs.interactive.reset();
+	})
+
 	describe('when the requested ID maps to an interactive', function () {
 		beforeEach(function () {
 			return createInstance({

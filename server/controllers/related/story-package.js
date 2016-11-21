@@ -16,10 +16,13 @@ module.exports = function (req, res, next) {
 	}
 
 	let count = parseInt(req.query.count, 10) || 5;
+	const uuids = req.query.articleIds.split(',').slice(0, count);
+
+	res.set('surrogate-key', uuids.map(id => `contentId:${id}`).join(' '));
 
 	return api.content({
 		index: 'v3_api_v2',
-		uuid: req.query.articleIds.split(',').slice(0, count)
+		uuid: uuids
 	})
 		.then(function (articles) {
 			if (!articles.length) {

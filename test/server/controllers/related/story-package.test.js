@@ -98,6 +98,10 @@ describe('Story Package', () => {
 			expect(stubs.ReactServer.renderToStaticMarkup.callCount).to.equal(1);
 		});
 
+		it('sets surrogate-key', () => {
+			expect(response._headers['surrogate-key']).to.equal('contentId:117bbe2c-9417-11e5-b190-291e94b77c8f contentId:79d6ce3a-93bd-11e5-bd82-c1fb87bef7af contentId:eecf7c4a-92d3-11e5-bd82-c1fb87bef7af contentId:64492528-91d2-11e5-94e6-c5413829caa5 contentId:6f8c134e-91d9-11e5-bd82-c1fb87bef7af');
+		})
+
 		it('should return an OK status code', () => {
 			expect(response.statusCode).to.equal(200);
 		});

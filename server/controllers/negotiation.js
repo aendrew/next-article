@@ -36,6 +36,8 @@ function getArticle (contentId) {
 }
 
 module.exports = function negotiationController (req, res, next) {
+	res.set('surrogate-key', `contentId:${req.params.id}`);
+
 	let interactive = getInteractive(req.params.id);
 
 	if (interactive) {

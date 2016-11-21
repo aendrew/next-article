@@ -27,6 +27,9 @@ module.exports = function (req, res, next) {
 	}
 
 	const tagIdArray = req.query.tagIds.split(',');
+
+	res.set('surrogate-key', tagIdArray.map(id => `idV1:${id}`).join(' '));
+
 	const moreOnIndex = req.query.index;
 	const parentId = req.params.id;
 	const count = Math.min(parseInt(req.query.count, 10), 10) || 5;

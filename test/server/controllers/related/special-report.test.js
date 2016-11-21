@@ -35,6 +35,8 @@ describe('Special Report', () => {
 		return subject(request, response);
 	}
 
+
+
 	describe('getting most recent articles in a special report', () => {
 
 		before(() => {
@@ -53,6 +55,10 @@ describe('Special Report', () => {
 			});
 
 		});
+
+		it('sets surrogate-key', () => {
+			response._headers['surrogate-key'].should.equal('idV1:TnN0ZWluX0dMX0FS-R0w=');
+		})
 
 		it('should return a list of 5 articles', () => {
 			result.articles.should.have.length(5);

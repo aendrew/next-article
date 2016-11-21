@@ -13,6 +13,9 @@ module.exports = function (req, res, next) {
 	}
 
 	const tagId = req.query.tagId;
+
+	res.set('surrogate-key', `idV1:${req.query.tagId}`);
+
 	const count = parseInt(req.query.count, 10) || 5;
 	const parentId = req.params.id;
 
