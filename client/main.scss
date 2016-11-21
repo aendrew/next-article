@@ -17,7 +17,7 @@ $n-ui-output-critical: $output-critical;
 	@import 'o-teaser/main';
 	$o-teaser-collection-is-silent: false;
 	@import 'o-teaser-collection/main';
-	
+
 	@import 'n-card/src/components/classifier';
 	[data-o-grid-colspan~=Loffset1] {
 		@include oGridRespondTo(L) {
