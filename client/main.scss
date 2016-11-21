@@ -13,7 +13,11 @@ $n-ui-output-critical: $output-critical;
 );
 @import 'n-ui/bootstrap';
 @include nUiCriticalStart();
-	@import 'n-image/main';
+	$o-teaser-is-silent: false;
+	@import 'o-teaser/main';
+	$o-teaser-collection-is-silent: false;
+	@import 'o-teaser-collection/main';
+	
 	@import 'n-card/src/components/classifier';
 	[data-o-grid-colspan~=Loffset1] {
 		@include oGridRespondTo(L) {
@@ -29,11 +33,9 @@ $n-ui-output-critical: $output-critical;
 	@import 'helpers';
 	@import 'n-content-body/main';
 
-	$o-teaser-is-silent: false;
-	@import 'o-teaser/main';
-	$o-teaser-collection-is-silent: false;
-	@import 'o-teaser-collection/main';
 
+
+	@import 'n-image/main';
 	@import 'components/article/main';
 	@import 'components/classifier/main';
 	@import 'components/headline/main';
