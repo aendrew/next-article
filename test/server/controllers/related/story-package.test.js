@@ -1,13 +1,10 @@
 const expect = require('chai').expect;
-
 const sinon = require('sinon');
 const proxyquire = require('proxyquire');
 const httpMocks = require('node-mocks-http');
 
 const stubs = {
-	api: {
-		content: sinon.stub()
-	},
+	fetchGraphQlData: sinon.stub(),
 	contentDecorator: sinon.stub(),
 	ReactServer: {
 		renderToStaticMarkup: sinon.stub()
@@ -16,7 +13,7 @@ const stubs = {
 };
 
 const subject = proxyquire('../../../../server/controllers/related/story-package', {
-	'next-ft-api-client': stubs.api,
+	'../../lib/fetch-graphql-data': stubs.fetchGraphQlData,
 	'@financial-times/n-content-decorator': stubs.contentDecorator,
 	'react-dom/server': stubs.ReactServer,
 	'../../../config/sections': stubs.getSection
@@ -27,26 +24,23 @@ stubs.ReactServer.renderToStaticMarkup.returns('section');
 stubs.getSection.returns('sectionProps');
 
 const resetStubs = () => {
-	stubs.api.content.reset();
+	stubs.fetchGraphQlData.reset();
 	stubs.ReactServer.renderToStaticMarkup.reset();
 	stubs.contentDecorator.reset();
 	stubs.getSection.reset();
 };
 
-const articleIds = ['117bbe2c-9417-11e5-b190-291e94b77c8f',
-'79d6ce3a-93bd-11e5-bd82-c1fb87bef7af',
-'eecf7c4a-92d3-11e5-bd82-c1fb87bef7af',
-'64492528-91d2-11e5-94e6-c5413829caa5',
-'6f8c134e-91d9-11e5-bd82-c1fb87bef7af'].join(',');
-
-const articlesStoryPackage = [
-	{id: '117bbe2c-9417-11e5-b190-291e94b77c8f', mainImage: true},
-	{id: '79d6ce3a-93bd-11e5-bd82-c1fb87bef7af', mainImage: true},
-	{id: 'eecf7c4a-92d3-11e5-bd82-c1fb87bef7af', mainImage: true},
-	{id: '64492528-91d2-11e5-94e6-c5413829caa5', mainImage: true},
-	{id: '6f8c134e-91d9-11e5-bd82-c1fb87bef7af', mainImage: true}
-];
-
+const articlesStoryPackage = {
+	article: {
+		storyPackage: [
+			{id: '117bbe2c-9417-11e5-b190-291e94b77c8f', mainImage: true},
+			{id: '79d6ce3a-93bd-11e5-bd82-c1fb87bef7af', mainImage: true},
+			{id: 'eecf7c4a-92d3-11e5-bd82-c1fb87bef7af', mainImage: true},
+			{id: '64492528-91d2-11e5-94e6-c5413829caa5', mainImage: true},
+			{id: '6f8c134e-91d9-11e5-bd82-c1fb87bef7af', mainImage: true}
+		]
+	}
+};
 
 describe('Story Package', () => {
 
@@ -71,23 +65,19 @@ describe('Story Package', () => {
 
 			resetStubs();
 
-			stubs.api.content.returns(
+			stubs.fetchGraphQlData.returns(
 				Promise.resolve(articlesStoryPackage)
 			);
 			options = {
-				params: {id: '64492528-91d2-11e5-94e6-c5413829caa5'},
-				query: {
-					articleIds: articleIds,
-					count: '5'
-				}
+				params: {id: '64492528-91d2-11e5-94e6-c5413829caa5'}
 			};
 
 			return createInstance(options);
 
 		});
 
-		it('makes one call to ES', () => {
-			expect(stubs.api.content.callCount).to.equal(1);
+		it('makes one call to next-api', () => {
+			expect(stubs.fetchGraphQlData.callCount).to.equal(1);
 		});
 
 		it('maps the article model for each article returned', () => {
@@ -108,7 +98,7 @@ describe('Story Package', () => {
 
 	});
 
-	describe('no article ids provided', () => {
+	describe('no article id provided', () => {
 
 		before(() => {
 
@@ -117,10 +107,7 @@ describe('Story Package', () => {
 			let options;
 
 			options = {
-				params: {id: '64492528-91d2-11e5-94e6-c5413829caa5'},
-				query: {
-					count: '5'
-				}
+				params: {}
 			};
 
 			return createInstance(options);
@@ -133,12 +120,11 @@ describe('Story Package', () => {
 
 	});
 
-	describe('count set to fewer than number of articles', () => {
+	describe('it passes through the count to the graphql query if set', () => {
 
-		const expectedContentArgs = {
-			index: 'v3_api_v2',
-			uuid: ['117bbe2c-9417-11e5-b190-291e94b77c8f',
-			'79d6ce3a-93bd-11e5-bd82-c1fb87bef7af']
+		const expectedArgs = {
+			uuid: '64492528-91d2-11e5-94e6-c5413829caa5',
+			limit: 2
 		}
 
 		before(() => {
@@ -148,14 +134,13 @@ describe('Story Package', () => {
 			let options;
 
 
-			stubs.api.content.returns(
+			stubs.fetchGraphQlData.returns(
 				Promise.resolve(articlesStoryPackage)
 			);
 
 			options = {
 				params: {id: '64492528-91d2-11e5-94e6-c5413829caa5'},
 				query: {
-					articleIds: articleIds,
 					count: '2'
 				}
 			};
@@ -165,38 +150,8 @@ describe('Story Package', () => {
 		});
 
 		it('it sends the right number of articles to ES', () => {
-			expect(stubs.api.content.calledWithExactly(expectedContentArgs)).to.be.true;
-		});
-
-	});
-
-	describe('converting an even number of articles to odd for display', () => {
-
-		before(() => {
-
-			resetStubs();
-
-			let options;
-
-
-			stubs.api.content.returns(
-				Promise.resolve(articlesStoryPackage.slice(0,4))
-			);
-
-			options = {
-				params: {id: '64492528-91d2-11e5-94e6-c5413829caa5'},
-				query: {
-					articleIds: articleIds,
-					count: '4'
-				}
-			};
-
-			return createInstance(options);
-
-		});
-
-		it('it sends the right number of articles to ES', () => {
-			expect(stubs.contentDecorator.callCount).to.equal(3);
+			const argsSent = stubs.fetchGraphQlData.getCall(0).args;
+			expect(argsSent[1]).to.deep.equal(expectedArgs);
 		});
 
 	});

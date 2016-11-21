@@ -1,4 +1,3 @@
-const api = require('next-ft-api-client');
 const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
 const NoRelatedResultsException = require('../../lib/no-related-results-exception');
@@ -7,39 +6,37 @@ const ReactServer = require('react-dom/server');
 const React = require('react');
 const getSection = require('../../../config/sections');
 const Section = require('@financial-times/n-section').Section;
+const fetchGraphQlData = require('../../lib/fetch-graphql-data');
+const storyPackageQuery = require('../../graphql-queries/story-package');
 
 module.exports = function (req, res, next) {
 	res.unvaryAll('wrapper');
 
-	if (!req.query.articleIds) {
+	if (!req.params.id) {
 		return res.status(400).end();
 	}
 
-	let count = parseInt(req.query.count, 10) || 5;
-	const uuids = req.query.articleIds.split(',').slice(0, count);
+	let count = parseInt(req.query.count, 10) || 3;
 
-	res.set('surrogate-key', uuids.map(id => `contentId:${id}`).join(' '));
-
-	return api.content({
-		index: 'v3_api_v2',
-		uuid: uuids
-	})
-		.then(function (articles) {
-			if (!articles.length) {
+	return fetchGraphQlData(storyPackageQuery, { uuid: req.params.id, limit: count })
+		.then(({ article: { storyPackage = [] } } = {}) => {
+			if (!storyPackage.length) {
 				throw new NoRelatedResultsException();
 			}
-			if (articles.length % 2 === 0) articles.length --;
-			return articles.map(article => Object.assign(article, contentDecorator(article)));
+
+			res.set('surrogate-key', storyPackage.map(article => `contentId:${article.id}`).join(' '));
+
+			return storyPackage.map(article => Object.assign(article, contentDecorator(article)));
 		})
-		.then(articles => {
+		.then(storyPackage => {
 
 			if(res.locals.flags.nTeaserArticle) {
 
-				return res.render('partials/related/story-package', { items: articles });
+				return res.render('partials/related/story-package', { items: storyPackage });
 			} else {
 				const sectionProps = getSection(
 					'onward-journey',
-					{content: articles},
+					{content: storyPackage},
 					res.locals.flags,
 					{
 						trackScrollEvent: 'story-package',

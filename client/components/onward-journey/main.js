@@ -38,8 +38,7 @@ module.exports.init = () => {
 	const hydratedMetadata = JSON.parse(dehydratedMetadata.innerHTML);
 
 	if (hydratedMetadata.package && hydratedMetadata.package.length) {
-		let storyIds = hydratedMetadata.package.map(article => article.id);
-		let url = `/article/${articleId}/story-package?articleIds=${storyIds.join()}&count=5`;
+		let url = `/article/${articleId}/story-package?count=3`;
 
 		fetchPromises = fetchPromises.concat(
 			$('.js-story-package').map(el => createPromise(el, url))
