@@ -144,7 +144,7 @@ module.exports = function articleV3Controller (req, res, next, content) {
 		);
 
 		asyncWorkToDo.push(
-			readNextHelper(content.id, storyPackageIds, content.primaryTag, content.publishedDate).then(
+			readNextHelper(content.id, content.publishedDate).then(
 				article => content.readNextArticle = article
 			)
 		);
