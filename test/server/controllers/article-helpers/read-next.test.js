@@ -1,58 +1,17 @@
 require('chai').should();
-const expect = require('chai').expect;
+
 const sinon = require('sinon');
 const proxyquire = require('proxyquire');
 
 const stubs = {
-	fetchGraphqlData: sinon.stub()
+	content: null,
+	search: null
 };
 
 const subject = proxyquire('../../../../server/controllers/article-helpers/read-next', {
-	'../../lib/fetch-graphql-data': stubs.fetchGraphqlData,
-	'@financial-times/n-content-decorator': (article) => article
+	'next-ft-api-client': stubs,
+	'../../mappings/article-pod-mapping-v3': (article) => article
 });
-
-const fixtures = {
-	withStoryPackage: {
-		article: {
-			primaryTag: {
-				latestContent: [
-					{
-						id: '9a2b7608-5746-11e5-9846-de406ccb37f2',
-						lastPublished: '2015-10-10T17:18:07.000Z'
-					},
-					{
-						id: '9a2b7608-5746-11e5-9846-de406XXXXXXX',
-						lastPublished: '2015-04-10T17:18:07.000Z'
-					}
-				]
-			},
-			storyPackage: [
-				{
-					id: '41129eec-5b9d-11e5-a28b-50226830d644',
-					lastPublished: '2015-09-16T11:44:13.000Z'
-				}
-			]
-		}
-	},
-	noStoryPackage: {
-		article: {
-			primaryTag: {
-				latestContent: [
-					{
-						id: '9a2b7608-5746-11e5-9846-de406ccb37f2',
-						lastPublished: '2015-10-10T17:18:07.000Z'
-					},
-					{
-						id: '9a2b7608-5746-11e5-9846-de406XXXXXXX',
-						lastPublished: '2015-04-10T17:18:07.000Z'
-					}
-				]
-			},
-			storyPackage: []
-		}
-	}
-};
 
 describe('Read next', function () {
 
@@ -61,18 +20,33 @@ describe('Read next', function () {
 	describe('Parent has a story package, but Topic article more recent than parent', function () {
 
 		before(function () {
-			stubs.fetchGraphqlData.reset();
-			stubs.fetchGraphqlData.returns(Promise.resolve(fixtures.withStoryPackage));
-			return subject('xxxxxxxxxxxx', '2015-09-10T18:32:34.000Z')
+			stubs.content = sinon.stub().returns(
+				Promise.resolve({
+					id: '9a2b7608-5746-11e5-9846-de406ccb37f2',
+					publishedDate: '2015-09-10T17:18:07.000Z'
+				})
+			);
+
+			stubs.search = sinon.stub().returns(
+				Promise.resolve([
+					{
+						id: '41129eec-5b9d-11e5-a28b-50226830d644',
+						publishedDate: '2015-09-16T11:44:13.000Z'
+					}
+				])
+			);
+
+			return subject('', [ '' ], {}, '2015-09-10T18:32:34.000Z')
 				.then(result => results = result);
 		});
 
 		it('read next should be based on topic as more recent', function () {
-			expect(results.id).to.equal(fixtures.withStoryPackage.article.primaryTag.latestContent[0].id);
+			results.id.should.equal('41129eec-5b9d-11e5-a28b-50226830d644');
 		});
 
 		it('should flag the read next article as more recent than the parent', function () {
-			expect(results.moreRecent).to.be.true;
+			results.should.have.property('moreRecent');
+			results.moreRecent.should.be.true;
 		});
 
 	});
@@ -80,18 +54,32 @@ describe('Read next', function () {
 	describe('Parent has a story package, Topic articles older than parent', function () {
 
 		before(function () {
-			stubs.fetchGraphqlData.reset();
-			stubs.fetchGraphqlData.returns(Promise.resolve(fixtures.withStoryPackage));
-			return subject('xxxxxxxxxxxx', '2015-11-10T18:32:34.000Z')
+			stubs.content = sinon.stub().returns(
+				Promise.resolve({
+					id: 'a581b44e-5acb-11e5-a28b-50226830d644',
+					publishedDate: '2015-09-14T14:26:37.000Z'
+				})
+			);
+
+			stubs.search = sinon.stub().returns(
+				Promise.resolve([
+					{
+						id: '921d8c8e-5c47-11e5-a28b-50226830d644',
+						publishedDate: '2015-09-10T09:07:26.000Z'
+					}
+				])
+			);
+
+			return subject('', [ '' ], {}, '2015-09-14T10:35:49.000Z')
 				.then(result => results = result);
 		});
 
 		it('read next should be based on story package as topic not more recent than parent', function () {
-			expect(results.id).to.equal(fixtures.withStoryPackage.article.storyPackage[0].id);
+			results.id.should.equal('a581b44e-5acb-11e5-a28b-50226830d644');
 		});
 
 		it('should not flag the read next article as more recent than the parent', function () {
-			expect(results.moreRecent).to.not.exist;
+			results.should.not.have.property('moreRecent');
 		});
 
 	});
@@ -99,18 +87,28 @@ describe('Read next', function () {
 	describe('Parent has no story package, Topic article more recent than parent', function () {
 
 		before(function () {
-			stubs.fetchGraphqlData.reset();
-			stubs.fetchGraphqlData.returns(Promise.resolve(fixtures.noStoryPackage));
-			return subject('xxxxxxxxxxxx', '2015-09-10T18:32:34.000Z')
+			stubs.content = sinon.stub();
+
+			stubs.search = sinon.stub().returns(
+				Promise.resolve([
+					{
+						id: 'eaa2adf0-5bb4-11e5-9846-de406ccb37f2',
+						publishedDate: '2015-09-16T11:58:53.000Z'
+					}
+				])
+			);
+
+			return subject('', [], {}, '2015-07-13T17:53:12.000Z')
 				.then(result => results = result);
 		});
 
 		it('read next should be based on topic as no story package', function () {
-			expect(results.id).to.equal(fixtures.noStoryPackage.article.primaryTag.latestContent[0].id);
+			results.id.should.equal('eaa2adf0-5bb4-11e5-9846-de406ccb37f2');
 		});
 
 		it('should flag the read next article as more recent than the parent', function () {
-			expect(results.moreRecent).to.be.true;
+			results.should.have.property('moreRecent');
+			results.moreRecent.should.be.true;
 		});
 
 	});
@@ -118,37 +116,46 @@ describe('Read next', function () {
 	describe('Parent has no story package, Topic articles older than parent', function () {
 
 		before(function () {
-			stubs.fetchGraphqlData.reset();
-			stubs.fetchGraphqlData.returns(Promise.resolve(fixtures.noStoryPackage));
-			return subject('xxxxxxxxxxxx', '2015-11-10T18:32:34.000Z')
+			stubs.content = sinon.stub();
+
+			stubs.search = sinon.stub().returns(
+				Promise.resolve([
+					{
+						id: '921d8c8e-5c47-11e5-a28b-50226830d644',
+						publishedDate: '2015-09-10T09:07:26.000Z'
+					}
+				])
+			);
+
+			return subject('', [], {}, '2015-09-14T12:27:09.000Z')
 				.then(result => results = result);
 		});
 
 		it('read next should be based on topic as no story package', function () {
-			expect(results.id).to.equal(fixtures.noStoryPackage.article.primaryTag.latestContent[0].id);
+			results.id.should.equal('921d8c8e-5c47-11e5-a28b-50226830d644');
 		});
 
 		it('should not flag the read next article as more recent than the parent', function () {
-			expect(results.moreRecent).to.not.exist;
+			results.should.not.have.property('moreRecent');
 		});
 
 	});
 
-	describe('Deduping parent from most recent primaryTag articles', () => {
+	describe('article\'s premium status', () => {
 
-		before(function () {
-			stubs.fetchGraphqlData.reset();
-			stubs.fetchGraphqlData.returns(Promise.resolve(fixtures.noStoryPackage));
-			return subject('9a2b7608-5746-11e5-9846-de406ccb37f2', '2015-09-10T18:32:34.000Z')
-				.then(result => results = result);
+		before(() => {
+			stubs.content = sinon.stub().returns(
+				Promise.resolve({
+					id: '9a2b7608-5746-11e5-9846-de406ccb37f2',
+					webUrl: 'http://www.ft.com/cms/s/3/123456'
+				})
+			);
 		});
 
-		it('read next should be based on topic as more recent', function () {
-			expect(results.id).to.equal(fixtures.withStoryPackage.article.primaryTag.latestContent[1].id);
-		});
-
-		it('should not flag the read next article as more recent than the parent', function () {
-			expect(results.moreRecent).to.not.exist;
+		it('should be true', () => {
+			return subject('', [ '' ], {}, '2015-09-10T18:32:34.000Z').then(result => {
+				result.isPremium.should.be.true;
+			});
 		});
 
 	});
