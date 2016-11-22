@@ -28,6 +28,8 @@ module.exports = `
 		}
 		primaryImage {
 			rawSrc
+			width
+			height
 		}
 	}
 `;
