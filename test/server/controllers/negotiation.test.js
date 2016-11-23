@@ -95,7 +95,7 @@ describe('Negotiation Controller', function () {
 		});
 	});
 
-	describe.only('when the requested article is a video', function () {
+	describe('when the requested article is a video', function () {
 		beforeEach(function () {
 			nock('https://next-elastic.ft.com')
 				.post('/v3_api_v2/item/_mget')
