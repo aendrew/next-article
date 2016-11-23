@@ -13,10 +13,9 @@ module.exports = function (articleId, publishedDate) {
 
 	return fetchGraphqlData(readNextQuery, variables)
 		.then(({ article = [] } = {}) => {
-			let { primaryTag: { latestContent: topicArticle } } = article;
-			let { storyPackage: packageArticle } = article;
-			topicArticle = topicArticle.filter(article => article.id !== articleId).shift();
-			packageArticle = packageArticle[0];
+			const { primaryTag, storyPackage } = article;
+			const topicArticle = primaryTag ? primaryTag.latestContent.filter(article => article.id !== articleId).shift() : null;
+			const packageArticle = storyPackage[0];
 
 			if (!topicArticle && !packageArticle) {
 				return;
@@ -35,6 +34,6 @@ module.exports = function (articleId, publishedDate) {
 			}
 		})
 		.catch(error => {
-			logger.warn('Fetching read next failed.', error.toString());
+			logger.warn('Fetching read next failed.', error);
 		});
 };

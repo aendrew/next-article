@@ -12,6 +12,7 @@ const fixtureNotFound = require('../../fixtures/v3-elastic-not-found');
 const dependencyStubs = {
 	igPoller: { getData: () => fixtureInteractives },
 	podcast: sinon.spy(),
+	video: sinon.spy(),
 	article: sinon.spy(),
 	interactive: sinon.spy(),
 	shellpromise: sinon.stub()
@@ -20,6 +21,7 @@ const dependencyStubs = {
 const subject = proxyquire('../../../server/controllers/negotiation', {
 	'../lib/ig-poller': dependencyStubs.igPoller,
 	'./podcast': dependencyStubs.podcast,
+	'./video': dependencyStubs.video,
 	'./article': dependencyStubs.article,
 	'./interactive': dependencyStubs.interactive,
 	'shellpromise': dependencyStubs.shellpromise
@@ -89,6 +91,37 @@ describe('Negotiation Controller', function () {
 
 		it('defers to the podcast controller', function () {
 			expect(dependencyStubs.podcast.callCount).to.equal(1);
+			expect(response.statusCode).to.not.equal(404);
+		});
+	});
+
+	describe.only('when the requested article is a video', function () {
+		beforeEach(function () {
+			nock('https://next-elastic.ft.com')
+				.post('/v3_api_v2/item/_mget')
+				.reply(200, {
+					docs: [{
+						found: true,
+						_source: {
+							webUrl: 'http://video.ft.com/5030468875001',
+							provenance: []
+						}
+					}]
+				});
+
+			return createInstance({
+				params: {
+					id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
+				}
+			});
+		});
+
+		afterEach(function () {
+			dependencyStubs.video.reset();
+		});
+
+		it('defers to the podcast controller', function () {
+			expect(dependencyStubs.video.callCount).to.equal(1);
 			expect(response.statusCode).to.not.equal(404);
 		});
 	});
@@ -243,28 +276,6 @@ describe('Negotiation Controller', function () {
 				.then(() => {
 					expect(response.statusCode).to.equal(302);
 					expect(response._getRedirectUrl()).to.include('http://blogs.ft.com/westminster/liveblogs/2016-06-28-2/');
-					expect(response._getRedirectUrl()).to.include('?ft_site=falcon&desktop=true');
-				});
-		});
-
-		it('redirects videos to video.ft.com', () => {
-			nock('https://next-elastic.ft.com')
-				.post('/v3_api_v2/item/_mget')
-				.reply(200, {
-					docs: [{
-						found: true,
-						_source: {
-							webUrl: 'http://video.ft.com/5030468875001'
-						}
-					}]
-				});
-
-			return createInstance({
-				params: { id: 'uuid' }
-			})
-				.then(() => {
-					expect(response.statusCode).to.equal(302);
-					expect(response._getRedirectUrl()).to.include('http://video.ft.com/5030468875001');
 					expect(response._getRedirectUrl()).to.include('?ft_site=falcon&desktop=true');
 				});
 		});

@@ -6,12 +6,17 @@ const shellpromise = require('shellpromise');
 
 const controllerInteractive = require('./interactive');
 const controllerPodcast = require('./podcast');
+const controllerVideo = require('./video');
 const controllerArticle = require('./article');
 
 function isArticlePodcast (article) {
 	return article.provenance.find(
 		source => source.includes('http://rss.acast.com/')
 	);
+}
+
+function isArticleVideo (article) {
+	return article.webUrl.includes('video.ft.com');
 }
 
 function getInteractive (contentId) {
@@ -60,10 +65,6 @@ module.exports = function negotiationController (req, res, next) {
 				return res.redirect(302, `${webUrl}${webUrl.includes('?') ? '&' : '?'}ft_site=falcon&desktop=true`);
 			}
 
-			if (webUrl.includes('video.ft.com')) {
-				return res.redirect(302, `${webUrl}${webUrl.includes('?') ? '&' : '?'}ft_site=falcon&desktop=true`);
-			}
-
 			// Redirect syndicated / wires content to old FT.com as no treatment on Next yet
 			if (article && article.originatingParty && article.originatingParty !== 'FT') {
 				return res.redirect(302, `${webUrl}${webUrl.includes('?') ? '&' : '?'}ft_site=falcon&desktop=true`);
@@ -72,6 +73,8 @@ module.exports = function negotiationController (req, res, next) {
 			if (article) {
 				if (isArticlePodcast(article)) {
 					return controllerPodcast(req, res, next, article);
+				} else if (isArticleVideo(article)) {
+					return controllerVideo(req, res, next, article);
 				} else {
 					return controllerArticle(req, res, next, article);
 				}

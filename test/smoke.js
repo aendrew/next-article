@@ -17,6 +17,8 @@ module.exports = [
 			'/content/21b56034-0ec9-3fe0-8174-ee90650e0bad': 200,
 			// podcast
 			'/content/5cf687c7-ddb9-4243-8fea-69e50b6b5682': 200,
+			// video
+			'/content/c382002a-a839-366c-9b5f-c3e51a25e05d': 200,
 			// slideshow
 			'/embedded-components/slideshow/593496fc-a4d5-11e5-97e1-a754d5d9538c': 200,
 			// fragment view
