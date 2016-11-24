@@ -1,154 +1,90 @@
-require('chai').should();
 const expect = require('chai').expect;
-const sinon = require('sinon');
 const proxyquire = require('proxyquire');
 
-const stubs = {
-	fetchGraphqlData: sinon.stub()
-};
-
 const subject = proxyquire('../../../../server/controllers/article-helpers/read-next', {
-	'../../lib/fetch-graphql-data': stubs.fetchGraphqlData,
 	'@financial-times/n-content-decorator': (article) => article
 });
 
-const fixtures = {
-	withStoryPackage: {
-		article: {
-			primaryTag: {
-				latestContent: [
-					{
-						id: '9a2b7608-5746-11e5-9846-de406ccb37f2',
-						lastPublished: '2015-10-10T17:18:07.000Z'
-					},
-					{
-						id: '9a2b7608-5746-11e5-9846-de406XXXXXXX',
-						lastPublished: '2015-04-10T17:18:07.000Z'
-					}
-				]
-			},
-			storyPackage: [
-				{
-					id: '41129eec-5b9d-11e5-a28b-50226830d644',
-					lastPublished: '2015-09-16T11:44:13.000Z'
-				}
-			]
-		}
-	},
-	noStoryPackage: {
-		article: {
-			primaryTag: {
-				latestContent: [
-					{
-						id: '9a2b7608-5746-11e5-9846-de406ccb37f2',
-						lastPublished: '2015-10-10T17:18:07.000Z'
-					},
-					{
-						id: '9a2b7608-5746-11e5-9846-de406XXXXXXX',
-						lastPublished: '2015-04-10T17:18:07.000Z'
-					}
-				]
-			},
-			storyPackage: []
-		}
-	}
-};
+const storyPackageArticles = [
+	{id: 'aff90924-5a01-11e5-9846-de406ccb37f2', source: 'storyPackage'},
+	{id: '3186f3dc-5310-11e5-b029-b9d50a74fd14', source: 'storyPackage'},
+	{id: '8dfcd43e-507b-11e5-b029-b9d50a74fd14', source: 'storyPackage'},
+	{id: 'e9b56844-4ece-11e5-b029-b9d50a74fd14', source: 'storyPackage'},
+	{id: '066a5068-4d98-11e5-b558-8a9722977189', source: 'storyPackage'}
+];
+
+const primaryTagArticles = [
+	{id: 'aff90924-5a01-11e5-9846-de406ccb37f2', lastPublished: '2015-10-10T04:53:24Z', source: 'primaryTag'},
+	{id: '3186f3dc-5310-11e5-b029-b9d50a74fd14', lastPublished: '2015-08-10T04:53:24Z', source: 'primaryTag'},
+	{id: '8dfcd43e-507b-11e5-b029-b9d50a74fd14', lastPublished: '2015-07-10T04:53:24Z', source: 'primaryTag'},
+	{id: 'e9b56844-4ece-11e5-b029-b9d50a74fd14', lastPublished: '2015-06-10T04:53:24Z', source: 'primaryTag'},
+	{id: '066a5068-4d98-11e5-b558-8a9722977189', lastPublished: '2015-05-10T04:53:24Z', source: 'primaryTag'}
+];
 
 describe('Read next', function () {
 
-	let results;
+	let readNext;
 
-	describe('Parent has a story package, but Topic article more recent than parent', function () {
+	context('Parent has a story package, but Topic article more recent than parent', function () {
 
-		before(function () {
-			stubs.fetchGraphqlData.reset();
-			stubs.fetchGraphqlData.returns(Promise.resolve(fixtures.withStoryPackage));
-			return subject('xxxxxxxxxxxx', '2015-09-10T18:32:34.000Z')
-				.then(result => results = result);
+		before(() => {
+			readNext = subject(primaryTagArticles, storyPackageArticles, '2015-09-10T18:32:34.000Z')
 		});
 
 		it('read next should be based on topic as more recent', function () {
-			expect(results.id).to.equal(fixtures.withStoryPackage.article.primaryTag.latestContent[0].id);
+			expect(readNext.id).to.equal(primaryTagArticles[0].id);
 		});
 
 		it('should flag the read next article as more recent than the parent', function () {
-			expect(results.moreRecent).to.be.true;
+			expect(readNext.moreRecent).to.be.true;
 		});
 
 	});
 
 	describe('Parent has a story package, Topic articles older than parent', function () {
 
-		before(function () {
-			stubs.fetchGraphqlData.reset();
-			stubs.fetchGraphqlData.returns(Promise.resolve(fixtures.withStoryPackage));
-			return subject('xxxxxxxxxxxx', '2015-11-10T18:32:34.000Z')
-				.then(result => results = result);
+		before(() => {
+			readNext = subject(primaryTagArticles, storyPackageArticles, '2015-11-10T18:32:34.000Z')
 		});
 
 		it('read next should be based on story package as topic not more recent than parent', function () {
-			expect(results.id).to.equal(fixtures.withStoryPackage.article.storyPackage[0].id);
+			expect(readNext.id).to.equal(storyPackageArticles[0].id);
 		});
 
 		it('should not flag the read next article as more recent than the parent', function () {
-			expect(results.moreRecent).to.not.exist;
+			expect(readNext.moreRecent).to.not.exist;
 		});
 
 	});
 
 	describe('Parent has no story package, Topic article more recent than parent', function () {
 
-		before(function () {
-			stubs.fetchGraphqlData.reset();
-			stubs.fetchGraphqlData.returns(Promise.resolve(fixtures.noStoryPackage));
-			return subject('xxxxxxxxxxxx', '2015-09-10T18:32:34.000Z')
-				.then(result => results = result);
+		before(() => {
+			readNext = subject(primaryTagArticles, [], '2015-09-10T18:32:34.000Z')
 		});
 
 		it('read next should be based on topic as no story package', function () {
-			expect(results.id).to.equal(fixtures.noStoryPackage.article.primaryTag.latestContent[0].id);
+			expect(readNext.id).to.equal(primaryTagArticles[0].id);
 		});
 
 		it('should flag the read next article as more recent than the parent', function () {
-			expect(results.moreRecent).to.be.true;
+			expect(readNext.moreRecent).to.be.true;
 		});
 
 	});
 
 	describe('Parent has no story package, Topic articles older than parent', function () {
 
-		before(function () {
-			stubs.fetchGraphqlData.reset();
-			stubs.fetchGraphqlData.returns(Promise.resolve(fixtures.noStoryPackage));
-			return subject('xxxxxxxxxxxx', '2015-11-10T18:32:34.000Z')
-				.then(result => results = result);
+		before(() => {
+			readNext = subject(primaryTagArticles, [], '2015-11-10T18:32:34.000Z')
 		});
 
 		it('read next should be based on topic as no story package', function () {
-			expect(results.id).to.equal(fixtures.noStoryPackage.article.primaryTag.latestContent[0].id);
+			expect(readNext.id).to.equal(primaryTagArticles[0].id);
 		});
 
 		it('should not flag the read next article as more recent than the parent', function () {
-			expect(results.moreRecent).to.not.exist;
-		});
-
-	});
-
-	describe('Deduping parent from most recent primaryTag articles', () => {
-
-		before(function () {
-			stubs.fetchGraphqlData.reset();
-			stubs.fetchGraphqlData.returns(Promise.resolve(fixtures.noStoryPackage));
-			return subject('9a2b7608-5746-11e5-9846-de406ccb37f2', '2015-09-10T18:32:34.000Z')
-				.then(result => results = result);
-		});
-
-		it('read next should be based on topic as more recent', function () {
-			expect(results.id).to.equal(fixtures.withStoryPackage.article.primaryTag.latestContent[1].id);
-		});
-
-		it('should not flag the read next article as more recent than the parent', function () {
-			expect(results.moreRecent).to.not.exist;
+			expect(readNext.moreRecent).to.not.exist;
 		});
 
 	});

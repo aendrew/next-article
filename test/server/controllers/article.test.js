@@ -9,15 +9,13 @@ const fixtureFastFT = require('../../fixtures/v3-elastic-article-found-fastft').
 const fixturePremium = require('../../fixtures/v3-elastic-article-found-premium').docs[0]._source;
 
 const stubs = {
-	suggested: sinon.stub(),
-	readNext: sinon.stub(),
+	onwardJourneyArticles: sinon.stub(),
 	sampleArticles: sinon.stub(),
 };
 stubs.sampleArticles.isSampleArticle = sinon.stub();
 
 const subject = proxyquire('../../../server/controllers/article', {
-	'./article-helpers/suggested': stubs.suggested,
-	'./article-helpers/read-next': stubs.readNext,
+	'./article-helpers/onward-journey': stubs.onwardJourneyArticles,
 	'../transforms/body': (articleHtml) => { return { html: () => articleHtml } },
 	'../transforms/byline': data => data
 });
@@ -43,8 +41,7 @@ describe('Article Controller', () => {
 
 	context('success', () => {
 		beforeEach(() => {
-			stubs.suggested.returns(Promise.resolve());
-			stubs.readNext.returns(Promise.resolve());
+			stubs.onwardJourneyArticles.returns(Promise.resolve());
 
 			result = null;
 
@@ -131,8 +128,7 @@ describe('Article Controller', () => {
 
 	context('suggestions fail', () => {
 		beforeEach(() => {
-			stubs.suggested.returns(Promise.reject());
-			stubs.readNext.returns(Promise.reject());
+			stubs.onwardJourneyArticles.returns(Promise.reject());
 
 			result = null;
 

@@ -1,6 +1,5 @@
 const logger = require('@financial-times/n-logger').default;
-const suggestedHelper = require('./article-helpers/suggested');
-const readNextHelper = require('./article-helpers/read-next');
+const getOnwardJourneyArticles = require('./article-helpers/onward-journey');
 const openGraphHelper = require('./article-helpers/open-graph');
 const decorateMetadataHelper = require('./article-helpers/decorate-metadata');
 const externalPodcastLinksUtil = require('../utils/external-podcast-links');
@@ -41,18 +40,13 @@ module.exports = function podcastLegacyController (req, res, next, payload) {
 	}
 
 	if (res.locals.flags.articleSuggestedRead && payload.metadata.length) {
-		let storyPackageIds = (payload.storyPackage || []).map(story => story.id);
 
 		asyncWorkToDo.push(
-			suggestedHelper(payload.id, storyPackageIds, payload.primaryTag).then(
-				articles => payload.readNextArticles = articles
-			)
-		);
-
-		asyncWorkToDo.push(
-			readNextHelper(payload.id, storyPackageIds, payload.primaryTag, payload.publishedDate).then(
-				article => payload.readNextArticle = article
-			)
+			getOnwardJourneyArticles(payload.id, payload.publishedDate)
+				.then(onwardJourney => {
+					payload.readNextArticle = onwardJourney && onwardJourney.readNext;
+					payload.readNextArticles = onwardJourney && onwardJourney.suggestedReads;
+				})
 		);
 
 		payload.readNextTopic = payload.primaryTag;

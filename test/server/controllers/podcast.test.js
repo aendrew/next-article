@@ -6,13 +6,11 @@ const httpMocks = require('node-mocks-http');
 const fixture = require('../../fixtures/v3-elastic-podcast-found').docs[0]._source;
 
 const stubs = {
-	suggested: sinon.stub(),
-	readNext: sinon.stub()
+	onwardJourney: sinon.stub()
 };
 
 const subject = proxyquire('../../../server/controllers/podcast', {
-	'./article-helpers/suggested': stubs.suggested,
-	'./article-helpers/read-next': stubs.readNext
+	'./article-helpers/onward-journey': stubs.onwardJourney
 });
 
 describe('Podcast Controller', () => {
@@ -35,8 +33,7 @@ describe('Podcast Controller', () => {
 
 	context('success', () => {
 		beforeEach(() => {
-			stubs.suggested.returns(Promise.resolve());
-			stubs.readNext.returns(Promise.resolve());
+			stubs.onwardJourney.returns(Promise.resolve());
 
 			result = null;
 
@@ -75,8 +72,7 @@ describe('Podcast Controller', () => {
 
 	context('suggestions fail', () => {
 		beforeEach(() => {
-			stubs.suggested.returns(Promise.reject());
-			stubs.readNext.returns(Promise.reject());
+			stubs.onwardJourney.returns(Promise.reject());
 
 			result = null;
 

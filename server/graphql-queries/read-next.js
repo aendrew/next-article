@@ -11,10 +11,6 @@ module.exports = `
 	) {
 		article(uuid: $uuid) {
 			primaryTag {
-				id
-				url
-				name
-				taxonomy
 				latestContent(limit: $limitPrimaryTag) {
 					...ContentExtract
 				}

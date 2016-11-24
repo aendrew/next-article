@@ -2,8 +2,7 @@ const logger = require('@financial-times/n-logger').default;
 const genericContentTransform = require('ft-n-content-transform').transformAll;
 const applicationContentTransform = require('../transforms/body');
 const articleBranding = require('ft-n-article-branding');
-const suggestedHelper = require('./article-helpers/suggested');
-const readNextHelper = require('./article-helpers/read-next');
+const getOnwardJourneyArticles = require('./article-helpers/onward-journey');
 const decorateMetadataHelper = require('./article-helpers/decorate-metadata');
 const openGraphHelper = require('./article-helpers/open-graph');
 const bylineTransform = require('../transforms/byline');
@@ -135,18 +134,13 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	}
 
 	if (res.locals.flags.articleSuggestedRead && content.metadata.length) {
-		let storyPackageIds = (content.storyPackage || []).map(story => story.id);
 
 		asyncWorkToDo.push(
-			suggestedHelper(content.id, storyPackageIds, content.primaryTag).then(
-				articles => content.readNextArticles = articles
-			)
-		);
-
-		asyncWorkToDo.push(
-			readNextHelper(content.id, content.publishedDate).then(
-				article => content.readNextArticle = article
-			)
+			getOnwardJourneyArticles(content.id, content.publishedDate)
+				.then(onwardJourney => {
+					content.readNextArticle = onwardJourney && onwardJourney.readNext;
+					content.readNextArticles = onwardJourney && onwardJourney.suggestedReads;
+				})
 		);
 
 		content.readNextTopic = addTagTitlePrefix(content.primaryTag);
