@@ -1,47 +1,54 @@
-<script type="application/ld+json">
-	{
-		"@context": "http://schema.org",
-		"@type": "NewsArticle",
-		"mainEntityofPage": "{{canonicalUrl}}",
-		"headline": "{{title}}",
-		{{#if initialPublishedDate}}
-			"datePublished": "{{initialPublishedDate}}",
-		{{/if}}
-		{{^initialPublishedDate}}
-			"datePublished": "{{publishedDate}}",
-		{{/initialPublishedDate}}
-		"dateModified": "{{publishedDate}}",
-		{{#if initialPublishedDate}}
-			"description": "{{description}}",
-		{{/if}}
-		{{^initialPublishedDate}}
-			"description": "{{title}}",
-		{{/initialPublishedDate}}
-		{{#if mainImage}}
-		"image": {
-			"@type": "ImageObject",
-			"url": "{{mainImage.url}}",
-			"width": {{mainImage.width}},
-			"height": {{mainImage.height}}
-		},
-		{{/if}}
-		{{#if authors}}
-			{{#authors}}
-			"author": {
-				"@type": "Person",
-				"name": "{{name}}"
-			},
-			{{/authors}}
-		{{/if}}
-		"publisher": {
-			"@type": "Organization",
-			"name": "The Financial Times",
-			"logo": {
+{{#if jsonld}}
+	<script type="application/ld+json">
+		{{{json jsonld}}}
+	</script>
+{{else}}
+
+	<script type="application/ld+json">
+		{
+			"@context": "http://schema.org",
+			"@type": "NewsArticle",
+			"mainEntityofPage": "{{canonicalUrl}}",
+			"headline": "{{title}}",
+			{{#if initialPublishedDate}}
+				"datePublished": "{{initialPublishedDate}}",
+			{{/if}}
+			{{^initialPublishedDate}}
+				"datePublished": "{{publishedDate}}",
+			{{/initialPublishedDate}}
+			"dateModified": "{{publishedDate}}",
+			{{#if initialPublishedDate}}
+				"description": "{{description}}",
+			{{/if}}
+			{{^initialPublishedDate}}
+				"description": "{{title}}",
+			{{/initialPublishedDate}}
+			{{#if mainImage}}
+			"image": {
 				"@type": "ImageObject",
-				"url": "http://im.ft-static.com/m/img/masthead_main.jpg",
-				"width": 435,
-				"height": 36
+				"url": "{{mainImage.url}}",
+				"width": {{mainImage.width}},
+				"height": {{mainImage.height}}
+			},
+			{{/if}}
+			{{#if authors}}
+				{{#authors}}
+				"author": {
+					"@type": "Person",
+					"name": "{{name}}"
+				},
+				{{/authors}}
+			{{/if}}
+			"publisher": {
+				"@type": "Organization",
+				"name": "The Financial Times",
+				"logo": {
+					"@type": "ImageObject",
+					"url": "http://im.ft-static.com/m/img/masthead_main.jpg",
+					"width": 435,
+					"height": 36
+				}
 			}
 		}
-	}
-</script>
+	</script>
+{{/if}}

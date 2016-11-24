@@ -1,5 +1,6 @@
 const logger = require('@financial-times/n-logger').default;
 const genericContentTransform = require('ft-n-content-transform').transformAll;
+const nextJsonLd = require('next-json-ld');
 const applicationContentTransform = require('../transforms/body');
 const articleBranding = require('ft-n-article-branding');
 const getOnwardJourneyArticles = require('./article-helpers/onward-journey');
@@ -154,6 +155,10 @@ module.exports = function articleV3Controller (req, res, next, content) {
 		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && res.locals.flags.lightSignupInArticle,
 		isInferred: res.locals.flags.lsuInferredTopic
 	};
+
+	if (res.locals.flags.newSchema) {
+		content.jsonld = nextJsonLd.newsArticle(content);
+	}
 
 	if(res.locals.flags.ftlabsSpokenLayer){
 		content.isAudioArticle = content.metadata.some(tag => tag.idV1 === 'MjgwYzIyNjUtMmQ1ZC00NTNiLTgyMTQtMWU5ZDc3YzIzNWUy-VG9waWNz');

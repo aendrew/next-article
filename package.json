@@ -33,7 +33,8 @@
     "next-ft-api-client": "^3.16.0",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
-    "shellpromise": "^1.3.0"
+    "shellpromise": "^1.3.0",
+    "next-json-ld": "https://github.com/Financial-Times/next-json-ld"
   },
   "devDependencies": {
     "@financial-times/n-heroku-tools": "^6.12.0",
