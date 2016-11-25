@@ -1,11 +1,6 @@
 const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
 const NoRelatedResultsException = require('../../lib/no-related-results-exception');
-const contentDecorator = require('@financial-times/n-content-decorator');
-const ReactServer = require('react-dom/server');
-const React = require('react');
-const getSection = require('../../../config/sections');
-const Section = require('@financial-times/n-section').Section;
 const fetchGraphQlData = require('../../lib/fetch-graphql-data');
 const storyPackageQuery = require('../../graphql-queries/story-package');
 
@@ -26,32 +21,7 @@ module.exports = function (req, res, next) {
 
 			res.set('surrogate-key', storyPackage.map(article => `contentId:${article.id}`).join(' '));
 
-			return storyPackage.map(article => Object.assign(article, contentDecorator(article)));
-		})
-		.then(storyPackage => {
-
-			if(res.locals.flags.nTeaserArticle) {
-
-				return res.render('partials/related/story-package', { items: storyPackage });
-			} else {
-				const sectionProps = getSection(
-					'onward-journey',
-					{content: storyPackage},
-					res.locals.flags,
-					{
-						trackScrollEvent: 'story-package',
-						name: {
-							title: 'Related stories'
-						}
-					}
-				);
-				const sectionHtml = ReactServer.renderToStaticMarkup(<Section {...sectionProps} />);
-
-				return res.send(sectionHtml);
-
-			}
-
-
+			return res.render('partials/related/story-package', { items: storyPackage });
 		})
 		.catch(function (err) {
 			logger.error(err);

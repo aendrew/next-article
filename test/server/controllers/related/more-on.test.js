@@ -4,29 +4,14 @@ const proxyquire = require('proxyquire');
 const httpMocks = require('node-mocks-http');
 
 const stubs = {
-	getRelatedArticles: sinon.stub(),
-	ReactServer: {
-		renderToStaticMarkup: sinon.stub()
-	},
-	contentDecorator: sinon.stub(),
-	getSection: sinon.stub()
+	getRelatedArticles: sinon.stub()
 };
 const subject = proxyquire('../../../../server/controllers/related/more-on', {
-	'../../lib/get-related-articles': stubs.getRelatedArticles,
-	'@financial-times/n-content-decorator': stubs.contentDecorator,
-	'react-dom/server': stubs.ReactServer,
-	'../../../config/sections': stubs.getSection
+	'../../lib/get-related-articles': stubs.getRelatedArticles
 });
-
-stubs.contentDecorator.returnsArg(0);
-stubs.ReactServer.renderToStaticMarkup.returns('section');
-stubs.getSection.returns('sectionProps');
 
 const resetStubs = () => {
 	stubs.getRelatedArticles.reset();
-	stubs.ReactServer.renderToStaticMarkup.reset();
-	stubs.contentDecorator.reset();
-	stubs.getSection.reset();
 };
 
 const articlesMoreOnOne = [
@@ -80,6 +65,7 @@ describe('More Ons', () => {
 		response.unvary = sinon.stub();
 		response.unvaryAll = sinon.stub();
 		response.locals = { flags: flags || {} };
+		response.render = sinon.stub();
 		return subject(request, response);
 	}
 
@@ -107,14 +93,6 @@ describe('More Ons', () => {
 
 		it('call makes one call to get-related-articles module', () => {
 			expect(stubs.getRelatedArticles.callCount).to.eql(1);
-		});
-
-		it('should get the section setup', () => {
-			expect(stubs.getSection.calledOnce).to.be.true;
-		});
-
-		it('should use react to render the section to static html', () => {
-			expect(stubs.ReactServer.renderToStaticMarkup.calledOnce).to.be.true;
 		});
 
 		it('sets surrogate-key', () => {
@@ -151,27 +129,29 @@ describe('More Ons', () => {
 			expect(stubs.getRelatedArticles.callCount).to.equal(2);
 		});
 
-		it('return 5 articles per more-on', () => {
-			expect(stubs.contentDecorator.callCount).to.equal(5);
-		});
+		context('items that are output', () => {
 
-		it('it should dedupe articles between more-ons', () => {
-			for (let articleCount = 1; articleCount < stubs.contentDecorator.callCount; articleCount++) {
-				const article = stubs.contentDecorator.getCall(articleCount).args[0];
-				expect(article.dupe).to.not.exist;
-			}
-		});
+			it('return 5 articles per more-on', () => {
+				const moreOnItems = response.render.getCall(0).args[1].items;
+				expect(moreOnItems.length).to.equal(5);
+			});
 
-		it('it should only return articles appropriate to the tag ID', () => {
-			for (let articleCount = 1; articleCount < stubs.contentDecorator.callCount; articleCount++) {
-				const article = stubs.contentDecorator.getCall(articleCount).args[0];
-				expect(article.moreOnTwo).to.be.true;
-			}
+			it('it should dedupe articles between more-ons', () => {
+				const moreOnItems = response.render.getCall(0).args[1].items;
+				moreOnItems.map(article => expect(article.dupe).to.not.exist);
+			});
+
+			it('it should only return articles appropriate to the tag ID', () => {
+				const moreOnItems = response.render.getCall(0).args[1].items;
+				moreOnItems.map(article => expect(article.moreOnTwo).to.be.true);
+			});
+
 		});
 
 		it('sets surrogate-key', () => {
 			expect(response._headers['surrogate-key']).to.equal('idV1:TnN0ZWluX0dMX0FS-R0w= idV1:MjY=-U2VjdGlvbnM=');
 		})
+
 	});
 
 	describe('third more-on', () => {
@@ -203,34 +183,34 @@ describe('More Ons', () => {
 			expect(stubs.getRelatedArticles.callCount).to.equal(3);
 		});
 
-		it('return 5 articles per more-on', () => {
-			expect(stubs.contentDecorator.callCount).to.equal(5);
-		});
+		context('items that are output', () => {
 
-		it('should not contain the parent article', () => {
-			for (let articleCount = 1; articleCount < stubs.contentDecorator.callCount; articleCount++) {
-				const article = stubs.contentDecorator.getCall(articleCount).args[0];
-				expect(article.parent).to.not.exist;
-			}
-		});
+			it('return 5 articles per more-on', () => {
+				const moreOnItems = response.render.getCall(0).args[1].items;
+				expect(moreOnItems.length).to.equal(5);
+			});
 
-		it('should dedupe articles between more-ons', () => {
-			for (let articleCount = 1; articleCount < stubs.contentDecorator.callCount; articleCount++) {
-				const article = stubs.contentDecorator.getCall(articleCount).args[0];
-				expect(article.dupe).to.not.exist;
-			}
-		});
+			it('should not contain the parent article', () => {
+				const moreOnItems = response.render.getCall(0).args[1].items;
+				moreOnItems.map(article => expect(article.parent).to.not.exist);
+			});
 
-		it('should only return articles appropriate to the tag ID', () => {
-			for (let articleCount = 1; articleCount < stubs.contentDecorator.callCount; articleCount++) {
-				const article = stubs.contentDecorator.getCall(articleCount).args[0];
-				expect(article.moreOnThree).to.be.true;
-			}
+			it('should dedupe articles between more-ons', () => {
+				const moreOnItems = response.render.getCall(0).args[1].items;
+				moreOnItems.map(article => expect(article.dupe).to.not.exist);
+			});
+
+			it('should only return articles appropriate to the tag ID', () => {
+				const moreOnItems = response.render.getCall(0).args[1].items;
+				moreOnItems.map(article => expect(article.moreOnThree).to.be.true);
+			});
+
 		});
 
 		it('sets surrogate-key', () => {
 			expect(response._headers['surrogate-key']).to.equal('idV1:TnN0ZWluX0dMX0FS-R0w= idV1:MjY=-U2VjdGlvbnM= idV1:Th1rdM0re0n1D=');
 		})
+
 	});
 
 	describe('limiting the number of more-ons that can be requested', () => {

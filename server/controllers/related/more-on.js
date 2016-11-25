@@ -1,11 +1,6 @@
 const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
 const NoRelatedResultsException = require('../../lib/no-related-results-exception');
-const contentDecorator = require('@financial-times/n-content-decorator');
-const ReactServer = require('react-dom/server');
-const React = require('react');
-const getSection = require('../../../config/sections');
-const Section = require('@financial-times/n-section').Section;
 const getRelatedArticles = require('../../lib/get-related-articles');
 
 const allSettled = (promises) => {
@@ -58,23 +53,9 @@ module.exports = function (req, res, next) {
 				precedingMoreOnIds = precedingMoreOnIds
 				.concat(dedupe(moreOnArticlesArray[i]).map(article => article.id));
 			}
-			moreOnArticlesArray[moreOnIndex] = dedupe(moreOnArticlesArray[moreOnIndex])
-				.map(article => Object.assign(article, contentDecorator(article)));
+			moreOnArticlesArray[moreOnIndex] = dedupe(moreOnArticlesArray[moreOnIndex]);
 
-			if(res.locals.flags.nTeaserArticle) {
-
-				return res.render('partials/teaser-collections/1-3', { items: moreOnArticlesArray[moreOnIndex] });
-			} else {
-				const sectionProps = getSection(
-					'onward-journey',
-					{content: moreOnArticlesArray[moreOnIndex]},
-					res.locals.flags,
-					{trackScrollEvent: `more-on-${moreOnIndex}`}
-				);
-				const sectionHtml = ReactServer.renderToStaticMarkup(<Section {...sectionProps} />);
-				return res.send(sectionHtml);
-			}
-
+			return res.render('partials/teaser-collections/1-3', { items: moreOnArticlesArray[moreOnIndex] });
 
 		})
 		.catch(function (err) {

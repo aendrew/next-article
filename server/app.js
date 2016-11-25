@@ -22,7 +22,10 @@ const app = module.exports = express({
 		checks.esv3,
 		checks.livefyre,
 		checks.errorRate
-	]
+	],
+	helpers: {
+		nTeaserPresenter: require('@financial-times/n-teaser').presenter
+	}
 });
 
 require('./lib/ig-poller').start();

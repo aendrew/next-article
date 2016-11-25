@@ -16,21 +16,13 @@
 					<div class="js-story-package" data-trackable="story-package"></div>
 					{{#if moreOns}}
 						{{#slice moreOns limit=1}}
-							{{#if @root.flags.nTeaserArticle}}
-								{{> related/more-ons-teaser-collection index=0}}
-							{{else}}
-								{{> related/more-ons index=0}}
-							{{/if}}
+							{{> related/more-ons-teaser-collection index=0}}
 						{{/slice}}
 						{{#if @root.flags.nativeAdsArticle}}
 							{{> ads/promoted-content }}
 						{{/if}}
 						{{#slice moreOns offset=1}}
-							{{#if @root.flags.nTeaserArticle}}
-								{{> related/more-ons-teaser-collection index=1}}
-							{{else}}
-								{{> related/more-ons index=1}}
-							{{/if}}
+							{{> related/more-ons-teaser-collection index=1}}
 						{{/slice}}
 					{{else}}
 						{{#if @root.flags.nativeAdsArticle}}
@@ -44,11 +36,7 @@
 			</div>
 			{{#ifAll @root.flags.myFtApi tags}}
 				<div data-o-grid-colspan="12 L4 XL3">
-					{{#if @root.flags.nTeaserArticle}}
-						{{> related/more-ons-tags-collection}}
-					{{else}}
-						{{> related/more-ons-tags}}
-					{{/if}}
+					{{> related/more-ons-tags-collection}}
 				</div>
 			{{/ifAll}}
 		{{/if}}

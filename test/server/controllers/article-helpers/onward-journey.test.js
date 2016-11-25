@@ -11,8 +11,7 @@ const stubs = {
 const subject = proxyquire('../../../../server/controllers/article-helpers/onward-journey', {
 	'../../lib/fetch-graphql-data': stubs.fetchGraphqlData,
 	'./read-next': stubs.readNext,
-	'./suggested': stubs.suggestedReads,
-	'@financial-times/n-content-decorator': (article) => article
+	'./suggested': stubs.suggestedReads
 });
 
 const storyPackageArticles = [

@@ -1,8 +1,11 @@
-const contentFragment = require('./fragments/content-fragment')
+const teaserFragments = require('@financial-times/n-teaser').fragments;
 
 module.exports = `
 
-	${contentFragment}
+	${teaserFragments.teaserExtraLight}
+	${teaserFragments.teaserLight}
+	${teaserFragments.teaserStandard}
+	${teaserFragments.teaserHeavy}
 
 	query StoryPackage (
 		$uuid: Uuid!
@@ -10,7 +13,10 @@ module.exports = `
 	) {
 		article(uuid: $uuid) {
 			storyPackage(limit: $limit) {
-				...ContentExtract
+				...TeaserExtraLight
+				...TeaserLight
+				...TeaserStandard
+				...TeaserHeavy
 			}
 		}
 	}

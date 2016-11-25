@@ -1,15 +1,21 @@
-const contentFragment = require('./fragments/content-fragment')
+const teaserFragments = require('@financial-times/n-teaser').fragments;
 
 module.exports = `
 
-	${contentFragment}
+	${teaserFragments.teaserExtraLight}
+	${teaserFragments.teaserLight}
+	${teaserFragments.teaserStandard}
+	${teaserFragments.teaserHeavy}
 
 	query RelatedContent (
 		$tagId: String!,
 		$limit: Int!
 	) {
 		search(termName: "metadata.idV1", termValue: $tagId, limit: $limit) {
-			... ContentExtract
+			...TeaserExtraLight
+			...TeaserLight
+			...TeaserStandard
+			...TeaserHeavy
 		}
 	}
 `;

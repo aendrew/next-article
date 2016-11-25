@@ -1,5 +1,3 @@
-const contentDecorator = require('@financial-times/n-content-decorator');
-
 module.exports = function (topicArticles, packageArticles) {
 
 	let suggestedReads;
@@ -13,8 +11,5 @@ module.exports = function (topicArticles, packageArticles) {
 			: [];
 		suggestedReads = packageArticles.concat(topicArticles).slice(0, 5);
 	}
-
-	return suggestedReads.map(article => {
-		return Object.assign({}, article, contentDecorator(article));
-	});
+	return suggestedReads;
 };

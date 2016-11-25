@@ -6,15 +6,14 @@ const httpMocks = require('node-mocks-http');
 
 const stubs = {getRelatedArticles: sinon.stub()};
 const subject = proxyquire('../../../../server/controllers/related/special-report', {
-	'../../lib/get-related-articles': stubs.getRelatedArticles,
-	'@financial-times/n-content-decorator': (article) => article
+	'../../lib/get-related-articles': stubs.getRelatedArticles
 });
 
 const articlesSpecialReport = [
-	{id: '117bbe2c-9417-11e5-b190-291e94b77c8f', primaryTag: {id: '1', name: 'Not Special Report', taxonomy: 'genre'}},
-	{id: '79d6ce3a-93bd-11e5-bd82-c1fb87bef7af', image: 'first'},
-	{id: 'eecf7c4a-92d3-11e5-bd82-c1fb87bef7af', image: 'second'},
-	{id: '6f8c134e-91d9-11e5-bd82-c1fb87bef7af', primaryTag: {id: '5', name: 'Special Report', taxonomy: 'specialReports'}},
+	{id: '117bbe2c-9417-11e5-b190-291e94b77c8f', primaryTag: {idV1: '1', name: 'Not Special Report', taxonomy: 'genre'}},
+	{id: '79d6ce3a-93bd-11e5-bd82-c1fb87bef7af', mainImage: 'first'},
+	{id: 'eecf7c4a-92d3-11e5-bd82-c1fb87bef7af', mainImage: 'second'},
+	{id: '6f8c134e-91d9-11e5-bd82-c1fb87bef7af', primaryTag: {prefLabel: 'Special Report', taxonomy: 'specialReports'}},
 	{id: '5149fd6a-91fc-11e5-bd82-c1fb87bef7af'}
 ];
 
@@ -65,11 +64,11 @@ describe('Special Report', () => {
 		});
 
 		it('should extract the image from the first article with an image', () => {
-			result.image.should.equal('first');
+			result.mainImage.should.equal('first');
 		});
 
 		it('should get the special report id and name from the first article with a primaryTag with taxonomy specialReports', () => {
-			result.idV1.should.eql('5');
+			result.idV1.should.eql('TnN0ZWluX0dMX0FS-R0w=');
 			result.prefLabel.should.equal('Special Report');
 		});
 

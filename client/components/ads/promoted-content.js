@@ -1,11 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import oDate from 'o-date';
 import crossDomainFetch from 'o-fetch-jsonp';
-import * as components from '@financial-times/n-section';
 
 const nImage = require('n-image');
-const template = require('../../../bower_components/n-teaser/templates/heavy.html');
+const template = require('../../../node_modules/@financial-times/n-teaser/templates/heavy.html');
 
 function correlator (len) {
 	len = len || 16;
@@ -85,7 +82,7 @@ const getAdJson = (data) => {
 	}
 }
 
-const handleResponse = (el, response, flags) => {
+const handleResponse = (el, response) => {
 
 	if(!(el && response && response.title)) {
 		return;
@@ -95,59 +92,51 @@ const handleResponse = (el, response, flags) => {
 	container.classList.add('promoted-content--loaded');
 	container.classList.add(`promoted-content--${response.type}`);
 
-	const propsForReact = {
-		data: {
-			content: [ response ]
-		},
-		itemIndex: 0,
-		image: response.image && response.image.url && response.type !== 'special-report' ? {
-			position: {
-				default: 'embedded'
-			},
-			widths: [166, 281],
-			sizes: {
-				default: '166px',
-				M: '281px'
-			}
-		} : null,
-		size: 'small',
-		standfirst: { show: { default: true } }
+	response.colspan = '{"default": 12, "L": 6}';
+	response.position = '{"default": "embedded"}';
+	response.widths = '[500, 332]';
+	response.type = response.type === 'smartmatch' ? 'promoted-content' : response.type;
+	response.mods = [response.type, 'small'];
+
+	if(response.advertiser) {
+		response.promotedByPrefix = response.type === 'paid-post' ? 'Paid Post' : 'Promoted content';
 	};
 
-	if(flags.nTeaserArticle) {
-		response.colspan = '{"default": 12, "L": 6}';
-		response.position = '{"default": "embedded"}';
-		response.widths = '[500, 332]';
-		response.type = response.type === 'smartmatch' ? 'promoted-content' : response.type;
-		response.mods = [response.type, 'small'];
-
-		if(response.advertiser) {
-			response.promotedByPrefix = response.type === 'paid-post' ? 'Paid Post' : 'Promoted content';
-		};
-
-		if(response.image && !response.image.url) {
-			delete response.image;
-		}
-
-		if(response.type === 'special-report') {
-			response.genreTag = {
-				prefLabel: 'Special Report'
-			};
-			delete response.image;
-		}
-		el.innerHTML = template(response);
-
-		[].concat(response.impressionURL).forEach(url => {
-			//drop all the impression tracking pixels
-			const image = new Image();
-			image.src = url;
-		});
-
-		nImage.lazyLoad({ root: el });
-
-	} else {
-		ReactDOM.render(<components.Content {...propsForReact} />, el);
+	if(response.image && !response.image.url) {
+		delete response.image;
 	}
+
+	if(response.type === 'special-report') {
+		response.genreTag = {
+			prefLabel: 'Special Report'
+		};
+		delete response.image;
+	}
+
+	//TODO change data at source to new naming conventions
+	response.standfirst = response.summary;
+	if (response.image) {
+		response.mainImage = response.image;
+	}
+	response.relativeUrl = response.url;
+	response.publishedDate = response.lastPublished;
+	response.initialPublishedDate = response.published;
+	if (response.tag) {
+		response.teaserTag = {
+			prefLabel: response.tag.name,
+			relativeUrl: response.tag.url
+		};
+	}
+
+	el.innerHTML = template(response);
+
+	[].concat(response.impressionURL).forEach(url => {
+		//drop all the impression tracking pixels
+		const image = new Image();
+		image.src = url;
+	});
+
+	nImage.lazyLoad({ root: el });
 
 	oDate.init(el);
 
@@ -187,8 +176,8 @@ function initPaidPost (el, flags, ads) {
 
 			if(data.type === 'special-report' && !secondEl.textContent) {
 				skipSmartmatch = true;
-				el.setAttribute('data-o-grid-colspan', (flags.nTeaserArticle) ? '12 L6': '12 M6');
-				secondEl.setAttribute('data-o-grid-colspan', (flags.nTeaserArticle) ? '12 L6': '12 M6');
+				el.setAttribute('data-o-grid-colspan', '12 L6');
+				secondEl.setAttribute('data-o-grid-colspan', '12 L6');
 				initPaidPost(secondEl, flags, ads);
 			}
 		} else if (data && data.type === 'smartmatch') {

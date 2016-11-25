@@ -8,7 +8,6 @@ const inlineAd = require('./inline-ad');
 const extractToc = require('./extract-toc');
 const extractMainImage = require('./extract-main-image');
 const gcsConflicts = require('./gcs-conflicts');
-const tourTip = require('./tour-tip');
 
 function transform ($, flags, options) {
 	const proto = {
@@ -29,8 +28,7 @@ module.exports = function (body, flags, options) {
 		.with(relatedBoxExpander)
 		.with(tableOfContents)
 		.with(inlineAd)
-		.with(lightSignup)
-		.with(tourTip);
+		.with(lightSignup);
 
 	const resultObject = { bodyHTML: $bodyHTML.html() };
 
