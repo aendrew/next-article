@@ -1,24 +1,52 @@
 const viewports = [
 	{
-		width: 768,
-		height: 1024
+		width: 1440,
+		height: 1220
+	},
+	{
+		width: 1220,
+		height: 980
+	},
+	{
+		width: 980,
+		height: 740
+	},
+	{
+		width: 740,
+		height: 490
 	},
 	{
 		width: 490,
-		height: 732
-	},
-	{
-		width: 320,
-		height: 480
+		height: 740
 	}
 ];
 
-const urls = [
-	`${process.env.TEST_URL}content/395650fa-5b9c-11e5-a28b-50226830d644`,
-	`${process.env.TEST_URL}content/21b56034-0ec9-3fe0-8174-ee90650e0bad`,
-	`${process.env.TEST_URL}content/5cf687c7-ddb9-4243-8fea-69e50b6b5682`,
-	`${process.env.TEST_URL}content/07d0ce80-944d-11e6-a80e-bcd69f323a8b`
-]
+const smoke = require('./test/smoke.js');
+
+const urls = [];
+
+smoke.forEach((config) => {
+	for (url in config.urls) {
+
+		// Fragments and components, not real pages
+		const exception = url.indexOf('fragment=true') !== -1 || url.indexOf('embedded-components') !== -1 || url.indexOf('story-package') !== -1 || url.indexOf('count=') !== -1;
+
+		if (config.urls[url] !== 200 || url === '/__health' || exception) {
+			continue;
+		}
+
+		const thisUrl = {
+			url: process.env.TEST_URL + url
+		}
+
+		if (config.headers) {
+			thisUrl.headers = config.headers
+		}
+
+		urls.push(thisUrl)
+	}
+});
+
 
 const config = {
 	defaults: {
@@ -35,10 +63,8 @@ const config = {
 
 for (viewport of viewports) {
 	for (url of urls) {
-		config.urls.push({
-			url: url,
-			viewport: viewport
-		})
+		url.viewport = viewport;
+		config.urls.push(url);
 	}
 }
 
