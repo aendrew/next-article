@@ -1,5 +1,5 @@
 const createSrcset = (url, width) =>
-	`https://next-geebee.ft.com/image/v1/images/raw/${encodeURIComponent(url)}?source=next&fit=scale-down&compression=best&width=${width} ${width}w`;
+	`https://www.ft.com/__origami/service/image/v2/images/raw/${encodeURIComponent(url)}?source=next&fit=scale-down&compression=best&width=${width} ${width}w`;
 
 const createSize = (sizes, breakpoint) =>
 	breakpoint !== 'default' ? `(min-width: ${breakpoint}) ${sizes[breakpoint]}px` : `${sizes[breakpoint]}px`;
