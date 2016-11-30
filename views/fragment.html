@@ -30,10 +30,10 @@
 				{{#each tags}}
 				<li>
 					<a
-						href="{{url}}"
+						href="{{relativeUrl}}"
 						class="n-content-tag n-content-tag--horizontal-list"
 						data-trackable="tag"
-						{{#if id}}data-concept-id="{{id}}"{{/if}}>{{name}}</a>
+						{{#if idV1}}data-concept-id="{{idV1}}"{{/if}}>{{prefLabel}}</a>
 				</li>
 				{{/each}}
 			</ul>
