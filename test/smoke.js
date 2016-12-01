@@ -32,9 +32,7 @@ module.exports = [
 			// articles with not tagged with X
 			'/article/02cad03a-844f-11e4-bae9-00144feabdc0/more-on?tagIds=TnN0ZWluX1BOX1BvbGl0aWNpYW5fMTY4OA==-UE4=,NDdiMzAyNzctMTRlMy00Zjk1LWEyZjYtYmYwZWIwYWU2NzAy-VG9waWNz&index=1': {
 				content: ''
-			},
-			// affinity
-			'/__affinity/popular': 200
+			}
 		}
 	}
 ];
