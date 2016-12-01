@@ -15,7 +15,8 @@
     "o-email-only-signup": "^3.2.3",
     "o-gallery": "^1.7.4",
     "o-share": "^2.1.2",
-    "superstore": "^2.1.0"
+    "superstore": "^2.1.0",
+    "next-affinity-client": "^0.1.0"
   },
   "resolutions": {
     "o-typography": "^4.1.0",
