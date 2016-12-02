@@ -43,7 +43,7 @@
 					<ul class="video__related-articles-list">
 					{{#each readNextArticles}}
 						<li class="related_content__list-item" data-trackable="related-content | {{@index}}">
-							<a href="{{url}}">
+							<a href="{{url}}" data-trackable="related-content-link">
 								{{title}}
 								{{#ifAll @root.flags.premiumContentIndicator isPremium}}
 									<span class="article-classifier">Premium</span>
