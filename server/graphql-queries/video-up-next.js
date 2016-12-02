@@ -17,7 +17,7 @@ module.exports = `
 	}
 
 	query tagLatest (
-	  $tagId: String!
+		$tagId: String!
 	) {
 		tag(id: $tagId) {
 			latestContent(limit: 20, type: Video) {

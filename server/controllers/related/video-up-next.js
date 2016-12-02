@@ -1,5 +1,4 @@
 const logger = require('@financial-times/n-logger').default;
-const contentDecorator = require('@financial-times/n-content-decorator');
 const fetchGraphQlData = require('../../lib/fetch-graphql-data');
 const upNextContentQuery = require('../../graphql-queries/video-up-next');
 
