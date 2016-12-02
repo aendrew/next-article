@@ -20,7 +20,7 @@ function createPromise (el, url) {
 
 module.exports.init = () => {
 
-	const articleEl = document.querySelector('.article, article.video');
+	const articleEl = document.querySelector('.article, .content__video');
 	const dehydratedMetadata = document.getElementById('dehydrated-metadata');
 
 	if (!articleEl || !dehydratedMetadata) {
