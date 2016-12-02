@@ -1,14 +1,63 @@
 <div class="article__media">
-	{{#with video}}
-	<div
-		class="o-video"
-		data-o-component="o-video"
-		data-o-component="o-video"
-		data-o-video-id="{{id}}"
-		data-o-video-advertising="true"
-		data-o-video-placeholder="true"></div>
-	{{/with}}
-</div>
-<div class="article__body n-content-body" data-trackable="article-body" data-legal-copy>
-	{{{bodyHTML}}}
+	<div class="video__container">
+		<div class="o-grid-container">
+			<div class="o-grid-row">
+				{{#with video}}
+				<div
+					class="o-video"
+					data-o-component="o-video"
+					data-o-video-id="{{id}}"
+					data-o-video-advertising="true"
+					data-o-video-placeholder="true"
+					data-o-video-placeholder-info="[]"
+					data-o-grid-colspan="12"></div>
+				{{/with}}
+			</div>
+		</div>
+	</div>
+
+	<div class="video__content-and-related o-grid-container">
+		<div class="o-grid-row">
+			<div class="video__info" data-o-grid-colspan="12 L8">
+				{{> header/content-video-header}}
+
+				<div class="video__description">
+					{{{bodyHTML}}}
+				</div>
+
+				<div class="video__date">
+					{{#if publishedDate}}
+						<time class="o-date" data-o-component="o-date" datetime="{{#dateformat}}{{publishedDate}}{{/dateformat}}" data-o-date-js>
+						{{#dateformat "mmm d, yyyy"}}{{publishedDate}}{{/dateformat}}
+						</time>
+					{{/if}}
+				</div>
+
+				<h5 class="video__byline-label">Credits</h5>
+				<p class="video__byline">
+					{{byline}}
+				</p>
+
+				{{#if readNextArticles}}
+					<h4 class="video__related-articles-title">Related Articles</h4>
+					<ul class="video__related-articles-list">
+					{{#each readNextArticles}}
+						<li class="related_content__list-item" data-trackable="related-content | {{@index}}">
+							<a href="{{url}}">
+								{{title}}
+								{{#ifAll @root.flags.premiumContentIndicator isPremium}}
+									<span class="article-classifier">Premium</span>
+								{{/ifAll}}
+							</a>
+						</li>
+					{{/each}}
+					</ul>
+				{{/if}}
+
+				<div class="js-up-next"></div>
+			</div>
+
+			{{> right-hand/right-hand-video-player}}
+		</div>
+	</div>
 </div>

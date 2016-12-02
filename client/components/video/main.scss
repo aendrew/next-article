@@ -1,0 +1,179 @@
+$video-background-primary: #252830;
+$video-grey-text: #999999;
+
+
+article.video {
+	background: $video-background-primary;
+	margin-bottom: 20px;
+	color: white;
+
+	.article__primary-theme {
+		margin-bottom: 15px;
+	}
+
+	.n-content-body {
+		@include oTypographySans(m);
+	}
+
+	.n-content-tag--medium {
+		color: white;
+		@include oTypographySansBold(s);
+	}
+
+	.standalone-teaser-heading {
+		margin-top: 20px;
+		&:after {
+			border-bottom-color: white;
+		}
+	}
+
+	// Hide follow link for now
+	.n-myft-ui--follow {
+		display: none;
+	}
+}
+
+.video__container {
+	background: oColorsGetPaletteColor('warm-4');
+	margin-bottom: 20px;
+}
+
+.video__info {
+	@include oGridRespondTo(L) {
+
+		// No way to disable the gutter on part of a row without making it full-width?
+		padding-left: 0;
+	}
+}
+
+.video__header-info {
+	margin-bottom: 20px;
+}
+
+.video__header {
+	margin-bottom: 26px;
+}
+
+.video__share-container {
+	float: right;
+
+	.article__share {
+		margin: 0;
+		padding: 0;
+		border: 0;
+	}
+
+	.o-share {
+		float: right;
+	}
+
+	.article__save {
+		margin-right: 15px;
+	}
+
+	.n-myft-ui__button {
+		color: white;
+		background-color: rgba(255, 255, 255, 0.15);
+		border-color: rgba(255, 255, 255, 0.25);
+	}
+	.n-myft-ui__button:not([disabled]):active {
+		color: oColorsGetPaletteColor('grey-tint1');
+	}
+}
+
+.video__description {
+	font-size: 20px;
+	line-height: 24px;
+	color: $video-grey-text;
+}
+
+.video__date {
+	font-size: 14px;
+	color: $video-grey-text;
+}
+
+.video__byline-label {
+	font-size: 16px;
+	margin: 24px 0 0;
+}
+
+.video__byline {
+	font-size: 16px;
+	color: $video-grey-text;
+	margin: 0 0 20px 0;
+}
+
+.video__duration {
+	color: $video-grey-text;
+	margin-left: 20px;
+}
+
+.video__related-articles-title {
+	margin: 25px 0 0;
+}
+
+.video__related-articles-list {
+	list-style-position: inside;
+	margin: 0;
+	padding: 0;
+
+	li {
+		margin: 5px;
+	}
+	a {
+		color: white;
+		border-bottom: none;
+
+		&:hover {
+			border-bottom: 1px dotted white;
+		}
+	}
+}
+
+.video__aside {
+	.o-ads {
+		width: 100%;
+		text-align: center;
+		margin-top: 20px;
+
+		@include oGridRespondTo(L) {
+			text-align: right;
+			margin-top: 0;
+		}
+	}
+}
+
+.video__up-next {
+	margin-top: 40px;
+
+	.o-teaser-collection__heading {
+		&:before {
+			border-top: 8px solid rgba(255, 255, 255, 0.2);
+		}
+		&:after {
+			border-top-color: white;
+			width: 50%;
+		}
+	}
+
+	.o-teaser__heading, .o-teaser__heading:hover {
+		color: white;
+	}
+}
+
+.video__up-next__list {
+	list-style-type: none;
+	padding: 0;
+}
+
+.video__up-next__list-item {
+	padding-bottom: 10px;
+}
+
+
+// o-video style overrides
+
+.o-video__play-button-icon {
+	height: 80px;
+	width: 80px;
+}

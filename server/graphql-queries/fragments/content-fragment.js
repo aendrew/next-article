@@ -3,7 +3,6 @@ module.exports = `
 		type: __typename
 		id
 		url
-		webUrl
 		title
 		published
 		lastPublished

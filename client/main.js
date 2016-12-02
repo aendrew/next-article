@@ -20,6 +20,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const promotedContent = require('./components/ads/promoted-content');
 	const ftlabsSpokenLayer = require('./components/ftlabsSpokenLayer/main');
 	const legalCopy = require('./components/legal-copy/main');
+	const videoAutoplay = require('./components/video/autoplay');
 
 	// cacheJourney();
 
@@ -62,7 +63,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 		const videos = document.querySelectorAll('[data-o-component="o-video"]');
 		Array.from(videos).forEach(video => {
-			new OVideo(video, {
+			let oVideo = new OVideo(video, {
 				id: video.getAttribute('data-o-video-id'),
 				placeholder: true,
 				classes: ['video'],
@@ -70,7 +71,9 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 				source: 'brightcove',
 				placeholderdisplay: 'brand,title'
 			});
+			video.ovideo = oVideo;
 		});
+		videoAutoplay(flags);
 
 		if (flags.get('articleComments') && document.querySelector('#comments')) {
 			commentsInit();
