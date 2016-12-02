@@ -2,7 +2,6 @@ const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
 const NoRelatedResultsException = require('../../lib/no-related-results-exception');
 const getRelatedArticles = require('../../lib/get-related-articles');
-const contentDecorator = require('@financial-times/n-content-decorator');
 
 module.exports = function (req, res, next) {
 
@@ -21,14 +20,13 @@ module.exports = function (req, res, next) {
 
 	return getRelatedArticles(tagId, count, parentId)
 		.then(specialReportArticles => {
-			specialReportArticles = specialReportArticles.map(article => Object.assign(article, contentDecorator(article)));
-			let articleWithImage = specialReportArticles.find(article => article.image);
+			let articleWithImage = specialReportArticles.find(article => article.mainImage);
 			let articleWithSpecialReportPrimary = specialReportArticles
 				.find(article => article.primaryTag && article.primaryTag.taxonomy === 'specialReports');
 			return res.render('related/special-report', {
-				idV1: articleWithSpecialReportPrimary ? articleWithSpecialReportPrimary.primaryTag.id : null,
-				prefLabel: articleWithSpecialReportPrimary ? articleWithSpecialReportPrimary.primaryTag.name : null,
-				image: articleWithImage ? articleWithImage.image : null,
+				idV1: tagId,
+				prefLabel: articleWithSpecialReportPrimary ? articleWithSpecialReportPrimary.primaryTag.prefLabel : null,
+				mainImage: articleWithImage ? articleWithImage.mainImage : null,
 				articles: specialReportArticles
 			});
 		})

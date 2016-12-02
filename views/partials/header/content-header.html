@@ -48,11 +48,7 @@
 				{{>follow-promo center=true tag=tagToFollow buttonSize="big" isHeader=true}}
 			{{else}}
 				{{#if readNextArticle}}
-					{{#if @root.flags.nTeaserArticle}}
-						{{> header/read-next-header-teaser article=readNextArticle}}
-					{{else}}
-						{{> header/read-next-header article=readNextArticle}}
-					{{/if}}
+					{{> header/read-next-header-teaser article=readNextArticle}}
 				{{else}}
 					{{#if tags}}
 						{{> header/topics-mentioned}}

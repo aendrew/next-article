@@ -1,4 +1,3 @@
-{{#if @root.flags.nTeaserArticle}}
 <div
 	class="promoted-content o-teaser-collection"
 	role="region"
@@ -10,21 +9,3 @@
 			<div class="promoted-content__second column" data-o-grid-colspan="12"></div>
 		</div>
 </div>
-{{else}}
-<div
-	class="promoted-content promoted-content--border"
-	role="region"
-	data-trackable="promoted-content"
-	aria-labelledby="promoted-content-title">
-		<section class="o-grid-row">
-			<div class="section__column section__column--content" data-o-grid-colspan="12">
-				<div class="section__column__inner">
-					<div class="o-grid-row">
-						<div class="promoted-content__first column" data-o-grid-colspan="12"></div>
-						<div class="promoted-content__second column" data-o-grid-colspan="12"></div>
-					</div>
-				</div>
-			</div>
-		</section>
-</div>
-{{/if}}

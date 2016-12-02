@@ -17,13 +17,8 @@ $n-ui-output-critical: $output-critical;
 	@import 'o-teaser/main';
 	$o-teaser-collection-is-silent: false;
 	@import 'o-teaser-collection/main';
-
-	@import 'n-card/src/components/classifier';
-	[data-o-grid-colspan~=Loffset1] {
-		@include oGridRespondTo(L) {
-			@include oGridOffset(1);
-		}
-	}
+	$o-labels-is-silent: false;
+	@import 'o-labels/main';
 
 	[data-o-grid-colspan~=XLoffset1] {
 		@include oGridRespondTo(XL) {
@@ -32,8 +27,6 @@ $n-ui-output-critical: $output-critical;
 	}
 	@import 'helpers';
 	@import 'n-content-body/main';
-
-
 
 	@import 'n-image/main';
 	@import 'components/article/main';
@@ -48,6 +41,9 @@ $n-ui-output-critical: $output-critical;
 	.myft-ui__qr-code {
 		display: none;
 	}
+	.o-labels {
+		@include oTypographySansBold('xs');
+	}
 @include nUiCriticalEnd();
 
 @import 'components/share/main';
@@ -59,7 +55,6 @@ $o-gallery-is-silent: false;
 $o-video-is-silent: false;
 @import 'o-video/main';
 @import 'o-email-only-signup/main';
-@import 'n-section/main';
 @import 'components/comments/skeleton';
 @import 'components/first-click-free/main';
 @import 'components/follow-promo/main';
@@ -68,7 +63,6 @@ $o-video-is-silent: false;
 @import 'components/story-package';
 @import 'components/toc/main';
 @import 'components/light-signup/light-signup';
-@import 'components/tour-tip/main';
 @import 'components/tearsheets/main';
 @import 'components/video/main';
 @import 'components/ftlabsSpokenLayer/main';
@@ -119,7 +113,7 @@ $o-video-is-silent: false;
 		background-image: none;
 
 		&:after {
-			content: url('https://next-geebee.ft.com/image/v1/images/raw/ftlogo:brand-ft-masthead?source=o-header&tint=%23505050,%23505050&format=svg');
+			content: url('https://www.ft.com/__origami/service/image/v2/images/raw/ftlogo:brand-ft-masthead?source=o-header&tint=%23505050,%23505050&format=svg');
 			display: block;
 		}
 	}

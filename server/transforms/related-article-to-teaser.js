@@ -1,12 +1,8 @@
 const cheerio = require('cheerio');
 
-const teaser = require('../../bower_components/n-teaser/templates/heavy.html');
+const teaser = require('../../node_modules/@financial-times/n-teaser/templates/heavy.html');
 
-module.exports = function ($, flags) {
-
-	if(!flags.nTeaserArticle) {
-		return $;
-	};
+module.exports = function ($) {
 
 	const $relatedBox = $('.n-content-related-box');
 
@@ -19,8 +15,8 @@ module.exports = function ($, flags) {
 		};
 		const title = $headline.text();
 		const $standfirstEl = $el.find('.n-content-related-box__content p');
-		const summary = $standfirstEl.length ? $standfirstEl.text() : null;
-		const url = $headline.attr('href');
+		const standfirst = $standfirstEl.length ? $standfirstEl.text() : null;
+		const relativeUrl = $headline.attr('href');
 
 		const $imageEl = $el.find('.n-content-related-box__image-link img');
 		let imageUrl;
@@ -31,10 +27,10 @@ module.exports = function ($, flags) {
 		}
 		const teaserHTML = teaser({
 			title,
-			summary,
-			url,
+			standfirst,
+			relativeUrl,
 			mods: ['large-portrait'],
-			image: imageUrl ? {
+			mainImage: imageUrl ? {
 				url: imageUrl
 			} : null,
 			colspan: '{"default": 12, "L": 4}',

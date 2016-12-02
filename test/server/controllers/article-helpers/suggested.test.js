@@ -1,9 +1,6 @@
 const expect = require('chai').expect;
-const proxyquire = require('proxyquire');
 
-const subject = proxyquire('../../../../server/controllers/article-helpers/suggested', {
-	'@financial-times/n-content-decorator': (article) => article
-});
+const subject = require('../../../../server/controllers/article-helpers/suggested');
 
 const storyPackageArticles = [
 	{id: 'aff90924-5a01-11e5-9846-de406ccb37f2', source: 'storyPackage'},

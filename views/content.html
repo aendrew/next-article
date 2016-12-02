@@ -86,11 +86,7 @@
 {{>propensity-messaging-promo-unit}}
 
 {{#ifAll readNextArticle readNextArticle.moreRecent}}
-	{{#if @root.flags.nTeaserArticle}}
-		{{>read-next-bottom-teaser article=readNextArticle}}
-	{{else}}
-		{{>read-next-bottom article=readNextArticle}}
-	{{/if}}
+	{{>read-next-bottom-teaser article=readNextArticle}}
 {{/ifAll}}
 
 {{> bottom/bottom}}

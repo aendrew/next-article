@@ -4,30 +4,15 @@ const proxyquire = require('proxyquire');
 const httpMocks = require('node-mocks-http');
 
 const stubs = {
-	fetchGraphQlData: sinon.stub(),
-	contentDecorator: sinon.stub(),
-	ReactServer: {
-		renderToStaticMarkup: sinon.stub()
-	},
-	getSection: sinon.stub()
+	fetchGraphQlData: sinon.stub()
 };
 
 const subject = proxyquire('../../../../server/controllers/related/story-package', {
-	'../../lib/fetch-graphql-data': stubs.fetchGraphQlData,
-	'@financial-times/n-content-decorator': stubs.contentDecorator,
-	'react-dom/server': stubs.ReactServer,
-	'../../../config/sections': stubs.getSection
+	'../../lib/fetch-graphql-data': stubs.fetchGraphQlData
 });
-
-stubs.contentDecorator.returnsArg(0);
-stubs.ReactServer.renderToStaticMarkup.returns('section');
-stubs.getSection.returns('sectionProps');
 
 const resetStubs = () => {
 	stubs.fetchGraphQlData.reset();
-	stubs.ReactServer.renderToStaticMarkup.reset();
-	stubs.contentDecorator.reset();
-	stubs.getSection.reset();
 };
 
 const articlesStoryPackage = {
@@ -78,14 +63,6 @@ describe('Story Package', () => {
 
 		it('makes one call to next-api', () => {
 			expect(stubs.fetchGraphQlData.callCount).to.equal(1);
-		});
-
-		it('maps the article model for each article returned', () => {
-			expect(stubs.contentDecorator.callCount).to.equal(5);
-		});
-
-		it('gets the section for the story package', () => {
-			expect(stubs.ReactServer.renderToStaticMarkup.callCount).to.equal(1);
 		});
 
 		it('sets surrogate-key', () => {
@@ -149,7 +126,7 @@ describe('Story Package', () => {
 
 		});
 
-		it('it sends the right number of articles to ES', () => {
+		it('it sends the right number of articles to the query', () => {
 			const argsSent = stubs.fetchGraphQlData.getCall(0).args;
 			expect(argsSent[1]).to.deep.equal(expectedArgs);
 		});

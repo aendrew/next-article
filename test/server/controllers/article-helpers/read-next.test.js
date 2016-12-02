@@ -1,9 +1,6 @@
 const expect = require('chai').expect;
-const proxyquire = require('proxyquire');
 
-const subject = proxyquire('../../../../server/controllers/article-helpers/read-next', {
-	'@financial-times/n-content-decorator': (article) => article
-});
+const subject = require('../../../../server/controllers/article-helpers/read-next');
 
 const storyPackageArticles = [
 	{id: 'aff90924-5a01-11e5-9846-de406ccb37f2', source: 'storyPackage'},
@@ -14,11 +11,11 @@ const storyPackageArticles = [
 ];
 
 const primaryTagArticles = [
-	{id: 'aff90924-5a01-11e5-9846-de406ccb37f2', lastPublished: '2015-10-10T04:53:24Z', source: 'primaryTag'},
-	{id: '3186f3dc-5310-11e5-b029-b9d50a74fd14', lastPublished: '2015-08-10T04:53:24Z', source: 'primaryTag'},
-	{id: '8dfcd43e-507b-11e5-b029-b9d50a74fd14', lastPublished: '2015-07-10T04:53:24Z', source: 'primaryTag'},
-	{id: 'e9b56844-4ece-11e5-b029-b9d50a74fd14', lastPublished: '2015-06-10T04:53:24Z', source: 'primaryTag'},
-	{id: '066a5068-4d98-11e5-b558-8a9722977189', lastPublished: '2015-05-10T04:53:24Z', source: 'primaryTag'}
+	{id: 'aff90924-5a01-11e5-9846-de406ccb37f2', publishedDate: '2015-10-10T04:53:24Z', source: 'primaryTag'},
+	{id: '3186f3dc-5310-11e5-b029-b9d50a74fd14', publishedDate: '2015-08-10T04:53:24Z', source: 'primaryTag'},
+	{id: '8dfcd43e-507b-11e5-b029-b9d50a74fd14', publishedDate: '2015-07-10T04:53:24Z', source: 'primaryTag'},
+	{id: 'e9b56844-4ece-11e5-b029-b9d50a74fd14', publishedDate: '2015-06-10T04:53:24Z', source: 'primaryTag'},
+	{id: '066a5068-4d98-11e5-b558-8a9722977189', publishedDate: '2015-05-10T04:53:24Z', source: 'primaryTag'}
 ];
 
 describe('Read next', function () {

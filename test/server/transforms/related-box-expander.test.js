@@ -43,7 +43,7 @@ describe('Related Box Expander Transform', () => {
 				'<aside class="n-content-related-box" data-trackable="related-box" role="complementary">' +
 				'<div class="n-content-related-box__title"><div class="n-content-related-box__title-text">Tatomer Riesling 2012</div></div>' +
 				'<div class="n-content-related-box__headline">Greece debt crisis</div>' +
-				'<img alt="" class="n-image" src="https://next-geebee.ft.com/image/v1/images/raw/http://com.ft.imagepublish.prod.s3.amazonaws.com/1871b094-3b7d-11e5-bbd1-b37bc06f590c?source=next&amp;fit=scale-down">' +
+				'<img alt="" class="n-image" src="https://www.ft.com/__origami/service/image/v2/images/raw/http://com.ft.imagepublish.prod.s3.amazonaws.com/1871b094-3b7d-11e5-bbd1-b37bc06f590c?source=next&amp;fit=scale-down">' +
 				'<div class="n-content-related-box__content">' +
 				'<p><strong>Breakthrough:</strong> “Closing our first seed round in 10 days three times oversubscribed gave us momentum.”</p>' +
 				'<p><strong>Best mentor:</strong> “Chris Baohm, my boss at Gresham Partners in Australia . . . made me understand the importance of breaking.”</p>' +
@@ -58,7 +58,7 @@ describe('Related Box Expander Transform', () => {
 				'<aside class="n-content-related-box" data-trackable="related-box" role="complementary" data-o-component="o-expander" data-o-expander-shrink-to="0" data-o-expander-count-selector=".n-content-related-box__content--extension">' +
 				'<div class="n-content-related-box__title"><div class="n-content-related-box__title-text">Tatomer Riesling 2012</div></div>' +
 				'<div class="n-content-related-box__headline">Greece debt crisis</div>' +
-				'<img alt="" class="n-image n-image--lazy-loading" role="presentation" data-src="https://next-geebee.ft.com/image/v1/images/raw/http://com.ft.imagepublish.prod.s3.amazonaws.com/1871b094-3b7d-11e5-bbd1-b37bc06f590c?source=next&amp;fit=scale-down">' +
+				'<img alt="" class="n-image n-image--lazy-loading" role="presentation" data-src="https://www.ft.com/__origami/service/image/v2/images/raw/http://com.ft.imagepublish.prod.s3.amazonaws.com/1871b094-3b7d-11e5-bbd1-b37bc06f590c?source=next&amp;fit=scale-down">' +
 				'<div class="n-content-related-box__content o-expander__content">' +
 				'<p><strong>Breakthrough:</strong> “Closing our first seed round in 10 days three times oversubscribed gave us momentum.”</p>' +
 				'<p><strong>Best mentor:</strong> “Chris Baohm, my boss at Gresham Partners in Australia . . . made me understand the importance of breaking.”</p>' +
