@@ -73,8 +73,8 @@ $video-grey-text: oColorsGetPaletteColor('grey-tint2');
 
 	.n-myft-ui__button {
 		color: white;
-		background-color: rgba(255, 255, 255, 0.15);
-		border-color: rgba(255, 255, 255, 0.25);
+		background-color: mix($video-background-primary, rgba(255, 255, 255, 0.15));
+		border-color: mix($video-background-primary, rgba(255, 255, 255, 0.25));
 	}
 	.n-myft-ui__button:not([disabled]):active {
 		color: oColorsGetPaletteColor('grey-tint1');
