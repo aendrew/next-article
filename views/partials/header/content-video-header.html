@@ -1,0 +1,19 @@
+<header class="video__header" data-trackable="header">
+	<div class="article__header-primary">
+		<div class="video__header-info n-util-clearfix">
+			<div class="video__share-container">
+				{{> toolbar}}
+			</div>
+			{{#if primaryTag}}
+				<a href="{{primaryTag.relativeUrl}}" class="n-content-tag n-content-tag--medium standalone-teaser-heading" data-trackable="primary-theme" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
+			{{/if}}
+			<span class="video__duration">
+				{{formattedDuration}}
+			</span>
+		</div>
+
+		<h1 class="article-headline">
+			<span class="article-classifier__gap">{{title}}</span>
+		</h1>
+	</div>
+</header>

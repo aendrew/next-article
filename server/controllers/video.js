@@ -4,6 +4,7 @@ const openGraphHelper = require('./article-helpers/open-graph');
 const decorateMetadataHelper = require('./article-helpers/decorate-metadata');
 const getMoreOnTags = require('./article-helpers/get-more-on-tags');
 const getAdsLayout = require('../utils/get-ads-layout');
+const durationTransform = require('../transforms/video-duration');
 
 module.exports = function (req, res, next, payload) {
 	const asyncWorkToDo = [];
@@ -20,13 +21,23 @@ module.exports = function (req, res, next, payload) {
 		id: payload.webUrl.replace('http://video.ft.com/', '')
 	};
 
+	payload.shareUrl = req.get('ft-real-url') || payload.url;
+
 	if (res.locals.flags.openGraph) {
 		openGraphHelper(payload);
 	}
 
+	payload.formattedDuration = durationTransform(payload.videoLength);
+
+	// HACK: There's no primary tag via the API yet, so grab the first section tag if present
+	if (!payload.primaryTag) {
+		payload.primaryTag = payload.tags.find(tag => tag.taxonomy === 'sections' && tag.prefLabel !== 'Video');
+		payload.primarySectionTag = payload.primarySectionTag || payload.primaryTag;
+	}
+
 	payload.moreOns = getMoreOnTags(payload);
 	payload.dehydratedMetadata = {
-		moreOns: payload.moreOns
+		upNextTag: payload.primaryTag && payload.primaryTag.idV1,
 	};
 
 	if (res.locals.flags.articleSuggestedRead && payload.metadata.length) {
@@ -46,13 +57,12 @@ module.exports = function (req, res, next, payload) {
 		.then(() => {
 			payload.contentType = 'video';
 			payload.adsLayout = getAdsLayout(req.query.adsLayout);
-
 			if (req.query.fragment) {
 				res.unvaryAll('wrapper');
 				res.render('fragment', payload);
 			} else {
 				payload.layout = 'wrapper';
-				res.render('content', payload);
+				res.render('content-video', payload);
 			}
 		})
 		.catch(error => {

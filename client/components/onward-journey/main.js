@@ -20,7 +20,7 @@ function createPromise (el, url) {
 
 module.exports.init = () => {
 
-	const articleEl = document.querySelector('.article');
+	const articleEl = document.querySelector('.article, .content__video');
 	const dehydratedMetadata = document.getElementById('dehydrated-metadata');
 
 	if (!articleEl || !dehydratedMetadata) {
@@ -70,6 +70,12 @@ module.exports.init = () => {
 				return createPromise(el, `${url}&${query}`);
 			})
 		);
+	}
+
+	const videoUpNext = $('.js-up-next');
+	if (videoUpNext.length && hydratedMetadata.upNextTag) {
+		let url = `/content/${articleId}/up-next?tagId=${encodeURIComponent(hydratedMetadata.upNextTag)}`;
+		fetchPromises = fetchPromises.concat(createPromise(videoUpNext[0], url));
 	}
 
 	return Promise.all(

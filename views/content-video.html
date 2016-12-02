@@ -1,0 +1,17 @@
+{{#defineBlock 'globalDataAttributes'}}data-content-id="{{id}}"{{/defineBlock}}
+{{#defineBlock 'head'}}
+	{{> rel-canonical}}
+	{{> schemaDotOrg}}
+	<link rel="amphtml" href="https://amp.ft.com/content/{{id}}" />
+	<meta name="description" content="{{description}}"/>
+{{/defineBlock}}
+
+<article id="site-content" role="main" class="content__video" data-content-id="{{id}}">
+	{{#ifSome bodyHTML media}}
+		{{> body-video}}
+	{{/ifSome}}
+</article>
+
+{{>propensity-messaging-promo-unit}}
+
+<script type="text/json" id="dehydrated-metadata">{{{json dehydratedMetadata}}}</script>
