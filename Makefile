@@ -46,13 +46,9 @@ tidy:
 provision:
 	nht deploy-hashed-assets
 	nht float -md --testapp ${TEST_APP}
-	make smoke
 	@export TEST_URL=http://${TEST_APP}.herokuapp.com; pa11y-ci
+	make smoke
 
 smoke:
 	nht test-urls ${TEST_APP} --throttle 1;
 	export TEST_APP=${TEST_APP}; nht nightwatch test/browser/tests/*
-
-# Test a11y locally
-a11y:
-	@export TEST_URL="local.ft.com:3002"; pa11y-ci
