@@ -64,7 +64,7 @@ function videoEnded () {
 		videoPlaceholderElement.classList.add('video__placeholder__ended');
 		videoPlaceholderElement.classList.remove('video__placeholder__playing');
 
-		lazyLoadImages();
+		lazyLoadImages({ root: upNextPlaceholderSlot });
 
 		upNextTimer = setTimeout(() => {
 			upNextPlaceholderSlot.querySelector('a').click();
