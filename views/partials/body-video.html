@@ -1,17 +1,16 @@
 <div class="article__media">
-	<div class="video__container">
+	<div class="video__background-wrapper">
 		<div class="o-grid-container">
 			<div class="o-grid-row">
-				{{#with video}}
-				<div
-					class="o-video"
-					data-o-component="o-video"
-					data-o-video-id="{{id}}"
-					data-o-video-advertising="true"
-					data-o-video-placeholder="true"
-					data-o-video-placeholder-info="[]"
-					data-o-grid-colspan="12"></div>
-				{{/with}}
+				<div class="video__container" data-o-grid-colspan="12">
+					{{#with video}}
+					<div
+						class="o-video"
+						data-o-component="o-video"
+						data-o-video-id="{{id}}"
+						></div>
+					{{/with}}
+				</div>
 			</div>
 		</div>
 	</div>
