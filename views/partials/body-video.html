@@ -55,10 +55,12 @@
 					{{/if}}
 				</div>
 
-				<h5 class="video__byline-label">Credits</h5>
-				<p class="video__byline">
-					{{byline}}
-				</p>
+				{{#if byline}}
+					<h5 class="video__byline-label">Credits</h5>
+					<p class="video__byline">
+						{{byline}}
+					</p>
+				{{/if}}
 
 				{{#if readNextArticles}}
 					<h4 class="video__related-articles-title">Related Articles</h4>
