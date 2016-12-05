@@ -55,7 +55,7 @@ app.get('/embedded-components/slideshow/:id', require('./controllers/slideshow')
 app.get(`^/content/:id(${uuid})$`, (req, res, next) => {
 	res.vary('country-code');
 	// cache articles for less time than all the related content
-	res.set('Surrogate-Control', res.FT_SHORT_CACHE);
+	res.set('Surrogate-Control', res.FT_HOUR_CACHE);
 	next();
 }, require('./controllers/negotiation'));
 
