@@ -3,9 +3,8 @@ module.exports = `
 		id
 		title
 		lastPublished
-		url
-		webUrl
-		image: mainImage {
+		relativeUrl
+		mainImage {
 			url: rawSrc
 			width
 			height

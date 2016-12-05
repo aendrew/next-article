@@ -1,17 +1,39 @@
 <div class="article__media">
-	<div class="video__container">
+	<div class="video__background-wrapper">
 		<div class="o-grid-container">
 			<div class="o-grid-row">
-				{{#with video}}
-				<div
-					class="o-video"
-					data-o-component="o-video"
-					data-o-video-id="{{id}}"
-					data-o-video-advertising="true"
-					data-o-video-placeholder="true"
-					data-o-video-placeholder-info="[]"
-					data-o-grid-colspan="12"></div>
-				{{/with}}
+				<div class="video__container" data-o-grid-colspan="12">
+					{{#with video}}
+					<div
+						class="o-video"
+						data-o-component="o-video"
+						data-o-video-id="{{id}}"
+						></div>
+					{{/with}}
+					<div class="video__placeholder">
+						<div class="o-video__info">
+							<div class="video__placeholder-info n-util-clearfix">
+								{{#if primaryTag}}
+									<span class="n-content-tag n-content-tag--medium standalone-teaser-heading">{{primaryTag.prefLabel}}</span>
+								{{/if}}
+								<span class="video__duration">
+									{{formattedDuration}}
+								</span>
+							</div>
+							<h1 class="video__placeholder__headline article-headline">
+								<span class="article-classifier__gap">{{title}}</span>
+							</h1>
+						</div>
+						<button class="o-video__play-button">
+							<span class="o-video__play-button-text">Play video</span>
+							<i class="o-video__play-button-icon"></i>
+						</button>
+						<div class="video__placeholder__up-next">
+							<h4>Up Next</h4>
+							<ol class="js-placeholder-up-next"></ol>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

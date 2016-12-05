@@ -1,13 +1,13 @@
-<div class="video__up-next o-griid-container">
+<div class="video__up-next">
 	{{> n-teaser-collection/templates/partials/heading title="Up Next" }}
 	<ol class="video__up-next__list n-util-clearfix o-grid-row">
-	{{#items}}
+	{{#each items}}
 		<li class="video__up-next__list-item" data-o-grid-colspan="6 L3">
 		{{> n-teaser/templates/heavy
 			mods=(array 'small' 'stacked' 'video')
 			position='{ "default": "bottom" }'
 			widths=(array 180 270 360) }}
 		</li>
-	{{/items}}
+	{{/each}}
 	</ol>
 </div>
