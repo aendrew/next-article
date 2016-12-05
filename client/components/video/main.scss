@@ -74,7 +74,7 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 
 	&.video__placeholder__played {
 		bottom: 40px;
-		touch-action: none;
+		pointer-events: none;
 		background: linear-gradient($placeholder-background-color, $placeholder-background-color, $placeholder-background-color, transparent); // Fades out the end
 
 		> .o-video__play-button {
@@ -98,7 +98,7 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 
 .video__placeholder__up-next {
 	display: none;
-	touch-action: auto;
+	pointer-events: auto;
 	position: absolute;
 	bottom: 0;
 	right: 20px;
