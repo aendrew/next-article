@@ -1,5 +1,6 @@
 $video-background-primary: #252830;
 $video-grey-text: oColorsGetPaletteColor('grey-tint2');
+$placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 
 
 .content__video {
@@ -33,9 +34,21 @@ $video-grey-text: oColorsGetPaletteColor('grey-tint2');
 	}
 }
 
-.video__container {
+.video__background-wrapper {
 	background: oColorsGetPaletteColor('warm-4');
-	margin-bottom: 20px;
+	margin-bottom: 15px;
+
+	// Reduce padding to left and right of the video on small screen sizes
+	> .o-grid-container {
+		@include oGridRespondTo($until: M) {
+			padding: 0 0 0 10px;
+		}
+	}
+}
+
+.video__container {
+	position: relative;
+	padding: 0;
 }
 
 .video__info {
@@ -47,7 +60,7 @@ $video-grey-text: oColorsGetPaletteColor('grey-tint2');
 }
 
 .video__header-info {
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 }
 
 .video__header {
@@ -81,10 +94,11 @@ $video-grey-text: oColorsGetPaletteColor('grey-tint2');
 	}
 }
 
-.video__description {
+.video__description > p {
 	font-size: 20px;
 	line-height: 24px;
 	color: $video-grey-text;
+	margin-bottom: 11px;
 }
 
 .video__date {
@@ -106,10 +120,11 @@ $video-grey-text: oColorsGetPaletteColor('grey-tint2');
 .video__duration {
 	color: $video-grey-text;
 	margin-left: 20px;
+	font-size: 14px;
 }
 
 .video__related-articles-title {
-	margin: 25px 0 0;
+	margin: 24px 0 0;
 }
 
 .video__related-articles-list {
@@ -134,11 +149,11 @@ $video-grey-text: oColorsGetPaletteColor('grey-tint2');
 	.o-ads {
 		width: 100%;
 		text-align: center;
-		margin-top: 20px;
+		margin: 20px 0;
 
 		@include oGridRespondTo(L) {
 			text-align: right;
-			margin-top: 0;
+			margin: 0;
 		}
 	}
 }
@@ -147,6 +162,8 @@ $video-grey-text: oColorsGetPaletteColor('grey-tint2');
 	margin-top: 40px;
 
 	.o-teaser-collection__heading {
+		padding: 13px 0 0;
+
 		&:before {
 			border-top: 8px solid rgba(255, 255, 255, 0.2);
 		}
@@ -172,9 +189,54 @@ $video-grey-text: oColorsGetPaletteColor('grey-tint2');
 }
 
 
+// o-teaser overrides - until o-teaser has the canonical version
+.o-teaser--video {
+	.o-teaser__duration {
+		@include oTypographySansData(m);
+		line-height: 18px;
+		color: rgba(255, 255, 255, 0.6);
+		display: inline-block;
+		margin: 0 0 0 10px;
+
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+
+	.n-image-wrapper {
+		overflow: hidden;
+
+		&:after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			background-image: url('https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:play?source=next-video-page&tint=%23FFFFFF,%23FFFFFF&format=svg');
+			background-color: #000000;
+			background-size: cover;
+			width: 15%;
+			height: 15% * (16 / 9);
+			min-width: 40px;
+			min-height: 40px;
+		}
+	}
+}
+
+
 // o-video style overrides
 
 .o-video__play-button-icon {
-	height: 80px;
-	width: 80px;
+	@include oGridRespondTo(M) {
+		height: 60px;
+		width: 60px;
+	}
+	@include oGridRespondTo(XL) {
+		height: 80px;
+		width: 80px;
+	}
+}
+
+.o-video__video:focus {
+	outline: none;
+	outline-offset: 0;
 }
