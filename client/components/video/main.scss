@@ -275,7 +275,7 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 		// Still display images on smallscreen
 		.o-teaser__image-container {
 			display: block;
-			flex: 1 0 100%;
+			flex-basis: 100%;
 		}
 	}
 }
