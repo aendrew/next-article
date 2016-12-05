@@ -268,6 +268,16 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 	.o-teaser__heading:hover {
 		color: white;
 	}
+
+	.o-teaser--small {
+		border-bottom: 0;
+
+		// Still display images on smallscreen
+		.o-teaser__image-container {
+			display: block;
+			flex: 1 0 100%;
+		}
+	}
 }
 
 .video__up-next__list {
