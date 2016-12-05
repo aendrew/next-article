@@ -47,7 +47,7 @@ describe('Negotiation Controller', function () {
 				id: '012f81d6-2e2b-11e5-8873-775ba7c2ea3d'
 			}
 		})
-		expect(response._headers['surrogate-key']).to.equal('contentId:012f81d6-2e2b-11e5-8873-775ba7c2ea3d');
+		expect(response._headers['surrogate-key']).to.equal('contentUuid:012f81d6-2e2b-11e5-8873-775ba7c2ea3d');
 		dependencyStubs.interactive.reset();
 	})
 

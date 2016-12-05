@@ -19,7 +19,7 @@ module.exports = function (req, res, next) {
 				throw new NoRelatedResultsException();
 			}
 
-			res.set('surrogate-key', storyPackage.map(article => `contentId:${article.id}`).join(' '));
+			res.set('surrogate-key', storyPackage.map(article => `contentUuid:${article.id}`).join(' '));
 
 			return res.render('partials/related/story-package', { items: storyPackage });
 		})
