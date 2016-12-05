@@ -1,3 +1,4 @@
+
 # Warning, don't edit this file, it's maintained on GitHub and updated by running `make update-tools`
 # Submit PR's here: https://www.github.com/Financial-Times/n-makefile
 
@@ -18,7 +19,7 @@ NPM_INSTALL = npm prune --production=false && npm install
 BOWER_INSTALL = bower prune && bower install --config.registry.search=http://registry.origami.ft.com --config.registry.search=https://bower.herokuapp.com
 JSON_GET_VALUE = grep $1 | head -n 1 | sed 's/[," ]//g' | cut -d : -f 2
 IS_GIT_IGNORED = grep -q $(if $1, $1, $@) .gitignore
-VERSION = v1.4.19
+VERSION = v1.4.23
 APP_NAME = $(shell cat package.json 2>/dev/null | $(call JSON_GET_VALUE,name))
 DONE = echo ✓ $@ done
 CONFIG_VARS = curl -fsL https://ft-next-config-vars.herokuapp.com/$1/$(call APP_NAME)$(if $2,.$2,) -H "Authorization: `heroku config:get APIKEY --app ft-next-config-vars`"
@@ -124,7 +125,8 @@ _verify_scss_lint:
 	@if [ -e .scss-lint.yml ]; then { scss-lint -c ./.scss-lint.yml `$(call GLOB,'*.scss')`; if [ $$? -ne 0 -a $$? -ne 1 ]; then exit 1; fi; $(DONE); } fi
 
 _run_pa11y:
-ifdef $(CIRCLE_BRANCH)
+	echo $(CIRCLE_BRANCH)
+ifneq ($(CIRCLE_BRANCH),)
 	@export TEST_URL=http://${TEST_APP}.herokuapp.com; pa11y-ci;
 else
 	@export TEST_URL=http://local.ft.com:3002; pa11y-ci;

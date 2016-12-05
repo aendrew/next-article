@@ -46,7 +46,7 @@ tidy:
 provision:
 	nht deploy-hashed-assets
 	nht float -md --testapp ${TEST_APP}
-	@export TEST_URL=http://${TEST_APP}.herokuapp.com; pa11y-ci
+	make a11y
 	make smoke
 
 smoke:
