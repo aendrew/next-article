@@ -82,6 +82,10 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 		opacity: 0;
 		visibility: hidden;
 	}
+
+	.o-video__play-button-text {
+		color: white;
+	}
 }
 
 .video__placeholder__headline {
