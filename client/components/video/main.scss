@@ -51,6 +51,89 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 	padding: 0;
 }
 
+// Although o-video has placeholder functionality, the designs for the video player page
+// call for placeholder states which both look and behave differently, including visibility
+// once the video has played.  Keep a separate placeholder element.
+.video__placeholder {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: $placeholder-background-color;
+	transition: opacity 0.2s;
+	visibility: visible;
+
+	> .o-video__info {
+		padding: 25px 20px;
+	}
+
+	&.video__placeholder__played {
+		bottom: 40px;
+		touch-action: none;
+		background: linear-gradient($placeholder-background-color, $placeholder-background-color, $placeholder-background-color, transparent); // Fades out the end
+
+		> .o-video__play-button {
+			display: none;
+		}
+	}
+
+	&.video__placeholder__playing {
+		opacity: 0;
+		visibility: hidden;
+	}
+}
+
+.video__placeholder__headline {
+	margin-top: 21px;
+}
+
+.video__placeholder__up-next {
+	display: none;
+	touch-action: auto;
+	position: absolute;
+	bottom: 0;
+	right: 20px;
+
+	.video__placeholder__ended & {
+		display: block;
+	}
+
+	> h4 {
+		margin: 0 0 6px;
+	}
+
+	> ol {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+
+		> li {
+			padding-bottom: 0;
+		}
+	}
+
+	.o-teaser {
+		@include oGridRespondTo($until: M) {
+			margin-bottom: 0;
+			padding-bottom: 0;
+			border-bottom: 0;
+		}
+	}
+
+	.o-teaser__heading {
+		color: white;
+	}
+
+	.o-teaser__timestamp {
+		@include oGridRespondTo($until: M) {
+			display: none;
+		}
+	}
+}
+
+
+
 .video__info {
 	@include oGridRespondTo(L) {
 

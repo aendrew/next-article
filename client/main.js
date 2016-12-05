@@ -61,6 +61,11 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 			localStorageKey: 'tour-tip-article-dismissed'
 		});
 
+		const enableAutoplay = document.querySelector('.content__video');
+		if (enableAutoplay) {
+			videoAutoplay.init();
+		}
+
 		const videos = document.querySelectorAll('[data-o-component="o-video"]');
 		Array.from(videos).forEach(video => {
 			let oVideo = new OVideo(video, {
@@ -69,11 +74,13 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 				classes: ['video'],
 				advertising: flags.get('videoPlayerAdvertising'),
 				source: 'brightcove',
-				placeholderdisplay: 'brand,title'
+				placeholderdisplay: 'brand,title',
+				autorender: !enableAutoplay,
 			});
-			video.ovideo = oVideo;
+			if (enableAutoplay) {
+				videoAutoplay(oVideo);
+			}
 		});
-		videoAutoplay(flags);
 
 		if (flags.get('articleComments') && document.querySelector('#comments')) {
 			commentsInit();
