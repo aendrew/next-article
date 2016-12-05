@@ -8,6 +8,10 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 	margin-bottom: 20px;
 	color: white;
 
+	// Improve text appearance on dark background
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+
 	.article__primary-theme {
 		margin-bottom: 15px;
 	}
