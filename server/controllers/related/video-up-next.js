@@ -1,6 +1,7 @@
 const logger = require('@financial-times/n-logger').default;
 const fetchGraphQlData = require('../../lib/fetch-graphql-data');
 const upNextContentQuery = require('../../graphql-queries/video-up-next');
+const url = require('url');
 
 module.exports = function (req, res, next) {
 	res.unvaryAll('wrapper');
@@ -31,6 +32,18 @@ module.exports = function (req, res, next) {
 			}
 
 			return latestContent.slice(sliceStartIndex, sliceStartIndex + videosToDisplay);
+		})
+
+		// HACK: videos should stay on Next, as there's no real Falcon-served equivalent, and
+		// the old video.ft.com backend is going away
+		.then(items => {
+			items.forEach(item => {
+				let urlObject = url.parse(item.relativeUrl, true, true);
+				urlObject.query.ft_site = 'next';
+				delete urlObject.search; // Forces regeneration of search from query parts
+				item.relativeUrl = url.format(urlObject);
+			});
+			return items;
 		})
 		.catch(err => {
 			logger.error(err);
