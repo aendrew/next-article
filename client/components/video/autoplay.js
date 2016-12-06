@@ -1,15 +1,31 @@
 'use strict';
 
 const lazyLoadImages = require('n-image').lazyLoad;
+const oViewport = require('n-ui/viewport');
 
 const videoPlaceholderElement = document.querySelector('.video__placeholder');
 let upNextTimer = false;
+let videoHasEverPlayed = false;
 
 module.exports = oVideo => {
 	oVideo.init().then(() => {
-		oVideo.play();
 		videoPlaceholderElement.addEventListener('click', oVideo.play.bind(oVideo));
-	})
+
+		// If the Page Visibility API is supported, and the window is hidden now,
+		// defer autoplay until the window becomes visible
+		if (document.hidden || document.webkitHidden) {
+			oViewport.listenTo('visibility');
+			document.body.addEventListener('oViewport.visibility', event => {
+				if (event.detail && !event.detail.hidden && !videoHasEverPlayed) {
+					oVideo.play();
+				}
+			});
+
+		// If there's no visibility API support or the window is visible start playing
+		} else {
+			oVideo.play();
+		}
+	});
 };
 
 module.exports.init = () => {
@@ -45,6 +61,7 @@ function videoPlaying () {
 	videoPlaceholderElement.classList.add('video__placeholder__played');
 	videoPlaceholderElement.classList.add('video__placeholder__playing');
 	clearTimeout(upNextTimer);
+	videoHasEverPlayed = true;
 }
 
 function videoPaused () {
