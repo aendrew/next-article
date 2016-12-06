@@ -5,7 +5,7 @@
     "n-email-article": "^1.2.9",
     "n-image": "^4.3.0",
     "n-service-worker": "^1.1.0",
-    "n-teaser-collection": "^0.3.0",
+    "n-teaser-collection": "^1.0.0",
     "o-teaser-collection": "#design-debt",
     "n-ui": "^2.54.10",
     "o-comment-api": "^2.4.0",
@@ -16,7 +16,8 @@
     "o-gallery": "^1.7.4",
     "o-share": "^2.1.2",
     "superstore": "^2.1.0",
-    "next-affinity-client": "^0.1.0"
+    "next-affinity-client": "^0.1.0",
+    "o-labels": "^2.0.3"
   },
   "resolutions": {
     "o-typography": "^4.1.0",
