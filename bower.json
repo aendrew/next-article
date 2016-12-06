@@ -17,7 +17,8 @@
     "o-labels": "^2.0.2",
     "o-share": "^2.1.2",
     "superstore": "^2.1.0",
-    "next-affinity-client": "^0.1.0"
+    "next-affinity-client": "^0.1.0",
+    "o-labels": "^2.0.3"
   },
   "resolutions": {
     "o-typography": "^4.1.0",

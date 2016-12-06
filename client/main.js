@@ -21,6 +21,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const ftlabsSpokenLayer = require('./components/ftlabsSpokenLayer/main');
 	const legalCopy = require('./components/legal-copy/main');
 	const videoAutoplay = require('./components/video/autoplay');
+	const affinity = require('./components/affinity/main');
 
 	// cacheJourney();
 
@@ -88,6 +89,10 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 		if (flags.get('ftlabsSpokenLayer')){
 			ftlabsSpokenLayer(flags);
+		}
+
+		if (flags.get('affinity')) {
+			affinity(flags);
 		}
 
 	});
