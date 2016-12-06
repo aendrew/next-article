@@ -8,6 +8,10 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 	margin-bottom: 20px;
 	color: white;
 
+	a:hover {
+		color: $video-grey-text;
+	}
+
 	// Improve text appearance on dark background
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
@@ -229,10 +233,6 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 	a {
 		color: white;
 		border-bottom: 0;
-
-		&:hover {
-			border-bottom: 1px dotted white;
-		}
 	}
 }
 
@@ -264,8 +264,7 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 		}
 	}
 
-	.o-teaser__heading,
-	.o-teaser__heading:hover {
+	.o-teaser__heading {
 		color: white;
 	}
 
