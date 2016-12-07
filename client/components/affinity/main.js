@@ -15,7 +15,7 @@ const errorHandler = err => {
 
 const getTitle = (headingModifiers) => {
 	return {
-		title: 'Recommended',
+		title: 'Recommended for you',
 		headingModifiers
 	};
 }
