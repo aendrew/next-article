@@ -4,21 +4,12 @@ const proxyquire = require('proxyquire');
 
 const stubs = {
 	getRelatedArticles: sinon.stub(),
-	NoRelatedResultsException: sinon.stub(),
-	logger: {
-		default: {
-			error: sinon.stub()
-		}
-	}
+	NoRelatedResultsException: sinon.stub()
 };
+
 const subject = proxyquire('../../../server/lib/get-related-articles', {
 	'./fetch-graphql-data': stubs.getRelatedArticles,
-	'./no-related-results-exception': stubs.NoRelatedResultsException,
-	'@financial-times/n-logger': {
-		default: {
-			error: stubs.logger.default.error
-		}
-	}
+	'./no-related-results-exception': stubs.NoRelatedResultsException
 });
 
 const resetStubs = () => {

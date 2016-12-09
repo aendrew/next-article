@@ -5,7 +5,9 @@ const logger = require('@financial-times/n-logger').default;
 
 module.exports = (tagId, count, parentId) => {
 	return fetchGraphQlData(relatedContentQuery, { tagId, limit: count + 1 })
-		.then(({ search: articles = [] } = {}) => {
+		.then((data) => {
+			const articles = Array.isArray(data.search) ? data.search : [];
+
 			if (!articles.length) {
 				throw new NoRelatedResultsException();
 			}
