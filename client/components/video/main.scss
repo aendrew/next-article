@@ -264,10 +264,6 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 		}
 	}
 
-	.o-teaser__heading {
-		color: white;
-	}
-
 	.o-teaser--small {
 		border-bottom: 0;
 
@@ -289,40 +285,6 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 }
 
 
-// o-teaser overrides - until o-teaser has the canonical version
-.o-teaser--video {
-	.o-teaser__duration {
-		@include oTypographySansData(m);
-		line-height: 18px;
-		color: rgba(255, 255, 255, 0.6);
-		display: inline-block;
-		margin: 0 0 0 10px;
-
-		&:first-child {
-			margin-left: 0;
-		}
-	}
-
-	.n-image-wrapper {
-		overflow: hidden;
-
-		&:after {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			background-image: url('https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:play?source=next-video-page&tint=%23FFFFFF,%23FFFFFF&format=svg');
-			background-color: #000000;
-			background-size: cover;
-			width: 15%;
-			height: 15% * (16 / 9);
-			min-width: 40px;
-			min-height: 40px;
-		}
-	}
-}
-
-
 // o-video style overrides
 
 .o-video__play-button-icon {
@@ -339,4 +301,8 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 .o-video__video:focus {
 	outline: none;
 	outline-offset: 0;
+}
+
+.n-image-wrapper {
+	overflow: hidden;
 }

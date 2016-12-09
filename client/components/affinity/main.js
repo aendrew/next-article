@@ -1,6 +1,6 @@
 'use strict';
 
-const nTeaserCollectionHeading = require('n-teaser-collection/templates/partials/heading.html');
+const nTeaserCollectionHeading = require('@financial-times/n-teaser-collection/templates/partials/heading.html');
 const nTeaserList = require('../../../views/partials/teaser-collections/list-extra-light.html');
 const nTeaser1And3 = require('../../../views/partials/teaser-collections/1-3.html');
 const affinityClient = require('next-affinity-client');

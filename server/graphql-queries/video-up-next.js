@@ -1,26 +1,20 @@
+const nTeaserFragments = require('@financial-times/n-teaser').fragments;
+
 module.exports = `
-	fragment videoContent on Content {
-		id
-		title
-		lastPublished
-		relativeUrl
-		mainImage {
-			url: rawSrc
-			width
-			height
-			ratio
-		}
-		... on Video {
-			duration
-		}
-	}
+	${nTeaserFragments.teaserExtraLight}
+	${nTeaserFragments.teaserLight}
+	${nTeaserFragments.teaserStandard}
+	${nTeaserFragments.teaserHeavy}
 
 	query tagLatest (
 		$tagId: String!
 	) {
 		tag(id: $tagId) {
 			latestContent(limit: 20, type: Video) {
-				...videoContent
+				...TeaserExtraLight
+				...TeaserLight
+				...TeaserStandard
+				...TeaserHeavy
 			}
 		}
 	}

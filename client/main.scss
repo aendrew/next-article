@@ -13,8 +13,6 @@ $n-ui-output-critical: $output-critical;
 );
 @import 'n-ui/bootstrap';
 @include nUiCriticalStart();
-	$o-teaser-is-silent: false;
-	@import 'o-teaser/main';
 	$o-teaser-collection-is-silent: false;
 	@import 'o-teaser-collection/main';
 	$o-labels-is-silent: false;
