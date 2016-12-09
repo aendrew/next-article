@@ -2,15 +2,14 @@
 
 	{{> ads/mid}}
 	{{{tocHTML}}}
-
-	{{#if @root.flags.articleSuggestedRead}}
-		{{> right-hand/suggested-reads-teaser-collection items=readNextArticles topic=readNextTopic }}
-	{{/if}}
-
-	{{#if @root.flags.affinity}}
+	{{#if @root.flags.affinityMvt}}
 		<div class="o-teaser-collection" data-trackable="suggested-reads">
 			<div data-trackable="affinity" id="affinity-rhs">[loading indicator to go here]</div>
 		</div>
+	{{else}}
+		{{#if @root.flags.articleSuggestedRead}}
+			{{> right-hand/suggested-reads-teaser-collection items=readNextArticles topic=readNextTopic }}
+		{{/if}}
 	{{/if}}
 
 	{{test}}
