@@ -1,23 +1,45 @@
 const createIndicator = {
 	init: function () {
-		const loadingIndicator = document.createElement('div');
-		const loadingIndicatorInner = document.createElement('div');
-		const loadingIndicatorAvatar = document.createElement('div');
-		const loadingIndicatorPod = document.createElement('div');
-		const indicatorEl = document.querySelector('.loading-indicator-bottom');
 
-		loadingIndicator.className = 'loading-indicator';
-		loadingIndicator.setAttribute('data-loading-indicator', 'affinity');
-		loadingIndicatorInner.className = 'loading-indicator__inner';
-		loadingIndicatorAvatar.className = 'loading-indicator__avatar';
-		loadingIndicatorPod.className = 'loading-indicator__text';
+		if(document.querySelector('.loading-indicator-rhr')) {
+			const rhrLoading = document.createElement('div');
+			const rhrLoadingInner = document.createElement('div');
+			const rhrLoadingPod = document.createElement('div');
+			const rhrLoadingEl = document.querySelector('.loading-indicator-rhr');
 
-		loadingIndicatorInner.appendChild(loadingIndicatorAvatar);
-		loadingIndicatorInner.appendChild(loadingIndicatorPod);
-		loadingIndicator.innerHTML += loadingIndicatorInner.outerHTML;
-		loadingIndicator.innerHTML += loadingIndicatorInner.outerHTML;
-		loadingIndicator.innerHTML += loadingIndicatorInner.outerHTML;
-		indicatorEl.parentNode.insertBefore(loadingIndicator, indicatorEl.nextSibling);
+			rhrLoading.className = 'loading-indicator';
+			rhrLoading.setAttribute('data-loading-indicator', 'affinity');
+			rhrLoadingInner.className = 'loading-indicator__inner';
+			rhrLoadingPod.className = 'loading-indicator__text';
+
+			rhrLoadingInner.appendChild(rhrLoadingPod);
+			rhrLoading.innerHTML += rhrLoadingInner.outerHTML;
+			rhrLoading.innerHTML += rhrLoadingInner.outerHTML;
+			rhrLoading.innerHTML += rhrLoadingInner.outerHTML;
+			rhrLoadingEl.parentNode.insertBefore(rhrLoading, rhrLoadingEl.nextSibling);
+		}
+
+		if(document.querySelector('.loading-indicator-bottom')) {
+			const bottomLoading = document.createElement('div');
+			const bottomLoadingInner = document.createElement('div');
+			const bottomLoadingAvatar = document.createElement('div');
+			const bottomLoadingPod = document.createElement('div');
+			const bottomLoadingEl = document.querySelector('.loading-indicator-bottom');
+
+			bottomLoading.className = 'loading-indicator';
+			bottomLoading.setAttribute('data-loading-indicator', 'affinity');
+			bottomLoadingInner.className = 'loading-indicator__inner';
+			bottomLoadingAvatar.className = 'loading-indicator__avatar';
+			bottomLoadingPod.className = 'loading-indicator__text';
+
+			bottomLoadingInner.appendChild(bottomLoadingAvatar);
+			bottomLoadingInner.appendChild(bottomLoadingPod);
+			bottomLoading.innerHTML += bottomLoadingInner.outerHTML;
+			bottomLoading.innerHTML += bottomLoadingInner.outerHTML;
+			bottomLoading.innerHTML += bottomLoadingInner.outerHTML;
+			bottomLoadingEl.parentNode.insertBefore(bottomLoading, bottomLoadingEl.nextSibling);
+		}
+
 	}
 }
 
