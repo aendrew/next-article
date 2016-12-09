@@ -60,8 +60,8 @@ app.get(`^/content/:id(${uuid})$`, (req, res, next) => {
 }, require('./controllers/negotiation'));
 
 // normal caching on popular calls, no caching on other affinity calls
-app.get('^/__affinity/:type(popular)', require('./controllers/affinity-proxy'));
-app.get(`^/__affinity/:type/:id(${uuid})?/:user(user)?/:uid?`, (req, res, next) => {
+app.get('^/[_]{0,2}affinity/:type(popular)', require('./controllers/affinity-proxy'));
+app.get(`^/[_]{0,2}affinity/:type/:id(${uuid})?`, (req, res, next) => {
 	res.set('Surrogate-Control', res.FT_NO_CACHE);
 	next();
 }, require('./controllers/affinity-proxy'));
