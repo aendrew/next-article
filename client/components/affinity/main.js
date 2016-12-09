@@ -7,6 +7,8 @@ const affinityClient = require('next-affinity-client');
 const oDate = require('o-date');
 const nImage = require('n-image');
 
+const loadingIndicator = require('./loading-indicator');
+
 const errorHandler = err => {
 	window.setTimeout(() => {
 		throw err;
@@ -54,6 +56,7 @@ const buildBottom = (articles) => {
 export default (flags) => {
 	const articleId = document.querySelector('[data-content-id]').getAttribute('data-content-id');
 	if (flags.affinityMvt) {
+		loadingIndicator.init();
 		let affinityEndpoint;
 		let options;
 		switch (flags.affinityMvt) {
@@ -76,6 +79,7 @@ export default (flags) => {
 			default:
 				break;
 		}
+
 
 		if (affinityEndpoint) {
 			affinityClient[affinityEndpoint](options)

@@ -1,15 +1,15 @@
-.skeleton {
+.loading-indicator {
 	font-family: BentonSans, sans-serif;
 	width: 100%;
 	margin-top: 20px;
 	background-color: orange;
 }
 
-.skeleton:before {
-	content: 'COMMENTS';
+.loading-indicator:before {
+	content: '';
 }
 
-.skeleton__inner {
+.loading-indicator__inner {
 	width: 100%;
 	margin: 20px 0 60px;
 
@@ -64,27 +64,27 @@
 	}
 }
 
-.skeleton__text {
+.loading-indicator__text {
 	@include skeleton-line(100%, bodyPulse);
 	position: relative;
 	margin-top: 30px;
 }
 
-.skeleton__text:before {
+.loading-indicator__text:before {
 	@include skeleton-line(100%, bodyPulse);
 	content: '';
 	position: absolute;
 	top: -20px;
 }
 
-.skeleton__text:after {
+.loading-indicator__text:after {
 	@include skeleton-line(100%, bodyPulse);
 	content: '';
 	position: absolute;
 	bottom: -20px;
 }
 
-.skeleton__avatar {
+.loading-indicator__avatar {
 	position: relative;
 	width: 50px;
 	height: 50px;
@@ -101,7 +101,7 @@
 }
 
 
-.skeleton__avatar:before {
+.loading-indicator__avatar:before {
 	@include skeleton-line(160px, namePulse);
 	@media (min-width:280px) {
 		width: 200px;
@@ -115,7 +115,7 @@
 	top: 5px;
 }
 
-.skeleton__avatar:after {
+.loading-indicator__avatar:after {
 	@include skeleton-line(120px, namePulse);
 	@media (min-width:380px) {
 		width: 200px;
