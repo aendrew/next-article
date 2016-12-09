@@ -84,7 +84,7 @@ function videoEnded () {
 		lazyLoadImages({ root: upNextPlaceholderSlot });
 
 		upNextTimer = setTimeout(() => {
-			upNextPlaceholderSlot.querySelector('a').click();
+			upNextPlaceholderSlot.querySelector('.o-teaser__heading a').click();
 		}, 5000);
 	}
 }
