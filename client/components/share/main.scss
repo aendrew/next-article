@@ -32,13 +32,19 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 
 		&__comments {
 			@include oTypographySansSize(s);
+			line-height: 24px;
+			position: relative;
 			border-bottom-width: 0;
 			float: right;
-			margin-right: 0.5em;
+			margin-right: 16px;
+			padding-left: 22px;
 		}
 
 		&__print {
 			display: none;
+			position: relative;
+			width: 17px;
+			height: 24px;
 			border-bottom-width: 0;
 			float: left;
 			margin-right: 16px;
@@ -118,25 +124,27 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 
 // Lazy load all the icons
 .article__share {
+	$icon-size: 34;
+	$icon-padding: ($icon-size / 100) * 25;
+
 	> * {
 		visibility: visible;
 	}
 
-	&__comments {
+	&__comments,
+	&__print {
 		&:before {
-			@include oIconsGetIcon('comment', getColorFor('link', 'text'), 17);
+			@include oIconsGetIcon('speech', getColorFor('link', 'text'), $icon-size);
 			content: '';
-			position: relative;
-			top: 5px;
-			margin-right: 5px;
+			position: absolute;
+			top: -#{$icon-padding / 2}px;
+			left: -#{$icon-padding}px;
 		}
 	}
 
 	&__print {
 		&:before {
-			@include oIconsGetIcon('printer', getColor('cold-1'), 24);
-			content: '';
-			display: block; // prevent inline-block spacing issue
+			@include oIconsGetIcon('print', getColor('cold-1'), $icon-size, $apply-base-styles: false, $apply-width-height: false);
 		}
 	}
 }
