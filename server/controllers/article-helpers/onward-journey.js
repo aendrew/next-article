@@ -10,7 +10,7 @@ module.exports = function (articleId, publishedDate) {
 		uuid: articleId,
 		limitPrimaryTag: 6,
 		limitStoryPackage: 5
-	}
+	};
 
 	return fetchGraphqlData(readNextQuery, variables)
 		.then(({ article = [] } = {}) => {
@@ -25,7 +25,5 @@ module.exports = function (articleId, publishedDate) {
 				suggestedReads: getSuggestedReads(topicArticles, storyPackage)
 			};
 		})
-		.catch(
-			error => logger.warn('Fetching onward journey data failed.', error.toString())
-		);
+		.catch(logger.warn.bind(null, 'Fetching onward journey data failed.'));
 };

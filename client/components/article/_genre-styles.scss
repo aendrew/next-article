@@ -42,11 +42,11 @@ $brand-color: getColor('warm-1');
 	margin-top: 8px;
 	@media screen {
 		&:before {
-			@include oIconsGetIcon('pullquote', getColor('claret'), 26);
-			position: absolute;
-			top: 3px;
-			left: 0;
+			@include oIconsGetIcon('speech-left', getColor('claret'), 44);
 			content: '';
+			position: absolute;
+			top: -7px;
+			left: -9px;
 		}
 	}
 	@media print {
