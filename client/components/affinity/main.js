@@ -53,7 +53,7 @@ const buildBottom = (articles) => {
 
 export default (flags) => {
 	const articleId = document.querySelector('[data-content-id]').getAttribute('data-content-id');
-	if (flags.affinity) {
+	if (flags.affinityMvt) {
 		let affinityEndpoint;
 		let options;
 		switch (flags.affinityMvt) {
