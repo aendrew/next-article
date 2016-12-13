@@ -27,7 +27,7 @@ module.exports = function (req, res, next, payload) {
 		openGraphHelper(payload);
 	}
 
-	payload.formattedDuration = durationTransform(payload.videoLength);
+	payload.formattedDuration = durationTransform(payload.attachments && payload.attachments[0] && payload.attachments[0].duration);
 
 	// HACK: There's no primary tag via the API yet, so grab the first section tag if present
 	if (!payload.primaryTag) {
