@@ -6,11 +6,13 @@ const affinityApi = require('ft-next-affinity-client');
 * See affinity-client for params
 **/
 module.exports = (req, res, next) => {
+	const sessionToken = req.get('ft-session-token') || req.cookies.FTSession;
 	const options = {
 		params: req.params,
 		query: req.query,
-		session: req.header('ft-session-token')
+		session: sessionToken
 	};
+
 	return affinityApi.buildRequest(options)
 		.then(data => res.json(data))
 		.catch(next);
