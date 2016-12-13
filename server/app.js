@@ -1,6 +1,7 @@
 const express = require('@financial-times/n-express');
 const logger = require('@financial-times/n-logger').default;
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const checks = require('./checks/main.js');
 const path = require('path');
 // Starts polling checks
@@ -64,7 +65,7 @@ app.get('^/[_]{0,2}affinity/:type(popular)', require('./controllers/affinity-pro
 app.get(`^/[_]{0,2}affinity/:type/:id(${uuid})?`, (req, res, next) => {
 	res.set('Surrogate-Control', res.FT_NO_CACHE);
 	next();
-}, require('./controllers/affinity-proxy'));
+}, cookieParser(), require('./controllers/affinity-proxy'));
 
 app.get('/__gtg', (req, res) => {
 	res.status(200).end();
