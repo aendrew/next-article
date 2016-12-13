@@ -34,16 +34,17 @@
 				</ul>
 			</div>
 		{{/if}}
-		<div class="article__save">
-			{{#ifEquals contentType 'article'}}
-				<a class="article__share__print n-util-hide-no-js" href="javascript:window.print()" data-trackable="print">
-					<span class="n-util-visually-hidden">Print this page</span>
-				</a>
-			{{/ifEquals}}
-			{{#ifAll @root.flags.saveForLater @root.flags.myFtApiWrite}}
-				{{>n-ui/myft/templates/save-for-later contentId=id}}
-			{{/ifAll}}
-		</div>
+		<div class="comment_plus_save">
+			<span class="article__save">
+				{{#ifEquals contentType 'article'}}
+					<a class="article__share__print n-util-hide-no-js" href="javascript:window.print()" data-trackable="print">
+						<span class="n-util-visually-hidden">Print this page</span>
+					</a>
+				{{/ifEquals}}
+				{{#ifAll @root.flags.saveForLater @root.flags.myFtApiWrite}}
+					{{>n-ui/myft/templates/save-for-later contentId=id}}
+				{{/ifAll}}
+		</span>
 	</div>
 	{{#ifAll signedIn @root.flags.giftArticle}}
 		<div data-n-article-email-{{location}}-container></div>
