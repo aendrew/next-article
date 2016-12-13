@@ -63,15 +63,15 @@ export default (flags) => {
 				break;
 			case 'onto-contextual':
 				affinityEndpoint = 'contextual';
-				options = {id: articleId};
+				options = {id: articleId, count: 5};
 				break;
 			case 'onto-behavioural':
 				affinityEndpoint = 'behavioural';
-				options = {id: articleId};
+				options = {id: articleId, count: 5};
 				break;
 			case 'onto-covisit':
 				affinityEndpoint = 'behavioural';
-				options = {id: articleId, covisitation: true};
+				options = {id: articleId, covisitation: true, count: 5};
 				break;
 			default:
 				break;
