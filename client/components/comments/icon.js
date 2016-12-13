@@ -16,8 +16,7 @@ const createIcon = {
 			commentLink.setAttribute('href', '#comments');
 			commentLink.setAttribute('data-trackable', 'view-comments');
 			commentLink.className = 'article__share__comments';
-			let commentPlusSave = document.querySelector('.comment_plus_save');
-			commentPlusSave.insertBefore(commentLink, articleShare.querySelector('.article__save'));
+			articleShare.appendChild(commentLink);
 		});
 	}
 }

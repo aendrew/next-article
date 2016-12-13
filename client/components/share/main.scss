@@ -35,6 +35,7 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 			line-height: 24px;
 			position: relative;
 			border-bottom-width: 0;
+			float: right;
 			margin-right: 16px;
 			padding-left: 22px;
 		}
@@ -54,10 +55,6 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 
 		&--bottom {
 			clear: left;
-		}
-
-		.comment_plus_save {
-			float: right;
 		}
 
 		.o-share {
@@ -140,19 +137,13 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 			@include oIconsGetIcon('speech', getColorFor('link', 'text'), $icon-size);
 			content: '';
 			position: absolute;
+			top: -#{$icon-padding / 2}px;
 			left: -#{$icon-padding}px;
-		}
-	}
-
-	&__comments {
-		&::before {
-			top: -8.25px;
 		}
 	}
 
 	&__print {
 		&:before {
-			top: -#{$icon-padding / 2}px;
 			@include oIconsGetIcon('print', getColor('cold-1'), $icon-size, $apply-base-styles: false, $apply-width-height: false);
 		}
 	}
