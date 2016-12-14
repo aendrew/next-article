@@ -72,7 +72,6 @@ export default (flags) => {
 				loadingIndicator.destroy();
 		}
 
-
 		if (affinityEndpoint) {
 			affinityClient[affinityEndpoint](options)
 				.then(data => {

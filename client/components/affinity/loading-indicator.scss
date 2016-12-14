@@ -12,55 +12,6 @@
 	margin: 0 0 60px;
 }
 
-@mixin skeleton-line($width, $animation) {
-	width: $width;
-	animation-duration: 1s;
-	animation-fill-mode: forwards;
-	animation-iteration-count: infinite;
-	animation-name: $animation;
-	animation-timing-function: linear;
-	background: #fff1e0;
-	background-image: linear-gradient(to left, #fff1e0 0%, #f6e9d8 50%, #fff1e0 100%);
-	background-repeat: no-repeat;
-	background-size: 800px 15px;
-	height: 15px;
-	position: relative;
-
-}
-
-@keyframes namePulse {
-	0% {
-		background-position: -800px 0;
-	}
-	15% {
-		background-position: -800px 0;
-	}
-	100% {
-		background-position: 800px 0;
-	}
-}
-
-@keyframes bodyPulse {
-	0% {
-		background-position: -800px 0;
-	}
-	100% {
-		background-position: 800px 0;
-	}
-}
-
-@keyframes avatarPulse {
-	0% {
-		background-position: -200px 0;
-	}
-	70% {
-		background-position: 200px 0;
-	}
-	100% {
-		background-position: 200px 0;
-	}
-}
-
 .loading-indicator__text {
 	@include skeleton-line(100%, bodyPulse);
 	position: relative;
