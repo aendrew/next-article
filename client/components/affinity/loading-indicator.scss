@@ -1,5 +1,4 @@
 .loading-indicator {
-	font-family: BentonSans, sans-serif;
 	width: 100%;
 	margin-top: 20px;
 }
@@ -10,8 +9,7 @@
 
 .loading-indicator__inner {
 	width: 100%;
-	margin: 20px 0 60px;
-
+	margin: 0 0 60px;
 }
 
 @mixin skeleton-line($width, $animation) {
@@ -81,46 +79,4 @@
 	content: '';
 	position: absolute;
 	bottom: -20px;
-}
-
-.loading-indicator__avatar {
-	position: relative;
-	width: 50px;
-	height: 50px;
-	border-radius: 25px;
-	background: #fff1e0;
-	background-image: linear-gradient(to left, #fff1e0 0%, #f6e9d8 50%, #fff1e0 100%);
-	background-repeat: no-repeat;
-	background-size: 200px 50px;
-	animation-duration: 1s;
-	animation-fill-mode: forwards;
-	animation-iteration-count: infinite;
-	animation-name: avatarPulse;
-	animation-timing-function: linear;
-}
-
-
-.loading-indicator__avatar:before {
-	@include skeleton-line(160px, namePulse);
-	@media (min-width:280px) {
-		width: 200px;
-	}
-	@media (min-width:380px) {
-		width: 300px;
-	}
-	content: '';
-	position: absolute;
-	left: 60px;
-	top: 5px;
-}
-
-.loading-indicator__avatar:after {
-	@include skeleton-line(120px, namePulse);
-	@media (min-width:380px) {
-		width: 200px;
-	}
-	content: '';
-	position: absolute;
-	left: 60px;
-	top: 25px;
 }

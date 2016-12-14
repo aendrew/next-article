@@ -1,45 +1,59 @@
+const util = require('n-ui/utils');
+
+/**
+* createIndicator - loading bars to display while content is lazy loading, currently specific to affinity
+**/
 const createIndicator = {
+	/**
+  * @param {Integer} amount Number of lines to return
+	* @return {String} html string for lines
+	**/
+	createLineBlocks: (amount) => {
+		const lineHtml = '<div class="loading-indicator__inner"><div class="loading-indicator__text"></div></div>';
+		let htmlString = '';
+		for (let i = 0; i < amount; i++) {
+			htmlString += lineHtml;
+		}
+		return htmlString;
+	},
+
+	/**
+	* @return {String} html string for loading element
+	**/
+	createLoadingEl: () => {
+		const htmlNode = document.createElement('div');
+		htmlNode.className = 'loading-indicator';
+		htmlNode.setAttribute('data-loading-indicator', 'affinity');
+		return htmlNode;
+	},
+
+	/**
+	* add loading elements
+	**/
 	init: function () {
-
-		if(document.querySelector('.loading-indicator-rhr')) {
-			const rhrLoading = document.createElement('div');
-			const rhrLoadingInner = document.createElement('div');
-			const rhrLoadingPod = document.createElement('div');
-			const rhrLoadingEl = document.querySelector('.loading-indicator-rhr');
-
-			rhrLoading.className = 'loading-indicator';
-			rhrLoading.setAttribute('data-loading-indicator', 'affinity');
-			rhrLoadingInner.className = 'loading-indicator__inner';
-			rhrLoadingPod.className = 'loading-indicator__text';
-
-			rhrLoadingInner.appendChild(rhrLoadingPod);
-			rhrLoading.innerHTML += rhrLoadingInner.outerHTML;
-			rhrLoading.innerHTML += rhrLoadingInner.outerHTML;
-			rhrLoading.innerHTML += rhrLoadingInner.outerHTML;
-			rhrLoadingEl.parentNode.insertBefore(rhrLoading, rhrLoadingEl.nextSibling);
+		const rhrEl = document.querySelector('#affinity-rhs');
+		const bottomEl = document.querySelector('#affinity-bottom');
+		if(rhrEl) {
+			const rhrLoading = createIndicator.createLoadingEl();
+			rhrLoading.innerHTML = createIndicator.createLineBlocks(3);
+			rhrEl.appendChild(rhrLoading);
 		}
 
-		if(document.querySelector('.loading-indicator-bottom')) {
-			const bottomLoading = document.createElement('div');
-			const bottomLoadingInner = document.createElement('div');
-			const bottomLoadingAvatar = document.createElement('div');
-			const bottomLoadingPod = document.createElement('div');
-			const bottomLoadingEl = document.querySelector('.loading-indicator-bottom');
-
-			bottomLoading.className = 'loading-indicator';
-			bottomLoading.setAttribute('data-loading-indicator', 'affinity');
-			bottomLoadingInner.className = 'loading-indicator__inner';
-			bottomLoadingAvatar.className = 'loading-indicator__avatar';
-			bottomLoadingPod.className = 'loading-indicator__text';
-
-			bottomLoadingInner.appendChild(bottomLoadingAvatar);
-			bottomLoadingInner.appendChild(bottomLoadingPod);
-			bottomLoading.innerHTML += bottomLoadingInner.outerHTML;
-			bottomLoading.innerHTML += bottomLoadingInner.outerHTML;
-			bottomLoading.innerHTML += bottomLoadingInner.outerHTML;
-			bottomLoadingEl.parentNode.insertBefore(bottomLoading, bottomLoadingEl.nextSibling);
+		if(bottomEl) {
+			const bottomLoading = createIndicator.createLoadingEl();
+			bottomLoading.innerHTML = createIndicator.createLineBlocks(1);
+			bottomEl.appendChild(bottomLoading);
 		}
+	},
 
+	/**
+	* remove loading elements
+	**/
+	destroy: () => {
+		const indicators = util.$$('[data-loading-indicator="affinity"]');
+		indicators.forEach((indicator) => {
+			indicator.parentNode.removeChild(indicator);
+		});
 	}
 }
 

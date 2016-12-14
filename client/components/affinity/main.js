@@ -6,11 +6,11 @@ const nTeaser1And3 = require('../../../views/partials/teaser-collections/1-3.htm
 const affinityClient = require('next-affinity-client');
 const oDate = require('o-date');
 const nImage = require('n-image');
-
 const loadingIndicator = require('./loading-indicator');
 
 const errorHandler = err => {
 	window.setTimeout(() => {
+		loadingIndicator.destroy();
 		throw err;
 	});
 };
@@ -24,16 +24,12 @@ const getTitle = (headingModifiers) => {
 
 const buildRhs = (articles) => {
 	const affinityRhsElem = document.querySelector('#affinity-rhs');
-	if (affinityRhsElem) {
-		if (articles.items.length > 0) {
-			const titleData = getTitle('small');
-			const teaserHeading = nTeaserCollectionHeading(titleData);
-			const teaserList = nTeaserList(articles);
-			affinityRhsElem.innerHTML = teaserHeading + teaserList;
-			oDate.init(affinityRhsElem);
-		} else {
-			affinityRhsElem.innerHTML = '';
-		}
+	if (affinityRhsElem && articles && articles.items && articles.items.length > 0) {
+		const titleData = getTitle('small');
+		const teaserHeading = nTeaserCollectionHeading(titleData);
+		const teaserList = nTeaserList(articles);
+		affinityRhsElem.innerHTML = teaserHeading + teaserList;
+		oDate.init(affinityRhsElem);
 	}
 }
 
@@ -41,15 +37,11 @@ const buildBottom = (articles) => {
 	const titleData = getTitle('half-width');
 	const teaserHeading = nTeaserCollectionHeading(titleData);
 	const affinityBottomElem = document.querySelector('#affinity-bottom');
-	if (affinityBottomElem) {
-		if (articles.items.length > 0) {
-			const teaserDisplay = nTeaser1And3(articles);
-			affinityBottomElem.innerHTML = teaserHeading + teaserDisplay;
-			oDate.init(affinityBottomElem);
-			nImage.lazyLoad({root: affinityBottomElem});
-		} else {
-			affinityBottomElem.innerHTML = '';
-		}
+	if (affinityBottomElem && articles && articles.items && articles.items.length > 0) {
+		const teaserDisplay = nTeaser1And3(articles);
+		affinityBottomElem.innerHTML = teaserHeading + teaserDisplay;
+		oDate.init(affinityBottomElem);
+		nImage.lazyLoad({root: affinityBottomElem});
 	}
 }
 
@@ -77,13 +69,14 @@ export default (flags) => {
 				options = {id: articleId, covisitation: true, count: 5};
 				break;
 			default:
-				break;
+				loadingIndicator.destroy();
 		}
 
 
 		if (affinityEndpoint) {
 			affinityClient[affinityEndpoint](options)
 				.then(data => {
+					loadingIndicator.destroy();
 					buildRhs({items: data});
 					buildBottom({items: data});
 				})
