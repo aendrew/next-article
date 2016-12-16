@@ -273,6 +273,10 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 			flex-basis: 100%;
 		}
 	}
+
+	.o-teaser--has-image .o-teaser__heading:after {
+		display: none;
+	}
 }
 
 .video__up-next__list {
