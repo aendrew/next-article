@@ -157,7 +157,9 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	};
 
 	if (res.locals.flags.newSchema) {
-		content.jsonld = nextJsonLd.newsArticle(content);
+		res.locals.jsonLd = res.locals.jsonLd || [];
+		res.locals.jsonLd.push(nextJsonLd.newsArticle(content));
+		content.jsonLd = res.locals.jsonLd;
 	}
 
 	if(res.locals.flags.ftlabsSpokenLayer){

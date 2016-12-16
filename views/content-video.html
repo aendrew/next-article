@@ -1,7 +1,9 @@
 {{#defineBlock 'globalDataAttributes'}}data-content-id="{{id}}"{{/defineBlock}}
 {{#defineBlock 'head'}}
+	{{#unless @root.flags.newSchema}}
+		{{> schemaDotOrg}}
+	{{/unless}}
 	{{> rel-canonical}}
-	{{> schemaDotOrg}}
 	<link rel="amphtml" href="https://amp.ft.com/content/{{id}}" />
 	<meta name="description" content="{{description}}"/>
 {{/defineBlock}}

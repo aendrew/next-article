@@ -16,6 +16,7 @@ const app = module.exports = express({
 	withAnonMiddleware: true,
 	withBackendAuthentication: true,
 	withRequestTracing: true,
+	withJsonLd: true,
 	hasHeadCss: true,
 	hasNUiBundle: true,
 	layoutsDir: path.join(process.cwd(), '/bower_components/n-ui/layout'),
