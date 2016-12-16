@@ -66,8 +66,10 @@
 					<h4 class="video__related-articles-title">Related Articles</h4>
 					<ul class="video__related-articles-list">
 					{{#each readNextArticles}}
-						<li class="related_content__list-item" data-trackable="related-content | {{@index}}">
-							<a href="{{url}}" data-trackable="related-content-link">
+						<li
+							class="related_content__list-item{{#ifEquals type 'Video'}} related_content__list-item--video{{/ifEquals}}"
+							data-trackable="related-content | {{@index}}">
+							<a href="{{relativeUrl}}" data-trackable="related-content-link">
 								{{title}}
 								{{#ifAll @root.flags.premiumContentIndicator isPremium}}
 									<span class="o-labels o-labels--premium-inverted">Premium</span>
