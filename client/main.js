@@ -91,7 +91,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 			ftlabsSpokenLayer(flags);
 		}
 
-		if (flags.get('affinity')) {
+		if (flags.get('affinityMvt')) {
 			affinity(flags);
 		}
 
