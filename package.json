@@ -12,6 +12,7 @@
     "@financial-times/n-logger": "^5.3.0",
     "@financial-times/n-teaser": "^1.1.4",
     "@financial-times/n-teaser-collection": "^1.0.0",
+    "@financial-times/next-json-ld": "^0.1.0",
     "body-parser": "^1.13.3",
     "cheerio": "^0.19.0",
     "cookie-parser": "^1.4.3",
@@ -28,7 +29,6 @@
     "n-health": "^1.3.0",
     "n-podcast-mapping": "Financial-Times/n-podcast-mapping",
     "next-ft-api-client": "^3.16.0",
-    "next-json-ld": "https://github.com/Financial-Times/next-json-ld",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "shellpromise": "^1.3.0"

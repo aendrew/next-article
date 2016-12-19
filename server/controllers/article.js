@@ -1,6 +1,6 @@
 const logger = require('@financial-times/n-logger').default;
 const genericContentTransform = require('ft-n-content-transform').transformAll;
-const nextJsonLd = require('next-json-ld');
+const nextJsonLd = require('@financial-times/next-json-ld');
 const applicationContentTransform = require('../transforms/body');
 const articleBranding = require('ft-n-article-branding');
 const getOnwardJourneyArticles = require('./article-helpers/onward-journey');
