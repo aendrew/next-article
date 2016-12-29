@@ -8,7 +8,10 @@
 							class="o-video"
 							data-o-component="o-video"
 							data-o-video-id="{{video.id}}"
-							></div>
+							>
+								{{! Add a non-js fallback for core users }}
+								<video controls class="video video__core-fallback" poster="{{#resize 1024}}{{mainImage.url}}{{/resize}}" src="{{attachments.0.url}}" preload="none"></video>
+						</div>
 						<div class="video__placeholder">
 							<div class="o-video__info">
 								<div class="video__placeholder-info n-util-clearfix">

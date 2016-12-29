@@ -71,6 +71,11 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 	background: $placeholder-background-color;
 	transition: opacity 0.2s;
 	visibility: visible;
+	display: none;
+
+	.enhanced & {
+		display: block;
+	}
 
 	> .o-video__info {
 		padding: 25px 20px;
@@ -315,6 +320,17 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 	&:before {
 		@include oIconsGetIcon('cross', oColorsGetPaletteColor('red-tint2'), 80);
 		content: '';
+	}
+}
+
+.video__core-fallback {
+	display: block;
+	position: absolute;
+	top: 0;
+	width: 100%;
+
+	.enhanced & {
+		display: none;
 	}
 }
 

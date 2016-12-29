@@ -30,6 +30,10 @@ module.exports = oVideo => {
 
 module.exports.init = () => {
 	document.body.addEventListener('oTracking.event', eventForwarder);
+	const placeholderVideos = document.querySelectorAll('.video__core-fallback');
+	Array.from(placeholderVideos).forEach(video => {
+		video.parentNode.removeChild(video);
+	});
 };
 
 function eventForwarder (event) {
