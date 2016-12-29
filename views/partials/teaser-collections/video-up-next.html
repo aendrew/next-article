@@ -1,13 +1,11 @@
-<div class="video__up-next">
-	{{> n-teaser-collection/templates/partials/heading title="Up Next" }}
-	<ol class="video__up-next__list o-grid-row">
-	{{#each items}}
-		<li class="video__up-next__list-item" data-o-grid-colspan="6 L3">
-		{{> n-teaser/templates/heavy
-			mods=(array 'small' 'stacked' 'inverse')
-			widths=(array 180 270 360)
-			colspan='{ "default": 6, "L": 2 }'}}
-		</li>
-	{{/each}}
-	</ol>
-</div>
+{{> n-teaser-collection/templates/partials/heading title="Up Next" }}
+<ol class="video__up-next__list o-grid-row">
+{{#each items}}
+	<li class="video__up-next__list-item" data-o-grid-colspan="6 L3">
+	{{> n-teaser/templates/heavy
+		mods=(array 'small' 'stacked' 'inverse')
+		widths=(array 180 270 360)
+		colspan='{ "default": 6, "L": 2 }'}}
+	</li>
+{{/each}}
+</ol>
