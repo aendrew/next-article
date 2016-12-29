@@ -3,36 +3,41 @@
 		<div class="o-grid-container">
 			<div class="o-grid-row">
 				<div class="video__container" data-o-grid-colspan="12">
-					{{#with video}}
-					<div
-						class="o-video"
-						data-o-component="o-video"
-						data-o-video-id="{{id}}"
-						></div>
-					{{/with}}
-					<div class="video__placeholder">
-						<div class="o-video__info">
-							<div class="video__placeholder-info n-util-clearfix">
-								{{#if primaryTag}}
-									<span class="n-content-tag n-content-tag--medium standalone-teaser-heading">{{primaryTag.prefLabel}}</span>
-								{{/if}}
-								<span class="video__duration">
-									{{formattedDuration}}
-								</span>
+					{{#if attachments}}
+						<div
+							class="o-video"
+							data-o-component="o-video"
+							data-o-video-id="{{video.id}}"
+							></div>
+						<div class="video__placeholder">
+							<div class="o-video__info">
+								<div class="video__placeholder-info n-util-clearfix">
+									{{#if primaryTag}}
+										<span class="n-content-tag n-content-tag--medium standalone-teaser-heading">{{primaryTag.prefLabel}}</span>
+									{{/if}}
+									<span class="video__duration">
+										{{formattedDuration}}
+									</span>
+								</div>
+								<h1 class="video__placeholder__headline article-headline">
+									<span class="article-classifier__gap">{{title}}</span>
+								</h1>
 							</div>
-							<h1 class="video__placeholder__headline article-headline">
-								<span class="article-classifier__gap">{{title}}</span>
-							</h1>
+							<button class="o-video__play-button">
+								<span class="o-video__play-button-text">Play video</span>
+								<i class="o-video__play-button-icon"></i>
+							</button>
+							<div class="video__placeholder__up-next">
+								<h4>Up Next</h4>
+								<ol class="js-placeholder-up-next"></ol>
+							</div>
 						</div>
-						<button class="o-video__play-button">
-							<span class="o-video__play-button-text">Play video</span>
-							<i class="o-video__play-button-icon"></i>
-						</button>
-						<div class="video__placeholder__up-next">
-							<h4>Up Next</h4>
-							<ol class="js-placeholder-up-next"></ol>
+					{{else}}
+						<div class="video__error">
+							<h1>This video cannot be displayed</h1>
+							<p>We just updated our video hub and some videos might take a while till they are accessible. Please come back later or watch the clips below instead.</p>
 						</div>
-					</div>
+					{{/if}}
 				</div>
 			</div>
 		</div>
