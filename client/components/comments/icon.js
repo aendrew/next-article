@@ -6,7 +6,8 @@ const createIcon = {
 		const articleShareArray = Array.prototype.slice.call(articleShareList);
 
 		CommentCount.setConfig({
-			'template': '{count}'
+			'template': '{count}',
+			'ariaLabelTemplate': 'There are {count} comments on this article. Write a comment.'
 		});
 		articleShareArray.forEach(function (articleShare) {
 			let commentLink = document.createElement('a');
