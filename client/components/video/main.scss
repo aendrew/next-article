@@ -81,6 +81,10 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 		padding: 25px 20px;
 	}
 
+	.video__duration {
+		color: white;
+	}
+
 	&.video__placeholder__played {
 		bottom: 40px;
 		pointer-events: none;
