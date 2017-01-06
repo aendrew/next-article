@@ -1,25 +1,14 @@
-const express = require('@financial-times/n-express');
+const nUi = require('@financial-times/n-ui');
 const logger = require('@financial-times/n-logger').default;
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const checks = require('./checks/main.js');
-const path = require('path');
 // Starts polling checks
 checks.init();
 
-const app = module.exports = express({
+const app = module.exports = nUi({
 	systemCode: 'next-article',
 	name: 'article',
-	withFlags: true,
-	withHandlebars: true,
-	withNavigation: true,
-	withAnonMiddleware: true,
-	withBackendAuthentication: true,
-	withRequestTracing: true,
-	withJsonLd: true,
-	hasHeadCss: true,
-	hasNUiBundle: true,
-	layoutsDir: path.join(process.cwd(), '/bower_components/n-ui/layout'),
 	healthChecks: [
 		checks.esv3,
 		checks.livefyre,
