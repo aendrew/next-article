@@ -75,8 +75,8 @@ module.exports = {
 	livefyre: livefyreStatus(),
 	errorRate: nHealth.runCheck({
 			type: 'graphiteSpike',
-			numerator: `heroku.article.*${process.env.REGION || ''}.express.default_route_GET.res.status.5**.count`,
-			divisor: `heroku.article.*${process.env.REGION || ''}.express.default_route_GET.res.status.*.count`,
+			numerator: `next.heroku.article.*${process.env.REGION || ''}.express.default_route_GET.res.status.5**.count`,
+			divisor: `next.heroku.article.*${process.env.REGION || ''}.express.default_route_GET.res.status.*.count`,
 			name: '500 rate is acceptable',
 			severity: 2,
 			threshold: 8,
