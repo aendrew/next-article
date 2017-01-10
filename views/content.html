@@ -18,15 +18,18 @@
 		{{#defineBlock 'above-header'}}{{> ads/top }}{{/defineBlock}}
 	{{/if}}
 
-	{{> header/content-header}}
+	<!-- {{> header/content-header}} -->
+
+	{{> header/article-topper}}
+
 	<div class="article__wrapper">
 		{{#ifSome bodyHTML media}}
 		<div class="o-grid-container">
 			<div class="article__main o-grid-row">
 				<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
-					{{#if mainImageHTML}}
+					<!-- {{#if mainImageHTML}}
 						{{{mainImageHTML}}}
-					{{/if}}
+					{{/if}} -->
 					{{> toolbar location='top'}}
 					<div class="article__time-byline">
 						{{#if publishedDate}}
