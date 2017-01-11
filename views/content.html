@@ -10,7 +10,14 @@
 	<link rel="amphtml" href="https://amp.ft.com/content/{{id}}" />
 	<meta name="description" content="{{description}}"/>
 {{/defineBlock}}
-<article id="site-content" role="main" class="article{{#if designGenre}} article--brand {{#if designGenre.headshot}}article--brand--headshot{{/if}}{{/if}}" data-content-id="{{id}}" data-content-sources="{{#if articleV1}}v1{{/if}} {{#if articleV2}}v2{{/if}}">
+<article
+		id="site-content"
+		role="main"
+		class="article{{#if designGenre}} article--brand {{#if designGenre.headshot}}article--brand--headshot{{/if}}{{/if}}"
+		data-content-id="{{id}}"
+		data-content-sources="{{#if articleV1}}v1{{/if}} {{#if articleV2}}v2{{/if}}"
+		{{#if canBeSyndicated}}data-syndicatable="yes"{{/if}}
+>
 
 	{{#if @root.flags.stickyHeaderAd}}
 		{{#defineBlock 'sticky-advert'}}{{> ads/top }}{{/defineBlock}}
