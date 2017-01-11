@@ -1,0 +1,42 @@
+.article__topper--slot-2 {
+	display: flex;
+	justify-content: center;
+}
+
+.article__topper--text-box {
+	flex: 1 0 auto;
+}
+.article__topper--text {
+	display:  flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	background-color: lightsalmon;
+}
+
+.article__topper--headline {
+	@include oTypographySerifDisplay('xl', $load-progressively: true);
+	width: 50%;
+	// align-self: flex-end; //with bleed
+}
+
+.article__topper--stand-first {
+	font-size: 15px;
+	line-height: 16px;
+	width: 50%;
+	// align-self: flex-end; //with bleed
+}
+
+.article__topper--visual {
+	.n-content-image {
+		margin: 0;
+	}
+	
+	.n-content-image__caption {
+		position: absolute;
+    text-align: right;
+    width: 75%;
+    left: 9.5em;
+	}
+}

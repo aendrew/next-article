@@ -1,77 +1,80 @@
-<div class="article__header">
-	<div class="o-grid-container--bleed">
+<div class="article__topper o-grid-container"> <!-- currently full-grid – for bleed: o-grid-container--bleed -->
+	<div class="article__topper--slot-1 o-grid-row--compact"></div>
+	<div class="article__topper--slot-2 o-grid-row--compact">
+		<div class="article__topper--text-box" data-o-grid-colspan="6">
+			<div class="article__topper--text">
+				<h1 class="article__topper--headline" data-trackable="header">{{title}}</h1>
+				{{#if standfirst}}
+				<p class="article__topper--stand-first">{{{standfirst}}}</p>
+				{{/if}}
+			</div>
+		</div>
+		<div class="article__topper--visual" data-o-grid-colspan="6">
+			{{#if mainImageHTML}}
+			{{{mainImageHTML}}}
+			{{/if}}
+		</div>
+	</div>
+	<div class="article__topper--slot-3 o-grid-row">
+		<div class="article__topper--toolbar" data-o-grid-colspan="7 XLoffset1">
+			{{> toolbar location='top'}}
+			<div class="article__time-byline">
+				{{#if publishedDate}}
+				<time class="article__timestamp o-date" data-o-component="o-date" datetime="{{#dateformat}}{{publishedDate}}{{/dateformat}}" data-o-date-js>
+					{{#dateformat "mmmm d, yyyy"}}{{publishedDate}}{{/dateformat}}
+				</time>
+				{{/if}}
+				{{#if byline}}
+				<p class="article__byline">{{#ifEquals contentType 'article'}}by: {{/ifEquals}}{{{byline}}}</p>
+				{{/if}}
+			</div>
+		</div>
+		<!-- {{#if isSpecialReport}}
+			<p class="article__primary-theme">
+				Special Report:
+				<a href="/special-reports/{{primaryTag.idV1}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="section-link" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
+			</p>
+		{{else}}
+			{{#if primaryTag}}
+				{{> header/primary-tag}}
+			{{/if}}
+		{{/if}} -->
 
-		<div class="article__header-inner o-grid-row--compact">
-			<div data-o-grid-colspan="6">
-				<header class="article__header--topper" data-trackable="header" style="
-												    display:  flex;
-												    flex-direction: column;
-												    align-items: center;
-												    justify-content: center;
-												    height: 100%;
-												    background-color: lightsalmon;
-												">
-					<div class="article__header-primary" style="width: 50%; align-self: flex-end;">
-						<!-- {{#if isSpecialReport}}
-							<p class="article__primary-theme">
-								Special Report:
-								<a href="/special-reports/{{primaryTag.idV1}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="section-link" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
-							</p>
-						{{else}}
-							{{#if primaryTag}}
-								{{> header/primary-tag}}
-							{{/if}}
-						{{/if}} -->
-						<h1 class="article-headline">
-							{{title}}
-							<!-- <span class="article-classifier__gap">{{title}}</span>
-							{{#ifAll @root.flags.premiumContentIndicator isPremium}}
-								<span class="article-classifier">Premium</span>
-							{{/ifAll}} -->
-						</h1>
-					</div>
-					<div class="article__header-secondary" style="width: 50%; align-self: flex-end;">
+			<!-- <span class="article-classifier__gap">{{title}}</span>
+			{{#ifAll @root.flags.premiumContentIndicator isPremium}}
+				<span class="article-classifier">Premium</span>
+			{{/ifAll}} -->
+
+
+					<!-- {{#unlessEquals contentType 'podcast'}}
 						{{#if standfirst}}
 							<p class="article__stand-first">{{{standfirst}}}</p>
 						{{/if}}
-
-						<!-- {{#unlessEquals contentType 'podcast'}}
-							{{#if standfirst}}
-								<p class="article__stand-first">{{{standfirst}}}</p>
-							{{/if}}
-						{{/unlessEquals}}
-						{{#if designGenre}}
-							<div class="article__brand--wrapper">
-								<a class="article__brand--title	n-content-tag" href={{designGenre.relativeUrl}} data-trackable="brand" aria-label="part of the {{designGenre.prefLabel}} column">{{designGenre.prefLabel}}</a>
-							</div>
-						{{/if}} -->
-					</div>
-				<!-- </header>
-				{{#if designGenre.headshot}}
-				<div class="article__header-headshot">
-					<img
-						class="article__header-headshot--image"
-						src="{{designGenre.headshot}}?source=next&amp;fit=scale-down&amp;width=150&amp;compression=best&amp;format=png&amp;quality=highest&amp;dpr=2"
-						alt="Image of {{designGenre.prefLabel}}">
-				</div>
-				{{/if}}
-			</div> -->
-			<!-- {{#if tagToFollow}}
-				{{>follow-promo center=true tag=tagToFollow buttonSize="big" isHeader=true}}
-			{{else}}
-				{{#if readNextArticle}}
-					{{> header/read-next-header-teaser article=readNextArticle}}
-				{{else}}
-					{{#if tags}}
-						{{> header/topics-mentioned}}
+					{{/unlessEquals}}
+					{{#if designGenre}}
+						<div class="article__brand--wrapper">
+							<a class="article__brand--title	n-content-tag" href={{designGenre.relativeUrl}} data-trackable="brand" aria-label="part of the {{designGenre.prefLabel}} column">{{designGenre.prefLabel}}</a>
+						</div>
 					{{/if}}
-				{{/if}}
-			{{/if}} -->
-		</div>
-		<div data-o-grid-colspan="6">
-			{{#if mainImageHTML}}
-				{{{mainImageHTML}}}
+			{{#if designGenre.headshot}}
+			<div class="article__header-headshot">
+				<img
+					class="article__header-headshot--image"
+					src="{{designGenre.headshot}}?source=next&amp;fit=scale-down&amp;width=150&amp;compression=best&amp;format=png&amp;quality=highest&amp;dpr=2"
+					alt="Image of {{designGenre.prefLabel}}">
+			</div>
 			{{/if}}
-		</div>
+		</div> -->
+		<!-- {{#if tagToFollow}}
+			{{>follow-promo center=true tag=tagToFollow buttonSize="big" isHeader=true}}
+		{{else}}
+			{{#if readNextArticle}}
+				{{> header/read-next-header-teaser article=readNextArticle}}
+			{{else}}
+				{{#if tags}}
+					{{> header/topics-mentioned}}
+				{{/if}}
+			{{/if}}
+		{{/if}} -->
 	</div>
 </div>

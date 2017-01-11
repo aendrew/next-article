@@ -30,8 +30,8 @@
 					<!-- {{#if mainImageHTML}}
 						{{{mainImageHTML}}}
 					{{/if}} -->
-					{{> toolbar location='top'}}
-					<div class="article__time-byline">
+					<!-- {{> toolbar location='top'}} -->
+					<!-- <div class="article__time-byline">
 						{{#if publishedDate}}
 							<time class="article__timestamp o-date" data-o-component="o-date" datetime="{{#dateformat}}{{publishedDate}}{{/dateformat}}" data-o-date-js>
 							{{#dateformat "mmmm d, yyyy"}}{{publishedDate}}{{/dateformat}}
@@ -40,7 +40,7 @@
 						{{#if byline}}
 							<p class="article__byline">{{#ifEquals contentType 'article'}}by: {{/ifEquals}}{{{byline}}}</p>
 						{{/if}}
-					</div>
+					</div> -->
 
 					{{#ifAll isAudioArticle @root.flags.ftlabsSpokenLayer}}
 						{{> ftlabsSpokenLayerPlayer}}
