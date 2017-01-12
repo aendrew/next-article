@@ -21,6 +21,18 @@ module.exports = function (req, res, next, payload) {
 		id: payload.webUrl.replace('http://video.ft.com/', '')
 	};
 
+	const mp4s = payload.attachments.filter(attachment => attachment.mediaType === 'video/mp4' && 'codec' in attachment);
+	if (mp4s.length) {
+		payload.brightcoveData = {
+			videoStillURL: payload.mainImage.url,
+			renditions: mp4s.map(rendition => ({
+				url: rendition.url,
+				videoCodec: rendition.codec,
+				frameWidth: rendition.width
+			}))
+		};
+	}
+
 	payload.shareUrl = req.get('ft-real-url') || payload.url;
 
 	if (res.locals.flags.openGraph) {
