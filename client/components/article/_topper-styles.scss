@@ -1,18 +1,17 @@
 .article__topper--slot-2 {
-	display: flex;
-	justify-content: center;
+	display: inline-flex;
 }
 
 .article__topper--text-box {
-	flex: 1 0 auto;
+	background-color: lightsalmon;
 }
+
 .article__topper--text {
 	display:  flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	height: 100%;
-	background-color: lightsalmon;
 }
 
 .article__topper--headline {
@@ -32,7 +31,7 @@
 	.n-content-image {
 		margin: 0;
 	}
-	
+
 	.n-content-image__caption {
 		position: absolute;
     text-align: right;
