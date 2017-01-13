@@ -15,6 +15,26 @@
 	height: 100%
 }
 
+.article__topper--extras { // all of teh hacks!!
+	width: 50%;
+	.article__primary-theme {
+		> span > form > button {
+			@include oButtonsTheme(inverse)
+			border-radius: 0;
+			background-color: transparent;
+			&:before {
+				background-image: url('https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:plus?source=o-icons&tint=ffffff')
+			}
+			&:hover {
+				background-color: rgba(0,0,0,0.2) !important;
+			}
+		}
+		.n-content-tag {
+			color: white;
+			-webkit-font-smoothing: antialiased;
+		}
+	}
+}
 .article__topper--headline {
 	align-self: center; // flex-end with bleed?
 	// font-family: 'Financier Display', serif ;
@@ -24,6 +44,14 @@
 	color: white;
 	width: 50%;
 	-webkit-font-smoothing: antialiased;
+
+	&:after {
+		content: '';
+		display: block;
+		width: 33%;
+		border-bottom: 8px solid white;
+		margin-top: 20px;
+	}
 }
 
 .article__topper--stand-first {

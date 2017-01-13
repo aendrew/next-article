@@ -3,16 +3,18 @@
 	<div class="article__topper--slot-2">
 		<div class="article__topper--text-box">
 			<div class="article__topper--text-wrapper">
-				{{#if isSpecialReport}}
+				<div class="article__topper--extras">
+					{{#if isSpecialReport}}
 					<p class="article__primary-theme">
 						Special Report:
 						<a href="/special-reports/{{primaryTag.idV1}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="section-link" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
 					</p>
-				{{else}}
+					{{else}}
 					{{#if primaryTag}}
-						{{> header/primary-tag}}
+					{{> header/primary-tag}}
 					{{/if}}
-				{{/if}}
+					{{/if}}
+				</div>
 				<div class="article__topper--headline" data-trackable="header">{{title}}</div>
 				{{#if standfirst}}
 				<p class="article__topper--stand-first">{{{standfirst}}}</p>
@@ -26,9 +28,7 @@
 		</div>
 	</div>
 	<div class="article__topper--slot-3 o-grid-row">
-		{{#ifAll @root.flags.premiumContentIndicator isPremium}}
-			<span class="article-classifier">Premium</span>
-		{{/ifAll}}
+
 		<div class="article__topper--utils " data-o-grid-colspan="7 XLoffset1">
 			{{> toolbar location='top'}}
 			<div class="article__time-byline">
@@ -40,6 +40,9 @@
 				{{#if byline}}
 				<p class="article__byline">{{#ifEquals contentType 'article'}}by: {{/ifEquals}}{{{byline}}}</p>
 				{{/if}}
+				{{#ifAll @root.flags.premiumContentIndicator isPremium}}
+					<span class="article-classifier">Premium</span>
+				{{/ifAll}}
 			</div>
 		</div>
 		<!-- {{#if isSpecialReport}}
