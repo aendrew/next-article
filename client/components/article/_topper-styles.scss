@@ -1,35 +1,58 @@
+.article__topper {
+	// display: flex;
+	// justify-content: center;
+	// align-items: center;
+}
+
 .article__topper--slot-2 {
 	display: inline-flex;
 }
 
 .article__topper--text-box {
+	width:50%;
 	background-color: lightsalmon;
 }
 
-.article__topper--text {
+.article__topper--text-wrapper {
 	display:  flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height: 100%;
+	height: 100%
 }
 
 .article__topper--headline {
-	@include oTypographySerifDisplay('xl', $load-progressively: true);
+	font-family: 'Financier Display', serif ;
+	font-size: 40px;
+	font-weight: 600;
 	width: 50%;
-	// align-self: flex-end; //with bleed
+	color: black;
+	align-self: center; // flex-end with bleed?
 }
 
 .article__topper--stand-first {
+	align-self: center;
 	font-size: 15px;
 	line-height: 16px;
 	width: 50%;
-	// align-self: flex-end; //with bleed
+	align-self: center; // flex-end with bleed?
 }
 
-.article__topper--visual {
+.article__topper--visual { // much hacks
+	width: 50%;
+
 	.n-content-image {
 		margin: 0;
+
+		.n-image-wrapper {
+			padding-bottom: 100%;
+
+			.n-image {
+				object-fit: cover;
+				object-position: 20%;
+				height: 100%;
+			}
+		}
 	}
 
 	.n-content-image__caption {

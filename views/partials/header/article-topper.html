@@ -1,22 +1,22 @@
 <div class="article__topper o-grid-container"> <!-- currently full-grid – for bleed: o-grid-container--bleed -->
 	<div class="article__topper--slot-1 o-grid-row--compact"></div>
-	<div class="article__topper--slot-2 o-grid-row--compact">
-		<div class="article__topper--text-box" data-o-grid-colspan="6">
-			<div class="article__topper--text">
-				<h1 class="article__topper--headline" data-trackable="header">{{title}}</h1>
+	<div class="article__topper--slot-2 o-grid-row--compact" data-o-grid-colspan="12">
+		<div class="article__topper--text-box">
+			<div class="article__topper--text-wrapper">
+				<div class="article__topper--headline" data-trackable="header">{{title}}</div>
 				{{#if standfirst}}
 				<p class="article__topper--stand-first">{{{standfirst}}}</p>
 				{{/if}}
 			</div>
 		</div>
-		<div class="article__topper--visual" data-o-grid-colspan="6">
+		<div class="article__topper--visual">
 			{{#if mainImageHTML}}
 			{{{mainImageHTML}}}
 			{{/if}}
 		</div>
 	</div>
 	<div class="article__topper--slot-3 o-grid-row">
-		<div class="article__topper--utils" data-o-grid-colspan="7 XLoffset1">
+		<div class="article__topper--utils " data-o-grid-colspan="7 XLoffset1">
 			{{> toolbar location='top'}}
 			<div class="article__time-byline">
 				{{#if publishedDate}}
