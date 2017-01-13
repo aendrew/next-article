@@ -23,6 +23,7 @@
 	font-size: 52px;
 	color: white;
 	width: 50%;
+	-webkit-font-smoothing: antialiased;
 }
 
 .article__topper--stand-first {
@@ -31,6 +32,7 @@
 	line-height: 26px;
 	color: white;
 	width: 50%;
+	-webkit-font-smoothing: antialiased;
 }
 
 .article__topper--visual { // much hacks
@@ -58,6 +60,6 @@
 		position: absolute;
     text-align: right;
     width: 25%;
-    right: 0.5em;
+    right: 1.5em;
 	}
 }
