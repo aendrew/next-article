@@ -1,0 +1,100 @@
+.article__topper--slot-2 {
+	display: inline-flex;
+}
+
+.article__topper--text-box {
+	width: 50%;
+	background-color: oColorsGetPaletteColor('claret');
+}
+
+.article__topper--text-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+
+.article__topper--extras {
+	// all of teh hacks!!
+	width: 50%;
+
+	.article__primary-theme {
+		> span > form > button {
+			@include oButtonsTheme(inverse);
+			border-radius: 0;
+			background-color: transparent;
+
+			&:before {
+				background-image: url('https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:plus?source=o-icons&tint=ffffff');
+			}
+
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.2) !important;
+			}
+		}
+
+		.n-content-tag {
+			color: white;
+			-webkit-font-smoothing: antialiased;
+		}
+	}
+}
+
+.article__topper--headline {
+	align-self: center; // flex-end with bleed?
+	// font-family: 'Financier Display', serif ;
+	// font-weight: 600;
+	@include oTypographyBigNumber;
+	font-size: 52px;
+	color: white;
+	width: 50%;
+	-webkit-font-smoothing: antialiased;
+
+	&:after {
+		content: '';
+		display: block;
+		width: 33%;
+		border-bottom: 8px solid white;
+		margin-top: 20px;
+	}
+}
+
+.article__topper--stand-first {
+	align-self: center; // flex-end with bleed?
+	font-size: 22px;
+	line-height: 26px;
+	color: white;
+	width: 50%;
+	-webkit-font-smoothing: antialiased;
+}
+
+.article__topper--visual {
+	// much hacks
+	width: 50%;
+
+	> figure {
+		> div {
+			padding-bottom: 100% !important;
+		}
+	}
+
+	.n-content-image {
+		margin: 0;
+
+		.n-image-wrapper--placeholder {
+			.n-image {
+				object-fit: cover;
+				// object-position: 25%;
+				height: 100%;
+			}
+		}
+	}
+
+	.n-content-image__caption {
+		position: absolute;
+		text-align: right;
+		width: 25%;
+		right: 1.5em;
+	}
+}

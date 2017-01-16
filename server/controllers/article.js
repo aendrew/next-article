@@ -174,7 +174,11 @@ module.exports = function articleV3Controller (req, res, next, content) {
 				res.render('fragment', content);
 			} else {
 				content.layout = 'wrapper';
-				res.render('content', content);
+				if(res.locals.flags.articleTopper) {
+					res.render('rich-content', content)
+				} else {
+					res.render('content', content);
+				}
 			}
 		})
 		.catch(error => {
