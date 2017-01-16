@@ -1,5 +1,6 @@
 const fetchres = require('fetchres');
 const oDate = require('n-ui/date');
+import {broadcast} from 'n-ui/utils';
 const lazyLoadImages = require('n-image').lazyLoad;
 import * as serviceWorker from 'n-service-worker';
 
@@ -83,6 +84,7 @@ module.exports.init = () => {
 	)
 		.then(() => {
 			lazyLoadImages();
+			broadcast('asyncContentLoaded');
 			serviceWorker
 				.message({
 					type: 'cacheContent',

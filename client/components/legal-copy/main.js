@@ -5,10 +5,7 @@ const tsAndCsLink = 'http://help.ft.com/legal/ft-com-terms-and-conditions/';
 const copyrightLink = 'http://help.ft.com/legal/copyright-policy/';
 const supportEmail = 'ftsales.support@ft.com';
 const msgText = `High quality global journalism requires investment. Please share this article with others using the link below, do not cut & paste the article. See our T&Cs and Copyright Policy for more detail. Email ${supportEmail} to buy additional rights.`;
-const msgHtml = `
-	High quality global journalism requires investment. Please share this article with others using the link below, do not cut & paste the article.
-	See our <a href="${tsAndCsLink}">T&Cs</a> and <a href="${copyrightLink}">Copyright Policy</a> for more detail. Email <a href="mailto:${supportEmail}">${supportEmail}</a> to buy additional rights.`
-;
+const msgHtml = `High quality global journalism requires investment. Please share this article with others using the link below, do not cut & paste the article.  See our <a href="${tsAndCsLink}">T&Cs</a> and <a href="${copyrightLink}">Copyright Policy</a> for more detail. Email <a href="mailto:${supportEmail}">${supportEmail}</a> to buy additional rights.`;
 
 const supportsClipboard = e => e.clipboardData || window.clipboardData;
 const hasEventClipboardSupport = e => !!(e.clipboardData && e.clipboardData.setData);
