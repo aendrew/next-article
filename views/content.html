@@ -1,6 +1,7 @@
 {{#defineBlock 'globalDataAttributes'}}data-content-id="{{id}}"{{/defineBlock}}
 {{#defineBlock 'head'}}
 	{{> rel-canonical}}
+	{{> rel-alternate}}
 	{{#unless @root.flags.newSchema}}
 		{{> schemaDotOrg}}
 	{{/unless}}
