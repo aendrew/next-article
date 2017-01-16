@@ -45,7 +45,7 @@ describe('Related Article to Teaser Transform', () => {
 		});
 
 		transformed$.html().should.equal(
-			'<aside class="n-content-related-box n-content-related-box--no-border" data-trackable="related-box" role="complementary" aria-hidden="true"><div class="standalone-teaser-heading">Tatomer Riesling 2012</div>[teaser-placeholder]</aside>'
+			'<aside class="n-content-related-box n-content-related-box--no-border" data-trackable="related-box" role="complementary"><div class="standalone-teaser-heading">Tatomer Riesling 2012</div>[teaser-placeholder]</aside>'
 		);
 	});
 

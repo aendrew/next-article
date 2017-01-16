@@ -39,7 +39,6 @@ module.exports = function ($) {
 		});
 
 		$el.addClass('n-content-related-box--no-border');
-		$el.attr('aria-hidden', 'true');
 		let boxTitle = $boxTitle.length > 0 ? $boxTitle.text() : 'Related article';
 
 		$el.html(`<div class="standalone-teaser-heading">${boxTitle}</div>${teaserHTML}`);
