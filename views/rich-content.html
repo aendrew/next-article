@@ -18,28 +18,13 @@
 		{{#defineBlock 'above-header'}}{{> ads/top }}{{/defineBlock}}
 	{{/if}}
 
-	{{> header/content-header}}
+	{{> header/article-topper}}
 
 	<div class="article__wrapper">
 		{{#ifSome bodyHTML media}}
 		<div class="o-grid-container">
 			<div class="article__main o-grid-row">
 				<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
-					{{#if mainImageHTML}}
-						{{{mainImageHTML}}}
-					{{/if}}
-					{{> toolbar location='top'}}
-					<div class="article__time-byline">
-						{{#if publishedDate}}
-							<time class="article__timestamp o-date" data-o-component="o-date" datetime="{{#dateformat}}{{publishedDate}}{{/dateformat}}" data-o-date-js>
-							{{#dateformat "mmmm d, yyyy"}}{{publishedDate}}{{/dateformat}}
-							</time>
-						{{/if}}
-						{{#if byline}}
-							<p class="article__byline">{{#ifEquals contentType 'article'}}by: {{/ifEquals}}{{{byline}}}</p>
-						{{/if}}
-					</div>
-
 					{{#ifAll isAudioArticle @root.flags.ftlabsSpokenLayer}}
 						{{> ftlabsSpokenLayerPlayer}}
 					{{/ifAll}}
