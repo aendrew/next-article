@@ -30,6 +30,7 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 	}
 
 	.standalone-teaser-heading {
+		font-weight: bold;
 		margin-top: 20px;
 		&:after {
 			border-bottom-color: white;

@@ -42,7 +42,7 @@ module.exports = function ($) {
 		$el.attr('aria-hidden', 'true');
 		let boxTitle = $boxTitle.length > 0 ? $boxTitle.text() : 'Related article';
 
-		$el.html(`<h2 class="standalone-teaser-heading">${boxTitle}</h2>${teaserHTML}`);
+		$el.html(`<div class="standalone-teaser-heading">${boxTitle}</div>${teaserHTML}`);
 		return $el;
 
 	});
