@@ -13,7 +13,7 @@ module.exports = function ($, flags, options) {
 			let isOrphan = !par.parent;
 			let hasNextP = (par.next && par.next.name === 'p');
 			if (indexMatches && isOrphan && hasNextP) {
-				$(par).after('<div class="p402_hide" data-o-email-only-signup-position-mvt></div>');
+				$(par).after('<div class="p402_hide" data-o-email-only-signup-position-mvt aria-hidden="true"></div>');
 				return false;
 			}
 		});

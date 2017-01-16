@@ -6,14 +6,13 @@ describe('Light Signup component inside body', function () {
 
 	describe('Position component', function () {
 		const flags = {lightSignupInArticle: true};
-		const lightSignupHtml = '<div class="p402_hide" data-o-email-only-signup-position-mvt=""></div>';
+		const lightSignupHtml = '<div class="p402_hide" data-o-email-only-signup-position-mvt="" aria-hidden="true"></div>';
 
 		it('should insert the component after the first paragraph', () => {
 			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>');
 			lightSignupTransform($, flags);
 			expect($.html()).to.equal(`<p>1</p>${lightSignupHtml}<p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>`);
 		});
-
 
 		it('should not insert the component if there is only one paragraph', () => {
 			const $ = cheerio.load('<p>1</p><img>');
