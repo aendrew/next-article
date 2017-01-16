@@ -41,7 +41,7 @@ module.exports = function ($) {
 		$el.addClass('n-content-related-box--no-border');
 		let boxTitle = $boxTitle.length > 0 ? $boxTitle.text() : 'Related article';
 
-		$el.html(`<h2 class="standalone-teaser-heading">${boxTitle}</h2>${teaserHTML}`);
+		$el.html(`<div class="standalone-teaser-heading">${boxTitle}</div>${teaserHTML}`);
 		return $el;
 
 	});

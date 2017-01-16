@@ -160,6 +160,7 @@ $o-video-is-silent: false;
 	@include font-size(18, 20);
 	font-family: $o-typography-sans;
 	margin: 0 0 20px;
+	font-weight: bold;
 	&:after {
 		content: '';
 		display: block;
