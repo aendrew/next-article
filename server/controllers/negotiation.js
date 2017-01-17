@@ -43,7 +43,7 @@ function getRichArticle (contentId) {
 	return fetch(`https://s3-eu-west-1.amazonaws.com/rj-xcapi-mock/${contentId}`)
 		.then(fetchres.json)
 		.then(richArticleModel)
-		.catch((err) => console.error);
+		.catch(() => null);
 }
 
 module.exports = function negotiationController (req, res, next) {

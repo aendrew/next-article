@@ -1,6 +1,6 @@
 const logger = require('@financial-times/n-logger').default;
 
-//copied from 
+//copied from es-interface but tweaked to have smaller timeout 
 const fetchCapiJson = (endpoint) => {
 	return fetch(endpoint, {
 		timeout: 1000,
@@ -33,17 +33,17 @@ module.exports = function (image) {
 	if (image && image.id) {
 		return fetchCapiJson(image.id)
 		.then((imageSet) => {
-			// image sets only contain one member ATM
-			return fetchCapiJson(imageSet.members[0].id)
+			//For topper at least we want all the images in the imageset
+			return Promise.all(imageSet.members.map(image => fetchCapiJson(image.id)));
 		})
-		.then((image) => ({
+		.then((images) => images.map(image => ({
 			title: image.title,
 			description: image.description,
 			url: image.binaryUrl,
 			width: image.pixelWidth,
 			height: image.pixelHeight,
 			ratio: image.pixelWidth && image.pixelHeight ? image.pixelWidth / image.pixelHeight : null
-		}))
+		})))
 		.catch((err) => {
 			logger.error({
 				event: 'MAIN_IMAGE_FETCH_FAIL',
