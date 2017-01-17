@@ -1,4 +1,4 @@
-.article__topper--slot-2 {
+.article-topper__slot-2 {
 	// display: inline-flex;
 	// flex-direction: column;
 	// @include oGridRespondTo(M) {
@@ -7,7 +7,7 @@
 	// }
 }
 
-.article__topper--text-box {
+.article-topper__text-box {
 	background-color: oColorsGetPaletteColor('claret');
 	height: 75vw;
 	@include oGridRespondTo(M) {
@@ -15,7 +15,7 @@
 	}
 }
 
-.article__topper--text-wrapper {
+.article-topper__text-wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -23,11 +23,10 @@
 	height: 100%;
 }
 
-.article__topper--extras {
+.article-topper__extras {
 	// all of teh hacks!!
 	width: 75%;
 	margin-top: 5%;
-
 	@include oGridRespondTo(L) {
 		width: 50%;
 	}
@@ -54,7 +53,7 @@
 	}
 }
 
-.article__topper--headline {
+.article-topper__headline {
 	align-self: center; // flex-end with bleed?
 	// font-family: 'Financier Display', serif ;
 	// font-weight: 600;
@@ -64,7 +63,6 @@
 	color: white;
 	width: 75%;
 	-webkit-font-smoothing: antialiased;
-
 	@include oGridRespondTo(L) {
 		width: 50%;
 		font-size: 52px;
@@ -79,14 +77,13 @@
 	}
 }
 
-.article__topper--stand-first {
+.article-topper__stand-first {
 	align-self: center; // flex-end with bleed?
 	font-size: 18px;
 	line-height: 24px;
 	color: white;
 	width: 75%;
 	-webkit-font-smoothing: antialiased;
-
 	@include oGridRespondTo(L) {
 		font-size: 22px;
 		line-height: 26px;
@@ -94,14 +91,16 @@
 	}
 }
 
-.article__topper--visual {
+.article-topper__visual {
 	// much hacks
 	@include oGridRespondTo($until: L) {
 		margin-bottom: 5%;
 	}
+
 	> figure {
 		width: calc(100vw - 20px) !important;
-	  > div {
+
+		> div {
 			@include oGridRespondTo($until: M) {
 				padding-bottom: 60% !important;
 			}
@@ -130,6 +129,5 @@
 			width: 55%;
 			right: 0.5em;
 		}
-
 	}
 }

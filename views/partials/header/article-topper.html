@@ -1,9 +1,9 @@
 <div class="article__topper o-grid-container"> <!-- currently full-grid – for bleed: o-grid-container--bleed -->
-	<div class="article__topper--slot-1"></div>
-	<div class="article__topper--slot-2 o-grid-row--compact">
-		<div class="article__topper--text-box" data-o-grid-colspan="S12 M6 L6">
-			<div class="article__topper--text-wrapper">
-				<div class="article__topper--extras">
+	<div class="article-topper__slot-1"></div>
+	<div class="article-topper__slot-2 o-grid-row--compact">
+		<div class="article-topper__text-box" data-o-grid-colspan="S12 M6 L6">
+			<div class="article-topper__text-wrapper">
+				<div class="article-topper__extras">
 					{{#if isSpecialReport}}
 					<p class="article__primary-theme">
 						Special Report:
@@ -15,21 +15,21 @@
 					{{/if}}
 					{{/if}}
 				</div>
-				<div class="article__topper--headline" data-trackable="header">{{title}}</div>
+				<div class="article-topper__headline" data-trackable="header">{{title}}</div>
 				{{#if standfirst}}
-				<p class="article__topper--stand-first">{{{standfirst}}}</p>
+				<p class="article-topper__stand-first">{{{standfirst}}}</p>
 				{{/if}}
 			</div>
 		</div>
-		<div class="article__topper--visual" data-o-grid-colspan="S12 M6 L6">
+		<div class="article-topper__visual" data-o-grid-colspan="S12 M6 L6">
 			{{#if mainImageHTML}}
 			{{{mainImageHTML}}}
 			{{/if}}
 		</div>
 	</div>
-	<div class="article__topper--slot-3 o-grid-row">
+	<div class="article-topper__slot-3 o-grid-row">
 
-		<div class="article__topper--utils " data-o-grid-colspan="12 L7 XLoffset1">
+		<div class="article-topper__utils " data-o-grid-colspan="12 L7 XLoffset1">
 			{{> toolbar location='top'}}
 			<div class="article__time-byline">
 				{{#if publishedDate}}
