@@ -1,7 +1,7 @@
 <div class="article__topper o-grid-container"> <!-- currently full-grid – for bleed: o-grid-container--bleed -->
 	<div class="article__topper--slot-1"></div>
-	<div class="article__topper--slot-2">
-		<div class="article__topper--text-box">
+	<div class="article__topper--slot-2 o-grid-row--compact">
+		<div class="article__topper--text-box" data-o-grid-colspan="S12 M6 L6">
 			<div class="article__topper--text-wrapper">
 				<div class="article__topper--extras">
 					{{#if isSpecialReport}}
@@ -21,7 +21,7 @@
 				{{/if}}
 			</div>
 		</div>
-		<div class="article__topper--visual">
+		<div class="article__topper--visual" data-o-grid-colspan="S12 M6 L6">
 			{{#if mainImageHTML}}
 			{{{mainImageHTML}}}
 			{{/if}}

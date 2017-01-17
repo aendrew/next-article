@@ -1,10 +1,18 @@
 .article__topper--slot-2 {
-	display: inline-flex;
+	// display: inline-flex;
+	// flex-direction: column;
+	// @include oGridRespondTo(M) {
+	// 	display: flex;
+	// 	flex-direction: row;
+	// }
 }
 
 .article__topper--text-box {
-	width: 50%;
 	background-color: oColorsGetPaletteColor('claret');
+	height: 75vw;
+	@include oGridRespondTo(M) {
+		height: 50vw;
+	}
 }
 
 .article__topper--text-wrapper {
@@ -18,6 +26,11 @@
 .article__topper--extras {
 	// all of teh hacks!!
 	width: 50%;
+	margin-top: 5%;
+
+	@include oGridRespondTo(M, L) {
+		width: 75%;
+	}
 
 	.article__primary-theme {
 		> span > form > button {
@@ -46,10 +59,18 @@
 	// font-family: 'Financier Display', serif ;
 	// font-weight: 600;
 	@include oTypographyBigNumber;
-	font-size: 52px;
+	font-size: 36px;
 	color: white;
 	width: 50%;
 	-webkit-font-smoothing: antialiased;
+
+	@include oGridRespondTo(M, L) {
+		width: 75%;
+	}
+
+	@include oGridRespondTo(L) {
+		font-size: 52px;
+	}
 
 	&:after {
 		content: '';
@@ -62,20 +83,33 @@
 
 .article__topper--stand-first {
 	align-self: center; // flex-end with bleed?
-	font-size: 22px;
-	line-height: 26px;
+	font-size: 18px;
+	line-height: 24px;
 	color: white;
 	width: 50%;
 	-webkit-font-smoothing: antialiased;
+
+	@include oGridRespondTo(M, L) {
+		font-size: 20px;
+		width: 75%;
+	}
+
+	@include oGridRespondTo(L) {
+		font-size: 22px;
+		line-height: 26px;
+	}
 }
 
 .article__topper--visual {
 	// much hacks
-	width: 50%;
 
 	> figure {
+		width: 100% !important;
 		> div {
-			padding-bottom: 100% !important;
+			@include oGridRespondTo($until: M) {
+				padding-bottom: 60% !important;
+			}
+			padding-bottom: 50vw !important;
 		}
 	}
 
@@ -94,7 +128,12 @@
 	.n-content-image__caption {
 		position: absolute;
 		text-align: right;
-		width: 25%;
+		width: 35%;
 		right: 1.5em;
+		@include oGridRespondTo($until: L) {
+			width: 55%;
+			right: 0.5em;
+		}
+
 	}
 }
