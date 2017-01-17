@@ -25,11 +25,11 @@
 
 .article__topper--extras {
 	// all of teh hacks!!
-	width: 50%;
+	width: 75%;
 	margin-top: 5%;
 
-	@include oGridRespondTo(M, L) {
-		width: 75%;
+	@include oGridRespondTo(L) {
+		width: 50%;
 	}
 
 	.article__primary-theme {
@@ -61,14 +61,11 @@
 	@include oTypographyBigNumber;
 	font-size: 36px;
 	color: white;
-	width: 50%;
+	width: 75%;
 	-webkit-font-smoothing: antialiased;
 
-	@include oGridRespondTo(M, L) {
-		width: 75%;
-	}
-
 	@include oGridRespondTo(L) {
+		width: 50%;
 		font-size: 52px;
 	}
 
@@ -86,26 +83,24 @@
 	font-size: 18px;
 	line-height: 24px;
 	color: white;
-	width: 50%;
+	width: 75%;
 	-webkit-font-smoothing: antialiased;
-
-	@include oGridRespondTo(M, L) {
-		font-size: 20px;
-		width: 75%;
-	}
 
 	@include oGridRespondTo(L) {
 		font-size: 22px;
 		line-height: 26px;
+		width: 50%;
 	}
 }
 
 .article__topper--visual {
 	// much hacks
-
+	@include oGridRespondTo($until: L) {
+		margin-bottom: 10%;
+	}
 	> figure {
-		width: 100% !important;
-		> div {
+		width: calc(100vw - 20px) !important;
+	  > div {
 			@include oGridRespondTo($until: M) {
 				padding-bottom: 60% !important;
 			}
