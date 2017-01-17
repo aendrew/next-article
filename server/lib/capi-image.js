@@ -1,6 +1,6 @@
 const logger = require('@financial-times/n-logger').default;
 
-//copied from es-interface but tweaked to have smaller timeout 
+//copied from es-interface but tweaked to have smaller timeout
 const fetchCapiJson = (endpoint) => {
 	return fetch(endpoint, {
 		timeout: 1000,
@@ -48,7 +48,7 @@ module.exports = function (image) {
 			logger.error({
 				event: 'MAIN_IMAGE_FETCH_FAIL',
 				error: err.toString(),
-				uuid: image 
+				uuid: image
 			});
 		});
 	}
