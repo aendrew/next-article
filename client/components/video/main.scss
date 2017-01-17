@@ -214,6 +214,7 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 .video__byline-label {
 	font-size: 16px;
 	margin: 24px 0 0;
+	font-weight: bold;
 }
 
 .video__byline {
@@ -230,6 +231,7 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 
 .video__related-articles-title {
 	margin: 24px 0 0;
+	font-size: 16px;
 }
 
 .video__related-articles-list {
