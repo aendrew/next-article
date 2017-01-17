@@ -58,8 +58,9 @@
 	align-self: center; // flex-end with bleed?
 	// font-family: 'Financier Display', serif ;
 	// font-weight: 600;
-	@include oTypographyBigNumber;
+	@include oTypographySerifDisplayBold(l);
 	font-size: 36px;
+	line-height: 36px;
 	color: white;
 	width: 75%;
 	-webkit-font-smoothing: antialiased;
@@ -96,7 +97,7 @@
 .article__topper--visual {
 	// much hacks
 	@include oGridRespondTo($until: L) {
-		margin-bottom: 10%;
+		margin-bottom: 5%;
 	}
 	> figure {
 		width: calc(100vw - 20px) !important;
