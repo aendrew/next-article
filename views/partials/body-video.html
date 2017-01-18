@@ -32,14 +32,14 @@
 								<i class="o-video__play-button-icon"></i>
 							</button>
 							<div class="video__placeholder__up-next">
-								<h4>Up Next</h4>
+								<h2><span aria-hidden="true">Up Next</span><span class="n-util-visually-hidden">Related videos</span></h2>
 								<ol class="js-placeholder-up-next"></ol>
 							</div>
 						</div>
 					{{else}}
 						<div class="video__error">
 							<h1>This video cannot be displayed</h1>
-							<p>We just updated our video hub and some videos might take a while till they are accessible. Please come back later or watch the clips below instead.</p>
+							<p>We just updated our video hub and some videos might take a while before they can be accessed. Please come back later or watch the clips below instead.</p>
 						</div>
 					{{/if}}
 				</div>
@@ -65,14 +65,14 @@
 				</div>
 
 				{{#if byline}}
-					<h5 class="video__byline-label">Credits</h5>
+					<div class="video__byline-label">Credits</div>
 					<p class="video__byline">
 						{{byline}}
 					</p>
 				{{/if}}
 
 				{{#if readNextArticles}}
-					<h4 class="video__related-articles-title">Related Articles</h4>
+					<h2 class="video__related-articles-title">Related Articles</h2>
 					<ul class="video__related-articles-list">
 					{{#each readNextArticles}}
 						<li

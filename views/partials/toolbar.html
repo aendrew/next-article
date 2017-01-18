@@ -35,6 +35,18 @@
 			</div>
 		{{/if}}
 		<div class="comment_plus_save">
+			{{#if comments.enabled}}
+				<a data-o-component="o-comment-count"
+					data-o-comment-count-auto-init="false"
+					data-o-comment-count-config-article-id="{{id}}"
+					data-o-comment-count-config-template="{count}"
+					data-o-comment-count-config-aria-template="There are {count} comments on this article. Write a comment."
+					class="article__share__comments"
+					data-trackable="view-comments"
+					style="visibility: hidden;"
+					href="#comments">
+				</a>
+			{{/if}}
 			<span class="article__save">
 				{{#ifEquals contentType 'article'}}
 					<a class="article__share__print n-util-hide-no-js" href="javascript:window.print()" data-trackable="print">

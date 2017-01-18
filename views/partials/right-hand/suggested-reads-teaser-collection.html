@@ -1,5 +1,5 @@
 {{#if items.length}}
-	<div class="o-teaser-collection" role="group" aria-labelledby="suggested-reads__title" data-trackable="suggested-reads">
+	<div class="o-teaser-collection" role="group" data-trackable="suggested-reads">
 		{{#with topic}}
 			{{> n-teaser-collection/templates/partials/heading title=(concat 'Latest ' title ' ' prefLabel) headingModifiers='small'}}
 		{{/with}}

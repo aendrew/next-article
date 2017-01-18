@@ -74,7 +74,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 				placeholder: true,
 				classes: ['video'],
 				advertising: flags.get('videoPlayerAdvertising'),
-				placeholderInfo: ['brand,title'],
+				placeholderInfo: ['brand', 'title'],
 				autorender: !enableAutoplay,
 			});
 			if (enableAutoplay) {
