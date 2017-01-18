@@ -1,16 +1,17 @@
 $colors: 'white', 'black', 'claret', 'blue';
-$textual-color: hotpink;
+$textual-color: black;
 
 @each $color in $colors {
 	[data-textbox-background~='#{$color}'] {
 		$contrast: lightness(oColorsGetPaletteColor($color));
-		@if $contrast >= 50% {
-			$textual-color: black;
-		} @else {
+		@if $contrast <= 50% {
 			$textual-color: white;
 		}
 		background-color: oColorsGetPaletteColor('#{$color}');
 		color: $textual-color;
+		.article-topper__headline::after {
+			border-bottom: 8px solid $textual-color;
+		}
 	}
 }
 

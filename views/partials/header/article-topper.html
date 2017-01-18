@@ -1,8 +1,8 @@
-<div class="article__topper o-grid-container--bleed">
+<div class="article__topper">
 	<div class="article-topper__slot-1"></div>
-	<div class="article-topper__slot-2 o-grid-row--compact">
-		<div class="article-topper__text-box" data-textbox-background="white" data-o-grid-colspan="S12 M6 L6">
-			<div class="article-topper__text-wrapper">
+	<div class="article-topper__slot-2">
+		<div class="article-topper__text-box" data-textbox-background="blue">
+			<div class="article-topper__text-wrapper o-grid-container">
 				<div class="article-topper__extras">
 					{{#if isSpecialReport}}
 					<p class="article__primary-theme">
@@ -21,13 +21,13 @@
 				{{/if}}
 			</div>
 		</div>
-		<div class="article-topper__visual" data-o-grid-colspan="S12 M6 L6">
+		<div class="article-topper__visual">
 			{{#if mainImageHTML}}
 			{{{mainImageHTML}}}
 			{{/if}}
 		</div>
 	</div>
-	<div class="article-topper__slot-3 o-grid-row">
+	<div class="article-topper__slot-3">
 
 		<div class="article-topper__utils " data-o-grid-colspan="12 L7 XLoffset1">
 			{{> toolbar location='top'}}
