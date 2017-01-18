@@ -52,8 +52,7 @@ module.exports = [
 			// video
 			'/content/c382002a-a839-366c-9b5f-c3e51a25e05d': 200,
 			// fragment view
-			'/content/a85bf481-457c-3bd4-bd49-3801d175d583?fragment=true': 200,
-			content: ''
+			'/content/a85bf481-457c-3bd4-bd49-3801d175d583?fragment=true': 200
 		}
 	}
 ];
