@@ -34,11 +34,7 @@
 
 .article-topper__extras {
 	// all of teh hacks!!
-	width: 75%;
-	margin-top: 5%;
-	@include oGridRespondTo(L) {
-		width: 50%;
-	}
+	width: 50%;
 
 	.article__primary-theme {
 		> a {
@@ -64,10 +60,7 @@
 
 .article-topper__headline {
 	@include setHeadlineFont;
-	width: 75%;
-	@include oGridRespondTo(L) {
-		width: 50%;
-	}
+	width: 45%;
 
 	&::after {
 		content: '';
@@ -80,18 +73,11 @@
 
 .article-topper__stand-first {
 	@include setStandfirstFont;
-	width: 75%;
-	@include oGridRespondTo(L) {
-		width: 50%;
-	}
+	width: 45%;
 }
 
 .article-topper__visual {
 	// much hacks
-	@include oGridRespondTo($until: L) {
-		margin-bottom: 5%;
-	}
-
 	> figure {
 		width: 50vw !important;
 		> div {
