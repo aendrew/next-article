@@ -65,7 +65,7 @@ const showGcs = (req, res, isFreeArticle) => {
 	}
 };
 
-module.exports = function articleV3Controller (req, res, next, content) {
+module.exports = function articleV3Controller (req, res, next, content, richContent) {
 	let asyncWorkToDo = [];
 
 	res.vary('ft-is-aud-dev');
@@ -164,6 +164,10 @@ module.exports = function articleV3Controller (req, res, next, content) {
 
 	if(res.locals.flags.ftlabsSpokenLayer){
 		content.isAudioArticle = content.metadata.some(tag => tag.idV1 === 'MjgwYzIyNjUtMmQ1ZC00NTNiLTgyMTQtMWU5ZDc3YzIzNWUy-VG9waWNz');
+	}
+
+	if(res.locals.flags.articleTopper && richContent) {
+		content.topper = richContent.topper;
 	}
 
 	return Promise.all(asyncWorkToDo)

@@ -40,7 +40,11 @@ function getArticle (contentId) {
 }
 
 function getRichArticle (contentId) {
-	return fetch(`https://s3-eu-west-1.amazonaws.com/rj-xcapi-mock/${contentId}`)
+	return fetch(`http://test.api.ft.com/internalcontent/${contentId}`, {
+		headers: {
+			'X-API-Key': process.env.API_KEY
+		}
+	})
 		.then(fetchres.json)
 		.then(richArticleModel)
 		.catch(() => null);
@@ -66,10 +70,6 @@ module.exports = function negotiationController (req, res, next) {
 			const richArticle = data.length > 1 ? data[1] : null;
 			const webUrl = article && article.webUrl || '';
 
-			if(richArticle) {
-				article.topper = richArticle.topper;
-			}
-
 			// Redirect ftalphaville to old FT.com.  Next is not currently planning to absorb FTAlphaville
 			// and therefore we shouldn't replicate content from FTAlphaville on Next for SEO reasons.
 			if (webUrl.includes('ftalphaville.ft.com')) {
@@ -93,7 +93,7 @@ module.exports = function negotiationController (req, res, next) {
 				} else if (isArticleVideo(article)) {
 					return controllerVideo(req, res, next, article);
 				} else {
-					return controllerArticle(req, res, next, article);
+					return controllerArticle(req, res, next, article, richArticle);
 				}
 			}
 

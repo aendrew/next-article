@@ -27,7 +27,7 @@ describe('Article Controller', () => {
 	let next;
 	let result;
 
-	function createInstance (params, flags, payload) {
+	function createInstance (params, flags, payload, internalContentPayload) {
 		next = sinon.stub();
 		request = httpMocks.createRequest(params);
 		response = httpMocks.createResponse();
@@ -36,7 +36,7 @@ describe('Article Controller', () => {
 		// node-mocks-http doesn't support this method
 		response.unvaryAll = sinon.stub();
 
-		return subject(request, response, next, payload || fixture);
+		return subject(request, response, next, payload || fixture, internalContentPayload);
 	}
 
 	context('success', () => {
@@ -141,4 +141,18 @@ describe('Article Controller', () => {
 			expect(next.callCount).to.equal(1);
 		});
 	});
+
+	context('has rich article model', () => {
+
+		it('sets the topper on the view model', () => {
+			return createInstance(null, { articleTopper: true }, null, { topper: 'something' } ).then(() => {
+				let result = response._getRenderData()
+				expect(result.topper).to.equal('something');
+				expect(response.statusCode).to.equal(200);
+			});
+		});
+
+	});
+
+
 });
