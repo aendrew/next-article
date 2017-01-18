@@ -1,7 +1,7 @@
-<div class="article__topper o-grid-container"> <!-- currently full-grid – for bleed: o-grid-container--bleed -->
+<div class="article__topper o-grid-container--bleed">
 	<div class="article-topper__slot-1"></div>
 	<div class="article-topper__slot-2 o-grid-row--compact">
-		<div class="article-topper__text-box" data-o-grid-colspan="S12 M6 L6">
+		<div class="article-topper__text-box" data-textbox-background="white" data-o-grid-colspan="S12 M6 L6">
 			<div class="article-topper__text-wrapper">
 				<div class="article-topper__extras">
 					{{#if isSpecialReport}}
@@ -10,9 +10,9 @@
 						<a href="/special-reports/{{primaryTag.idV1}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="section-link" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
 					</p>
 					{{else}}
-					{{#if primaryTag}}
-					{{> header/primary-tag}}
-					{{/if}}
+						{{#if primaryTag}}
+							{{> header/primary-tag}}
+						{{/if}}
 					{{/if}}
 				</div>
 				<div class="article-topper__headline" data-trackable="header">{{title}}</div>

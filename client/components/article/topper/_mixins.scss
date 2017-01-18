@@ -1,0 +1,44 @@
+$colors: 'white', 'black', 'claret', 'blue';
+$textual-color: hotpink;
+
+@each $color in $colors {
+	[data-textbox-background~='#{$color}'] {
+		$contrast: lightness(oColorsGetPaletteColor($color));
+		@if $contrast >= 50% {
+			$textual-color: black;
+		} @else {
+			$textual-color: white;
+		}
+		background-color: oColorsGetPaletteColor('#{$color}');
+		color: $textual-color;
+	}
+}
+
+@mixin alignText($position) {
+	.article-topper__text-wrapper {
+		text-align: $position;
+	}
+}
+
+@mixin setHeadlineFont {
+	@include oTypographySerifDisplayBold(xl, $load-progressively: true);
+	@include responsiveTypeSet(52px, 52px, 36px, 36px);
+}
+
+
+@mixin setStandfirstFont {
+	@include oTypographySans(m);
+	@include responsiveTypeSet(22px, 26px, 18px, 24px);
+}
+
+@mixin responsiveTypeSet($size-l, $height-l, $size-s, $height-s) {
+	@include oGridRespondTo($until: L) {
+		font-size: $size-s;
+		line-height: $height-s;
+	}
+
+	@include oGridRespondTo(L) {
+		font-size: $size-l;
+		line-height: $height-l;
+	}
+}
