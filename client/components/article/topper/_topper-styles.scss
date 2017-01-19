@@ -3,22 +3,25 @@
 	width: 100%;
 	height: 60vh;
 	position: relative;
-	background: hotpink;
 }
 
 .article-topper__visual {
-	width: 50%;
+	width: 100%;
 	height: inherit;
-	background: goldenrod;
 	float: right;
+	@include oGridRespondTo(M) {
+		width: 50%;
+	}
 }
 
 .article-topper__text-box {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
 	height: inherit;
+	@include oGridRespondTo(M) {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+	}
 }
 
 .article-topper__text-wrapper {
@@ -34,7 +37,9 @@
 
 .article-topper__extras {
 	// all of teh hacks!!
-	width: 50%;
+	@include oGridRespondTo(M) {
+		width: 40%;
+	}
 
 	.article__primary-theme {
 		> a {
@@ -60,7 +65,9 @@
 
 .article-topper__headline {
 	@include setHeadlineFont;
-	width: 45%;
+	@include oGridRespondTo(M) {
+		width: 40%;
+	}
 
 	&::after {
 		content: '';
@@ -73,13 +80,15 @@
 
 .article-topper__stand-first {
 	@include setStandfirstFont;
-	width: 45%;
+	@include oGridRespondTo(M) {
+		width: 40%;
+	}
 }
 
 .article-topper__visual {
 	// much hacks
 	> figure {
-		width: 50vw !important;
+		width: 100% !important;
 		> div {
 			padding-bottom: 60vh !important;
 		}
@@ -87,6 +96,9 @@
 
 	.n-content-image {
 		margin: 0;
+		@include oGridRespondTo(M) {
+			width: 100%
+		}
 
 		.n-image-wrapper--placeholder {
 			.n-image {
