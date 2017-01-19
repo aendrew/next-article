@@ -1,13 +1,13 @@
 @import 'mixins';
 
-// .split-text-right {
-// 	@include alignText(right);
-// }
-//
-// .split-text-left {
-// 	@include alignText(left);
-// }
-//
-// .split-text-center {
-// 	@include alignText(center);
-// }
+.split-text-right {
+	@include alignText(right);
+}
+
+.split-text-left {
+	@include alignText(left);
+}
+
+.split-text-center {
+	@include alignText(center);
+}

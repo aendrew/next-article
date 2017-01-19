@@ -167,7 +167,6 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 	}
 
 	if(res.locals.flags.articleTopper && richContent) {
-		console.log(richContent.topper);
 		content.topper = richContent.topper;
 	}
 
