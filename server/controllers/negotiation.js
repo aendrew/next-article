@@ -40,14 +40,16 @@ function getArticle (contentId) {
 }
 
 function getRichArticle (contentId) {
-	return fetch(`http://test.api.ft.com/internalcontent/${contentId}`, {
-		headers: {
-			'X-API-Key': process.env.API_KEY
-		}
-	})
+	return fetch(`https://s3-eu-west-1.amazonaws.com/rj-xcapi-mock/${contentId}`)
 		.then(fetchres.json)
 		.then(richArticleModel)
-		.catch(() => null);
+		.catch(err => {
+			logger.error({
+				event: 'INTERNAL_CONTENT_FETCH_FAIL',
+				error: err.toString(),
+				uuid: contentId
+			});
+		});
 }
 
 module.exports = function negotiationController (req, res, next) {

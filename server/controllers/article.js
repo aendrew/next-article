@@ -167,6 +167,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 	}
 
 	if(res.locals.flags.articleTopper && richContent) {
+		console.log(richContent.topper);
 		content.topper = richContent.topper;
 	}
 
@@ -178,7 +179,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 				res.render('fragment', content);
 			} else {
 				content.layout = 'wrapper';
-				if(res.locals.flags.articleTopper) {
+				if(content.topper) {
 					res.render('rich-content', content)
 				} else {
 					res.render('content', content);

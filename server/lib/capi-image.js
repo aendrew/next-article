@@ -46,7 +46,7 @@ module.exports = function (image) {
 		})))
 		.catch((err) => {
 			logger.error({
-				event: 'MAIN_IMAGE_FETCH_FAIL',
+				event: 'TOPPER_IMAGE_FETCH_FAIL',
 				error: err.toString(),
 				uuid: image
 			});
