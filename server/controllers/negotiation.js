@@ -3,6 +3,7 @@ const logger = require('@financial-times/n-logger').default;
 const api = require('next-ft-api-client');
 const interactivePoller = require('../lib/ig-poller');
 const shellpromise = require('shellpromise');
+const richArticleModel = require('../lib/rich-article');
 
 const controllerInteractive = require('./interactive');
 const controllerPodcast = require('./podcast');
@@ -38,6 +39,19 @@ function getArticle (contentId) {
 		});
 }
 
+function getRichArticle (contentId) {
+	return fetch(`https://s3-eu-west-1.amazonaws.com/rj-xcapi-mock/${contentId}`)
+		.then(fetchres.json)
+		.then(richArticleModel)
+		.catch(err => {
+			logger.error({
+				event: 'INTERNAL_CONTENT_FETCH_FAIL',
+				error: err.toString(),
+				uuid: contentId
+			});
+		});
+}
+
 module.exports = function negotiationController (req, res, next) {
 	res.set('surrogate-key', `contentUuid:${req.params.id}`);
 
@@ -47,8 +61,15 @@ module.exports = function negotiationController (req, res, next) {
 		return controllerInteractive(req, res, next, interactive);
 	}
 
-	return getArticle(req.params.id)
-		.then(article => {
+	const contentPromises = [getArticle(req.params.id)];
+	if(res.locals.flags.articleTopper) {
+		contentPromises.push(getRichArticle(req.params.id));
+	}
+
+	return Promise.all(contentPromises)
+		.then(data => {
+			const article = data[0];
+			const richArticle = data.length > 1 ? data[1] : null;
 			const webUrl = article && article.webUrl || '';
 
 			// Redirect ftalphaville to old FT.com.  Next is not currently planning to absorb FTAlphaville
@@ -74,7 +95,7 @@ module.exports = function negotiationController (req, res, next) {
 				} else if (isArticleVideo(article)) {
 					return controllerVideo(req, res, next, article);
 				} else {
-					return controllerArticle(req, res, next, article);
+					return controllerArticle(req, res, next, article, richArticle);
 				}
 			}
 
