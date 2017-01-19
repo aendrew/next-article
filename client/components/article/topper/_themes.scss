@@ -1,5 +1,4 @@
 @import 'mixins';
-
 @mixin fullBleedImage {
 	.article-topper__text-box {
 		background: transparent;
@@ -7,12 +6,12 @@
 
 	.article-topper__visual {
 		width: 100%;
+
 		.n-image-wrapper > .n-image {
 			height: auto;
 			width: 100vw;
 		}
 	}
-
 	@include setHeadlineFont(64px, 64px, 36px, 36px);
 	@include setStandfirstFont(22px, 26px, 18px, 22px);
 
@@ -21,20 +20,33 @@
 	}
 }
 
+@mixin constrainTextBox($percent) {
+	@include oGridRespondTo(M){
+		.article-topper__extras,
+		.article-topper__headline,
+		.article-topper__stand-first {
+			width: $percent;
+		}
+	}
+}
+
 .article-topper--split-text-right {
 	@include alignText(right);
+	@include constrainTextBox(40%);
 	@include oGridRespondTo($until: M) {
-		@include alignText(center);
+		 @include alignText(center);
 	}
 	@include setHeadlineFont(52px, 52px, 36px, 36px);
-	@include setStandfirstFont(22px, 26px, 18px, 22px)
-
+	@include setStandfirstFont(22px, 26px, 18px, 22px);
 }
+
+
 
 .article-topper--split-text-left {
 	@include alignText(left);
+	@include constrainTextBox(40%);
 	@include oGridRespondTo($until: M) {
-		@include alignText(center);
+		 @include alignText(center);
 	}
 	@include setHeadlineFont(52px, 52px, 36px, 36px);
 	@include setStandfirstFont(22px, 26px, 18px, 22px)
@@ -42,33 +54,28 @@
 
 .article-topper--split-text-center {
 	@include alignText(center);
+	@include constrainTextBox(40%);
 	@include setHeadlineFont(52px, 52px, 36px, 36px);
 	@include setStandfirstFont(22px, 26px, 18px, 22px)
 }
 
 .article-topper--full-bleed-text {
 	@include alignText(center);
+	@include constrainTextBox(100%);
 	@include setHeadlineFont(100px, 80px, 36px, 36px);
-	@include setStandfirstFont(22px, 26px, 18px, 22px)
-
-	.article-topper__visual {
+	@include setStandfirstFont(22px, 26px, 18px, 22px) .article-topper__visual {
 		display: none;
 	}
 
 	.article-topper__headline {
 		@include oGridRespondTo($from: M) {
 			margin-top: 20px;
+
 			&::after {
 				border-bottom-width: 8px;
 				margin-top: 40px;
 			}
 		}
-	}
-
-	.article-topper__headline,
-	.article-topper__stand-first,
-	.article-topper__extras {
-		width: 100%;
 	}
 }
 
@@ -80,15 +87,17 @@
 .article-topper--full-bleed-image-right {
 	@include alignText(right);
 	@include oGridRespondTo($until: M) {
-		@include alignText(center);
+		 @include alignText(center);
 	}
 	@include fullBleedImage;
+	@include constrainTextBox(50%);
 }
 
 .article-topper--full-bleed-image-left {
 	@include alignText(left);
 	@include oGridRespondTo($until: M) {
-		@include alignText(center);
+		 @include alignText(center);
 	}
 	@include fullBleedImage;
+	@include constrainTextBox(50%);
 }
