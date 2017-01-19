@@ -22,7 +22,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'transparent';
 
 
 @mixin alignBorder($position) {
-	$value: ( "left": 0, "center": 33%, "right": 66% );
+	$value: ("left": 0, "center": 33%, "right": 66%);
 	.article-topper__headline::after {
 		content: '';
 		display: block;
@@ -47,7 +47,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'transparent';
 
 
 @mixin setStandfirstFont($size-l, $height-l, $size-s, $height-s) {
-	.article-topper__stand-first{
+	.article-topper__stand-first {
 		@include oTypographySans(m);
 		@include setResponsiveType($size-l, $height-l, $size-s, $height-s);
 	}
