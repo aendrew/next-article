@@ -1,5 +1,5 @@
-<div class="article__topper">
-	<div class="article-topper__slot-1 {{topper.theme}}">
+<div class="article__topper full-bleed-text">
+	<div class="article-topper__slot-1">
 		<div class="article-topper__text-box" data-textbox-background={{topper.bgColor}}>
 			<div class="article-topper__text-wrapper o-grid-container">
 				<div class="article-topper__extras">
@@ -26,21 +26,27 @@
 			{{/nImagePresenter}}
 		</div>
 	</div>
-	<div class="article-topper__slot-2">
-		<div class="article-topper__utils " data-o-grid-colspan="12 L7 XLoffset1">
-			{{> toolbar location='top'}}
-			<div class="article__time-byline">
-				{{#if publishedDate}}
-				<time class="article__timestamp o-date" data-o-component="o-date" datetime="{{#dateformat}}{{publishedDate}}{{/dateformat}}" data-o-date-js>
-					{{#dateformat "mmmm d, yyyy"}}{{publishedDate}}{{/dateformat}}
-				</time>
-				{{/if}}
-				{{#if byline}}
-				<p class="article__byline">{{#ifEquals contentType 'article'}}by: {{/ifEquals}}{{{byline}}}</p>
-				{{/if}}
-				{{#ifAll @root.flags.premiumContentIndicator isPremium}}
-					<span class="article-classifier">Premium</span>
-				{{/ifAll}}
+	<div class="article-topper__slot-2 o-grid-container">
+		<div class="o-grid-row">
+
+			<div class="article-topper__utils" data-o-grid-colspan="12 L8 XL7 XLoffset1">
+				{{> toolbar location='top'}}
+				<div class="article__time-byline">
+					{{#if publishedDate}}
+					<time class="article__timestamp o-date" data-o-component="o-date" datetime="{{#dateformat}}{{publishedDate}}{{/dateformat}}" data-o-date-js>
+						{{#dateformat "mmmm d, yyyy"}}{{publishedDate}}{{/dateformat}}
+					</time>
+					{{/if}}
+					{{#if byline}}
+					<p class="article__byline">{{#ifEquals contentType 'article'}}by: {{/ifEquals}}{{{byline}}}</p>
+					{{/if}}
+					{{#ifAll @root.flags.premiumContentIndicator isPremium}}
+						<span class="article-classifier">Premium</span>
+					{{/ifAll}}
+				</div>
+			</div>
+			<div class="article-topper__caption">
+				{{mainImage.description}}
 			</div>
 		</div>
 	</div>

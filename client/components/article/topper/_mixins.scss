@@ -1,38 +1,57 @@
+@mixin colorBorder($color) {
+	.article-topper__headline::after {
+		border-bottom: 6px solid $color;
+	}
+}
+
 $colors: 'white', 'black', 'claret', 'blue';
-$textual-color: black;
 
 @each $color in $colors {
 	[data-textbox-background~='#{$color}'] {
+		$text-color: black;
 		$contrast: lightness(oColorsGetPaletteColor($color));
 		@if $contrast <= 50% {
-			$textual-color: white;
+			$text-color: white;
 		}
 		background-color: oColorsGetPaletteColor('#{$color}');
-		color: $textual-color;
-		.article-topper__headline::after {
-			border-bottom: 8px solid $textual-color;
-		}
+		color: $text-color;
+		@include colorBorder($text-color);
+	}
+}
+
+@mixin alignBorder($position) {
+	$value: ( "left": 0, "center": 33%, "right": 66% );
+	.article-topper__headline::after {
+		content: '';
+		display: block;
+		width: 33%;
+		margin: 20px 0 20px map-get($value, #{$position});
 	}
 }
 
 @mixin alignText($position) {
+	@include alignBorder($position);
 	.article-topper__text-wrapper {
 		text-align: $position;
 	}
 }
 
-@mixin setHeadlineFont {
-	@include oTypographySerifDisplayBold(xl, $load-progressively: true);
-	@include responsiveTypeSet(52px, 52px, 36px, 36px);
+@mixin setHeadlineFont($size-l, $height-l, $size-s, $height-s) {
+	.article-topper__headline {
+		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
+		@include setResponsiveType($size-l, $height-l, $size-s, $height-s);
+	}
 }
 
 
-@mixin setStandfirstFont {
-	@include oTypographySans(m);
-	@include responsiveTypeSet(22px, 26px, 18px, 24px);
+@mixin setStandfirstFont($size-l, $height-l, $size-s, $height-s) {
+	.article-topper__stand-first{
+		@include oTypographySans(m);
+		@include setResponsiveType($size-l, $height-l, $size-s, $height-s);
+	}
 }
 
-@mixin responsiveTypeSet($size-l, $height-l, $size-s, $height-s) {
+@mixin setResponsiveType($size-l, $height-l, $size-s, $height-s) {
 	@include oGridRespondTo($until: L) {
 		font-size: $size-s;
 		line-height: $height-s;

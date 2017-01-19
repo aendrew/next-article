@@ -1,21 +1,35 @@
 @import 'themes';
-.article-topper__slot-1 {
+.article-topper__slot-1 { //always the same size for the full bleed container
 	width: 100%;
 	height: 60vh;
 	position: relative;
+	@include oGridRespondTo(L) {
+		min-height: 600px;
+	}
 }
+
 
 .article-topper__visual {
 	width: 100%;
 	height: inherit;
+	min-height: inherit;
 	float: right;
 	@include oGridRespondTo(M) {
 		width: 50%;
+	}
+	.n-image-wrapper {
+		height: inherit;
+		min-height: inherit;
+		.n-image {
+			object-fit: cover;
+			height: 60vh;
+		}
 	}
 }
 
 .article-topper__text-box {
 	height: inherit;
+	min-height: inherit;
 	@include oGridRespondTo(M) {
 		position: absolute;
 		top: 0;
@@ -31,16 +45,13 @@
 
 	width: 80%;
 	height: inherit;
+	min-height: inherit;
 	margin: 0 auto;
 	-webkit-font-smoothing: antialiased;
 }
 
 .article-topper__extras {
 	// all of teh hacks!!
-	@include oGridRespondTo(M) {
-		width: 40%;
-	}
-
 	.article__primary-theme {
 		> a {
 			color: inherit;
@@ -63,45 +74,19 @@
 	}
 }
 
-.article-topper__headline {
-	@include setHeadlineFont;
-	@include oGridRespondTo(M) {
-		width: 40%;
-	}
-
-	&::after {
-		content: '';
-		display: block;
-		width: 33%;
-		// border-bottom: 8px solid $textual-color;
-		margin: 20px 0 20px 0;
-	}
-}
-
-.article-topper__stand-first {
-	@include setStandfirstFont;
-	@include oGridRespondTo(M) {
+@include oGridRespondTo(M) {
+	.article-topper__extras,
+	.article-topper__headline,
+	.article-topper__stand-first {
 		width: 40%;
 	}
 }
 
-.article-topper__visual {
-	.n-image-wrapper {
-		height: inherit;
-		.n-image {
-			object-fit: cover;
-			height: 80vh;
-		}
-	}
-
-	.n-content-image__caption {
-		position: absolute;
-		text-align: right;
-		width: 35%;
-		right: 1.5em;
-		@include oGridRespondTo($until: L) {
-			width: 55%;
-			right: 0.5em;
-		}
-	}
+.article-topper__caption {
+	position: absolute;
+  width: 45%;
+  right: -15%;
+  top: 10%;
+	font-style: italic;
+	font-size: 15px;
 }

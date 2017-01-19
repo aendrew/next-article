@@ -2,12 +2,47 @@
 
 .split-text-right {
 	@include alignText(right);
+	@include setHeadlineFont(52px, 52px, 36px, 36px);
+	@include setStandfirstFont(22px, 26px, 18px, 22px)
+
 }
 
 .split-text-left {
 	@include alignText(left);
+	@include setHeadlineFont(52px, 52px, 36px, 36px);
+	@include setStandfirstFont(22px, 26px, 18px, 22px)
+
 }
 
 .split-text-center {
 	@include alignText(center);
+	@include setHeadlineFont(52px, 52px, 36px, 36px);
+	@include setStandfirstFont(22px, 26px, 18px, 22px)
+
+}
+
+.full-bleed-text {
+	@include alignText(center);
+	@include setHeadlineFont(100px, 80px, 36px, 36px);
+	@include setStandfirstFont(22px, 26px, 18px, 22px)
+
+	.article-topper__visual {
+		display: none;
+	}
+
+	.article-topper__headline {
+		@include oGridRespondTo($from: M) {
+			margin-top: 20px;
+			&::after {
+				border-bottom-width: 8px;
+				margin-top: 40px;
+			}
+		}
+	}
+
+	.article-topper__headline,
+	.article-topper__stand-first,
+	.article-topper__extras {
+		width: 100%;
+	}
 }
