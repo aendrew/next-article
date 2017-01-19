@@ -2,6 +2,7 @@ const cheerio = require('cheerio');
 
 const relatedBoxExpander = require('./related-box-expander');
 const relatedArticleToTeaser = require('./related-article-to-teaser');
+const ariaHiddenMidContentInterruptions = require('./aria-hidden');
 const tableOfContents = require('./table-of-contents');
 const lightSignup = require('./light-sign-up');
 const inlineAd = require('./inline-ad');
@@ -26,6 +27,7 @@ module.exports = function (body, flags, options) {
 	transform($bodyHTML, flags, options)
 		.with(relatedArticleToTeaser)
 		.with(relatedBoxExpander)
+		.with(ariaHiddenMidContentInterruptions)
 		.with(tableOfContents)
 		.with(inlineAd)
 		.with(lightSignup);

@@ -97,7 +97,7 @@
 	.n-content-image {
 		margin: 0;
 		@include oGridRespondTo(M) {
-			width: 100%
+			width: 100%;
 		}
 
 		.n-image-wrapper--placeholder {

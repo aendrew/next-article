@@ -1,5 +1,12 @@
 .stream-card {
 }
+
+.stream-card__title {
+	margin: 1em 0;
+	font-size: 1.17em;
+	font-weight: bold;
+}
+
 .stream-card__wrapper {
 	position: relative;
 	overflow: hidden;
