@@ -4,7 +4,8 @@
 	}
 }
 
-$colors: 'white', 'black', 'claret', 'blue';
+
+$colors: 'white', 'black', 'claret', 'blue', 'transparent';
 
 @each $color in $colors {
 	[data-textbox-background~='#{$color}'] {
@@ -13,11 +14,13 @@ $colors: 'white', 'black', 'claret', 'blue';
 		@if $contrast <= 50% {
 			$text-color: white;
 		}
+		@debug ' #{$color} means #{$contrast} and textual color is #{$text-color}';
 		background-color: oColorsGetPaletteColor('#{$color}');
 		color: $text-color;
 		@include colorBorder($text-color);
 	}
 }
+
 
 @mixin alignBorder($position) {
 	$value: ( "left": 0, "center": 33%, "right": 66% );
