@@ -63,7 +63,9 @@
 	@include alignText(center);
 	@include constrainTextBox(100%);
 	@include setHeadlineFont(100px, 80px, 36px, 36px);
-	@include setStandfirstFont(22px, 26px, 18px, 22px) .article-topper__visual {
+	@include setStandfirstFont(22px, 26px, 18px, 22px);
+
+	.article-topper__visual {
 		display: none;
 	}
 
