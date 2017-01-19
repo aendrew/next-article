@@ -16,35 +16,37 @@
 	@include setHeadlineFont(64px, 64px, 36px, 36px);
 	@include setStandfirstFont(22px, 26px, 18px, 22px);
 
-
-
 	.article-topper__text-wrapper {
 		z-index: 1;
 	}
-
-
 }
 
-.split-text-right {
+.article-topper--split-text-right {
 	@include alignText(right);
+	@include oGridRespondTo($until: M) {
+		@include alignText(center);
+	}
 	@include setHeadlineFont(52px, 52px, 36px, 36px);
 	@include setStandfirstFont(22px, 26px, 18px, 22px)
 
 }
 
-.split-text-left {
+.article-topper--split-text-left {
 	@include alignText(left);
+	@include oGridRespondTo($until: M) {
+		@include alignText(center);
+	}
 	@include setHeadlineFont(52px, 52px, 36px, 36px);
 	@include setStandfirstFont(22px, 26px, 18px, 22px)
 }
 
-.split-text-center {
+.article-topper--split-text-center {
 	@include alignText(center);
 	@include setHeadlineFont(52px, 52px, 36px, 36px);
 	@include setStandfirstFont(22px, 26px, 18px, 22px)
 }
 
-.full-bleed-text {
+.article-topper--full-bleed-text {
 	@include alignText(center);
 	@include setHeadlineFont(100px, 80px, 36px, 36px);
 	@include setStandfirstFont(22px, 26px, 18px, 22px)
@@ -70,17 +72,23 @@
 	}
 }
 
-.full-bleed-image-center {
+.article-topper--full-bleed-image-center {
 	@include alignText(center);
 	@include fullBleedImage;
 }
 
-.full-bleed-image-right {
+.article-topper--full-bleed-image-right {
 	@include alignText(right);
+	@include oGridRespondTo($until: M) {
+		@include alignText(center);
+	}
 	@include fullBleedImage;
 }
 
-.full-bleed-image-left {
+.article-topper--full-bleed-image-left {
 	@include alignText(left);
+	@include oGridRespondTo($until: M) {
+		@include alignText(center);
+	}
 	@include fullBleedImage;
 }

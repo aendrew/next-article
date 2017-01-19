@@ -1,6 +1,6 @@
 @mixin colorBorder($color) {
 	.article-topper__headline::after {
-		border-bottom: 6px solid $color;
+		border-bottom: 8px solid $color;
 	}
 }
 
@@ -14,7 +14,6 @@ $colors: 'white', 'black', 'claret', 'blue', 'transparent';
 		@if $contrast <= 50% {
 			$text-color: white;
 		}
-		@debug ' #{$color} means #{$contrast} and textual color is #{$text-color}';
 		background-color: oColorsGetPaletteColor('#{$color}');
 		color: $text-color;
 		@include colorBorder($text-color);
