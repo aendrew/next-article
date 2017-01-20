@@ -31,6 +31,12 @@ run:
 run-sw:
 	nht run --https --local-apps service-worker=3010
 
+run-experimental-capi:
+	export EXPERIMENTAL_CONTENT_SOURCE=CAPI; make run
+
+run-experimental-s3:
+	export EXPERIMENTAL_CONTENT_SOURCE=S3; make run
+
 deploy: _deploy_whitesource
 	nht deploy-hashed-assets --monitor-assets
 	nht ship -m
