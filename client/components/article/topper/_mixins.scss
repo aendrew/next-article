@@ -1,9 +1,11 @@
 @mixin colorBorder($color) {
 	.article-topper__headline::after {
-		border-bottom: 8px solid $color;
+		border-bottom: 6px solid $color;
+		@include oGridRespondTo($from: M) {
+			border-bottom-width: 8px;
+		}
 	}
 }
-
 
 $colors: 'white', 'black', 'claret', 'blue', 'transparent';
 
@@ -27,7 +29,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'transparent';
 		content: '';
 		display: block;
 		width: 33%;
-		margin: 20px 0 20px map-get($value, #{$position});
+		margin: 20px 0 40px map-get($value, #{$position});
 	}
 }
 
@@ -40,7 +42,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'transparent';
 
 @mixin setHeadlineFont($size-l, $height-l, $size-s, $height-s) {
 	.article-topper__headline {
-		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
+		@include oTypographySerifDisplay(xl);
 		@include setResponsiveType($size-l, $height-l, $size-s, $height-s);
 	}
 }
@@ -48,6 +50,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'transparent';
 
 @mixin setStandfirstFont($size-l, $height-l, $size-s, $height-s) {
 	.article-topper__stand-first {
+		opacity: 0.8;
 		@include oTypographySans(m);
 		@include setResponsiveType($size-l, $height-l, $size-s, $height-s);
 	}

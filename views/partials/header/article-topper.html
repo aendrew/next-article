@@ -1,23 +1,31 @@
-<div class="article-topper article-topper--{{topper.theme}}">
+<header class="n-util-visually-hidden">
+	<h1>{{title}}</h1>
+	<p>
+		{{{standfirst}}}
+	</p>
+</header>
+<div class="article-topper article-topper--full-bleed-text" aria-hidden="true" role="presentation">
 	<div class="article-topper__slot-1">
-		<div class="article-topper__text-box" data-textbox-background={{topper.bgColor}}>
-			<div class="article-topper__text-wrapper o-grid-container">
-				<div class="article-topper__extras">
-					{{#if isSpecialReport}}
-					<p class="article__primary-theme">
-						Special Report:
-						<a href="/special-reports/{{primaryTag.idV1}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="section-link" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
-					</p>
-					{{else}}
-						{{#if primaryTag}}
-							{{> header/primary-tag}}
+		<div class="article-topper__background" data-textbox-background={{topper.bgColor}}>
+			<div class="article-topper__text-box o-grid-container">
+				<div class="article-topper__text-wrapper">
+					<div class="article-topper__extras">
+						{{#if isSpecialReport}}
+						<p class="article__primary-theme">
+							Special Report:
+							<a href="/special-reports/{{primaryTag.idV1}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="section-link" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
+						</p>
+						{{else}}
+							{{#if primaryTag}}
+								{{> header/primary-tag}}
+							{{/if}}
 						{{/if}}
-					{{/if}}
-				</div>
-				<div class="article-topper__headline" data-trackable="header">{{topper.headline}}</div>
-				{{#if topper.standfirst}}
-				<p class="article-topper__stand-first">{{{topper.standfirst}}}</p>
+					</div>
+					<div class="article-topper__headline" data-trackable="header">{{topper.headline}}</div>
+					{{#if topper.standfirst}}
+					<div class="article-topper__stand-first">{{{topper.standfirst}}}</div>
 				{{/if}}
+				</div>
 			</div>
 		</div>
 		<div class="article-topper__visual">
