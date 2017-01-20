@@ -30,13 +30,22 @@
 	}
 }
 
+@mixin overlayText {
+	.article-topper__background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: inherit;
+		min-height: inherit;
+		width: 100%;
+	}
+}
+
 .article-topper--split-text-right {
 	@include alignText(right);
 	@include setHeadlineFont(52px, 52px, 32px, 32px);
 	@include setStandfirstFont(22px, 26px, 18px, 22px);
 }
-
-
 
 .article-topper--split-text-left {
 	@include alignText(left);
@@ -47,22 +56,51 @@
 .article-topper--split-text-center {
 	@include alignText(center);
 	@include setHeadlineFont(52px, 52px, 32px, 32px);
-	@include setStandfirstFont(22px, 26px, 18px, 22px)
+	@include setStandfirstFont(22px, 26px, 18px, 22px);
 }
 
 .article-topper--full-bleed-image-center {
 	@include alignText(center);
 	@include fullBleedImage;
+	@include overlayText;
+	.article-topper__text-wrapper {
+		width: 100%;
+		padding: 0;
+	}
+
+	.article-topper__headline {
+		margin-top: 20px;
+		@include oGridRespondTo(M) {
+			&::after {
+				margin-top: 40px
+			}
+		}
+	}
+
+	.article-topper__stand-first {
+		width: 50%;
+		margin: 0	auto;
+	}
 }
 
 .article-topper--full-bleed-image-right {
-	@include alignText(right);
+	@include alignText(center);
+	@include overlayText;
+	@include oGridRespondTo(M) {
+		@include alignText(right);
+	};
 	@include fullBleedImage;
+	.article-topper__text-wrapper {
+		float: right;
+		align-self: flex-end;
+	}
+
 }
 
 .article-topper--full-bleed-image-left {
 	@include alignText(left);
 	@include fullBleedImage;
+	@include overlayText;
 }
 
 
@@ -80,17 +118,8 @@
 		padding: 0;
 	}
 
-	.article-topper__headline {
-		margin-top: 20px;
-		@include oGridRespondTo(M) {
-			&::after {
-				margin-top: 40px
-			}
-		}
-	}
-
 	.article-topper__stand-first {
-		@include oGridRespondTo(M){
+		@include oGridRespondTo(M) {
 			width: 50%;
 			margin: 0	auto;
 		}
