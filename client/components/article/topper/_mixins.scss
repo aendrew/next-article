@@ -7,7 +7,7 @@
 	}
 }
 
-$colors: 'white', 'black', 'claret', 'blue', 'transparent';
+$colors: 'white', 'black', 'claret', 'blue', 'pink';
 
 @each $color in $colors {
 	[data-textbox-background~='#{$color}'] {
@@ -21,7 +21,6 @@ $colors: 'white', 'black', 'claret', 'blue', 'transparent';
 		@include colorBorder($text-color);
 	}
 }
-
 
 @mixin alignBorder($position) {
 	$value: ("left": 0, "center": 33%, "right": 66%);
@@ -40,13 +39,51 @@ $colors: 'white', 'black', 'claret', 'blue', 'transparent';
 	}
 }
 
+@mixin resizeTextbox {
+	.article-topper__text-wrapper {
+		width: 100%;
+		padding: 0;
+	}
+
+	.article-topper__headline {
+		margin-top: 20px;
+		@include oGridRespondTo(M) {
+			&::after {
+				margin-top: 40px;
+			}
+		}
+	}
+
+	.article-topper__stand-first {
+		@include oGridRespondTo(M) {
+			width: 50%;
+			margin: 0 auto;
+		}
+	}
+}
+
+@mixin overlayText {
+	.article-topper__background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: inherit;
+		min-height: inherit;
+		width: 100%;
+	}
+}
+
+@mixin setTypeStyles($l-size, $l-height) {
+	@include setHeadlineFont($l-size, $l-height, 32px, 32px);
+	@include setStandfirstFont(22px, 26px, 18px, 22px);
+}
+
 @mixin setHeadlineFont($size-l, $height-l, $size-s, $height-s) {
 	.article-topper__headline {
 		@include oTypographySerifDisplay(xl);
 		@include setResponsiveType($size-l, $height-l, $size-s, $height-s);
 	}
 }
-
 
 @mixin setStandfirstFont($size-l, $height-l, $size-s, $height-s) {
 	.article-topper__stand-first {
@@ -61,9 +98,26 @@ $colors: 'white', 'black', 'claret', 'blue', 'transparent';
 		font-size: $size-s;
 		line-height: $height-s;
 	}
-
 	@include oGridRespondTo(L) {
 		font-size: $size-l;
 		line-height: $height-l;
+	}
+}
+
+@mixin fullBleedImage {
+	@include setTypeStyles(64px, 64px);
+	.article-topper__text-box {
+		background: transparent;
+	}
+	.article-topper__visual {
+		width: 100%;
+
+		.n-image-wrapper > .n-image {
+			height: auto;
+			width: 100vw;
+		}
+	}
+	.article-topper__text-wrapper {
+		z-index: 1;
 	}
 }
