@@ -88,6 +88,8 @@ const handleResponse = (el, response) => {
 		return;
 	}
 
+	el.dataset.trackable = `type-${response.type} | id-${response.id}`;
+
 	const container = document.querySelector('.promoted-content')
 	container.classList.add('promoted-content--loaded');
 	container.classList.add(`promoted-content--${response.type}`);
