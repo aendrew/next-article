@@ -65,7 +65,7 @@ const showGcs = (req, res, isFreeArticle) => {
 	}
 };
 
-module.exports = function articleV3Controller (req, res, next, content) {
+module.exports = function articleV3Controller (req, res, next, content, richContent) {
 	let asyncWorkToDo = [];
 
 	res.vary('ft-is-aud-dev');
@@ -166,6 +166,10 @@ module.exports = function articleV3Controller (req, res, next, content) {
 		content.isAudioArticle = content.metadata.some(tag => tag.idV1 === 'MjgwYzIyNjUtMmQ1ZC00NTNiLTgyMTQtMWU5ZDc3YzIzNWUy-VG9waWNz');
 	}
 
+	if(res.locals.flags.articleTopper && richContent) {
+		content.topper = richContent.topper;
+	}
+
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
 			content.contentType = 'article';
@@ -174,7 +178,7 @@ module.exports = function articleV3Controller (req, res, next, content) {
 				res.render('fragment', content);
 			} else {
 				content.layout = 'wrapper';
-				if(res.locals.flags.articleTopper) {
+				if(content.topper) {
 					res.render('rich-content', content)
 				} else {
 					res.render('content', content);

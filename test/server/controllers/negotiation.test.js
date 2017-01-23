@@ -18,6 +18,8 @@ const dependencyStubs = {
 	shellpromise: sinon.stub()
 };
 
+nock.disableNetConnect();
+
 const subject = proxyquire('../../../server/controllers/negotiation', {
 	'../lib/ig-poller': dependencyStubs.igPoller,
 	'./podcast': dependencyStubs.podcast,
@@ -302,7 +304,72 @@ describe('Negotiation Controller', function () {
 					expect(response._getRedirectUrl()).to.include('?ft_site=falcon&desktop=true');
 				});
 		});
+	});
 
-	})
+	describe('when rich article flag is on', function () {
 
+		context('and internalcontent request succeeds', function () {
+			beforeEach(function () {
+
+				nock('https://next-elastic.ft.com')
+					.post('/v3_api_v2/item/_mget')
+					.reply(200, fixtureArticle);
+
+				nock('http://test.api.ft.com')
+					.get('/internalcontent/352210c4-7b17-11e5-a1fe-567b37f80b64')
+					.reply(200, fixtureArticle);
+
+				return createInstance({
+					params: {
+						id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
+					}
+				},
+				{
+						articleTopper: true
+				});
+
+			});
+
+			afterEach(function () {
+				dependencyStubs.article.reset();
+			});
+
+			it('defers to the article controller', function () {
+				expect(dependencyStubs.article.callCount).to.equal(1);
+				expect(response.statusCode).to.not.equal(404);
+			});
+		});
+
+		context('and internalcontent request fails', function () {
+			beforeEach(function () {
+
+				nock('https://next-elastic.ft.com')
+					.post('/v3_api_v2/item/_mget')
+					.reply(200, fixtureArticle);
+
+				nock('http://test.api.ft.com')
+					.get('/internalcontent/352210c4-7b17-11e5-a1fe-567b37f80b64')
+					.reply(404);
+
+				return createInstance({
+					params: {
+						id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
+					}
+				},
+				{
+						articleTopper: true
+				});
+			});
+
+			afterEach(function () {
+				dependencyStubs.article.reset();
+			});
+
+			it('still defers to the article controller', function () {
+				expect(dependencyStubs.article.callCount).to.equal(1);
+				expect(response.statusCode).to.not.equal(404);
+			});
+		});
+
+	});
 });

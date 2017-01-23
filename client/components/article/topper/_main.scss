@@ -1,0 +1,106 @@
+@import 'themes';
+
+.article-topper__slot-1 {
+	// default and only size for the full bleed container
+	width: 100%;
+	height: 50vh;
+	position: relative;
+	@include oGridRespondTo(L) {
+		min-height: 600px;
+	}
+}
+
+.article-topper__visual {
+	//default size for current themes
+	width: 100%;
+	@include oGridRespondTo(M) {
+		width: 50%;
+	}
+	height: inherit;
+	min-height: inherit;
+	float: right;
+
+	.n-image-wrapper {
+		height: inherit;
+		min-height: inherit;
+
+		.n-image {
+			object-fit: cover;
+			height: 70vh;
+			min-height: 600px;
+		}
+	}
+}
+
+.article-topper__background {
+	//default for current themes
+	@include oGridRespondTo(M) {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	height: inherit;
+	min-height: inherit;
+	width: 100%;
+}
+
+.article-topper__text-box {
+	//default text setting
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: inherit;
+	min-height: inherit;
+	margin: 0 auto;
+	-webkit-font-smoothing: antialiased;
+}
+
+.article-topper__text-wrapper {
+	width: 100%;
+	padding: 0 5%;
+	box-sizing: border-box;
+	@include oGridRespondTo(M) {
+		width: 50%;
+		padding: 0 5% 0 0;
+	}
+}
+
+.article-topper__extras {
+	// all of teh hacks!!
+	.article__primary-theme {
+		> a {
+			color: inherit;
+			font-size: 16px;
+		}
+
+		> span > form > button {
+			@include oButtonsTheme(inverse);
+			border-radius: 0;
+			background-color: transparent;
+
+			&:before {
+				background-image: url('https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:plus?source=o-icons&tint=ffffff');
+			}
+
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.2) !important;
+			}
+		}
+	}
+}
+
+.article-topper__caption {
+	// very TBD
+	width: 95%;
+	font-style: italic;
+	font-size: 15px;
+	text-align: justify;
+	margin: 10px auto;
+	@include oGridRespondTo(L) {
+		position: absolute;
+		width: 45%;
+		right: -15%;
+		top: 10%;
+		margin: 0;
+	}
+}

@@ -1,13 +1,51 @@
 @import 'mixins';
 
-// .split-text-right {
-// 	@include alignText(right);
-// }
-//
-// .split-text-left {
-// 	@include alignText(left);
-// }
-//
-// .split-text-center {
-// 	@include alignText(center);
-// }
+.article-topper--split-text-right {
+	@include alignText(right);
+	@include setTypeStyles(52px, 52px);
+}
+
+.article-topper--split-text-left {
+	@include alignText(left);
+	@include setTypeStyles(52px, 52px);
+}
+
+.article-topper--split-text-center {
+	@include alignText(center);
+	@include setTypeStyles(52px, 52px);
+}
+
+.article-topper--full-bleed-image-center {
+	@include alignText(center);
+	@include fullBleedImage;
+	@include overlayText;
+	@include resizeTextbox;
+}
+
+.article-topper--full-bleed-image-right {
+	@include overlayText;
+	@include fullBleedImage;
+	@include alignText(center);
+	@include oGridRespondTo(M) {
+		@include alignText(right);
+	}
+	.article-topper__text-wrapper {
+		float: right;
+		align-self: flex-end;
+	}
+}
+
+.article-topper--full-bleed-image-left {
+	@include alignText(left);
+	@include fullBleedImage;
+	@include overlayText;
+}
+
+.article-topper--full-bleed-text {
+	@include alignText(center);
+	@include setTypeStyles(100px, 90px);
+	@include resizeTextbox;
+	.article-topper__visual {
+		display: none;
+	}
+}

@@ -34,5 +34,25 @@ module.exports = [
 				content: ''
 			}
 		}
+	},
+	{
+		timeout: 10000,
+		headers: { 'FT-Flags': 'articleTopper:on' },
+		urls: {
+			// not in CAPI (redirected to ft.com -> redirected to barrier)
+			'/content/8f88c930-d00a-11da-80fb-0000779e2340': 'http://www.ft.com/cms/s/0/8f88c930-d00a-11da-80fb-0000779e2340.html?ft_site=falcon&desktop=true',
+			// methode
+			'/content/395650fa-5b9c-11e5-a28b-50226830d644': 200,
+			// methode article with topper
+			'/content/5c3cae78-dbef-11e6-9d7c-be108f1c1dce': 200,
+			// fastft
+			'/content/21b56034-0ec9-3fe0-8174-ee90650e0bad': 200,
+			// podcast
+			'/content/5cf687c7-ddb9-4243-8fea-69e50b6b5682': 200,
+			// video
+			'/content/c382002a-a839-366c-9b5f-c3e51a25e05d': 200,
+			// fragment view
+			'/content/a85bf481-457c-3bd4-bd49-3801d175d583?fragment=true': 200
+		}
 	}
 ];
