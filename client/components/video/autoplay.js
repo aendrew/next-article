@@ -88,9 +88,9 @@ function videoEnded () {
 		lazyLoadImages({ root: upNextPlaceholderSlot });
 
 		upNextTimer = setTimeout(() => {
-			const upNextPlaceholderSlot.querySelector('.o-teaser__heading a');
-			upNextPlaceholderSlot.setAttribute('data-trackable', 'autoplay')
-			upNextPlaceholderSlot.click();
+			const upNextLink = upNextPlaceholderSlot.querySelector('.o-teaser__heading a');
+			upNextLink.setAttribute('data-trackable', 'autoplay');
+			upNextLink.click();
 		}, 5000);
 	}
 }
