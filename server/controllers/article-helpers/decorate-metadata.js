@@ -46,23 +46,11 @@ const selectAuthorsForDisplay = (article) => {
 	article.authors = article.metadata.filter(tag => tag.taxonomy === 'authors');
 }
 
-const selectTagToFollow = (article) => {
-	if(!article.tagToFollow) {
-		return;
-	}
-
-	article.tagToFollow = article.metadata
-		.find(tag => tag.idV1 === article.tagToFollow);
-
-	addTagTitlePrefix(article.tagToFollow);
-}
-
 module.exports = function (article) {
 	addRelativeUrl(article);
 	selectPrimaries(article);
 	selectPrimaryTag(article);
 	selectTagsForDisplay(article);
-	selectTagToFollow(article);
 	selectAuthorsForDisplay(article);
 	return article;
 };
