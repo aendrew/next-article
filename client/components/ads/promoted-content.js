@@ -88,7 +88,7 @@ const handleResponse = (el, response) => {
 		return;
 	}
 
-	el.dataset.trackable = `type-${response.type} | id-${response.id}`;
+	el.dataset.trackable = `type-${response.type} | id-${response.id || response.advertiser.split(' ').join('-').toLowerCase()}`;
 
 	const container = document.querySelector('.promoted-content')
 	container.classList.add('promoted-content--loaded');
