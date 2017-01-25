@@ -1,9 +1,8 @@
-import oGrid from 'n-ui/grid';
 import tracking from './tracking';
 
+const oGrid = require('o-grid');
 const commentsIcon = require('./icon');
 const commentsSkeleton = require('./skeleton');
-
 /*
  * We must check in this way because window.scrollY is not
  * readily available on page load. Furthermore it helps us
