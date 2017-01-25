@@ -42,7 +42,13 @@ function getArticle (contentId) {
 }
 
 function getRichArticle (contentId) {
-	return fetch(`https://s3-eu-west-1.amazonaws.com/rj-xcapi-mock/${contentId}`)
+	return fetch(`https://rj-up.ft.com/internalcontent/${contentId}`,
+	{
+		headers: {
+			"Authorization": process.env.RJUP_INTERNAL_CONTENT_KEY
+		},
+		timeout: 2000
+	})
 		.then(fetchres.json)
 		.then(richArticleModel)
 		.catch(err => {

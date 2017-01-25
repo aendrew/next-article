@@ -3,7 +3,6 @@
 const capiImage = require('./capi-image');
 
 module.exports = (article) => {
-
 	const model = {};
 	if(!article) {
 		return model;
