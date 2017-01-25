@@ -44,17 +44,7 @@
 				</div>
 				{{/if}}
 			</div>
-			{{#if tagToFollow}}
-				{{>follow-promo center=true tag=tagToFollow buttonSize="big" isHeader=true}}
-			{{else}}
-				{{#if readNextArticle}}
-					{{> header/read-next-header-teaser article=readNextArticle}}
-				{{else}}
-					{{#if tags}}
-						{{> header/topics-mentioned}}
-					{{/if}}
-				{{/if}}
-			{{/if}}
+				{{> header/read-next-header-teaser article=readNextArticle}}
 		</div>
 	</div>
 </div>
