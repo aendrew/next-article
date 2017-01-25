@@ -1,5 +1,3 @@
-const addTagTitlePrefix = require('./tag-title-prefix');
-
 const addRelativeUrl = (article) => {
 	article.metadata.map(tag => {
 		tag.relativeUrl = tag.url.replace(/https:\/\/www.ft.com/, '');
