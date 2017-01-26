@@ -92,7 +92,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 	content.isSpecialReport = content.primaryTag && content.primaryTag.taxonomy === 'specialReports';
 
 	// Setup the description field
-	content.description = content.subheading || '';
+	content.description = content.standfirst || '';
 
 	// Set the canonical URL, it's needed by Open Graph'
 	content.canonicalUrl = getCanonicalUrl(content.webUrl, content.id);
