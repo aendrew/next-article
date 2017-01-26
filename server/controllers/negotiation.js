@@ -45,7 +45,7 @@ function getRichArticle (contentId) {
 	return fetch(`https://rj-up.ft.com/internalcontent/${contentId}`,
 	{
 		headers: {
-			"Authorization": process.env.RJUP_INTERNAL_CONTENT_KEY
+			'Authorization': process.env.RJUP_INTERNAL_CONTENT_KEY
 		},
 		timeout: 3000
 	})
