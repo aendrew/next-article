@@ -308,7 +308,7 @@ describe('Negotiation Controller', function () {
 
 	describe('when rich article flag is on', function () {
 
-		const richArticleFixture = { topper: { headline: 'topper headline' } };
+		const richArticleFixture = { topper: { headline: 'topper headline', theme: 'split-text-left' } };
 
 		context('and internalcontent request succeeds', function () {
 			beforeEach(function () {

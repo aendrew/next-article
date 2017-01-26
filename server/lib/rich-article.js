@@ -8,7 +8,7 @@ module.exports = (article) => {
 		return model;
 	}
 
-	if(article.topper) {
+	if(article.topper && article.topper.theme && article.topper.theme !== '') {
 		model.topper = article.topper;
 		model.topper.standfirst = article.topper.standfirst || article.standfirst;
 		model.topper.headline = article.topper.headline || article.title;
