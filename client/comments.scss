@@ -5,8 +5,8 @@
 // of o-comments/o-comment-ui will appear on the site.
 @import "o-assets/main";
 @include oAssetsSetModulePaths((
-	o-comments: "//next-geebee.ft.com/build/v2/files/o-comments@3.2.0",
-	o-comment-ui: "//next-geebee.ft.com/build/v2/files/o-comment-ui@3.1.1"
+	o-comments: "https://www.ft.com/__origami/service/build/v2/files/o-comments@3.2.0",
+	o-comment-ui: "https://www.ft.com/__origami/service/build/v2/files/o-comment-ui@3.1.1"
 ));
 
 $o-comments-include-fonts: false;
