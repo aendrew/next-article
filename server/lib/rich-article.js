@@ -14,7 +14,7 @@ module.exports = (article) => {
 		model.topper.headline = article.topper.headline || article.title;
 	}
 
-	if(model.topper.image) {
+	if(model.topper && model.topper.image) {
 		return capiImage(model.topper.image).then(image => {
 			model.topper.image = image;
 		}).then(() => model);

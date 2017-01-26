@@ -10,6 +10,7 @@ const bylineTransform = require('../transforms/byline');
 const getMoreOnTags = require('./article-helpers/get-more-on-tags');
 const addTagTitlePrefix = require('./article-helpers/tag-title-prefix');
 const getAdsLayout = require('../utils/get-ads-layout');
+const cheerio = require('cheerio');
 
 function isCapiV1 (provenance) {
 	return provenance.find(
@@ -45,6 +46,16 @@ function isMethodeArticle (webUrl) {
 		return true;
 	}
 	return false;
+}
+
+function getDescription (article) {
+	if (article.standfirst) {
+		return article.standfirst;
+	} else if (article.openingHTML) {
+		return cheerio.load(article.openingHTML)('p').first().text();
+	} else {
+		return '';
+	}
 }
 
 function getCanonicalUrl (webUrl, id) {
@@ -92,7 +103,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 	content.isSpecialReport = content.primaryTag && content.primaryTag.taxonomy === 'specialReports';
 
 	// Setup the description field
-	content.description = content.standfirst || '';
+	content.description = getDescription(content);
 
 	// Set the canonical URL, it's needed by Open Graph'
 	content.canonicalUrl = getCanonicalUrl(content.webUrl, content.id);
