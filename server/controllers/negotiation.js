@@ -47,7 +47,7 @@ function getRichArticle (contentId) {
 		headers: {
 			"Authorization": process.env.RJUP_INTERNAL_CONTENT_KEY
 		},
-		timeout: 2000
+		timeout: 3000
 	})
 		.then(fetchres.json)
 		.then(richArticleModel)
