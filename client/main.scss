@@ -1,9 +1,6 @@
-$output-critical: true !default;
-
-
+$n-ui-output-critical: true;
 
 @import 'n-ui/configure';
-$n-ui-output-critical: $output-critical;
 @include nUiConfigure(
 	$features: (
 		buttons: true,

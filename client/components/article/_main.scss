@@ -120,20 +120,20 @@
 	margin-top: -30px;
 }
 .o-gallery__control--prev:before {
-	@include oIconsGetIcon('arrow-left', #ffffff, 60);
+	@include oIconsGetIcon('arrow-left', #ffffff, 60, $iconset-version: 1);
 	left: -5px;
 	content: '';
 }
 .o-gallery__control--prev:hover:before {
-	@include oIconsGetIcon('arrow-left', #b0b0b0, 60);
+	@include oIconsGetIcon('arrow-left', #b0b0b0, 60, $iconset-version: 1);
 }
 .o-gallery__control--next:before {
-	@include oIconsGetIcon('arrow-right', #ffffff, 60);
+	@include oIconsGetIcon('arrow-right', #ffffff, 60, $iconset-version: 1);
 	left: -3px;
 	content: '';
 }
 .o-gallery__control--next:hover:before {
-	@include oIconsGetIcon('arrow-right', #b0b0b0, 60);
+	@include oIconsGetIcon('arrow-right', #b0b0b0, 60, $iconset-version: 1);
 }
 
 .article__aside {

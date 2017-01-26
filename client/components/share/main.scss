@@ -137,7 +137,7 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 	&__comments,
 	&__print {
 		&:before {
-			@include oIconsGetIcon('speech', getColorFor('link', 'text'), $icon-size);
+			@include oIconsGetIcon('speech', getColorFor('link', 'text'), $icon-size, $iconset-version: 1);
 			content: '';
 			position: absolute;
 			left: -#{$icon-padding}px;
@@ -153,7 +153,7 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 	&__print {
 		&:before {
 			top: -#{$icon-padding / 2}px;
-			@include oIconsGetIcon('print', getColor('cold-1'), $icon-size, $apply-base-styles: false, $apply-width-height: false);
+			@include oIconsGetIcon('print', getColor('cold-1'), $icon-size, $apply-base-styles: false, $apply-width-height: false, $iconset-version: 1);
 		}
 	}
 }

@@ -30,7 +30,7 @@ $brand-color: getColor('warm-1');
 	margin-top: 8px;
 	@media screen {
 		&:before {
-			@include oIconsGetIcon('speech-left', getColor('claret'), 44);
+			@include oIconsGetIcon('speech-left', getColor('claret'), 44, $iconset-version: 1);
 			content: '';
 			position: absolute;
 			top: -7px;
