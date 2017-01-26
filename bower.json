@@ -20,9 +20,7 @@
     "superstore": "^2.1.0"
   },
   "resolutions": {
-    "o-hoverable": "^3.0.0",
     "o-typography": "^4.1.0",
-    "o-viewport": "^2.0.0",
-    "superstore-sync": "b29aa99"
+    "o-viewport": "^2.0.0"
   }
 }
