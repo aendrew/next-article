@@ -4,16 +4,16 @@
 * For now we simply render an inline barrier page similar to fastft.
 */
 
-const populateWithBarrier = () => {
+const populateWithBarrier = (el) => {
 	return fetch('/products?fragment=true&inline=true&narrow=true', { credentials: 'same-origin' })
 		.then(response => {
 			if (response.ok) {
 				return response.text().then(html => {
-					document.querySelector('#inline-barrier').insertAdjacentHTML('beforeend', html);
-					document.querySelector('#inline-barrier').classList.remove('n-util-visually-hidden');
+					el.insertAdjacentHTML('beforeend', html);
+					el.classList.remove('n-util-visually-hidden');
 				});
 			} else {
-				return response.text().then(text => {throw(`Could not barrier content`)});
+				return response.text().then(text => {throw(`Could not fetch barrier content`)});
 			}
 		})
 		.catch(error => {
@@ -23,7 +23,8 @@ const populateWithBarrier = () => {
 
 export default (flags) => {
 	const el = document.querySelector('#inline-barrier');
-	if (el) {
-		populateWithBarrier();
+
+	if (el && el.dataset.nType === 'standard') {
+		populateWithBarrier(el);
 	}
 }

@@ -117,7 +117,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 
 	// Inline barrier page & type
 	content.inlineBarrier = {
-		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && res.get('x-ft-access-teaser') && !req.query.fragment && res.locals.flags.inArticleTeaser,
+		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && req.get('ft-access-teaser') && !req.query.fragment && res.locals.flags.inArticleTeaser,
 		type: 'standard' // TODO - set inline barrier type via preflight decision
 	}
 
