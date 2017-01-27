@@ -2,6 +2,7 @@
 * !WIP Proof of Concept
 *
 * For now we simply render an inline barrier page similar to fastft.
+* In future this could become an n/o-component
 */
 
 const populateWithBarrier = (el) => {
