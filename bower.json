@@ -12,6 +12,7 @@
     "o-comment-ui": "v4.0.0-beta.2",
     "o-comments": "v4.0.0-beta.2",
     "o-email-only-signup": "^3.2.3",
+    "o-icons": "^5.2.0",
     "o-gallery": "^1.7.4",
     "o-labels": "^2.0.3",
     "o-share": "^2.1.2",
@@ -21,6 +22,7 @@
   },
   "resolutions": {
     "o-typography": "^4.1.0",
-    "o-viewport": "^2.0.0"
+    "o-viewport": "^2.0.0",
+    "o-icons": "^5.2.0"
   }
 }
