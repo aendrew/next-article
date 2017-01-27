@@ -124,8 +124,8 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 	content.designGenre = articleBranding(content.metadata);
 
 	content.commentsAssets = {
-		js: req.app.hasher.get('comments.js'),
-		css: req.app.hasher.get('comments.css')
+		js: req.app.getHashedAssetUrl('comments.js'),
+		css: req.app.getHashedAssetUrl('comments.css')
 	};
 
 	// Decorate with related stuff
