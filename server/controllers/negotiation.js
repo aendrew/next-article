@@ -21,9 +21,11 @@ function isArticleVideo (article) {
 }
 
 function getInteractive (contentId) {
-	return interactivePoller.getData().find(
+	const data = interactivePoller.getData();
+
+	return data ? data.find(
 		mapping => mapping.articleuuid === contentId
-	);
+	) : [];
 }
 
 function getArticle (contentId) {
