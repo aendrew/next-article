@@ -36,7 +36,7 @@ const elementsToCut = (i, el, $el, cutIdx) => {
  */
 const getCutOffIdx = ($, $contents, breakdown) => {
 	const half = Math.ceil(breakdown['p'] / 2);
-	const idx = half > 3 ? 3 : t; // 4 paragraphs (0 index)
+	const idx = half > 3 ? 3 : half; // 4 paragraphs (0 index)
 	const $lastP = $('p').eq(idx);
 	return $contents.index($lastP);
 }
@@ -64,7 +64,7 @@ module.exports = function (bodyHTML, flags) {
 	const cutIdx = getCutOffIdx($, $contents, breakdown);
 
 	$contents
-		.filter(function(i, el) { // NOTE: preserve this scope
+		.filter(function (i, el) { // NOTE: preserve this scope
 			return elementsToCut(i, el, $(this), cutIdx)
 		})
 		.remove();

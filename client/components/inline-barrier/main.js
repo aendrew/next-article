@@ -13,15 +13,15 @@ const populateWithBarrier = (el) => {
 					el.classList.remove('n-util-visually-hidden');
 				});
 			} else {
-				return response.text().then(text => {throw(`Could not fetch barrier content`)});
+				return response.text().then(() => {throw('Could not fetch barrier content')});
 			}
 		})
-		.catch(error => {
-			console.log(error.toString());
+		.catch(() => {
+			// console.log(error.toString());
 		});
 }
 
-export default (flags) => {
+export default () => {
 	const el = document.querySelector('#inline-barrier');
 
 	if (el && el.dataset.nType === 'standard') {
