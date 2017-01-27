@@ -123,6 +123,11 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 
 	content.designGenre = articleBranding(content.metadata);
 
+	content.commentsAssets = {
+		js: req.app.hasher.get('comments.js'),
+		css: req.app.hasher.get('comments.css')
+	};
+
 	// Decorate with related stuff
 	content.moreOns = getMoreOnTags(content);
 
