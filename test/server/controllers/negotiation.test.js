@@ -308,16 +308,19 @@ describe('Negotiation Controller', function () {
 
 	describe('when rich article flag is on', function () {
 
+		const richArticleFixture = { topper: { headline: 'topper headline', theme: 'split-text-left' } };
+
 		context('and internalcontent request succeeds', function () {
 			beforeEach(function () {
+
 
 				nock('https://next-elastic.ft.com')
 					.post('/v3_api_v2/item/_mget')
 					.reply(200, fixtureArticle);
 
-				nock('http://test.api.ft.com')
+				nock('https://rj-up.ft.com')
 					.get('/internalcontent/352210c4-7b17-11e5-a1fe-567b37f80b64')
-					.reply(200, fixtureArticle);
+					.reply(200, richArticleFixture);
 
 				return createInstance({
 					params: {
@@ -336,6 +339,7 @@ describe('Negotiation Controller', function () {
 
 			it('defers to the article controller', function () {
 				expect(dependencyStubs.article.callCount).to.equal(1);
+				expect(dependencyStubs.article.args[0][4].topper.headline).to.equal('topper headline');
 				expect(response.statusCode).to.not.equal(404);
 			});
 		});

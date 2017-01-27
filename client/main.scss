@@ -54,7 +54,6 @@ $o-video-is-silent: false;
 @import 'o-email-only-signup/main';
 @import 'components/comments/skeleton';
 @import 'components/affinity/loading-indicator';
-@import 'components/follow-promo/main';
 @import 'components/onward-journey/main';
 @import 'components/special-report/main';
 @import 'components/story-package';
@@ -76,7 +75,6 @@ $o-video-is-silent: false;
 	.article__share,
 	.article__tags,
 	.core .o-header__search,
-	.follow-promo,
 	.js-special-report,
 	.more-on,
 	.more-on--abtest_b--wrapper,

@@ -174,11 +174,5 @@
 	width: 40px;
 }
 
-.tag-to-follow {
-	@include oGridRespondTo(L) {
-		display: none;
-	}
-}
-
 @import 'genre-styles';
 @import 'topper/main';
