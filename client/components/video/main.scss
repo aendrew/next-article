@@ -116,6 +116,16 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 	position: absolute;
 	bottom: 0;
 	right: 20px;
+	background-color: #000000;
+	padding: 10px;
+
+	@include oGridRespondTo(M) {
+		width: 240px;
+	}
+
+	@include oGridRespondTo(L) {
+		width: 300px;
+	}
 
 	.video__placeholder__ended & {
 		display: block;
