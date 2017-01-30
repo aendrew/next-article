@@ -116,6 +116,16 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 	position: absolute;
 	bottom: 0;
 	right: 20px;
+	background-color: #000000;
+	padding: 10px;
+
+	@include oGridRespondTo(M) {
+		width: 240px;
+	}
+
+	@include oGridRespondTo(L) {
+		width: 300px;
+	}
 
 	.video__placeholder__ended & {
 		display: block;
@@ -249,7 +259,7 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 }
 
 .related_content__list-item--video a:after {
-	@include oIconsGetIcon('play', oColorsGetPaletteColor('black'), 13);
+	@include oIconsGetIcon('play', oColorsGetPaletteColor('black'), 13, $iconset-version: 1);
 	content: '';
 	position: relative;
 	top: 1px;
@@ -325,7 +335,7 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 	}
 
 	&:before {
-		@include oIconsGetIcon('cross', oColorsGetPaletteColor('red-tint2'), 80);
+		@include oIconsGetIcon('cross', oColorsGetPaletteColor('red-tint2'), 80, $iconset-version: 1);
 		content: '';
 	}
 }
