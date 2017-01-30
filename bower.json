@@ -18,11 +18,13 @@
     "o-share": "^2.1.2",
     "o-teaser": "^1.4.1",
     "o-teaser-collection": "^1.1.0",
+    "o-viewport": "^3.0.2",
     "superstore": "^2.1.0"
   },
   "resolutions": {
     "o-typography": "^4.1.0",
-    "o-viewport": "^2.0.0",
-    "o-icons": "^5.2.0"
+    "o-icons": "^5.2.0",
+    "o-viewport": "^3.0.2",
+    "superstore-sync": "b29aa99"
   }
 }

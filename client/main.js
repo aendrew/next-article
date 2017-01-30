@@ -20,7 +20,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const promotedContent = require('./components/ads/promoted-content');
 	const ftlabsSpokenLayer = require('./components/ftlabsSpokenLayer/main');
 	const legalCopy = require('./components/legal-copy/main');
-	const videoAutoplay = require('./components/video/autoplay');
+	const AutoplayVideo = require('./components/video/autoplay-video');
 	const affinity = require('./components/affinity/main');
 
 	// cacheJourney();
@@ -62,23 +62,17 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 			localStorageKey: 'tour-tip-article-dismissed'
 		});
 
-		const enableAutoplay = document.querySelector('.content__video');
-		if (enableAutoplay) {
-			videoAutoplay.init();
-		}
-
-		const videos = document.querySelectorAll('[data-o-component="o-video"]');
-		Array.from(videos).forEach(video => {
-			let oVideo = new OVideo(video, {
-				id: video.getAttribute('data-o-video-id'),
-				placeholder: true,
-				classes: ['video'],
-				advertising: flags.get('videoPlayerAdvertising'),
-				placeholderInfo: ['brand', 'title'],
-				autorender: !enableAutoplay,
-			});
-			if (enableAutoplay) {
-				videoAutoplay(oVideo);
+		[...document.querySelectorAll('[data-o-component="o-video"]')].forEach(videoEl => {
+			if (videoEl.hasAttribute('data-video-autoplay')) {
+				const video = new AutoplayVideo(videoEl, { showAds: flags.get('videoPlayerAdvertising') });
+				video.init();
+			} else {
+				new OVideo(videoEl, {
+					placeholder: true,
+					classes: ['video'],
+					advertising: flags.get('videoPlayerAdvertising'),
+					placeholderInfo: ['brand', 'title'],
+				});
 			}
 		});
 
