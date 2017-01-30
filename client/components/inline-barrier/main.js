@@ -13,12 +13,7 @@ const populateWithBarrier = (el) => {
 					el.insertAdjacentHTML('beforeend', html);
 					el.classList.remove('n-util-visually-hidden');
 				});
-			} else {
-				return response.text().then(() => {throw('Could not fetch barrier content')});
 			}
-		})
-		.catch(() => {
-			// console.log(error.toString());
 		});
 }
 
