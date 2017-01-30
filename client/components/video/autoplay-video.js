@@ -1,5 +1,5 @@
 import { lazyLoad as lazyLoadImages } from 'n-image';
-import oViewport from 'n-ui/viewport';
+import oViewport from 'o-viewport';
 import OVideo from 'o-video';
 
 import playCheck from './play-check';
