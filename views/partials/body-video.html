@@ -6,10 +6,10 @@
 					{{#if attachments}}
 						<div
 							class="o-video"
+							data-video-autoplay
 							data-o-component="o-video"
 							data-o-video-id="{{video.id}}"
-							{{#if brightcoveData}}data-o-video-data="{{json brightcoveData}}"{{/if}}
-							>
+							{{#if brightcoveData}}data-o-video-data="{{json brightcoveData}}"{{/if}}>
 								{{! Add a non-js fallback for core users }}
 								<video controls class="video video__core-fallback" poster="{{#resize 1024}}{{mainImage.url}}{{/resize}}" src="{{attachments.0.url}}" preload="none"></video>
 						</div>
