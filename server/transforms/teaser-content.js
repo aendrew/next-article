@@ -35,7 +35,7 @@ const elementsToCut = (i, el, $el, cutIdx) => {
  * catering for shorter articles
  */
 const getCutOffIdx = ($, $contents, breakdown) => {
-	const half = Math.ceil(breakdown['p'] / 2);
+	const half = Math.floor(breakdown['p'] / 2) - 1;
 	const idx = half > 3 ? 3 : half; // 4 paragraphs (0 index)
 	const $lastP = $('p').eq(idx);
 	return $contents.index($lastP);

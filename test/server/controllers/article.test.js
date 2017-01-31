@@ -27,11 +27,11 @@ describe('Article Controller', () => {
 	let next;
 	let result;
 
-	function createInstance (params, flags, payload, internalContentPayload) {
+	function createInstance (params, flags, payload, internalContentPayload, asAnon) {
 		next = sinon.stub();
 		request = httpMocks.createRequest(params);
 		response = httpMocks.createResponse();
-		response.locals = { flags: flags || {} };
+		response.locals = { flags: flags || {}, anon: { userIsAnonymous: asAnon } };
 
 		// node-mocks-http doesn't support this method
 		response.unvaryAll = sinon.stub();
@@ -150,6 +150,25 @@ describe('Article Controller', () => {
 				expect(result.topper).to.equal('something');
 				expect(response.statusCode).to.equal(200);
 			});
+		});
+
+	});
+
+	context('article teaser layout', () => {
+		beforeEach(() => {
+			result = null;
+
+			return createInstance({ headers: { 'ft-access-teaser': 'TRUE' }}, { inArticleTeaser: true }, null, null, true).then(() => {
+				result = response._getRenderData()
+			});
+		});
+
+		it('renders with an inline barrier', () => {
+			expect(result.inlineBarrier.show).to.equal(true);
+		});
+
+		it('will not render lightSignup if inArticleTeaser flag is on', () => {
+			expect(result.lightSignup.show).to.not.equal(true);
 		});
 
 	});
