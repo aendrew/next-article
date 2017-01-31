@@ -13,7 +13,7 @@ const controllerVideo = require('./video');
 const controllerArticle = require('./article');
 
 function isArticlePodcast (article) {
-	return article.provenance.some(source => /acast\.com/.test(source));
+	return (article.provenance || []).some(source => /acast\.com/.test(source));
 }
 
 function isArticleVideo (article) {
