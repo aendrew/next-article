@@ -175,7 +175,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 		content.jsonLd = res.locals.jsonLd;
 	}
 
-	if(res.locals.flags.ftlabsSpokenLayer){
+	if (res.locals.flags.ftlabsSpokenLayer) {
 		content.isAudioArticle = content.metadata.some(tag => tag.idV1 === 'MjgwYzIyNjUtMmQ1ZC00NTNiLTgyMTQtMWU5ZDc3YzIzNWUy-VG9waWNz');
 	}
 
@@ -191,6 +191,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 				res.render('fragment', content);
 			} else {
 				content.layout = 'wrapper';
+				content.viewStyle = 'compact';
 				if(content.topper) {
 					res.render('rich-content', content)
 				} else {
