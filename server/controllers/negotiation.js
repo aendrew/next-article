@@ -17,7 +17,7 @@ function isArticlePodcast (article) {
 }
 
 function isArticleVideo (article) {
-	return article.webUrl.includes('video.ft.com');
+	return (article.webUrl || '').includes('video.ft.com');
 }
 
 function getInteractive (contentId) {
