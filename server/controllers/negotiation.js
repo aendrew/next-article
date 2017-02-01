@@ -12,12 +12,12 @@ const controllerPodcast = require('./podcast');
 const controllerVideo = require('./video');
 const controllerArticle = require('./article');
 
-function isArticlePodcast (article) {
-	return article.provenance.some(source => /acast\.com/.test(source));
+function isArticlePodcast ({ provenance = [] } = {}) {
+	return provenance.some(source => /acast\.com/.test(source));
 }
 
-function isArticleVideo (article) {
-	return article.webUrl.includes('video.ft.com');
+function isArticleVideo ({ webUrl = '' } = {}) {
+	return webUrl.includes('video.ft.com');
 }
 
 function getInteractive (contentId) {
@@ -54,9 +54,8 @@ function getRichArticle (contentId) {
 		.catch(err => {
 			logger.error({
 				event: 'INTERNAL_CONTENT_FETCH_FAIL',
-				error: err.toString(),
 				uuid: contentId
-			});
+			}, err);
 		});
 }
 

@@ -12,9 +12,9 @@ module.exports = (article) => {
 		'split-text-center': 'split',
 		'split-text-left': 'split',
 		'split-text-right': 'split',
-		'full-bleed-center': 'full-bleed',
-		'full-bleed-left': 'full-bleed',
-		'full-bleed-right': 'full-bleed',
+		'full-bleed-image-center': 'full-bleed',
+		'full-bleed-image-left': 'full-bleed',
+		'full-bleed-image-right': 'full-bleed',
 		'full-bleed-text': null
 	}
 

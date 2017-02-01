@@ -41,9 +41,8 @@ module.exports = function (image) {
 		.catch((err) => {
 			logger.error({
 				event: 'TOPPER_IMAGE_FETCH_FAIL',
-				error: err.message.toString(),
 				uuid: image.id
-			});
+			}, err);
 		});
 	}
 };
