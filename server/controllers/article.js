@@ -41,7 +41,7 @@ function isPremium (webUrl) {
 	return webUrl.search('/cms/s/3') !== -1
 }
 
-function isMethodeArticle (webUrl) {
+function isMethodeArticle (webUrl = '') {
 	if (webUrl.indexOf('http://www.ft.com/cms/s') === 0) {
 		return true;
 	}
