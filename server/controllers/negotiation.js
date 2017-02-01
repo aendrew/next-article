@@ -97,6 +97,11 @@ module.exports = function negotiationController (req, res, next) {
 				return res.redirect(302, `${webUrl}${webUrl.includes('?') ? '&' : '?'}ft_site=falcon&desktop=true`);
 			}
 
+			// Redirect requests for placeholders
+			if (article && article.type === 'placeholder') {
+				return res.redirect(302, article.url);
+			}
+
 			if (article) {
 				if (isArticlePodcast(article)) {
 					return controllerPodcast(req, res, next, article);
