@@ -25,7 +25,7 @@ module.exports = (article) => {
 		model.topper.themeImageRatio = themeImageRatio[article.topper.theme];
 	}
 
-	if(model.topper.images) {
+	if(model.topper && model.topper.images) {
 		return Promise.all(model.topper.images.map(image => capiImage(image)))
 		.then(images => {
 			model.topper.images = images;
