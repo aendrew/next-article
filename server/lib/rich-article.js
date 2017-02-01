@@ -8,10 +8,21 @@ module.exports = (article) => {
 		return model;
 	}
 
-	if(article.topper && article.topper.theme && article.topper.theme !== '') {
+	const themeImageRatio = {
+		'split-text-center': 'split',
+		'split-text-left': 'split',
+		'split-text-right': 'split',
+		'full-bleed-center': 'full-bleed',
+		'full-bleed-left': 'full-bleed',
+		'full-bleed-right': 'full-bleed',
+		'full-bleed-text': null
+	}
+
+	if(article.topper && article.topper.theme && themeImageRatio[article.topper.theme]) {
 		model.topper = article.topper;
 		model.topper.standfirst = article.topper.standfirst || article.standfirst;
 		model.topper.headline = article.topper.headline || article.title;
+		model.topper.themeImageRatio = themeImageRatio[article.topper.theme];
 	}
 
 	if(model.topper.images) {
