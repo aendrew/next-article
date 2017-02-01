@@ -14,15 +14,9 @@ const fetchCapiJson = (endpoint) => {
 			}
 			return response.text()
 				.then((text) => {
-					const requestId = response.headers.get('x-request-id') || 'UNKNOWN';
-					const server = response.headers.get('server') || 'UNKNOWN';
-					const masheryMessageId = response.headers.get('x-mashery-message-id') || 'UNKNOWN';
 					return Promise.reject({
 						error: text,
-						status: response.status,
-						requestId: requestId,
-						server: server,
-						masheryMessageId: masheryMessageId
+						status: response.status
 					});
 				});
 		});
@@ -47,8 +41,8 @@ module.exports = function (image) {
 		.catch((err) => {
 			logger.error({
 				event: 'TOPPER_IMAGE_FETCH_FAIL',
-				error: err.toString(),
-				uuid: image
+				error: err.message.toString(),
+				uuid: image.id
 			});
 		});
 	}
