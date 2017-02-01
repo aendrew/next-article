@@ -29,15 +29,25 @@
 			</div>
 		</div>
 		<div class="article-topper__visual">
-			{{#nImagePresenter srcSet=mainImage.url placeholder=image.ratio widths="[1310, 1960, 2760]" }}
-				{{> n-image/templates/image }}
-			{{/nImagePresenter}}
+			<picture class="article-topper__picture">
+				{{#each topper.images}}
+				{{#ifEquals type 'square'}}<source media="(max-width: 490px)" srcset="https://www.ft.com/__origami/service/image/v2/images/raw/{{url}}?source=next&fit=scale-down&quality=highest&width=490 490w">{{/ifEquals}}
+				{{#ifEquals type 'standard'}}<source media="(max-width: 1220px)" srcset="https://www.ft.com/__origami/service/image/v2/images/raw/{{url}}?source=next&fit=scale-down&quality=highest&width=1220 1220w">{{/ifEquals}}
+				{{#ifEquals type 'wide'}}<source media="(min-width: 1220px)" srcset="https://www.ft.com/__origami/service/image/v2/images/raw/{{url}}?source=next&fit=scale-down&quality=highest&width=1440 1440w">
+				{{/ifEquals}}
+				{{/each}}
+				<img class="article-topper__image" src="https://www.ft.com/__origami/service/image/v2/images/raw/{{mainImage.url}}?source=next&fit=scale-down&quality=highest&width=1440">
+			</picture>
 		</div>
 	</div>
 	<div class="article-topper__slot-2 o-grid-container">
 		<div class="o-grid-row">
-			<div class="article-topper__caption">
-				{{mainImage.description}}
+			<div class="article-topper__credits" data-o-grid-colspan="12 L8 XL7 XLoffset1">
+				{{#each topper.images}}
+					{{#ifEquals type 'square'}}<span class='article-topper__s-credits' data-o-grid-colspan="12 Mhide">{{copyright}}</span>{{/ifEquals}}
+					{{#ifEquals type 'standard'}}<span class='article-topper__m-credits'  data-o-grid-colspan="hide M12 Lhide">{{copyright}}</span>{{/ifEquals}}
+					{{#ifEquals type 'wide'}}<span class='article-topper__l-credits' data-o-grid-colspan="hide L12">{{copyright}}</span>{{/ifEquals}}
+				{{/each}}
 			</div>
 			<div class="article-topper__utils" data-o-grid-colspan="12 L8 XL7 XLoffset1">
 				{{> toolbar location='top'}}

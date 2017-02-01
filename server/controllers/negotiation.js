@@ -12,20 +12,18 @@ const controllerPodcast = require('./podcast');
 const controllerVideo = require('./video');
 const controllerArticle = require('./article');
 
-function isArticlePodcast ({ provenance = [] }) {
-	return provenance.some(source => /acast\.com/.test(source));
+function isArticlePodcast (article) {
+	return article.provenance.some(source => /acast\.com/.test(source));
 }
 
-function isArticleVideo ({ webUrl = '' }) {
-	return webUrl.includes('video.ft.com');
+function isArticleVideo (article) {
+	return article.webUrl.includes('video.ft.com');
 }
 
 function getInteractive (contentId) {
-	const data = interactivePoller.getData();
-
-	return data ? data.find(
+	return interactivePoller.getData().find(
 		mapping => mapping.articleuuid === contentId
-	) : [];
+	);
 }
 
 function getArticle (contentId) {
