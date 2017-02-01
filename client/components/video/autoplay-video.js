@@ -23,9 +23,6 @@ function eventForwarder (ev) {
 		case 'pause':
 			this.paused();
 			break;
-		case 'ended':
-			this.ended();
-			break;
 	}
 }
 
@@ -36,10 +33,10 @@ export default class {
 		this.video = new OVideo(videoEl, {
 			placeholder: true,
 			classes,
-			advertising: showAds
+			advertising: false
 		});
+
 		this.videoPlaceholderElement = this.videoEl.parentNode.querySelector('.video__placeholder');
-		this.upNextTimer;
 	}
 
 	init () {
@@ -49,6 +46,8 @@ export default class {
 		return Promise.all([playCheck(), this.video.init()])
 			.then(([canPlay]) => {
 				if (canPlay) {
+					this.setupAutoplayTest();
+
 					// NOTE: confusingly, #getVisibility returns true if hidden
 					if (oViewport.getVisibility() === true) {
 						const visibilityHandler = ({ detail: { hidden } = {} }) => {
@@ -72,43 +71,81 @@ export default class {
 			});
 	}
 
+	setupAutoplayTest () {
+		// This is for an A/B test to see if displaying the 'next up' component before
+		// the video ends is more effective than display one after the video ends.
+		const autoplay = (link) => {
+			link.setAttribute('data-trackable', 'autoplay');
+			link.click();
+		};
+
+		const firstPlayHandler = (e) => {
+			// TODO: flag
+			if (true) {
+				e.target.addEventListener('timeupdate', beforeEndHandler);
+			} else {
+				e.target.addEventListener('ended', onEndHandler);
+			}
+
+			e.currentTarget.removeEventListener('playing', firstPlayHandler, true);
+		};
+
+		const beforeEndHandler = (e) => {
+			if ((e.target.duration - e.target.currentTime) <= 5) {
+				const next = this.showUpNext();
+
+				if (next) {
+					e.target.removeEventListener('timeupdate', beforeEndHandler);
+					e.target.addEventListener('ended', () => autoplay(next));
+				}
+			}
+		};
+
+		const onEndHandler = (e) => {
+			const next = this.showUpNext();
+
+			if (next) {
+				this.upNextTimer = setTimeout(() => autoplay(next), 5000);
+			}
+		};
+
+		this.videoEl.addEventListener('playing', firstPlayHandler, true);
+	}
+
 	playing () {
 		this.videoPlaceholderElement.classList.add('video__placeholder__played');
 		this.videoPlaceholderElement.classList.add('video__placeholder__playing');
-		clearTimeout(this.upNextTimer);
+
+		// Allow users to scrub back to replay video
+		this.upNextTimer && clearTimeout(this.upNextTimer);
 	}
 
 	paused () {
 		this.videoPlaceholderElement.classList.remove('video__placeholder__playing');
 	}
 
-	ended () {
-		const upNextItem = document.querySelector('li.video__up-next__list-item:first-of-type');
-		const upNextPlaceholderSlot = document.querySelector('.js-placeholder-up-next');
-		if (upNextItem && upNextPlaceholderSlot) {
-			const rolloverUpNext = upNextItem.cloneNode(true);
-			rolloverUpNext.removeAttribute('data-o-grid-colspan');
-			// remove image lazy-loading marker
-			[...rolloverUpNext.querySelectorAll('[data-n-image-lazy-load-js]')].forEach(lazyLoadingImageEl => {
-				lazyLoadingImageEl.removeAttribute('data-n-image-lazy-load-js');
-				// TODO: more appropriate responsive images sizes
-				lazyLoadingImageEl.setAttribute('sizes', '300px')
-			});
+	showUpNext () {
+		const item = document.querySelector('.video__up-next__list-item');
+		const slot = document.querySelector('.js-placeholder-up-next');
 
-			upNextPlaceholderSlot.innerHTML = '';
-			upNextPlaceholderSlot.appendChild(rolloverUpNext);
+		if (!item || !slot) return;
 
-			this.videoPlaceholderElement.classList.add('video__placeholder__ended');
-			this.videoPlaceholderElement.classList.remove('video__placeholder__playing');
+		const clone = item.firstElementChild.cloneNode(true);
 
-			lazyLoadImages({ root: upNextPlaceholderSlot });
+		// grab the link
+		const link = clone.querySelector('.js-teaser-heading-link');
 
-			this.upNextTimer = setTimeout(() => {
-				const upNextLink = upNextPlaceholderSlot.querySelector('.o-teaser__heading a');
-				upNextLink.setAttribute('data-trackable', 'autoplay');
-				upNextLink.click();
-			}, 5000);
-		}
+		slot.appendChild(clone);
+
+		// load the image already!
+		// TODO: fix this
+		lazyLoadImages({ root: clone });
+
+		this.videoPlaceholderElement.classList.add('video__placeholder__ended');
+		this.videoPlaceholderElement.classList.remove('video__placeholder__playing');
+
+		// next up items are lazy loaded so we'll return something useful if we got this far
+		return link;
 	}
 
 }

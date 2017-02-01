@@ -64,6 +64,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 		[...document.querySelectorAll('[data-o-component="o-video"]')].forEach(videoEl => {
 			if (videoEl.hasAttribute('data-video-autoplay')) {
+				// TODO: autoplay A/B test flag
 				const video = new AutoplayVideo(videoEl, { showAds: flags.get('videoPlayerAdvertising') });
 				video.init();
 			} else {
