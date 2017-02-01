@@ -97,36 +97,3 @@
 	margin-top: 15px;
 	opacity: 0.6; //opacity tbd in origami
 }
-//
-// @include oGridRespondTo($until: S) {
-// 	.article-topper__s-credits {
-// 		display: block;
-// 	}
-//
-// 	.article-topper__m-credits,
-// 	.article-topper__l-credits {
-// 		display: none;
-// 	}
-// }
-//
-// @include oGridRespondTo(S, L) {
-// 	.article-topper__m-credits {
-// 		display: block;
-// 	}
-//
-// 	.article-topper__s-credits,
-// 	.article-topper__l-credits {
-// 		display: none;
-// 	}
-// }
-//
-// @include oGridRespondTo(L) {
-// 	.article-topper__l-credits {
-// 		display: block;
-// 	}
-//
-// 	.article-topper__s-credits,
-// 	.article-topper__m-credits {
-// 		display: none;
-// 	}
-// }
