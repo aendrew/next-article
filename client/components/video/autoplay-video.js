@@ -29,26 +29,39 @@ function eventForwarder (ev) {
 	}
 }
 
+const defaults = {
+	advertising: false,
+	classes: [ 'video' ],
+	// TODO: add A/B test variants
+	upNextStyle: false
+}
+
 export default class {
 
-	constructor (videoEl, { showAds = false, classes = ['video'] } = {}) {
+	constructor (videoEl, options = {}) {
+		this.options = Object.assign({}, defaults, options);
+
 		this.videoEl = videoEl;
+
 		this.video = new OVideo(videoEl, {
 			placeholder: true,
-			classes,
-			advertising: showAds
+			classes: this.options.classes,
+			advertising: this.options.advertising
 		});
+
 		this.videoPlaceholderElement = this.videoEl.parentNode.querySelector('.video__placeholder');
-		this.upNextTimer;
 	}
 
 	init () {
 		removeCoreFallback(this.videoEl);
 		document.body.addEventListener('oTracking.event', eventForwarder.bind(this));
 
+		this.setupUpNext();
+
 		return Promise.all([playCheck(), this.video.init()])
 			.then(([canPlay]) => {
 				if (canPlay) {
+
 					// NOTE: confusingly, #getVisibility returns true if hidden
 					if (oViewport.getVisibility() === true) {
 						const visibilityHandler = ({ detail: { hidden } = {} }) => {
@@ -73,42 +86,115 @@ export default class {
 	}
 
 	playing () {
-		this.videoPlaceholderElement.classList.add('video__placeholder__played');
-		this.videoPlaceholderElement.classList.add('video__placeholder__playing');
-		clearTimeout(this.upNextTimer);
+		this.videoPlaceholderElement.classList.add('video__placeholder--played');
+		this.videoPlaceholderElement.classList.add('video__placeholder--playing');
+		this.videoPlaceholderElement.classList.remove('video__placeholder--ended');
 	}
 
 	paused () {
-		this.videoPlaceholderElement.classList.remove('video__placeholder__playing');
+		this.videoPlaceholderElement.classList.remove('video__placeholder--playing');
 	}
 
 	ended () {
-		const upNextItem = document.querySelector('li.video__up-next__list-item:first-of-type');
-		const upNextPlaceholderSlot = document.querySelector('.js-placeholder-up-next');
-		if (upNextItem && upNextPlaceholderSlot) {
-			const rolloverUpNext = upNextItem.cloneNode(true);
-			rolloverUpNext.removeAttribute('data-o-grid-colspan');
-			// remove image lazy-loading marker
-			[...rolloverUpNext.querySelectorAll('[data-n-image-lazy-load-js]')].forEach(lazyLoadingImageEl => {
-				lazyLoadingImageEl.removeAttribute('data-n-image-lazy-load-js');
-				// TODO: more appropriate responsive images sizes
-				lazyLoadingImageEl.setAttribute('sizes', '300px')
-			});
+		this.videoPlaceholderElement.classList.add('video__placeholder--ended');
+		this.videoPlaceholderElement.classList.remove('video__placeholder--playing');
+	}
 
-			upNextPlaceholderSlot.innerHTML = '';
-			upNextPlaceholderSlot.appendChild(rolloverUpNext);
+	setupUpNext () {
+		// is the up next component being shown
+		this.upNextShown = false;
 
-			this.videoPlaceholderElement.classList.add('video__placeholder__ended');
-			this.videoPlaceholderElement.classList.remove('video__placeholder__playing');
+		// have the events been set up
+		this.upNextSetup = false;
 
-			lazyLoadImages({ root: upNextPlaceholderSlot });
+		// reference to autoplay countdown
+		this.upNextTimer = false;
 
-			this.upNextTimer = setTimeout(() => {
-				const upNextLink = upNextPlaceholderSlot.querySelector('.o-teaser__heading a');
-				upNextLink.setAttribute('data-trackable', 'autoplay');
-				upNextLink.click();
-			}, 5000);
-		}
+		const autoplay = (link) => {
+			link.setAttribute('data-trackable', 'autoplay');
+			link.click();
+		};
+
+		const beforeEndHandler = (e) => {
+			// duration and currentTime are both in seconds
+			if (!this.upNextShown && (e.target.duration - e.target.currentTime) <= 5) {
+				const next = this.appendUpNext();
+
+				if (next) {
+					// play next video immediately on end
+					e.target.addEventListener('ended', () => autoplay(next));
+				}
+			}
+		};
+
+		const onEndedHandler = () => {
+			const next = this.appendUpNext();
+
+			if (next) {
+				// this timer may be cancelled
+				this.upNextTimer = setTimeout(() => autoplay(next), 5000);
+			}
+		};
+
+		const onPlayingHandler = (e) => {
+			if (this.upNextSetup === false) {
+				if (this.options.upNextStyle) {
+					e.target.addEventListener('timeupdate', beforeEndHandler);
+				} else {
+					e.target.addEventListener('ended', onEndedHandler);
+				}
+
+				this.upNextSetup = true;
+			}
+
+			// stop displaying up next if the video is played again
+			if (this.upNextShown) {
+				this.removeUpNext();
+			}
+
+			// Allow users to scrub back to replay video
+			if (this.upNextTimer) {
+				clearTimeout(this.upNextTimer);
+				this.upNextTimer = null;
+			}
+		};
+
+		this.videoEl.addEventListener('playing', onPlayingHandler, true);
+	}
+
+	appendUpNext () {
+		const slot = document.querySelector('.video__autoplay-up-next');
+		const item = document.querySelector('.video__up-next__list-item');
+
+		if (!item || !slot) return;
+
+		const clone = item.firstElementChild.cloneNode(true);
+
+		// grab the link
+		const link = clone.querySelector('.js-teaser-heading-link');
+
+		// we need to re-setup image lazyloading
+		const image = clone.querySelector('[data-n-image-lazy-load-js]');
+		image.removeAttribute('data-n-image-lazy-load-js');
+
+		slot.appendChild(clone);
+
+		// load the image already!
+		lazyLoadImages({ root: slot });
+
+		slot.classList.add('video__autoplay-up-next--shown');
+
+		this.upNextShown = true;
+
+		// next up items are lazy loaded so we'll return a useful reference if we got this far
+		return link;
+	}
+
+	removeUpNext () {
+		const slot = document.querySelector('.video__autoplay-up-next');
+		slot.classList.remove('video__autoplay-up-next--shown');
+		slot.removeChild(slot.lastChild);
+		this.upNextShown = false;
 	}
 
 }
