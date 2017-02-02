@@ -1,4 +1,3 @@
-const cheerio = require('cheerio');
 const expect = require('chai').expect;
 const teaserContentTransform = require('../../../server/transforms/teaser-content');
 
