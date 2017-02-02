@@ -5,9 +5,7 @@
 	width: 100%;
 	height: 50vh;
 	position: relative;
-	@include oGridRespondTo(L) {
-		min-height: 600px;
-	}
+	min-height: auto;
 	@include oGridRespondTo(XL) {
 		max-height: 800px;
 	}
@@ -18,6 +16,7 @@
 	width: 100%;
 	height: 100vw;
 	float: right;
+	overflow: hidden;
 
 	@include oGridRespondTo(M) {
 		width: 50%;
@@ -31,7 +30,7 @@
 
 .article-topper__picture {
 	position: relative;
-	height: inherit;
+	// height: inherit;
 }
 
 //default for current themes
@@ -77,18 +76,26 @@
 }
 
 .article-topper__image {
-	width: 120vw;
 	position: relative;
-	right: 10%;
+	width: 100%;
 }
 
 @supports (object-fit: cover) {
+	.article-topper__slot-1 {
+		@include oGridRespondTo(L) {
+			min-height: 600px;
+		}
+	}
 	.article-topper__image {
 		position: static;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 	}
+	.article-topper__visual {
+		overflow: none;
+	}
+
 }
 
 .article-topper__credits {
