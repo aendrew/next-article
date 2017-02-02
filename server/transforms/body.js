@@ -5,7 +5,7 @@ const relatedArticleToTeaser = require('./related-article-to-teaser');
 const ariaHiddenMidContentInterruptions = require('./aria-hidden');
 const tableOfContents = require('./table-of-contents');
 const lightSignup = require('./light-sign-up');
-const teaserContent = require('./content-preview');
+const contentPreview = require('./content-preview');
 const inlineAd = require('./inline-ad');
 const extractToc = require('./extract-toc');
 const extractMainImage = require('./extract-main-image');
@@ -45,9 +45,9 @@ module.exports = function (body, flags, options) {
 
 	Object.assign(resultObject, gcsConflicts(resultObject.bodyHTML));
 
-	// "teaser" access - cut article content
-	if (options.userIsAnonymous && options.teaserArticle && !options.fragment) {
-		Object.assign(resultObject, teaserContent(resultObject.bodyHTML, flags));
+	// "preview" access — cut article content
+	if (options.userIsAnonymous && options.previewArticle && !options.fragment) {
+		Object.assign(resultObject, contentPreview(resultObject.bodyHTML, flags));
 	}
 
 	return resultObject;

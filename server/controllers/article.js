@@ -82,12 +82,12 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 	res.vary('ft-is-aud-dev');
 	res.vary('ft-blocked-url');
 	res.vary('ft-barrier-type');
-	res.vary('ft-access-teaser');
+	res.vary('ft-access-preview');
 	res.vary('x-ft-auth-gate-result');
 
 	res.set('x-ft-auth-gate-result', req.get('x-ft-auth-gate-result') || '-');
 	res.set('x-ft-barrier-type', req.get('ft-barrier-type') || '-');
-	res.set('x-ft-access-teaser', req.get('ft-access-teaser') || '-');
+	res.set('x-ft-access-preview', req.get('ft-access-preview') || '-');
 	res.set('ft-blocked-url', req.get('ft-blocked-url') || '-');
 
 	content.thisYear = new Date().getFullYear();
@@ -117,7 +117,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 
 	// Inline barrier page & type
 	content.inlineBarrier = {
-		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && req.get('ft-access-teaser') && !req.query.fragment && res.locals.flags.inArticleTeaser,
+		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && req.get('ft-access-preview') && !req.query.fragment && res.locals.flags.inArticlePreview,
 		type: 'standard' // TODO - set inline barrier type via preflight decision
 	}
 
@@ -126,7 +126,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 			fragment: req.query.fragment,
 			adsLayout: content.adsLayout,
 			userIsAnonymous: res.locals.anon && res.locals.anon.userIsAnonymous,
-			teaserArticle: req.get('ft-access-teaser') // TODO: match on res.get() ?
+			previewArticle: req.get('ft-access-preview') // TODO: match on res.get() ?
 		}
 	));
 
@@ -174,7 +174,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 	content.isPremium = isPremium(content.webUrl);
 	content.withGcs = showGcs(req, res, content.freeArticle);
 	content.lightSignup = {
-		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && res.locals.flags.lightSignupInArticle && !res.locals.flags.inArticleTeaser,
+		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && res.locals.flags.lightSignupInArticle && !res.locals.flags.inArticlePreview,
 		isInferred: res.locals.flags.lsuInferredTopic
 	};
 

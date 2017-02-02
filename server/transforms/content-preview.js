@@ -1,9 +1,9 @@
 const cheerio = require('cheerio');
 
 /**
-* Cut content to a "teaser" length
+* Cut content to a "preview" length
 *
-* If the user has been granted "teaser" access to an article,
+* If the user has been granted "preview" access to an article,
 * then we cut the content to a sensible length.
 *
 * [1] currently this functionality is behind a flag while testing.
@@ -56,7 +56,7 @@ const asObj = ($) => ({ bodyHTML: $.html() });
 module.exports = function (bodyHTML, flags) {
 	const $ = cheerio.load(bodyHTML);
 
-	if (!flags.inArticleTeaser) return asObj($); // [1]
+	if (!flags.inArticlePreview) return asObj($); // [1]
 
 	const $contents = $('*');
 	const breakdown = tagNameCount($contents);

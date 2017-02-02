@@ -154,11 +154,11 @@ describe('Article Controller', () => {
 
 	});
 
-	context('article teaser layout', () => {
+	context('article preview layout', () => {
 		beforeEach(() => {
 			result = null;
 
-			return createInstance({ headers: { 'ft-access-teaser': 'TRUE' }}, { inArticleTeaser: true }, null, null, true).then(() => {
+			return createInstance({ headers: { 'ft-access-preview': 'TRUE' }}, { inArticlePreview: true }, null, null, true).then(() => {
 				result = response._getRenderData()
 			});
 		});
@@ -167,7 +167,7 @@ describe('Article Controller', () => {
 			expect(result.inlineBarrier.show).to.equal(true);
 		});
 
-		it('will not render lightSignup if inArticleTeaser flag is on', () => {
+		it('will not render lightSignup if inArticlePreview flag is on', () => {
 			expect(result.lightSignup.show).to.not.equal(true);
 		});
 
