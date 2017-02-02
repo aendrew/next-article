@@ -69,6 +69,7 @@ module.exports = function negotiationController (req, res, next) {
 	}
 
 	const contentPromises = [getArticle(req.params.id)];
+
 	if(res.locals.flags.articleTopper) {
 		contentPromises.push(getRichArticle(req.params.id));
 	}
