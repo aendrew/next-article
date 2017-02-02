@@ -155,6 +155,7 @@ export default class {
 			// Allow users to scrub back to replay video
 			if (this.upNextTimer) {
 				clearTimeout(this.upNextTimer);
+				this.upNextTimer = null;
 			}
 		};
 
@@ -190,7 +191,7 @@ export default class {
 	}
 
 	removeUpNext () {
-		const slot = document.querySelector('.js-video-up-next');
+		const slot = document.querySelector('.video__autoplay-up-next');
 		slot.classList.remove('video__autoplay-up-next--shown');
 		slot.removeChild(slot.lastChild);
 		this.upNextShown = false;
