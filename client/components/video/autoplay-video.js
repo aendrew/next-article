@@ -29,14 +29,24 @@ function eventForwarder (ev) {
 	}
 }
 
+const defaults = {
+	advertising: false,
+	classes: [ 'video' ],
+	// TODO: add A/B test variants
+	upNextStyle: false
+}
+
 export default class {
 
-	constructor (videoEl, { showAds = false, classes = ['video'] } = {}) {
+	constructor (videoEl, options = {}) {
+		this.options = Object.assign({}, defaults, options);
+
 		this.videoEl = videoEl;
+
 		this.video = new OVideo(videoEl, {
 			placeholder: true,
-			classes,
-			advertising: false
+			classes: this.options.classes,
+			advertising: this.options.advertising
 		});
 
 		this.videoPlaceholderElement = this.videoEl.parentNode.querySelector('.video__placeholder');
@@ -117,7 +127,7 @@ export default class {
 			}
 		};
 
-		const onEndedHandler = (e) => {
+		const onEndedHandler = () => {
 			const next = this.appendUpNext();
 
 			if (next) {
@@ -128,8 +138,7 @@ export default class {
 
 		const onPlayingHandler = (e) => {
 			if (this.upNextSetup === false) {
-				// TODO: flag
-				if (true) {
+				if (this.options.upNextStyle) {
 					e.target.addEventListener('timeupdate', beforeEndHandler);
 				} else {
 					e.target.addEventListener('ended', onEndedHandler);
@@ -153,7 +162,7 @@ export default class {
 	}
 
 	appendUpNext () {
-		const slot = document.querySelector('.js-video-up-next');
+		const slot = document.querySelector('.video__autoplay-up-next');
 		const item = document.querySelector('.video__up-next__list-item');
 
 		if (!item || !slot) return;
@@ -172,7 +181,7 @@ export default class {
 		// load the image already!
 		lazyLoadImages({ root: slot });
 
-		slot.classList.add('video__up-next--shown');
+		slot.classList.add('video__autoplay-up-next--shown');
 
 		this.upNextShown = true;
 
@@ -182,7 +191,7 @@ export default class {
 
 	removeUpNext () {
 		const slot = document.querySelector('.js-video-up-next');
-		slot.classList.remove('video__up-next--shown');
+		slot.classList.remove('video__autoplay-up-next--shown');
 		slot.removeChild(slot.lastChild);
 		this.upNextShown = false;
 	}

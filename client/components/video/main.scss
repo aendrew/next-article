@@ -110,7 +110,7 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 	margin-top: 21px;
 }
 
-.video__up-next {
+.video__autoplay-up-next {
 	display: none;
 	pointer-events: auto;
 	position: absolute;
@@ -128,7 +128,7 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 		width: 300px;
 	}
 
-	&.video__up-next--shown {
+	&.video__autoplay-up-next--shown {
 		display: block;
 	}
 
