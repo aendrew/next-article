@@ -30,7 +30,7 @@ const elementsToCut = (i, el, $el, cutIdx) => {
 
 /**
  * Decide where to cut content.
- * Current logic: content up to an including half of the article's paragraphs
+ * Current logic: content up to and including half of the article's paragraphs
  * (up to a max of 4). This should hopefully preserve figures etc whilst
  * catering for shorter articles
  */
