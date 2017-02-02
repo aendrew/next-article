@@ -26,7 +26,7 @@ module.exports = function (req, res, next) {
 			}
 		}
 	`, { tagId })
-		.then(({ specialReport: { prefLabel } = {}} = {}) => prefLabel)
+		.then(({ specialReport } = {}) => specialReport && specialReport.prefLabel)
 		.catch(err => logger.error(err));
 
 	return Promise.all([getRelatedArticles(tagId, count, parentId), tagPrefLabelPromise])
