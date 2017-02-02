@@ -54,9 +54,8 @@ function getRichArticle (contentId) {
 		.catch(err => {
 			logger.error({
 				event: 'INTERNAL_CONTENT_FETCH_FAIL',
-				error: err.toString(),
 				uuid: contentId
-			});
+			}, err);
 		});
 }
 

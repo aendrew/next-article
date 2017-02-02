@@ -5,7 +5,7 @@ const fetchCapiJson = (endpoint) => {
 	return fetch(endpoint, {
 		timeout: 1000,
 		headers: {
-			'X-Api-Key': process.env.API_KEY,
+			'X-Api-Key': process.env.apikey,
 		}
 	})
 		.then((response) => {
