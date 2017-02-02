@@ -1,5 +1,7 @@
 const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
+
+const fetchGraphQlData = require('../../lib/fetch-graphql-data');
 const NoRelatedResultsException = require('../../lib/no-related-results-exception');
 const getRelatedArticles = require('../../lib/get-related-articles');
 
@@ -17,15 +19,22 @@ module.exports = function (req, res, next) {
 
 	const count = parseInt(req.query.count, 10) || 5;
 	const parentId = req.params.id;
+	const tagPrefLabelPromise = fetchGraphQlData(`
+		query ($tagId: String!) {
+			specialReport: tag(id: $tagId) {
+				prefLabel
+			}
+		}
+	`, { tagId })
+		.then(({ specialReport: { prefLabel } = {}} = {}) => prefLabel)
+		.catch(err => logger.error(err));
 
-	return getRelatedArticles(tagId, count, parentId)
-		.then(specialReportArticles => {
-			let articleWithImage = specialReportArticles.find(article => article.mainImage);
-			let articleWithSpecialReportPrimary = specialReportArticles
-				.find(article => article.primaryTag && article.primaryTag.taxonomy === 'specialReports');
+	return Promise.all([getRelatedArticles(tagId, count, parentId), tagPrefLabelPromise])
+		.then(([specialReportArticles, tagPrefLabel]) => {
+			const articleWithImage = specialReportArticles.find(article => article.mainImage);
 			return res.render('related/special-report', {
 				idV1: tagId,
-				prefLabel: articleWithSpecialReportPrimary ? articleWithSpecialReportPrimary.primaryTag.prefLabel : null,
+				prefLabel: tagPrefLabel,
 				mainImage: articleWithImage ? articleWithImage.mainImage : null,
 				articles: specialReportArticles
 			});
