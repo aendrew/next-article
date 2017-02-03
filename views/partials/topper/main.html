@@ -3,4 +3,8 @@
 	<p>{{{standfirst}}}</p>
 </header>
 
+{{#ifEquals topper.theme 'full-bleed-offset'}}
 	{{> topper/offset-image}}
+{{else}}
+	{{> topper/standard-themes}}
+{{/ifEquals}}
