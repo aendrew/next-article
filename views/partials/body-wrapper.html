@@ -5,20 +5,7 @@
 			<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
 
 				{{#unless topper}}
-					{{#if mainImageHTML}}
-						{{{mainImageHTML}}}
-					{{/if}}
-					{{> toolbar location='top'}}
-					<div class="article__time-byline">
-						{{#if publishedDate}}
-							<time class="article__timestamp o-date" data-o-component="o-date" datetime="{{#dateformat}}{{publishedDate}}{{/dateformat}}" data-o-date-js>
-							{{#dateformat "mmmm d, yyyy"}}{{publishedDate}}{{/dateformat}}
-							</time>
-						{{/if}}
-						{{#if byline}}
-							<p class="article__byline">{{#ifEquals contentType 'article'}}by: {{/ifEquals}}{{{byline}}}</p>
-						{{/if}}
-					</div>
+					{{> master-image-byline}}
 				{{/unless}}
 
 				{{#ifEquals topper.theme 'full-bleed-image-left'}}
