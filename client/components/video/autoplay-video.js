@@ -1,4 +1,4 @@
-import { lazyLoad as lazyLoadImages } from 'n-image';
+import { $ } from 'n-ui/utils';
 import oViewport from 'o-viewport';
 import OVideo from 'o-video';
 
@@ -29,11 +29,23 @@ function eventForwarder (ev) {
 	}
 }
 
+const upNextTemplate = (data) => (`
+	<a class="video__autoplay-up-next video__autoplay-up-next--${data.variant}" data-trackable="manual" href="${data.href}">
+		<i class="video__autoplay-up-next__icon"></i>
+		<h2 class="video__autoplay-up-next__label">
+			<span aria-hidden="true">Up Next</span>
+			<span class="n-util-visually-hidden">Related videos</span>
+		</h2>
+		<p class="video__autoplay-up-next__heading">${data.heading}</p>
+		<span class="video__autoplay-up-next__duration">${data.duration}</span>
+	</a>
+`);
+
 const defaults = {
 	advertising: false,
 	classes: [ 'video' ],
 	// TODO: add A/B test variants
-	upNextStyle: false
+	upNextVariant: false
 }
 
 export default class {
@@ -101,14 +113,14 @@ export default class {
 	}
 
 	setupUpNext () {
+		// this is where we'll append the component
+		this.upNextSlot = $('.js-video-autoplay-up-next');
+
 		// is the up next component being shown
-		this.upNextShown = false;
+		this.upNextIsShown = false;
 
-		// have the events been set up
-		this.upNextSetup = false;
-
-		// reference to autoplay countdown
-		this.upNextTimer = false;
+		// reference to autoplay countdown if active
+		this.upNextTimeout = false;
 
 		const autoplay = (link) => {
 			link.setAttribute('data-trackable', 'autoplay');
@@ -117,84 +129,76 @@ export default class {
 
 		const beforeEndHandler = (e) => {
 			// duration and currentTime are both in seconds
-			if (!this.upNextShown && (e.target.duration - e.target.currentTime) <= 5) {
+			const timeUntilEnd = e.target.duration - e.target.currentTime;
+
+			if (!this.upNextIsShown && timeUntilEnd <= 5) {
 				const next = this.appendUpNext();
 
-				if (next) {
-					// play next video immediately on end
-					e.target.addEventListener('ended', () => autoplay(next));
-				}
+				// play next video immediately on end
+				next && e.target.addEventListener('ended', () => autoplay(next));
 			}
 		};
 
 		const onEndedHandler = () => {
 			const next = this.appendUpNext();
 
-			if (next) {
-				// this timer may be cancelled
-				this.upNextTimer = setTimeout(() => autoplay(next), 5000);
+			if (next && this.options.upNextVariant !== 'no-autoplay') {
+				// this timeout may be cancelled
+				this.upNextTimeout = setTimeout(() => autoplay(next), 5000);
 			}
 		};
 
-		const onPlayingHandler = (e) => {
-			if (this.upNextSetup === false) {
-				if (this.options.upNextStyle) {
-					e.target.addEventListener('timeupdate', beforeEndHandler);
-				} else {
-					e.target.addEventListener('ended', onEndedHandler);
-				}
-
-				this.upNextSetup = true;
-			}
-
+		const onPlayingHandler = () => {
 			// stop displaying up next if the video is played again
-			if (this.upNextShown) {
+			if (this.upNextIsShown) {
 				this.removeUpNext();
 			}
 
 			// Allow users to scrub back to replay video
-			if (this.upNextTimer) {
-				clearTimeout(this.upNextTimer);
-				this.upNextTimer = null;
-			}
+			clearTimeout(this.upNextTimeout);
 		};
 
-		this.videoEl.addEventListener('playing', onPlayingHandler, true);
+		const onFirstPlayHandler = (e) => {
+			if (this.options.upNextVariant === 'before-end') {
+				e.target.addEventListener('timeupdate', beforeEndHandler);
+			} else {
+				e.target.addEventListener('ended', onEndedHandler);
+			}
+
+			this.videoEl.removeEventListener('playing', onFirstPlayHandler, true);
+
+			e.target.addEventListener('playing', onPlayingHandler);
+		};
+
+		if (this.upNextSlot) {
+			this.videoEl.addEventListener('playing', onFirstPlayHandler, true);
+		}
 	}
 
 	appendUpNext () {
-		const slot = document.querySelector('.video__autoplay-up-next');
-		const item = document.querySelector('.video__up-next__list-item');
+		// the up next list is lazy loaded so we'll fetch it lazily now...
+		const item = $('.js-up-next .o-teaser');
 
-		if (!item || !slot) return;
+		if (!item) return;
 
-		const clone = item.firstElementChild.cloneNode(true);
+		const data = {
+			href: $('.js-teaser-heading-link', item).href,
+			heading: $('.js-teaser-heading-link', item).textContent,
+			duration: $('.o-teaser__duration', item).textContent,
+			variant: this.options.upNextVariant
+		};
 
-		// grab the link
-		const link = clone.querySelector('.js-teaser-heading-link');
+		this.upNextSlot.innerHTML = upNextTemplate(data);
 
-		// we need to re-setup image lazyloading
-		const image = clone.querySelector('[data-n-image-lazy-load-js]');
-		image.removeAttribute('data-n-image-lazy-load-js');
+		this.upNextIsShown = true;
 
-		slot.appendChild(clone);
-
-		// load the image already!
-		lazyLoadImages({ root: slot });
-
-		slot.classList.add('video__autoplay-up-next--shown');
-
-		this.upNextShown = true;
-
-		// next up items are lazy loaded so we'll return a useful reference if we got this far
-		return link;
+		// return the new content so the caller knows we were successful 👌
+		return this.upNextSlot.firstElementChild;
 	}
 
 	removeUpNext () {
-		const slot = document.querySelector('.video__autoplay-up-next');
-		slot.classList.remove('video__autoplay-up-next--shown');
-		slot.removeChild(slot.lastChild);
-		this.upNextShown = false;
+		this.upNextSlot.innerHTML = '';
+		this.upNextIsShown = false;
 	}
 
 }
