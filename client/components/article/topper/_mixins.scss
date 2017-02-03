@@ -11,8 +11,6 @@
 	.article-topper__extras {
 		button {
 			@include oButtonsTheme($theme);
-			border-radius: 0;
-			background-color: transparent;
 
 			&::before {
 				background-image: url('https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:plus?source=o-icons&tint=#{$hex}');
@@ -20,15 +18,11 @@
 
 			&:hover {
 				background-color: rgba(0, 0, 0, 0.2) !important;
+				border-color: #505050 !important;
 			}
 		}
 	}
 }
-
-// maybe a little hack. but it looks lovely in the topper :)
-// @include oGridRespondTo(M) {
-// 	@include oFontsInclude(FinancierDisplayWeb, bold);
-// };
 
 $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 @each $color in $colors {

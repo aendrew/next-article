@@ -1,0 +1,74 @@
+<div class="article-topper article-topper--full-bleed-offset" aria-hidden="true" role="presentation">
+	<div class="article-topper__slot-1">
+		<div class="article-topper__background"></div>
+		<div class="article-topper__visual">
+			<picture class="article-topper__picture">
+				{{#ifEquals topper.themeImageRatio 'full-bleed'}}
+					{{#each topper.images}}
+						{{#ifEquals type 'square'}}<source media="(max-width: 490px)" srcset="https://www.ft.com/__origami/service/image/v2/images/raw/{{url}}?source=next&fit=scale-down&quality=highest&width=490 490w">{{/ifEquals}}
+						{{#ifEquals type 'standard'}}<source media="(max-width: 1220px)" srcset="https://www.ft.com/__origami/service/image/v2/images/raw/{{url}}?source=next&fit=scale-down&quality=highest&width=1220 1220w">{{/ifEquals}}
+						{{#ifEquals type 'wide'}}<source media="(min-width: 1220px)" srcset="https://www.ft.com/__origami/service/image/v2/images/raw/{{url}}?source=next&fit=scale-down&quality=highest&width=1440 1440w">{{/ifEquals}}
+					{{/each}}
+				{{/ifEquals}}
+
+				{{#ifEquals topper.themeImageRatio 'split'}}
+					{{#each topper.images}}
+						{{#ifEquals type 'square'}}<source media="(max-width: 1440px)" srcset="https://www.ft.com/__origami/service/image/v2/images/raw/{{url}}?source=next&fit=scale-down&quality=highest&width=1440 1440w">{{/ifEquals}}
+						{{#ifEquals type 'standard'}}<source media="(min-width: 1440px)" srcset="https://www.ft.com/__origami/service/image/v2/images/raw/{{url}}?source=next&fit=scale-down&quality=highest&width=1440 1440w">{{/ifEquals}}
+					{{/each}}
+				{{/ifEquals}}
+
+				<img class="article-topper__image" src="https://www.ft.com/__origami/service/image/v2/images/raw/{{mainImage.url}}?source=next&fit=scale-down&quality=highest&width=1440">
+			</picture>
+		</div>
+	</div>
+	<div class="article-topper__slot-2 o-grid-container">
+		<div class="o-grid-row">
+			<div class="article-topper__offset-container" data-textbox-background="pink" data-o-grid-colspan="12 L8 XL7 XLoffset1">
+				<div class="article-topper__text-box">
+					<div class="article-topper__text-wrapper">
+						<div class="article-topper__extras">
+							{{#if isSpecialReport}}
+							<p class="article__primary-theme">
+								Special Report:
+								<a href="/special-reports/{{primaryTag.idV1}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="section-link" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
+							</p>
+							{{else}}
+								{{#if primaryTag}}
+									{{> header/primary-tag}}
+								{{/if}}
+							{{/if}}
+						</div>
+						<div class="article-topper__headline" data-trackable="header">{{topper.headline}}</div>
+						{{#if topper.standfirst}}
+						<div class="article-topper__stand-first">{{{topper.standfirst}}}</div>
+					{{/if}}
+					</div>
+				</div>
+				<div class="article-topper__credits">
+					{{#each topper.images}}
+					{{#ifEquals type 'square'}}<span class='article-topper__s-credits' data-o-grid-colspan="12 Mhide">{{copyright}}</span>{{/ifEquals}}
+					{{#ifEquals type 'standard'}}<span class='article-topper__m-credits'  data-o-grid-colspan="hide M12 Lhide">{{copyright}}</span>{{/ifEquals}}
+					{{#ifEquals type 'wide'}}<span class='article-topper__l-credits' data-o-grid-colspan="hide L12">{{copyright}}</span>{{/ifEquals}}
+					{{/each}}
+				</div>
+				<div class="article-topper__utils">
+					{{> toolbar location='top'}}
+					<div class="article__time-byline">
+						{{#if publishedDate}}
+						<time class="article__timestamp o-date" data-o-component="o-date" datetime="{{#dateformat}}{{publishedDate}}{{/dateformat}}" data-o-date-js>
+							{{#dateformat "mmmm d, yyyy"}}{{publishedDate}}{{/dateformat}}
+						</time>
+						{{/if}}
+						{{#if byline}}
+						<p class="article__byline">{{#ifEquals contentType 'article'}}by: {{/ifEquals}}{{{byline}}}</p>
+						{{/if}}
+						{{#ifAll @root.flags.premiumContentIndicator isPremium}}
+						<span class="article-classifier">Premium</span>
+						{{/ifAll}}
+					</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>

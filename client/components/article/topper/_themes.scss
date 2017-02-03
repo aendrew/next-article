@@ -82,3 +82,34 @@
 		}
 	}
 }
+
+.article-topper--full-bleed-offset {
+	@include standardSplitMobile;
+	@include oGridRespondTo(S) {
+		@include alignText(left);
+		@include fullBleedImage;
+		@include overlayText;
+	}
+
+	.article-topper__offset-container {
+		margin-top: -60px;
+	}
+
+	.article-topper__text-wrapper {
+		width: 100%;
+		padding: 16px 0 0;
+	}
+
+	.article-topper__stand-first {
+		margin-bottom: 20px;
+	}
+
+	.article-topper__extras {
+		.article__primary-theme {
+			> a {
+				color: oColorsGetPaletteColor('claret');
+				font-size: 16px;
+			}
+		}
+	}
+}
