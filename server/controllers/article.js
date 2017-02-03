@@ -192,11 +192,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 			} else {
 				content.layout = 'wrapper';
 				content.viewStyle = 'compact';
-				if(content.topper) {
-					res.render('rich-content', content)
-				} else {
-					res.render('content', content);
-				}
+				res.render('content', content);
 			}
 		})
 		.catch(error => {

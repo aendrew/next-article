@@ -26,8 +26,12 @@
 		{{#defineBlock 'above-header'}}{{> ads/top }}{{/defineBlock}}
 	{{/if}}
 
-	{{> header/content-header}}
-
+	{{#if topper}}
+		{{> topper/main}}
+	{{else}}
+		{{> header/content-header}}
+	{{/if}}
+	
 	<div class="article__wrapper">
 		{{#ifSome bodyHTML media}}
 		<div class="o-grid-container">
