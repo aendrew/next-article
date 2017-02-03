@@ -22,6 +22,7 @@ module.exports = function (req, res, next, payload) {
 	};
 
 	const mp4s = payload.attachments.filter(attachment => attachment.mediaType === 'video/mp4' && 'codec' in attachment);
+
 	if (mp4s.length) {
 		payload.brightcoveData = {
 			videoStillURL: payload.mainImage && payload.mainImage.url,
@@ -31,6 +32,10 @@ module.exports = function (req, res, next, payload) {
 				frameWidth: rendition.width
 			}))
 		};
+	}
+
+	if (res.locals.flags.closedCaptions) {
+		payload.captions = payload.attachments.filter(attachment => attachment.mediaType === 'text/vtt').reduce((a, b) => b, undefined);
 	}
 
 	payload.shareUrl = req.get('ft-real-url') || payload.url;
