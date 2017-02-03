@@ -71,7 +71,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 			if (videoEl.hasAttribute('data-video-autoplay')) {
 				const video = new AutoplayVideo(videoEl, {
 					advertising: flags.get('videoPlayerAdvertising'),
-					upNextStyle: flags.get('videoUpNext')
+					upNextVariant: flags.get('videoUpNext')
 				});
 				video.init();
 			} else {

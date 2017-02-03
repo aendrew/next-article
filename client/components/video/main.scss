@@ -111,44 +111,58 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 }
 
 .video__autoplay-up-next {
-	display: none;
-	pointer-events: auto;
 	position: absolute;
 	// allow space for the control bar
 	bottom: 40px;
 	right: 20px;
-	background-color: #000000;
 	padding: 10px;
+	width: 240px;
+	// it's a link so remove the border
+	border: 0;
+	background-color: getColor('black');
+	color: getColor('white');
 
-	@include oGridRespondTo(M) {
-		width: 240px;
+	&:empty {
+		display: none;
+	}
+}
+
+.video__autoplay-up-next--no-autoplay {
+	padding-left: 70px;
+}
+
+.video__autoplay-up-next__icon {
+	@include oIconsGetIcon('play', getColor('white'), 48);
+	position: absolute;
+	top: 0;
+	left: 10px;
+	height: 100%;
+	// only display for the no-autoplay A/B variant
+	display: none;
+
+	:hover > &,
+	:focus > & {
+		// match link hover color without loading a new icon
+		// #999 == cmyk(0, 0, 0, 0.4)
+		opacity: 0.6;
 	}
 
-	@include oGridRespondTo(L) {
-		width: 300px;
-	}
-
-	&.video__autoplay-up-next--shown {
+	.video__autoplay-up-next--no-autoplay & {
 		display: block;
 	}
+}
 
-	> h2 {
-		margin: 0 0 6px;
-	}
+.video__autoplay-up-next__label {
+	margin: 0;
+	font-size: 1em;
+}
 
-	.o-teaser {
-		@include oGridRespondTo($until: M) {
-			margin-bottom: 0;
-			padding-bottom: 0;
-			border-bottom: 0;
-		}
-	}
+.video__autoplay-up-next__heading {
+	@include oTypographySerif('m');
+	margin: 0.4em 0;
+}
 
-	.o-teaser__timestamp {
-		@include oGridRespondTo($until: M) {
-			display: none;
-		}
-	}
+.video__autoplay-up-next__duration {
 }
 
 .video__info {
