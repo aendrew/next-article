@@ -21,6 +21,10 @@
 					</div>
 				{{/unless}}
 
+				{{#ifEquals topper.theme 'full-bleed-image-left'}}
+					{{> topper/offset-text}}
+				{{/ifEquals}}
+
 				{{#ifAll isAudioArticle @root.flags.ftlabsSpokenLayer}}
 					{{> ftlabsSpokenLayerPlayer}}
 				{{/ifAll}}

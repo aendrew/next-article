@@ -15,6 +15,7 @@ module.exports = (article) => {
 		'full-bleed-image-center': 'full-bleed',
 		'full-bleed-image-left': 'full-bleed',
 		'full-bleed-image-right': 'full-bleed',
+		'full-bleed-offset': 'full-bleed',
 		'full-bleed-text': null
 	}
 
