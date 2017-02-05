@@ -64,9 +64,7 @@ module.exports = function (bodyHTML, flags) {
 	const cutIdx = getCutOffIdx($, $contents, breakdown);
 
 	$contents
-		.filter(function (i, el) { // NOTE: preserve this scope
-			return elementsToCut(i, el, $(this), cutIdx)
-		})
+		.filter((i, el) => elementsToCut(i, el, $(el), cutIdx))
 		.remove();
 
 	return asObj($);
