@@ -11,17 +11,17 @@ describe('Preview content', function () {
 		expect(result.bodyHTML).to.equal(mockContent);
 	});
 
-	it('should cut short from content paragraph count in half', function () {
+	it('should cut short-form content paragraph count in half', function () {
 		const result = contentPreviewTransform('<p>1</p><p>2</p><p>3</p><p>4</p>', {inArticlePreview: true});
 		expect(result.bodyHTML).to.equal('<p>1</p><p>2</p>');
 	});
 
-	it('should cut short from content paragraph count in half and round down', function () {
+	it('should cut short-form content paragraph count in half and round down', function () {
 		const result = contentPreviewTransform('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>', {inArticlePreview: true});
 		expect(result.bodyHTML).to.equal('<p>1</p><p>2</p>');
 	});
 
-	it('should cut long from content to a maximum of 4 paragraphs', function () {
+	it('should cut long-form content to a maximum of 4 paragraphs', function () {
 		const result = contentPreviewTransform('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p>', {inArticlePreview: true});
 		expect(result.bodyHTML).to.equal('<p>1</p><p>2</p><p>3</p><p>4</p>');
 	});
