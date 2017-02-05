@@ -9,62 +9,29 @@ const cheerio = require('cheerio');
 * [1] currently this functionality is behind a flag while testing.
 */
 
-const isChildOf = (selector, $el) => $el.parents(selector).length !== 0;
-
-/**
- * Cut content after the provided cut off index, exclude special cases.
- * TODO: improve logic to ensure we do not cut anything important
- *
- * e.g keep figures: el.tagName === 'figure' || isChildOf('figure', $el)
- */
-const elementsToCut = (i, el, $el, cutIdx) => {
-
-	const whiteListed = (
-		$el.hasClass('o-ads') ||
-		isChildOf('.o-ads', $el)
-	);
-
-	// content is not whitelisted and after cut off index
-	return !whiteListed && i > cutIdx;
-}
-
 /**
  * Decide where to cut content.
  * Current logic: content up to and including half of the article's paragraphs
- * (up to a max of 4). This should hopefully preserve figures etc whilst
- * catering for shorter articles
+ * (up to a max of 4).
  */
-const getCutOffIdx = ($, $contents, breakdown) => {
-	const half = Math.floor(breakdown['p'] / 2) - 1;
-	const idx = half > 3 ? 3 : half; // 4 paragraphs (0 index)
-	const $lastP = $('p').eq(idx);
-	return $contents.index($lastP);
-}
+const getParaToTruncateFrom = ($) => {
+	const maxNumParas = 4;
+	const $paras = $('p');
+	const midPoint = Math.floor($paras.length / 2);
+	const cutoffPoint = midPoint > maxNumParas ? maxNumParas : midPoint;
 
-/**
- * @returns {Obj} example:
- * { p: 16, a: 6, div: 5, figure: 3, img: 3, figcaption: 3 }
- */
-const tagNameCount = ($) => {
-	const tags = {};
-	$.each((i, el) => tags[el.tagName] = (tags[el.tagName] || 0) + 1);
-	return tags;
+	return $paras.eq(cutoffPoint-1);
 }
 
 const asObj = ($) => ({ bodyHTML: $.html() });
 
-module.exports = function (bodyHTML, flags) {
+module.exports = (bodyHTML, flags) => {
 	const $ = cheerio.load(bodyHTML);
 
-	if (!flags.inArticlePreview) return asObj($); // [1]
+	if (!flags.inArticlePreview) { return asObj($); } // [1]
 
-	const $contents = $('*');
-	const breakdown = tagNameCount($contents);
-
-	const cutIdx = getCutOffIdx($, $contents, breakdown);
-
-	$contents
-		.filter((i, el) => elementsToCut(i, el, $(el), cutIdx))
+	getParaToTruncateFrom($)
+		.nextAll()
 		.remove();
 
 	return asObj($);
