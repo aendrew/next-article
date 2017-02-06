@@ -42,13 +42,7 @@ function getArticle (contentId) {
 }
 
 function getRichArticle (contentId) {
-	return fetch(`https://rj-up.ft.com/internalcontent/${contentId}`,
-	{
-		headers: {
-			'Authorization': process.env.RJUP_INTERNAL_CONTENT_KEY
-		},
-		timeout: 3000
-	})
+	return fetch(`https://s3-eu-west-1.amazonaws.com/rj-xcapi-mock/${contentId}`)
 		.then(fetchres.json)
 		.then(richArticleModel)
 		.catch(err => {
@@ -76,6 +70,8 @@ module.exports = function negotiationController (req, res, next) {
 
 	return Promise.all(contentPromises)
 		.then(data => {
+			console.log('LE RICH ARTICLE ============', data);
+
 			const article = data[0];
 			const richArticle = data.length > 1 ? data[1] : null;
 			const webUrl = article && article.webUrl || '';
@@ -108,6 +104,7 @@ module.exports = function negotiationController (req, res, next) {
 				} else if (isArticleVideo(article)) {
 					return controllerVideo(req, res, next, article);
 				} else {
+
 					return controllerArticle(req, res, next, article, richArticle);
 				}
 			}
