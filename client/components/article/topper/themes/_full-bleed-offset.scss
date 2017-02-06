@@ -20,7 +20,7 @@
 		.article-topper__slot-1 {
 			height: 0;
 		}
-		
+
 		.article-topper__background {
 			height: 0;
 			min-height: 0;
@@ -40,6 +40,10 @@
 			flex-direction: column;
 			.n-myft-ui {
 				top: 5px;
+				> a {
+					color: oColorsGetPaletteColor('claret');
+					font-size: 16px;
+				}
 			}
 		}
 
@@ -59,10 +63,7 @@
 
 	.article-topper__extras {
 		.article__primary-theme {
-			> a {
-				color: oColorsGetPaletteColor('claret');
-				font-size: 16px;
-			}
+
 		}
 	}
 }
