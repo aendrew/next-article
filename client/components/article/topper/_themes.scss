@@ -65,7 +65,7 @@
 	}
 
 	.article-topper__headline {
-		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
+		@include oTypographySerifDisplayBold(xl, $load-progressively: false);
 		@include oGridRespondTo($until: S) {
 			font-size: 36px;
 			line-height: 36px;

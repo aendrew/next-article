@@ -98,7 +98,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 
 @mixin setHeadlineFont($size-l, $height-l, $size-s, $height-s) {
 	.article-topper__headline {
-		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
+		@include oTypographySerifDisplayBold(xl, $load-progressively: false);
 		// @include oTypographyBold;
 		@include setResponsiveType($size-l, $height-l, $size-s, $height-s);
 	}
