@@ -12,19 +12,19 @@ const addTagTitlePrefix = require('./article-helpers/tag-title-prefix');
 const getAdsLayout = require('../utils/get-ads-layout');
 const cheerio = require('cheerio');
 
-function isCapiV1 (provenance) {
+function isCapiV1 (provenance = []) {
 	return provenance.find(
 			source => source.includes('http://api.ft.com/content/items/v1/')
 	);
 }
 
-function isCapiV2 (provenance) {
+function isCapiV2 (provenance = []) {
 	return provenance.find(
 		source => source.includes('http://api.ft.com/enrichedcontent/')
 	);
 }
 
-function transformArticleBody (body, flags, options) {
+function transformArticleBody (body = '', flags, options) {
 	const articleBody = genericContentTransform(body, flags);
 	return applicationContentTransform(articleBody, flags, options);
 }
@@ -33,26 +33,26 @@ function isUserSignedIn (req) {
 	return req.header('ft-session-token') && req.header('ft-session-token') !== '-'
 }
 
-function isFreeArticle (webUrl) {
+function isFreeArticle (webUrl = '') {
 	return webUrl.search('/cms/s/2') !== -1
 }
 
-function isPremium (webUrl) {
+function isPremium (webUrl = '') {
 	return webUrl.search('/cms/s/3') !== -1
 }
 
-function isMethodeArticle (webUrl) {
+function isMethodeArticle (webUrl = '') {
 	if (webUrl.indexOf('http://www.ft.com/cms/s') === 0) {
 		return true;
 	}
 	return false;
 }
 
-function getDescription (article) {
-	if (article.standfirst) {
-		return article.standfirst;
-	} else if (article.openingHTML) {
-		return cheerio.load(article.openingHTML)('p').first().text();
+function getDescription ({ standfirst, openingHTML }) {
+	if (standfirst) {
+		return standfirst;
+	} else if (openingHTML) {
+		return cheerio.load(openingHTML)('p').first().text();
 	} else {
 		return '';
 	}
@@ -184,7 +184,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 		content.jsonLd = res.locals.jsonLd;
 	}
 
-	if(res.locals.flags.ftlabsSpokenLayer){
+	if (res.locals.flags.ftlabsSpokenLayer) {
 		content.isAudioArticle = content.metadata.some(tag => tag.idV1 === 'MjgwYzIyNjUtMmQ1ZC00NTNiLTgyMTQtMWU5ZDc3YzIzNWUy-VG9waWNz');
 	}
 
@@ -200,11 +200,8 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 				res.render('fragment', content);
 			} else {
 				content.layout = 'wrapper';
-				if(content.topper) {
-					res.render('rich-content', content)
-				} else {
-					res.render('content', content);
-				}
+				content.viewStyle = 'compact';
+				res.render('content', content);
 			}
 		})
 		.catch(error => {

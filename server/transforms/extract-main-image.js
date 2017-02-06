@@ -1,7 +1,6 @@
 const cheerio = require('cheerio');
 
 module.exports = function (bodyHTML) {
-
 	const $ = cheerio.load(bodyHTML);
 
 	// find image or slideshow in the body

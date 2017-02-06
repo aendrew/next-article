@@ -2,8 +2,10 @@ const oViewport = require('n-ui/viewport');
 const OVideo = require('o-video');
 const lightSignup = require('o-email-only-signup');
 const expander = require('n-ui/expander');
+const tracking = require('n-ui/tracking');
 const nUiConfig = require('./n-ui-config');
 const tipDismisser = require('n-ui/tour-tip/lib/dismiss.js');
+
 import {bootstrap} from 'n-ui';
 // import cacheJourney from './components/cache-journey/cache-journey';
 import {init as commentsInit} from './components/comments';
@@ -12,7 +14,6 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 	const slideshow = require('./components/slideshow/main');
 	const readingHistory = require('./components/reading-history');
-	const scrollDepth = require('./components/article/scroll-depth');
 	const tearsheets = require('./components/tearsheets');
 	const onwardJourney = require('./components/onward-journey/main');
 	const toc = require('./components/toc/main');
@@ -47,7 +48,11 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	}
 
 	toc.init(flags);
-	scrollDepth(flags);
+
+	if(flags.get('articleScrollDepthTracking')) {
+		tracking.scrollDepth.init('next-article', { selector: '.article__body' });
+	}
+
 	legalCopy(flags);
 
 	mainCss.then(() => {
@@ -65,7 +70,10 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 		[...document.querySelectorAll('[data-o-component="o-video"]')].forEach(videoEl => {
 			if (videoEl.hasAttribute('data-video-autoplay')) {
-				const video = new AutoplayVideo(videoEl, { showAds: flags.get('videoPlayerAdvertising') });
+				const video = new AutoplayVideo(videoEl, {
+					advertising: flags.get('videoPlayerAdvertising'),
+					upNextVariant: flags.get('videoUpNext')
+				});
 				video.init();
 			} else {
 				new OVideo(videoEl, {

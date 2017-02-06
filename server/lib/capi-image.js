@@ -5,7 +5,7 @@ const fetchCapiJson = (endpoint) => {
 	return fetch(endpoint, {
 		timeout: 1000,
 		headers: {
-			'X-Api-Key': process.env.API_KEY,
+			'X-Api-Key': process.env.apikey,
 		}
 	})
 		.then((response) => {
@@ -14,15 +14,9 @@ const fetchCapiJson = (endpoint) => {
 			}
 			return response.text()
 				.then((text) => {
-					const requestId = response.headers.get('x-request-id') || 'UNKNOWN';
-					const server = response.headers.get('server') || 'UNKNOWN';
-					const masheryMessageId = response.headers.get('x-mashery-message-id') || 'UNKNOWN';
 					return Promise.reject({
 						error: text,
-						status: response.status,
-						requestId: requestId,
-						server: server,
-						masheryMessageId: masheryMessageId
+						status: response.status
 					});
 				});
 		});
@@ -31,25 +25,24 @@ const fetchCapiJson = (endpoint) => {
 
 module.exports = function (image) {
 	if (image && image.id) {
+		let crop = image.type;
 		return fetchCapiJson(image.id)
-		.then((imageSet) => {
-			//For topper at least we want all the images in the imageset
-			return Promise.all(imageSet.members.map(image => fetchCapiJson(image.id)));
+		.then((result) => {
+			return {
+				type: crop,
+				title: result.title,
+				copyright: result.copyright ? result.copyright.notice : '',
+				url: result.binaryUrl,
+				width: result.pixelWidth,
+				height: result.pixelHeight,
+				ratio: result.pixelWidth && result.pixelHeight ? result.pixelWidth / result.pixelHeight : null
+			}
 		})
-		.then((images) => images.map(image => ({
-			title: image.title,
-			description: image.description,
-			url: image.binaryUrl,
-			width: image.pixelWidth,
-			height: image.pixelHeight,
-			ratio: image.pixelWidth && image.pixelHeight ? image.pixelWidth / image.pixelHeight : null
-		})))
 		.catch((err) => {
 			logger.error({
 				event: 'TOPPER_IMAGE_FETCH_FAIL',
-				error: err.toString(),
-				uuid: image
-			});
+				uuid: image.id
+			}, err);
 		});
 	}
 };

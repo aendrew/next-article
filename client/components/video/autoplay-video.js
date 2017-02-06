@@ -1,5 +1,5 @@
-import { lazyLoad as lazyLoadImages } from 'n-image';
-import oViewport from 'n-ui/viewport';
+import { $ } from 'n-ui/utils';
+import oViewport from 'o-viewport';
 import OVideo from 'o-video';
 
 import playCheck from './play-check';
@@ -29,26 +29,51 @@ function eventForwarder (ev) {
 	}
 }
 
+const upNextTemplate = (data) => (`
+	<a class="video__autoplay-up-next video__autoplay-up-next--${data.variant}" data-trackable="manual" href="${data.href}">
+		<i class="video__autoplay-up-next__icon"></i>
+		<h2 class="video__autoplay-up-next__label">
+			<span aria-hidden="true">Up Next</span>
+			<span class="n-util-visually-hidden">Related videos</span>
+		</h2>
+		<p class="video__autoplay-up-next__heading">${data.heading}</p>
+		<span class="video__autoplay-up-next__duration">${data.duration}</span>
+	</a>
+`);
+
+const defaults = {
+	advertising: false,
+	classes: [ 'video' ],
+	// TODO: add A/B test variants
+	upNextVariant: false
+}
+
 export default class {
 
-	constructor (videoEl, { showAds = false, classes = ['video'] } = {}) {
+	constructor (videoEl, options = {}) {
+		this.options = Object.assign({}, defaults, options);
+
 		this.videoEl = videoEl;
+
 		this.video = new OVideo(videoEl, {
 			placeholder: true,
-			classes,
-			advertising: showAds
+			classes: this.options.classes,
+			advertising: this.options.advertising
 		});
+
 		this.videoPlaceholderElement = this.videoEl.parentNode.querySelector('.video__placeholder');
-		this.upNextTimer;
 	}
 
 	init () {
 		removeCoreFallback(this.videoEl);
 		document.body.addEventListener('oTracking.event', eventForwarder.bind(this));
 
+		this.setupUpNext();
+
 		return Promise.all([playCheck(), this.video.init()])
 			.then(([canPlay]) => {
 				if (canPlay) {
+
 					// NOTE: confusingly, #getVisibility returns true if hidden
 					if (oViewport.getVisibility() === true) {
 						const visibilityHandler = ({ detail: { hidden } = {} }) => {
@@ -73,42 +98,107 @@ export default class {
 	}
 
 	playing () {
-		this.videoPlaceholderElement.classList.add('video__placeholder__played');
-		this.videoPlaceholderElement.classList.add('video__placeholder__playing');
-		clearTimeout(this.upNextTimer);
+		this.videoPlaceholderElement.classList.add('video__placeholder--played');
+		this.videoPlaceholderElement.classList.add('video__placeholder--playing');
+		this.videoPlaceholderElement.classList.remove('video__placeholder--ended');
 	}
 
 	paused () {
-		this.videoPlaceholderElement.classList.remove('video__placeholder__playing');
+		this.videoPlaceholderElement.classList.remove('video__placeholder--playing');
 	}
 
 	ended () {
-		const upNextItem = document.querySelector('li.video__up-next__list-item:first-of-type');
-		const upNextPlaceholderSlot = document.querySelector('.js-placeholder-up-next');
-		if (upNextItem && upNextPlaceholderSlot) {
-			const rolloverUpNext = upNextItem.cloneNode(true);
-			rolloverUpNext.removeAttribute('data-o-grid-colspan');
-			// remove image lazy-loading marker
-			[...rolloverUpNext.querySelectorAll('[data-n-image-lazy-load-js]')].forEach(lazyLoadingImageEl => {
-				lazyLoadingImageEl.removeAttribute('data-n-image-lazy-load-js');
-				// TODO: more appropriate responsive images sizes
-				lazyLoadingImageEl.setAttribute('sizes', '300px')
-			});
+		this.videoPlaceholderElement.classList.add('video__placeholder--ended');
+		this.videoPlaceholderElement.classList.remove('video__placeholder--playing');
+	}
 
-			upNextPlaceholderSlot.innerHTML = '';
-			upNextPlaceholderSlot.appendChild(rolloverUpNext);
+	setupUpNext () {
+		// this is where we'll append the component
+		this.upNextSlot = $('.js-video-autoplay-up-next');
 
-			this.videoPlaceholderElement.classList.add('video__placeholder__ended');
-			this.videoPlaceholderElement.classList.remove('video__placeholder__playing');
+		// is the up next component being shown
+		this.upNextIsShown = false;
 
-			lazyLoadImages({ root: upNextPlaceholderSlot });
+		// reference to autoplay countdown if active
+		this.upNextTimeout = false;
 
-			this.upNextTimer = setTimeout(() => {
-				const upNextLink = upNextPlaceholderSlot.querySelector('.o-teaser__heading a');
-				upNextLink.setAttribute('data-trackable', 'autoplay');
-				upNextLink.click();
-			}, 5000);
+		const autoplay = (link) => {
+			link.setAttribute('data-trackable', 'autoplay');
+			link.click();
+		};
+
+		const beforeEndHandler = (e) => {
+			// duration and currentTime are both in seconds
+			const timeUntilEnd = e.target.duration - e.target.currentTime;
+
+			if (!this.upNextIsShown && timeUntilEnd <= 5) {
+				const next = this.appendUpNext();
+
+				// play next video immediately on end
+				next && e.target.addEventListener('ended', () => autoplay(next));
+			}
+		};
+
+		const onEndedHandler = () => {
+			const next = this.appendUpNext();
+
+			if (next && this.options.upNextVariant !== 'no-autoplay') {
+				// this timeout may be cancelled
+				this.upNextTimeout = setTimeout(() => autoplay(next), 5000);
+			}
+		};
+
+		const onPlayingHandler = () => {
+			// stop displaying up next if the video is played again
+			if (this.upNextIsShown) {
+				this.removeUpNext();
+			}
+
+			// Allow users to scrub back to replay video
+			clearTimeout(this.upNextTimeout);
+		};
+
+		const onFirstPlayHandler = (e) => {
+			if (this.options.upNextVariant === 'before-end') {
+				e.target.addEventListener('timeupdate', beforeEndHandler);
+			} else {
+				e.target.addEventListener('ended', onEndedHandler);
+			}
+
+			this.videoEl.removeEventListener('playing', onFirstPlayHandler, true);
+
+			e.target.addEventListener('playing', onPlayingHandler);
+		};
+
+		if (this.upNextSlot) {
+			this.videoEl.addEventListener('playing', onFirstPlayHandler, true);
 		}
+	}
+
+	appendUpNext () {
+		// the up next list is lazy loaded so we'll fetch it lazily now...
+		const item = $('.js-up-next .o-teaser');
+
+		if (!item) return;
+
+		const data = {
+			href: $('.js-teaser-heading-link', item).href,
+			heading: $('.js-teaser-heading-link', item).textContent,
+			duration: $('.o-teaser__duration', item).textContent,
+			variant: this.options.upNextVariant
+		};
+
+		this.upNextSlot.innerHTML = upNextTemplate(data);
+
+		this.upNextIsShown = true;
+
+		// return the new content so the caller knows we were successful 👌
+		return this.upNextSlot.firstElementChild;
+	}
+
+	removeUpNext () {
+		this.upNextSlot.innerHTML = '';
+		this.upNextIsShown = false;
 	}
 
 }

@@ -1,0 +1,62 @@
+<div class="article__wrapper">
+	{{#ifSome bodyHTML media}}
+	<div class="o-grid-container">
+		<div class="article__main o-grid-row">
+			<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
+
+				{{#unless topper}}
+					{{> master-image-byline}}
+				{{/unless}}
+
+				{{#ifEquals topper.theme 'full-bleed-offset'}}
+					{{> topper/offset-text}}
+				{{/ifEquals}}
+
+				{{#ifAll isAudioArticle @root.flags.ftlabsSpokenLayer}}
+					{{> ftlabsSpokenLayerPlayer}}
+				{{/ifAll}}
+
+				{{#ifEquals contentType 'article'}}
+					{{#if tocHTML}}
+						<div class="article__body--toc">
+							{{{tocHTML}}}
+						</div>
+					{{/if}}
+					{{> body-article bodyHTML=bodyHTML}}
+					{{#if lightSignup.show}}
+						{{> light-signup tag=primaryTag articleUuid=id isInferred=lightSignup.isInferred}}
+					{{/if}}
+					{{#if inlineBarrier.show}}
+						{{> inline-barrier type=inlineBarrier.type}}
+					{{/if}}
+				{{/ifEquals}}
+				{{#ifEquals contentType 'podcast'}}
+					{{#if standfirst}}
+						<div class="article__body n-content-body" data-trackable="article-body" data-legal-copy>
+							<p>{{{standfirst}}}</p>
+						</div>
+					{{/if}}
+					<div class="article__media">
+						{{#with media}}
+						<audio controls>
+							<source src="{{url}}" type="{{mediaType}}" />
+							<p>
+								Your browser does not support playing this file but you can still <a href="{{url}}">download the MP3 file</a> to play locally.
+							</p>
+						</audio>
+						{{/with}}
+					</div>
+					{{> body-podcast}}
+				{{/ifEquals}}
+				{{> copyright-notice}}
+				{{> toolbar location='bottom'}}
+				{{#if tagToFollow}}
+					{{>follow-promo  tag=tagToFollow buttonSize="medium"}}
+				{{/if}}
+			</div>
+			{{> right-hand/right-hand}}
+		</div>
+	</div>
+	{{/ifSome}}
+</div>
+</article>

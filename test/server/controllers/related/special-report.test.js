@@ -4,9 +4,13 @@ const sinon = require('sinon');
 const proxyquire = require('proxyquire');
 const httpMocks = require('node-mocks-http');
 
-const stubs = {getRelatedArticles: sinon.stub()};
+const stubs = {
+	getRelatedArticles: sinon.stub(),
+	fetchGraphQlData: sinon.stub()
+};
 const subject = proxyquire('../../../../server/controllers/related/special-report', {
-	'../../lib/get-related-articles': stubs.getRelatedArticles
+	'../../lib/get-related-articles': stubs.getRelatedArticles,
+	'../../lib/fetch-graphql-data': stubs.fetchGraphQlData
 });
 
 const articlesSpecialReport = [
@@ -41,6 +45,7 @@ describe('Special Report', () => {
 		before(() => {
 
 			stubs.getRelatedArticles.returns(Promise.resolve(articlesSpecialReport));
+			stubs.fetchGraphQlData.returns(Promise.resolve({ specialReport: { prefLabel: 'Argentina' }}));
 			options = {
 				params: {id: '64492528-91d2-11e5-94e6-c5413829caa5'},
 				query: {
@@ -69,7 +74,7 @@ describe('Special Report', () => {
 
 		it('should get the special report id and name from the first article with a primaryTag with taxonomy specialReports', () => {
 			result.idV1.should.eql('TnN0ZWluX0dMX0FS-R0w=');
-			result.prefLabel.should.equal('Special Report');
+			result.prefLabel.should.equal('Argentina');
 		});
 
 		it('should not return the parent article in the list', () => {

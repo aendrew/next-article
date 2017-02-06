@@ -7,18 +7,36 @@
 	}
 }
 
-$colors: 'white', 'black', 'claret', 'blue', 'pink';
+@mixin setButtonColor($theme, $hex) {
+	.article-topper__extras {
+		button {
+			@include oButtonsTheme($theme);
 
+			&::before {
+				background-image: url('https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:plus?source=o-icons&tint=#{$hex}');
+			}
+
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.2) !important;
+				border-color: #505050 !important;
+			}
+		}
+	}
+}
+
+$colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 @each $color in $colors {
 	[data-textbox-background~='#{$color}'] {
 		$text-color: black;
 		$contrast: lightness(oColorsGetPaletteColor($color));
+		@include setButtonColor(uncolored, '000000');
 		@if $contrast <= 50% {
 			$text-color: white;
+			@include setButtonColor(inverse, ffffff);
 		}
+		@include colorBorder($text-color);
 		background-color: oColorsGetPaletteColor('#{$color}');
 		color: $text-color;
-		@include colorBorder($text-color);
 	}
 }
 
@@ -80,16 +98,17 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink';
 
 @mixin setHeadlineFont($size-l, $height-l, $size-s, $height-s) {
 	.article-topper__headline {
-		@include oTypographySerifDisplay(xl);
+		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
+		// @include oTypographyBold;
 		@include setResponsiveType($size-l, $height-l, $size-s, $height-s);
 	}
 }
 
 @mixin setStandfirstFont($size-l, $height-l, $size-s, $height-s) {
 	.article-topper__stand-first {
-		opacity: 0.8;
 		@include oTypographySans(m);
 		@include setResponsiveType($size-l, $height-l, $size-s, $height-s);
+		opacity: 0.8;
 	}
 }
 
@@ -111,12 +130,13 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink';
 	}
 	.article-topper__visual {
 		width: 100%;
-
-		.n-image-wrapper > .n-image {
-			width: 100vw;
-		}
 	}
 	.article-topper__text-wrapper {
 		z-index: 1;
 	}
+}
+
+@mixin standardSplitMobile {
+	@include alignText(left);
+	@include setTypeStyles(52px, 52px);
 }

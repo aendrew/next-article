@@ -14,7 +14,7 @@
 					<time data-o-component="o-date" class="stream-card__article__date o-date" datetime="{{#dateformat}}{{publishedDate}}{{/dateformat}}">
 						{{#dateformat "dddd, d mmmm, yyyy"}}{{publishedDate}}{{/dateformat}}
 					</time>
-					<a class="stream-card__article__link" href="{{url}}" data-trackable="link">{{title}}</a>
+					<a class="stream-card__article__link" href="{{relativeUrl}}" data-trackable="link">{{title}}</a>
 				</article>
 			{{/each}}
 		</div>

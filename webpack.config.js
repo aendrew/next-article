@@ -6,5 +6,6 @@ module.exports = nWebpack({
 		'./public/main.css': './client/main.scss',
 		'./public/comments.js': './client/comments.js',
 		'./public/comments.css': './client/comments.scss'
-	}
+	},
+	nUiExcludes: ['o-viewport']
 })

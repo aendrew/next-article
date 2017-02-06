@@ -62,6 +62,7 @@ module.exports = function podcastLegacyController (req, res, next, payload) {
 				res.render('fragment', payload);
 			} else {
 				payload.layout = 'wrapper';
+				payload.viewStyle = 'compact';
 				res.render('content', payload);
 			}
 		})

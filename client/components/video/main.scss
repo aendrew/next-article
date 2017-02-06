@@ -86,7 +86,7 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 		color: white;
 	}
 
-	&.video__placeholder__played {
+	&.video__placeholder--played {
 		bottom: 40px;
 		pointer-events: none;
 		background: linear-gradient($placeholder-background-color, $placeholder-background-color, $placeholder-background-color, transparent); // Fades out the end
@@ -96,7 +96,7 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 		}
 	}
 
-	&.video__placeholder__playing {
+	&.video__placeholder--playing {
 		opacity: 0;
 		visibility: hidden;
 	}
@@ -110,61 +110,60 @@ $placeholder-background-color: rgba(oColorsGetPaletteColor('claret'), 0.65);
 	margin-top: 21px;
 }
 
-.video__placeholder__up-next {
-	display: none;
-	pointer-events: auto;
+.video__autoplay-up-next {
 	position: absolute;
-	bottom: 0;
+	// allow space for the control bar
+	bottom: 40px;
 	right: 20px;
-	background-color: #000000;
 	padding: 10px;
+	width: 240px;
+	// it's a link so remove the border
+	border: 0;
+	background-color: getColor('black');
+	color: getColor('white');
 
-	@include oGridRespondTo(M) {
-		width: 240px;
-	}
-
-	@include oGridRespondTo(L) {
-		width: 300px;
-	}
-
-	.video__placeholder__ended & {
-		display: block;
-	}
-
-	> h4 {
-		margin: 0 0 6px;
-	}
-
-	> ol {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-
-		> li {
-			padding-bottom: 0;
-		}
-	}
-
-	.o-teaser {
-		@include oGridRespondTo($until: M) {
-			margin-bottom: 0;
-			padding-bottom: 0;
-			border-bottom: 0;
-		}
-	}
-
-	.o-teaser__heading {
-		color: white;
-	}
-
-	.o-teaser__timestamp {
-		@include oGridRespondTo($until: M) {
-			display: none;
-		}
+	&:empty {
+		display: none;
 	}
 }
 
+.video__autoplay-up-next--no-autoplay {
+	padding-left: 70px;
+}
 
+.video__autoplay-up-next__icon {
+	@include oIconsGetIcon('play', getColor('white'), 48);
+	position: absolute;
+	top: 0;
+	left: 10px;
+	height: 100%;
+	// only display for the no-autoplay A/B variant
+	display: none;
+
+	:hover > &,
+	:focus > & {
+		// match link hover color without loading a new icon
+		// #999 == cmyk(0, 0, 0, 0.4)
+		opacity: 0.6;
+	}
+
+	.video__autoplay-up-next--no-autoplay & {
+		display: block;
+	}
+}
+
+.video__autoplay-up-next__label {
+	margin: 0;
+	font-size: 1em;
+}
+
+.video__autoplay-up-next__heading {
+	@include oTypographySerif('m');
+	margin: 0.4em 0;
+}
+
+.video__autoplay-up-next__duration {
+}
 
 .video__info {
 	@include oGridRespondTo(L) {

@@ -4,7 +4,8 @@ $n-ui-output-critical: true;
 @include nUiConfigure(
 	$features: (
 		buttons: true,
-		tourTip: true
+		tourTip: true,
+		myft: true
 	),
 	$preset: 'complete'
 );
