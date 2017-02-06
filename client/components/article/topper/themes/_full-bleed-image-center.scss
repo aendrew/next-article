@@ -1,0 +1,9 @@
+.article-topper--full-bleed-image-center {
+	@include standardSplitMobile;
+	@include oGridRespondTo(S) {
+		@include alignText(center);
+		@include fullBleedImage;
+		@include overlayText;
+		@include resizeTextbox;
+	}
+}

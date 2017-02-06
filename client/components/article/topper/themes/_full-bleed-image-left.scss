@@ -1,0 +1,8 @@
+.article-topper--full-bleed-image-left {
+	@include standardSplitMobile;
+	@include oGridRespondTo(S) {
+		@include alignText(left);
+		@include fullBleedImage;
+		@include overlayText;
+	}
+}

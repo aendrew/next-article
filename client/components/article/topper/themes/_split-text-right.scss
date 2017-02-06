@@ -1,0 +1,7 @@
+.article-topper--split-text-right {
+	@include standardSplitMobile;
+	@include oGridRespondTo(S) {
+		@include alignText(right);
+		@include setTypeStyles(52px, 52px);
+	}
+}

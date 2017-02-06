@@ -1,0 +1,15 @@
+.article-topper--full-bleed-image-right {
+	@include standardSplitMobile;
+	@include oGridRespondTo(S) {
+		@include overlayText;
+		@include fullBleedImage;
+		@include alignText(center);
+		@include oGridRespondTo(M) {
+			@include alignText(right);
+		}
+		.article-topper__text-wrapper {
+			float: right;
+			align-self: flex-end;
+		}
+	}
+}

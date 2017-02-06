@@ -1,5 +1,4 @@
 @import 'themes';
-@import 'full-bleed-offset';
 
 .article-topper__slot-1 {
 	// default and only size for the full bleed container
@@ -35,9 +34,13 @@
 
 //default for current themes
 .article-topper__background {
+
 	height: inherit;
 	min-height: inherit;
 	width: 100%;
+	@include oGridRespondTo($until: S) {
+		min-height: 300px;
+	}
 	@include oGridRespondTo(M) {
 		position: absolute;
 		top: 0;

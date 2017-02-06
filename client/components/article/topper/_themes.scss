@@ -1,84 +1,12 @@
 @import 'mixins';
 
-.article-topper--split-text-right {
-	@include standardSplitMobile;
-	@include oGridRespondTo(S) {
-		@include alignText(right);
-		@include setTypeStyles(52px, 52px);
-	}
-}
+@import 'themes/full-bleed-image-center';
+@import 'themes/full-bleed-image-left';
+@import 'themes/full-bleed-image-right';
 
-.article-topper--split-text-left {
-	@include alignText(left);
-	@include setTypeStyles(52px, 52px);
-}
+@import 'themes/full-bleed-offset';
+@import 'themes/full-bleed-text';
 
-.article-topper--split-text-center {
-	@include standardSplitMobile;
-	@include oGridRespondTo(S) {
-		@include alignText(center);
-		@include setTypeStyles(52px, 52px);
-	}
-}
-
-.article-topper--full-bleed-image-center {
-	@include standardSplitMobile;
-	@include oGridRespondTo(S) {
-		@include alignText(center);
-		@include fullBleedImage;
-		@include overlayText;
-		@include resizeTextbox;
-	}
-}
-
-.article-topper--full-bleed-image-right {
-	@include standardSplitMobile;
-	@include oGridRespondTo(S) {
-		@include overlayText;
-		@include fullBleedImage;
-		@include alignText(center);
-		@include oGridRespondTo(M) {
-			@include alignText(right);
-		}
-		.article-topper__text-wrapper {
-			float: right;
-			align-self: flex-end;
-		}
-	}
-}
-
-.article-topper--full-bleed-image-left {
-	@include standardSplitMobile;
-	@include oGridRespondTo(S) {
-		@include alignText(left);
-		@include fullBleedImage;
-		@include overlayText;
-	}
-}
-
-.article-topper--full-bleed-text {
-	@include alignText(center);
-	@include setStandfirstFont(22px, 26px, 18px, 22px);
-	@include resizeTextbox;
-	.article-topper__visual {
-		display: none;
-	}
-
-	.article-topper__headline {
-		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
-		@include oGridRespondTo($until: S) {
-			font-size: 36px;
-			line-height: 36px;
-		}
-
-		@include oGridRespondTo(S, L) {
-			font-size: 52px;
-			line-height: 52px;
-		}
-
-		@include oGridRespondTo(L) {
-			font-size: 84px;
-			line-height: 84px;
-		}
-	}
-}
+@import 'themes/split-text-center';
+@import 'themes/split-text-left';
+@import 'themes/split-text-right';
