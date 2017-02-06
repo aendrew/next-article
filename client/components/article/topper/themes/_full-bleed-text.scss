@@ -1,23 +1,14 @@
 .article-topper--full-bleed-text {
 	@include alignText(center);
+	@include setHeadlineFont(52px, 52px, 32px, 32px);
 	@include setStandfirstFont(22px, 26px, 18px, 22px);
 	@include resizeTextbox;
+
 	.article-topper__visual {
 		display: none;
 	}
 
 	.article-topper__headline {
-		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
-		@include oGridRespondTo($until: S) {
-			font-size: 36px;
-			line-height: 36px;
-		}
-
-		@include oGridRespondTo(S, L) {
-			font-size: 52px;
-			line-height: 52px;
-		}
-
 		@include oGridRespondTo(L) {
 			font-size: 84px;
 			line-height: 84px;

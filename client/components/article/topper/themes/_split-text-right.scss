@@ -2,6 +2,7 @@
 	@include standardSplitMobile;
 	@include oGridRespondTo(S) {
 		@include alignText(right);
-		@include setTypeStyles(52px, 52px);
+		@include setHeadlineFont(52px, 52px, 32px, 32px);
+		@include setStandfirstFont(22px, 26px, 18px, 22px);;
 	}
 }

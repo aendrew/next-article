@@ -91,11 +91,6 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 	}
 }
 
-@mixin setTypeStyles($l-size, $l-height) {
-	@include setHeadlineFont($l-size, $l-height, 32px, 32px);
-	@include setStandfirstFont(22px, 26px, 18px, 22px);
-}
-
 @mixin setHeadlineFont($size-l, $height-l, $size-s, $height-s) {
 	.article-topper__headline {
 		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
@@ -113,18 +108,19 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 }
 
 @mixin setResponsiveType($size-l, $height-l, $size-s, $height-s) {
-	@include oGridRespondTo($until: L) {
+	@include oGridRespondTo($until: M) {
 		font-size: $size-s;
 		line-height: $height-s;
 	}
-	@include oGridRespondTo(L) {
+	@include oGridRespondTo(M) {
 		font-size: $size-l;
 		line-height: $height-l;
 	}
 }
 
 @mixin fullBleedImage {
-	@include setTypeStyles(64px, 64px);
+	@include setHeadlineFont(64px, 64px, 32px, 32px);
+	@include setStandfirstFont(22px, 26px, 18px, 22px);
 	.article-topper__text-box {
 		background: transparent;
 	}
@@ -138,5 +134,6 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 
 @mixin standardSplitMobile {
 	@include alignText(left);
-	@include setTypeStyles(52px, 52px);
+	@include setHeadlineFont(52px, 52px, 32px, 32px);
+	@include setStandfirstFont(22px, 26px, 18px, 22px);
 }
