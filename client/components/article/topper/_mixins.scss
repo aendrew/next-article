@@ -46,7 +46,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 		content: '';
 		display: block;
 		width: 33%;
-		margin: 20px 0 40px map-get($value, #{$position});
+		margin: 20px 0 20px map-get($value, #{$position});
 	}
 }
 
@@ -91,35 +91,41 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 	}
 }
 
-@mixin setHeadlineFont($size-l, $height-l, $size-s, $height-s) {
+@mixin setAllFonts {
+	@include setHeadlineFont;
+	@include setStandfirstFont;
+}
+@mixin setHeadlineFont {
 	.article-topper__headline {
 		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
-		@include setResponsiveType($size-l, $height-l, $size-s, $height-s);
+		@include setResponsiveType(52px, 52px, 38px, 38px, 32px, 32px);
 	}
 }
 
-@mixin setStandfirstFont($size-l, $height-l, $size-s, $height-s) {
+@mixin setStandfirstFont {
 	.article-topper__stand-first {
 		@include oTypographySans(m);
-		@include setResponsiveType($size-l, $height-l, $size-s, $height-s);
+		@include setResponsiveType(22px, 26px, 18px, 22px, 18px, 22px);
 		opacity: 0.8;
 	}
 }
 
-@mixin setResponsiveType($size-l, $height-l, $size-s, $height-s) {
-	@include oGridRespondTo($until: M) {
-		font-size: $size-s;
-		line-height: $height-s;
+@mixin setResponsiveType($L-size, $L-height, $M-size, $M-height, $S-size, $S-height) {
+	@include oGridRespondTo($until: S) {
+		font-size: $S-size;
+		line-height: $S-height;
 	}
-	@include oGridRespondTo(M) {
-		font-size: $size-l;
-		line-height: $height-l;
+	@include oGridRespondTo(S) {
+		font-size: $M-size;
+		line-height: $M-height;
+	}
+	@include oGridRespondTo(L) {
+		font-size: $L-size;
+		line-height: $L-height;
 	}
 }
 
 @mixin fullBleedImage {
-	@include setHeadlineFont(64px, 64px, 32px, 32px);
-	@include setStandfirstFont(22px, 26px, 18px, 22px);
 	.article-topper__text-box {
 		background: transparent;
 	}
@@ -133,6 +139,4 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 
 @mixin standardSplitMobile {
 	@include alignText(left);
-	@include setHeadlineFont(52px, 52px, 32px, 32px);
-	@include setStandfirstFont(22px, 26px, 18px, 22px);
 }

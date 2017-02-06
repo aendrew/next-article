@@ -1,8 +1,8 @@
 
 .article-topper--full-bleed-offset {
-	@include standardSplitMobile;
+	@include alignText(left);
+	@include setAllFonts;
 	@include oGridRespondTo(S) {
-		@include alignText(left);
 		@include fullBleedImage;
 		@include overlayText;
 	}

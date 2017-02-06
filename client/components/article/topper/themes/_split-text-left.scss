@@ -1,5 +1,4 @@
 .article-topper--split-text-left {
 	@include alignText(left);
-	@include setHeadlineFont(52px, 52px, 32px, 32px);
-	@include setStandfirstFont(22px, 26px, 18px, 22px);
+	@include setAllFonts;
 }
