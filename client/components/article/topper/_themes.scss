@@ -82,3 +82,67 @@
 		}
 	}
 }
+
+.article-topper--full-bleed-offset {
+	@include standardSplitMobile;
+	@include oGridRespondTo(S) {
+		@include alignText(left);
+		@include fullBleedImage;
+		@include overlayText;
+	}
+
+	.article-topper__visual {
+		margin-bottom: 30px;
+	}
+
+	.article-topper__offset-container {
+		margin: -90px 0 0 -20px;
+		padding-left: 20px;
+	}
+
+	@include oGridRespondTo($until: S) {
+		.article-topper__background {
+			height: 0;
+			min-height: 0;
+		}
+
+		.article-topper__visual {
+			margin-bottom: 0;
+		}
+
+		.article-topper__offset-container {
+			margin: 0;
+			padding-left: 0;
+		}
+
+		.article__primary-theme {
+			display: flex;
+			flex-direction: column;
+			.n-myft-ui {
+				top: 5px;
+			}
+		}
+
+		.article-topper__headline {
+			margin-top: 15px;
+		}
+	};
+
+	.article-topper__text-wrapper {
+		width: 100%;
+		padding: 16px 0 0;
+	}
+
+	.article-topper__stand-first {
+		margin-bottom: 20px;
+	}
+
+	.article-topper__extras {
+		.article__primary-theme {
+			> a {
+				color: oColorsGetPaletteColor('claret');
+				font-size: 16px;
+			}
+		}
+	}
+}

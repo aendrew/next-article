@@ -1,0 +1,10 @@
+<header class="n-util-visually-hidden">
+	<h1>{{title}}</h1>
+	<p>{{{standfirst}}}</p>
+</header>
+
+{{#ifEquals topper.theme 'full-bleed-offset'}}
+	{{> topper/offset-image}}
+{{else}}
+	{{> topper/standard-themes}}
+{{/ifEquals}}
