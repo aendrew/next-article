@@ -318,7 +318,7 @@ describe('Negotiation Controller', function () {
 					.post('/v3_api_v2/item/_mget')
 					.reply(200, fixtureArticle);
 
-				nock('https://rj-up.ft.com')
+				nock('https://coco.ft.com')
 					.get('/internalcontent/352210c4-7b17-11e5-a1fe-567b37f80b64')
 					.reply(200, richArticleFixture);
 

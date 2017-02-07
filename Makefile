@@ -13,7 +13,7 @@ coverage-report:
 	istanbul cover node_modules/.bin/_mocha --require server/setup --report=$(if $(CIRCLECI),lcovonly,lcov) 'test/server/**/*.test.js'
 
 unit-test:
-	export apikey=12345; export api2key=67890; export AWS_SIGNED_FETCH_DISABLE_DNS_RESOLUTION=true; export NODE_ENV=test; \
+	export apikey=12345; export api2key=67890; export AWS_SIGNED_FETCH_DISABLE_DNS_RESOLUTION=true; export COCO_API_HOST=coco.ft.com; export NODE_ENV=test; \
 	mocha --require server/setup 'test/server/**/*.test.js' --inline-diffs
 
 test:

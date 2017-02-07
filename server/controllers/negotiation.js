@@ -42,12 +42,12 @@ function getArticle (contentId) {
 }
 
 function getRichArticle (contentId) {
-	return fetch(`https://rj-up.ft.com/internalcontent/${contentId}`,
+	return fetch(`https://${process.env.COCO_API_HOST}/internalcontent/${contentId}`,
 	{
 		headers: {
-			'Authorization': process.env.RJUP_INTERNAL_CONTENT_KEY
+			'Authorization': process.env.COCO_API_AUTHORIZATION
 		},
-		timeout: 3000
+		timeout: 2000
 	})
 		.then(fetchres.json)
 		.then(richArticleModel)
