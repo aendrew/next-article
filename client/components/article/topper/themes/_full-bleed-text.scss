@@ -8,6 +8,10 @@
 		display: none;
 	}
 
+	.article-topper__extras {
+		justify-content: center;
+	}
+
 	.article-topper__headline {
 		@include oGridRespondTo(L) {
 			font-size: 84px;

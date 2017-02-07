@@ -3,5 +3,6 @@
 	@include alignText(left);
 	@include oGridRespondTo(S) {
 		@include overlayText;
+		@include fullBleedImage;
 	}
 }
