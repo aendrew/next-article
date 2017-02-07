@@ -1,6 +1,6 @@
- @import 'themes';
+@import 'themes';
 
- // default and only size for the full bleed container
+// default and only size for the full bleed container
 .article-topper__slot-1 {
 	width: 100%;
 	height: 50vh;
@@ -9,6 +9,10 @@
 
 	@include oGridRespondTo($until: S) {
 		min-height: 350px;
+	}
+
+	@include oGridRespondTo($until: L) {
+		min-height: 400px;
 	}
 
 	@include oGridRespondTo(XL) {
@@ -88,6 +92,8 @@
 
 .article-topper__extras {
 	display: flex;
+	padding-bottom: 5px;
+
 	@include oGridRespondTo($until: S) {
 		flex-direction: column;
 		justify-content: center;
@@ -96,7 +102,16 @@
 			padding-bottom: 5px;
 		}
 	}
-	
+
+	@include oGridRespondTo(M, L) {
+		flex-direction: column;
+		justify-content: center;
+		padding-bottom: 15px;
+		.n-content-tag {
+			padding-bottom: 5px;
+		}
+	}
+
 	.article-topper__brand {
 		font-weight: 400;
 	}

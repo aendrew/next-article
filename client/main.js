@@ -23,6 +23,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const legalCopy = require('./components/legal-copy/main');
 	const AutoplayVideo = require('./components/video/autoplay-video');
 	const affinity = require('./components/affinity/main');
+	const inlineBarrier = require('./components/inline-barrier/main');
 
 	// cacheJourney();
 
@@ -94,6 +95,10 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 		if (flags.get('affinityMvt')) {
 			affinity(flags);
+		}
+
+		if (document.querySelector('#inline-barrier')) {
+			inlineBarrier(flags);
 		}
 
 	});

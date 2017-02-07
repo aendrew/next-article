@@ -1,3 +1,5 @@
+// scss-lint:disable SelectorFormat
+
 @mixin colorBorder($color) {
 	.article-topper__headline::after {
 		border-bottom: 6px solid $color;
@@ -40,22 +42,18 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 	}
 }
 
-@mixin alignBorder($position) {
+@mixin alignText($position) {
 	$value: ("left": flex-start, "center": center, "right": flex-end);
 	.article-topper__headline::after {
 		content: '';
 		align-self: map-get($value, #{$position});
 		width: 120px;
-		margin: 20px 0 30px 0;
+		margin: 20px 0 30px;
 		@include oGridRespondTo(S) {
 			width: 150px;
-			margin: 20px 0 40px 0;
+			margin: 20px 0 40px;
 		};
 	}
-}
-
-@mixin alignText($position) {
-	@include alignBorder($position);
 	.article-topper__text-wrapper {
 		text-align: $position;
 	}
@@ -94,35 +92,53 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 	@include setHeadlineFont;
 	@include setStandfirstFont;
 }
+
 @mixin setHeadlineFont {
 	.article-topper__headline {
-		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
-		@include setResponsiveType(52px, 52px, 38px, 38px, 32px, 32px);
-		display: flex; //allows for responsive bottom border
+		display: flex; // for responsive bottom border
 		flex-direction: column;
+		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
+		line-height: 1;
+		font-size: 32px;
+
+		.o-typography--loaded-serifDisplayBold & {
+			font-size: 32px * 1.077;
+		}
+
+		@include oGridRespondTo(S) {
+			font-size: 38px;
+			.o-typography--loaded-serifDisplayBold & {
+				font-size: 38px * 1.077;
+			}
+		}
+
+		@include oGridRespondTo(L) {
+			font-size: 52px;
+			.o-typography--loaded-serifDisplayBold & {
+				font-size: 52px * 1.077;
+			}
+		}
 	}
 }
 
 @mixin setStandfirstFont {
 	.article-topper__stand-first {
-		@include oTypographySans(m);
-		@include setResponsiveType(22px, 26px, 18px, 22px, 18px, 22px);
+		@include oTypographySans(m, $load-progressively: true);
 		opacity: 0.8;
-	}
-}
+		font-size: round(18px * 0.9);
+		line-height: 1.4;
 
-@mixin setResponsiveType($L-size, $L-height, $M-size, $M-height, $S-size, $S-height) {
-	@include oGridRespondTo($until: S) {
-		font-size: $S-size;
-		line-height: $S-height;
-	}
-	@include oGridRespondTo(S) {
-		font-size: $M-size;
-		line-height: $M-height;
-	}
-	@include oGridRespondTo(L) {
-		font-size: $L-size;
-		line-height: $L-height;
+		.o-typography--loaded-sans & {
+			font-size: 18px;
+			line-height: 1.2;
+		}
+
+		@include oGridRespondTo(L) {
+			font-size: round(22px * 0.9);
+			.o-typography--loaded-sans & {
+				font-size: 22px;
+			}
+		}
 	}
 }
 
@@ -136,8 +152,4 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 	.article-topper__text-wrapper {
 		z-index: 1;
 	}
-}
-
-@mixin standardSplitMobile {
-	@include alignText(left);
 }
