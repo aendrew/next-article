@@ -6,7 +6,7 @@
 	height: 50vh;
 	position: relative;
 	min-height: auto; //IE9 support
-	
+
 	@include oGridRespondTo($until: S) {
 		min-height: 300px;
 	}
@@ -88,6 +88,7 @@
 
 .article-topper__extras {
 	.article__primary-theme {
+		display: flex;
 		> a {
 			color: inherit;
 			font-size: 16px;

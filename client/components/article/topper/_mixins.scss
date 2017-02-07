@@ -45,8 +45,11 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 	.article-topper__headline::after {
 		content: '';
 		align-self: map-get($value, #{$position});
-		width: 150px;
+		width: 120px;
 		margin: 20px 0 20px 0;
+		@include oGridRespondTo(S) {
+			width: 150px;
+		};
 	}
 }
 

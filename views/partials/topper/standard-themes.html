@@ -10,11 +10,6 @@
 							<a href="/special-reports/{{primaryTag.idV1}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="section-link" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
 						</p>
 						{{else}}
-						{{#if designGenre}}
-							<div class="article-topper__brand">
-								<span aria-label="part of the {{designGenre.prefLabel}} column">{{designGenre.prefLabel}}</span>
-							</div>
-						{{/if}}
 							{{#if primaryTag}}
 								{{> header/primary-tag}}
 							{{/if}}
