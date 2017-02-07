@@ -8,7 +8,7 @@
 	min-height: auto; //IE9 support
 
 	@include oGridRespondTo($until: S) {
-		min-height: 300px;
+		min-height: 350px;
 	}
 
 	@include oGridRespondTo(XL) {
@@ -87,11 +87,26 @@
 }
 
 .article-topper__extras {
-	.article__primary-theme {
-		display: flex;
-		> a {
-			color: inherit;
-			font-size: 16px;
+	display: flex;
+	@include oGridRespondTo($until: S) {
+		flex-direction: column;
+		justify-content: center;
+		padding-bottom: 15px;
+		.n-content-tag {
+			padding-bottom: 5px;
+		}
+	}
+	
+	.article-topper__brand {
+		font-weight: 400;
+	}
+
+	.n-content-tag {
+		color: inherit;
+		font-size: 16px;
+
+		&:hover {
+			border-bottom-color: inherit;
 		}
 	}
 }
