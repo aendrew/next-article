@@ -1,23 +1,28 @@
+// scss-lint:disable SelectorFormat
+
 @import 'mixins';
 
 .article-topper--split-text-right {
 	@include standardSplitMobile;
 	@include oGridRespondTo(S) {
 		@include alignText(right);
-		@include setTypeStyles(52px, 52px);
+		@include setHeadlineFont(52px, 32px);
+		@include setStandfirstFont(22px, 18px);
 	}
 }
 
 .article-topper--split-text-left {
 	@include alignText(left);
-	@include setTypeStyles(52px, 52px);
+	@include setHeadlineFont(52px, 32px);
+	@include setStandfirstFont(22px, 18px);
 }
 
 .article-topper--split-text-center {
 	@include standardSplitMobile;
 	@include oGridRespondTo(S) {
 		@include alignText(center);
-		@include setTypeStyles(52px, 52px);
+		@include setHeadlineFont(52px, 32px);
+		@include setStandfirstFont(22px, 18px);
 	}
 }
 
@@ -58,7 +63,7 @@
 
 .article-topper--full-bleed-text {
 	@include alignText(center);
-	@include setStandfirstFont(22px, 26px, 18px, 22px);
+	@include setStandfirstFont(22px, 18px);
 	@include resizeTextbox;
 	.article-topper__visual {
 		display: none;
@@ -66,19 +71,25 @@
 
 	.article-topper__headline {
 		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
-		@include oGridRespondTo($until: S) {
-			font-size: 36px;
-			line-height: 36px;
+		font-size: 36px;
+		line-height: 1;
+
+		.o-typography--loaded-serifDisplayBold & {
+			font-size: 36px * 1.077;
 		}
 
 		@include oGridRespondTo(S, L) {
 			font-size: 52px;
-			line-height: 52px;
+			.o-typography--loaded-serifDisplayBold & {
+				font-size: 52px * 1.077;
+			}
 		}
 
 		@include oGridRespondTo(L) {
 			font-size: 84px;
-			line-height: 84px;
+			.o-typography--loaded-serifDisplayBold & {
+				font-size: 84px * 1.077;
+			}
 		}
 	}
 }
