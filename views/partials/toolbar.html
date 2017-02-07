@@ -9,16 +9,16 @@
 			<div data-o-component="o-share" class="o-share">
 				<ul>
 					<li class="o-share__action o-share__action--twitter">
-						<a target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url={{encode shareUrl mode='uriComponent'}}&amp;text={{encode title mode='uriComponent'}}&amp;via=FT" data-trackable="twitter"><i>Twitter</i></a>
+						<a target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url={{encode shareUrl mode='uriComponent'}}&amp;text={{encode title mode='uriComponent'}}&amp;via=FT" data-trackable="twitter"><i>Share on Twitter (opens new window)</i></a>
 					</li>
 					<li class="o-share__action o-share__action--facebook">
-						<a target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u={{encode shareUrl mode='uriComponent'}}&amp;t={{encode title mode='uriComponent'}}" data-trackable="facebook"><i>Facebook</i></a>
+						<a target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u={{encode shareUrl mode='uriComponent'}}&amp;t={{encode title mode='uriComponent'}}" data-trackable="facebook"><i>Share on Facebook (opens new window)</i></a>
 					</li>
 					<li class="o-share__action o-share__action--linkedin">
-						<a target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{encode shareUrl mode='uriComponent'}}&amp;title={{encode title mode='uriComponent'}}&amp;source=Financial+Times" data-trackable="linkedin"><i>LinkedIn</i></a>
+						<a target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{encode shareUrl mode='uriComponent'}}&amp;title={{encode title mode='uriComponent'}}&amp;source=Financial+Times" data-trackable="linkedin"><i>Share on LinkedIn (opens new window)</i></a>
 					</li>
 					<li class="o-share__action o-share__action--whatsapp">
-						<a target="_blank" rel="noopener" href="whatsapp://send?text={{encode title mode='uriComponent'}}%20-%20{{encode shareUrl mode='uriComponent'}}" data-trackable="whatsapp"><i>Whatsapp</i></a>
+						<a target="_blank" rel="noopener" href="whatsapp://send?text={{encode title mode='uriComponent'}}%20-%20{{encode shareUrl mode='uriComponent'}}" data-trackable="whatsapp"><i>Share on Whatsapp (opens new window)</i></a>
 					</li>
 					{{#ifAll signedIn @root.flags.giftArticle}}
 						<li class="article__share-action--email o-share__action o-share__action--email">
