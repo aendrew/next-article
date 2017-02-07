@@ -92,7 +92,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
 
 		font-size: $size-s;
-		line-height: $size-s;
+		line-height: 1;
 
 		.o-typography--loaded-serifDisplayBold & {
 			font-size: $size-s * 1.077;
@@ -100,7 +100,6 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 
 		@include oGridRespondTo(L) {
 			font-size: $size-l;
-			line-height: $size-l;
 			.o-typography--loaded-serifDisplayBold & {
 				font-size: $size-l * 1.077;
 			}
@@ -110,15 +109,22 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 
 @mixin setStandfirstFont($size-l, $size-s) {
 	.article-topper__stand-first {
-		@include oTypographySans(m);
+		@include oTypographySans(m, $load-progressively: true);
 
-		font-size: $size-s;
-		line-height: round($size-s * 1.2);
+		font-size: round($size-s * 0.9);
+		line-height: 1.4;
 		opacity: 0.8;
 
+		.o-typography--loaded-sans & {
+			font-size: $size-s;
+			line-height: 1.2;
+		}
+
 		@include oGridRespondTo(L) {
-			font-size: $size-l;
-			line-height: round($size-l * 1.2);
+			font-size: round($size-l * 0.9);
+			.o-typography--loaded-sans & {
+				font-size: $size-l;
+			}
 		}
 	}
 }
