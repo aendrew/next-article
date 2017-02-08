@@ -11,7 +11,7 @@
 		min-height: 350px;
 	}
 
-	@include oGridRespondTo($until: L) {
+	@include oGridRespondTo(S, L) {
 		min-height: 400px;
 	}
 

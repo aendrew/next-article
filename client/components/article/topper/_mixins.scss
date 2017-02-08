@@ -11,7 +11,7 @@
 
 @mixin setButtonColor($theme, $hex) {
 	.article-topper__extras {
-		> form > button { //currently hacked in until button for myFT is done
+		.n-myft-ui__button { //currently hacked in until button for myFT is done
 			@include oButtonsTheme($theme);
 
 			&::before {
