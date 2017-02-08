@@ -1,0 +1,10 @@
+.article-topper--full-bleed-image-center {
+	@include setAllFonts;
+	@include alignText(left);
+	@include oGridRespondTo(S) {
+		@include alignText(center);
+		@include fullBleedImage;
+		@include overlayText;
+		@include resizeTextbox;
+	}
+}

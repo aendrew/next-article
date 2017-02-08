@@ -1,0 +1,7 @@
+.article-topper--split-text-right {
+	@include alignText(left);
+	@include setAllFonts;
+	@include oGridRespondTo(S) {
+		@include alignText(right);
+	}
+}
