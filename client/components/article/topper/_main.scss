@@ -93,19 +93,12 @@
 .article-topper__extras {
 	display: flex;
 	padding-bottom: 5px;
+	width: 125%;
 
 	@include oGridRespondTo($until: S) {
 		flex-direction: column;
 		justify-content: center;
-		padding-bottom: 15px;
-		.n-content-tag {
-			padding-bottom: 5px;
-		}
-	}
-
-	@include oGridRespondTo(M, L) {
-		flex-direction: column;
-		justify-content: center;
+		width: inherit;
 		padding-bottom: 15px;
 		.n-content-tag {
 			padding-bottom: 5px;

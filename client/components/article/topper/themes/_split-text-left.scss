@@ -1,4 +1,5 @@
 .article-topper--split-text-left {
 	@include alignText(left);
 	@include setAllFonts;
+	@include tagBehaviourSplit;
 }
