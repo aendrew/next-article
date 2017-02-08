@@ -57,7 +57,11 @@
 				{{> header/content-video-header}}
 
 				<div class="video__description">
-					{{{bodyHTML}}}
+					{{#if alternativeStandfirsts.promotionalStandfirst}}
+						<p>{{alternativeStandfirsts.promotionalStandfirst}}</p>
+					{{else}}
+						{{{bodyHTML}}}
+					{{/if}}
 				</div>
 
 				<div class="video__date">
