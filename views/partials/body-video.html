@@ -57,9 +57,16 @@
 				{{> header/content-video-header}}
 
 				<div class="video__description">
-					{{{bodyHTML}}}
+					{{#if alternativeStandfirsts.promotionalStandfirst}}
+						<p>{{alternativeStandfirsts.promotionalStandfirst}}</p>
+					{{else}}
+						{{{bodyHTML}}}
+					{{/if}}
+					{{#if captions}}
+						<div class="video__byline-label">Transcript</div>
+						{{{bodyHTML}}}
+					{{/if}}
 				</div>
-
 				<div class="video__date">
 					{{#if publishedDate}}
 						<time class="o-date" data-o-component="o-date" datetime="{{#dateformat}}{{publishedDate}}{{/dateformat}}" data-o-date-js>

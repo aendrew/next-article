@@ -1,0 +1,8 @@
+.article-topper--full-bleed-image-left {
+	@include setAllFonts;
+	@include alignText(left);
+	@include oGridRespondTo(S) {
+		@include overlayText;
+		@include fullBleedImage;
+	}
+}

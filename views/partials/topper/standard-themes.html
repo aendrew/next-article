@@ -3,18 +3,11 @@
 		<div class="article-topper__background" data-textbox-background="{{topper.backgroundColor}}">
 			<div class="article-topper__text-box o-grid-container">
 				<div class="article-topper__text-wrapper">
-					<div class="article-topper__extras">
-						{{#if isSpecialReport}}
-						<p class="article__primary-theme">
-							Special Report:
-							<a href="/special-reports/{{primaryTag.idV1}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="section-link" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
-						</p>
-						{{else}}
+
 							{{#if primaryTag}}
 								{{> header/primary-tag}}
 							{{/if}}
-						{{/if}}
-					</div>
+
 					<div class="article-topper__headline" data-trackable="header">{{topper.headline}}</div>
 					{{#if topper.standfirst}}
 					<div class="article-topper__stand-first">{{{topper.standfirst}}}</div>
@@ -39,7 +32,7 @@
 					{{/each}}
 				{{/ifEquals}}
 
-				<img class="article-topper__image" src="https://www.ft.com/__origami/service/image/v2/images/raw/{{mainImage.url}}?source=next&fit=scale-down&quality=highest&width=1440">
+				<img alt="{{alt}}" class="article-topper__image" src="https://www.ft.com/__origami/service/image/v2/images/raw/{{mainImage.url}}?source=next&fit=scale-down&quality=highest&width=1440">
 			</picture>
 		</div>
 	</div>
