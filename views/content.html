@@ -26,7 +26,12 @@
 		{{#defineBlock 'above-header'}}{{> ads/top }}{{/defineBlock}}
 	{{/if}}
 
-	{{#if topper}}
+	{{#if package}}
+		<h2>PACKAGE LOLS</h2>
+		{{package.title}}
+	{{/if}}
+
+	{{#if topper.bob}}
 		{{> topper/main}}
 	{{else}}
 		{{> header/content-header}}

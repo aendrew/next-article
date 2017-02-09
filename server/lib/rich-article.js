@@ -1,7 +1,6 @@
 'use strict';
 
 const capiImage = require('./capi-image');
-const packageData = require('./testi.json');
 
 module.exports = (article) => {
 	const model = {};
@@ -20,7 +19,12 @@ module.exports = (article) => {
 		'full-bleed-text': null
 	}
 
-	model.package = packageData.package;
+	console.log(article);
+
+	if(article.package) {
+		model.package = article.package;
+		return model;
+	}
 
 	if(article.topper && article.topper.theme && themeImageRatio[article.topper.theme]) {
 		model.topper = article.topper;
@@ -35,7 +39,6 @@ module.exports = (article) => {
 			model.topper.images = images;
 			return model;
 		});
-	} else {
-		return model;
 	}
+
 }

@@ -42,13 +42,7 @@ function getArticle (contentId) {
 }
 
 function getRichArticle (contentId) {
-	return fetch(`https://rj-up.ft.com/internalcontent/${contentId}`,
-	{
-		headers: {
-			'Authorization': process.env.RJUP_INTERNAL_CONTENT_KEY
-		},
-		timeout: 3000
-	})
+	return fetch(`https://s3-eu-west-1.amazonaws.com/rj-xcapi-mock/${contentId}`)
 		.then(fetchres.json)
 		.then(richArticleModel)
 		.catch(err => {
@@ -70,7 +64,7 @@ module.exports = function negotiationController (req, res, next) {
 
 	const contentPromises = [getArticle(req.params.id)];
 
-	if(res.locals.flags.articleTopper) {
+	if(res.locals.flags.articleTopper || res.locals.flags.contentPackages) {
 		contentPromises.push(getRichArticle(req.params.id));
 	}
 
