@@ -40,12 +40,15 @@
 					</div>
 
 					{{#ifAll @root.flags.contentPackages isContainedInPackage}}
-					<div class="o-toggler">
-							<ul>
-							{{#each currentPackage.contains}}
-								<li><a href="/content/{{this.id}}">{{ this.title }}</a></li>
-							{{/each}}
-							</ul>
+					<div data-o-component="o-expander" class="o-expander">
+					    <div class="o-expander__content">
+								<ul>
+								{{#each currentPackage.contains}}
+									<li><a href="/content/{{this.id}}">{{ this.title }}</a></li>
+								{{/each}}
+								</ul>
+					    </div>
+					    <a class="o-expander__toggle o--if-js"></a>
 					</div>
 					{{/ifAll}}
 				</header>
