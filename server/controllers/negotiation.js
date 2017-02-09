@@ -49,8 +49,6 @@ module.exports = function negotiationController (req, res, next) {
 		return controllerInteractive(req, res, next, interactive);
 	}
 
-	const contentPromises = [getArticle(req.params.id)];
-
 	return getArticle(req.params.id)
 		.then(article => {
 			const webUrl = article && article.webUrl || '';

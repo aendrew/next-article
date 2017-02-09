@@ -142,16 +142,32 @@ describe('Article Controller', () => {
 		});
 	});
 
-	context('has rich article model', () => {
+	context('Has rich journalism content', () => {
 
-		it('sets the topper on the view model', () => {
-			return createInstance(null, { articleTopper: true }, null, { topper: 'something' } ).then(() => {
+		it('sets the topper on the view model if flag is on', () => {
+			return createInstance(null, { articleTopper: true }, Object.assign({ topper: { theme: 'split-text-left'}}, fixture)).then(() => {
 				let result = response._getRenderData()
-				expect(result.topper).to.equal('something');
+				expect(result.topper.theme).to.equal('split-text-left');
+				expect(result.topper.themeImageRatio).to.equal('split');
 				expect(response.statusCode).to.equal(200);
 			});
 		});
 
+		it('does not set topper if flag is off', () => {
+			return createInstance(null, { articleTopper: false }, Object.assign({ topper: { theme: 'split-text-left'}}, fixture)).then(() => {
+				let result = response._getRenderData()
+				expect(result.topper).to.be.null;
+				expect(response.statusCode).to.equal(200);
+			});
+		})
+		
+		it('does not accept topper with an unkown theme', () => {
+			return createInstance(null, { articleTopper: true }, Object.assign({ topper: { theme: 'some-crazy-theme'}}, fixture)).then(() => {
+				let result = response._getRenderData()
+				expect(result.topper).to.be.null;
+				expect(response.statusCode).to.equal(200);
+			});
+		});;
 	});
 
 	context('article preview layout', () => {
