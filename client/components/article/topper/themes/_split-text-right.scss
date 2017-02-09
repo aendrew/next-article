@@ -1,8 +1,10 @@
 .article-topper--split-text-right {
 	@include alignText(left);
 	@include setAllFonts;
-	@include tagBehaviourSplit;
 	@include oGridRespondTo(S) {
 		@include alignText(right);
+	}
+	@include oGridRespondTo(M, L) {
+		@include stackTags;
 	}
 }

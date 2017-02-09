@@ -93,16 +93,11 @@
 .article-topper__extras {
 	display: flex;
 	padding-bottom: 5px;
-	width: 125%;
+	width: 125%; //breaks container out of parent width constraint, needs a better fix
 
 	@include oGridRespondTo($until: S) {
-		flex-direction: column;
-		justify-content: center;
+		@include stackTags;
 		width: inherit;
-		padding-bottom: 15px;
-		.n-content-tag {
-			padding-bottom: 5px;
-		}
 	}
 
 	.article-topper__brand {

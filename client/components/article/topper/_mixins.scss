@@ -159,15 +159,13 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 	}
 }
 
-@mixin tagBehaviourSplit {
+@mixin stackTags {
 	.article-topper__extras {
-		@include oGridRespondTo(M, L) {
-			flex-direction: column;
-			justify-content: center;
-			padding-bottom: 15px;
-			.n-content-tag {
-				padding-bottom: 5px;
-			}
+		flex-direction: column;
+		justify-content: center;
+		padding-bottom: 15px;
+		.n-content-tag {
+			padding-bottom: 5px;
 		}
 	}
 }
