@@ -1,6 +1,7 @@
 'use strict';
 
 const capiImage = require('./capi-image');
+const packageData = require('./testi.json');
 
 module.exports = (article) => {
 	const model = {};
@@ -18,6 +19,8 @@ module.exports = (article) => {
 		'full-bleed-offset': 'full-bleed',
 		'full-bleed-text': null
 	}
+
+	model.package = packageData.package;
 
 	if(article.topper && article.topper.theme && themeImageRatio[article.topper.theme]) {
 		model.topper = article.topper;

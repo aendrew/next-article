@@ -192,6 +192,10 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 		content.topper = richContent.topper;
 	}
 
+	if(res.locals.flags.contentPackage && richContent) {
+		content.package = richContent.package;
+	}
+
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
 			content.contentType = 'article';
