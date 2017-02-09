@@ -16,12 +16,16 @@
 							{{/if}}
 						{{/if}}
 						<h1 class="article-headline">
+							{{#ifAll @root.flags.contentPackages isContainedInPackage}}
+								<a href="/content/{{ currentPackage.id }}">{{ currentPackage.title }} ></a>
+							{{/ifAll}}
 							<span class="article-classifier__gap">{{title}}</span>
 							{{#ifAll @root.flags.premiumContentIndicator isPremium}}
 								<span class="article-classifier">Premium</span>
 							{{/ifAll}}
 						</h1>
 					</div>
+
 					<div class="article__header-secondary">
 						{{#unlessEquals contentType 'podcast'}}
 							{{#if standfirst}}
@@ -34,6 +38,16 @@
 							</div>
 						{{/if}}
 					</div>
+
+					{{#ifAll @root.flags.contentPackages isContainedInPackage}}
+					<div class="o-toggler">
+							<ul>
+							{{#each currentPackage.contains}}
+								<li><a href="/content/{{this.id}}">{{ this.title }}</a></li>
+							{{/each}}
+							</ul>
+					</div>
+					{{/ifAll}}
 				</header>
 				{{#if designGenre.headshot}}
 				<div class="article__header-headshot">

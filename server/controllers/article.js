@@ -192,17 +192,11 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 		content.topper = richContent.topper;
 	}
 
-	if (res.locals.flags.contentPackages) {
-		content.isContainedInPackage = Array.isArray(content.containedIn) && content.containedIn.length > 0;
-		// TODO: Fetch all the things
-
-		if (content.isContainedInPackage) {
-			asyncWorkToDo = asyncWorkToDo.concat([
-				// TODO: fetch parent package
-				// TODO: fetch sibling content
-			]);
-		}
+	if(res.locals.flags.contentPackages && content.isContainedInPackage) {
+		content.currentPackage = content.containedIn[0];
 	}
+
+	content.containedIn[0]
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
