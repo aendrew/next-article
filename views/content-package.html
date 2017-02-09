@@ -1,0 +1,29 @@
+{{#defineBlock 'globalDataAttributes'}}data-content-id="{{id}}"{{/defineBlock}}
+{{#defineBlock 'head'}}
+	{{> rel-canonical}}
+	{{> rel-alternate}}
+	{{#unless @root.flags.newSchema}}
+		{{> schemaDotOrg}}
+	{{/unless}}
+	{{#if isPremium}}
+		<meta name="robots" content="noindex">
+	{{/if}}
+	<link rel="amphtml" href="https://amp.ft.com/content/{{id}}" />
+	<meta name="description" content="{{description}}"/>
+{{/defineBlock}}
+<article
+		id="site-content"
+		role="main"
+		class="article{{#if designGenre}} article--brand{{/if}}"
+		data-content-id="{{id}}"
+		data-content-sources="{{#if articleV1}}v1{{/if}} {{#if articleV2}}v2{{/if}}"
+		data-syndicatable="{{canBeSyndicated}}"
+>
+
+  <h1>THIS IS A PACKAGE</h1>
+
+	{{> body-wrapper}}
+
+  {{>propensity-messaging-promo-unit}}
+
+<script type="text/json" id="dehydrated-metadata">{{{json dehydratedMetadata}}}</script>
