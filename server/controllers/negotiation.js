@@ -106,7 +106,11 @@ module.exports = function negotiationController (req, res, next) {
 				if (isArticlePodcast(article)) {
 					return controllerPodcast(req, res, next, article);
 				} else if (isArticleVideo(article)) {
-					return controllerVideo(req, res, next, article);
+					if (res.locals.flags.videoArticlePageV2) {
+						return res.redirect(`/video/${req.params.id}`)
+					} else {
+						return controllerVideo(req, res, next, article);
+					}
 				} else {
 
 					return controllerArticle(req, res, next, article, richArticle);
