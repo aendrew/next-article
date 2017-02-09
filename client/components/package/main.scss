@@ -1,0 +1,21 @@
+.package-nav__title {
+  display: inline-block;
+  padding: 0 1em;
+}
+
+.package-nav__contents {
+  list-style: none;
+  padding: 0;
+}
+
+.package-nav__content-item {
+  color: white;
+  font-size: large;
+  border-bottom: 1px solid white;
+  padding: .5em 1.5em;
+}
+
+.package-nav__link {
+  border: none;
+  color: inherit;
+}

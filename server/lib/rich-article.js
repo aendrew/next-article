@@ -17,13 +17,10 @@ module.exports = (article) => {
 		'full-bleed-image-right': 'full-bleed',
 		'full-bleed-offset': 'full-bleed',
 		'full-bleed-text': null
-	}
-
-	console.log(article);
+	};
 
 	if(article.package) {
 		model.package = article.package;
-		return model;
 	}
 
 	if(article.topper && article.topper.theme && themeImageRatio[article.topper.theme]) {
@@ -39,6 +36,8 @@ module.exports = (article) => {
 			model.topper.images = images;
 			return model;
 		});
+	} else {
+		return model;
 	}
 
 }

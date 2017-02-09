@@ -27,11 +27,10 @@
 	{{/if}}
 
 	{{#if package}}
-		<h2>PACKAGE LOLS</h2>
-		{{package.title}}
+		{{> package/nav package}}
 	{{/if}}
 
-	{{#if topper.bob}}
+	{{#if topper}}
 		{{> topper/main}}
 	{{else}}
 		{{> header/content-header}}
