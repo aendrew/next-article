@@ -16,6 +16,10 @@
   padding: .5em 1em;
 }
 
+.package-nav__content-item:last-child {
+  border: none;
+}
+
 .package-nav__link {
   border: none;
   color: inherit;
