@@ -160,7 +160,7 @@ describe('Article Controller', () => {
 				expect(response.statusCode).to.equal(200);
 			});
 		})
-		
+
 		it('does not accept topper with an unkown theme', () => {
 			return createInstance(null, { articleTopper: true }, Object.assign({ topper: { theme: 'some-crazy-theme'}}, fixture)).then(() => {
 				let result = response._getRenderData()
