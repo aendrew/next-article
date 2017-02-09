@@ -1,4 +1,7 @@
 .article-topper--split-text-left {
 	@include alignText(left);
 	@include setAllFonts;
+	@include oGridRespondTo(M, L) {
+		@include stackTags;
+	}
 }
