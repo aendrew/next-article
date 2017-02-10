@@ -54,7 +54,7 @@ module.exports = [
 			// video
 			'/content/c382002a-a839-366c-9b5f-c3e51a25e05d': 200,
 			// fragment view
-			'/content/a85bf481-457c-3bd4-bd49-3801d175d583?fragment=true': 200
+			'/content/a85bf481-457c-3bd4-bd49-3801d175d583?fragment=true': 200,
 			// article with topper
 			'/content/7b38ad62-d1a5-11e6-b06b-680c49b4b4c0': 200
 		}
