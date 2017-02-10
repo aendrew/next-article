@@ -15,10 +15,11 @@
 								{{> header/primary-tag}}
 							{{/if}}
 						{{/if}}
+
+						{{#ifAll @root.flags.contentPackages package}}
+							<a href="{{ package.url }}">{{ package.title }}</a>
+						{{/ifAll}}
 						<h1 class="article-headline">
-							{{#ifAll @root.flags.contentPackages isContainedInPackage}}
-								<a href="{{ packageContext.package.url }}">{{ packageContext.package.title }}</a>
-							{{/ifAll}}
 							<span class="article-classifier__gap">{{title}}</span>
 							{{#ifAll @root.flags.premiumContentIndicator isPremium}}
 								<span class="article-classifier">Premium</span>

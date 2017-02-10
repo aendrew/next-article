@@ -26,8 +26,8 @@
 		{{#defineBlock 'above-header'}}{{> ads/top }}{{/defineBlock}}
 	{{/if}}
 
-	{{#ifAll @root.flags.contentPackages packageContext}}
-		{{> package/nav packageContext.package}}
+	{{#ifAll @root.flags.contentPackages package}}
+		{{> package/nav package}}
 	{{/ifAll}}
 
 	{{#ifAll @root.flags.articleTopper topper}}

@@ -193,8 +193,8 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 	}
 
 	if(res.locals.flags.contentPackages && content.isContainedInPackage) {
-		const ctx = content.packageContext = {};
-		ctx.package = content.containedIn[0];
+		const package = content.package = content.containedIn[0];
+		const ctx = package.context = {};
 		// const currentIndex =
 		// ctx.previous =
 		// ctx.next =

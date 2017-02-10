@@ -98,7 +98,6 @@ function decoratePackageWithContents(package) {
 }
 
 function decorateContentWithPackage(content) {
-	console.log(content);
 	hackPackageData(content);
 
 	let promises = [];
