@@ -8,8 +8,9 @@
 		display: none;
 	}
 
-	.article-topper__tags {
-		justify-content: center;
+	.article-topper__tags,
+	.article-topper__text {
+		width: inherit;
 	}
 
 	.article-topper__headline {
