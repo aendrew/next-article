@@ -7,4 +7,9 @@
 		@include overlayText;
 		@include resizeTextbox;
 	}
+
+	.article-topper__tags,
+	.article-topper__text {
+		width: inherit;
+	}
 }
