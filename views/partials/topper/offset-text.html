@@ -2,11 +2,9 @@
 	<div class="article-topper__offset-container" data-textbox-background="pink">
 		<div class="article-topper__text-box">
 			<div class="article-topper__text-wrapper">
-				<div class="article-topper__extras">
-					{{#if primaryTag}}
-						{{> header/primary-tag}}
-					{{/if}}
-				</div>
+				{{#if primaryTag}}
+					{{> header/primary-tag}}
+				{{/if}}
 				<div class="article-topper__headline" data-trackable="header">{{topper.headline}}</div>
 				{{#if topper.standfirst}}
 				<div class="article-topper__stand-first">{{{topper.standfirst}}}</div>

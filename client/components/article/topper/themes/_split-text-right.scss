@@ -4,4 +4,7 @@
 	@include oGridRespondTo(S) {
 		@include alignText(right);
 	}
+	@include oGridRespondTo(M, L) {
+		@include stackTags;
+	}
 }
