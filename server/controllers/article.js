@@ -192,9 +192,14 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 		content.topper = richContent.topper;
 	}
 
-	if(res.locals.flags.contentPackages && richContent) {
-		content.package = richContent.package;
+	if(res.locals.flags.contentPackages && content.isContainedInPackage) {
+		const ctx = content.packageContext = {};
+		ctx.package = content.containedIn[0];
+		// const currentIndex =
+		// ctx.previous =
+		// ctx.next =
 	}
+
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {

@@ -1,12 +1,12 @@
-<nav data-o-component="o-expander" class="package-nav o-expander" data-o-expander-shrink-to="hidden" data-o-expander-collapsed-toggle-text="" data-o-expander-expanded-toggle-text="" data-textbox-background="{{@root.topper.bgColor}}">
+<nav data-o-component="o-expander" class="package-nav o-expander" data-o-expander-shrink-to="hidden" data-o-expander-collapsed-toggle-text="" data-o-expander-expanded-toggle-text="" data-textbox-background="{{#if @root.topper}}{{@root.topper.bgColor}}{{else}}slate{{/if}}">
 	<div>
 		<h3 class="package-nav__title">{{title}}</h3>
 		<button class="package-nav__expander o-expander__toggle o--if-js"></button>
 	</div>
 	<ul class="package-nav__contents o-expander__content">
-		{{#each articles}}
+		{{#each contains}}
 			<li class="package-nav__content-item">
-				<a href="{{url}}" class="package-nav__link">{{section}}</a>
+				<a href="{{url}}" class="package-nav__link">{{title}}</a>
 			</li>
 		{{/each}}
 	</ul>

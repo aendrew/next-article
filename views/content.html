@@ -26,15 +26,15 @@
 		{{#defineBlock 'above-header'}}{{> ads/top }}{{/defineBlock}}
 	{{/if}}
 
-	{{#if package}}
-		{{> package/nav package}}
-	{{/if}}
+	{{#ifAll @root.flags.contentPackages packageContext}}
+		{{> package/nav packageContext.package}}
+	{{/ifAll}}
 
-	{{#if topper}}
+	{{#ifAll @root.flags.articleTopper topper}}
 		{{> topper/main}}
 	{{else}}
 		{{> header/content-header}}
-	{{/if}}
+	{{/ifAll}}
 	{{> body-wrapper}}
 
 {{>propensity-messaging-promo-unit}}
