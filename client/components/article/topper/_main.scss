@@ -1,15 +1,23 @@
 @import 'themes';
 
+
+@include oGridRespondTo($until: S) {
+	@include stackTags;
+	.article-topper__tags {
+		width: inherit;
+	}
+
+	.article-topper__text-box {
+		padding: 0 5%;
+	}
+}
+
 // default and only size for the full bleed container
 .article-topper__slot-1 {
 	width: 100%;
 	height: 50vh;
 	position: relative;
-	min-height: auto; //IE9 support
-
-	@include oGridRespondTo($until: S) {
-		min-height: 350px;
-	}
+	min-height: 350px;
 
 	@include oGridRespondTo(S, L) {
 		min-height: 400px;
@@ -81,24 +89,23 @@
 //IE9 support
 .article-topper__text-wrapper {
 	width: 100%;
-	padding: 0 5%;
-	margin-top: 5%;
 	box-sizing: border-box;
+}
+
+.article-topper__text {
+	width: 100%;
 	@include oGridRespondTo(M) {
-		width: 50%;
-		padding: 0 5% 0 0;
+		width: 45%;
 	}
 }
 
-.article-topper__extras {
+.article-topper__tags {
 	display: flex;
 	padding-bottom: 5px;
-	width: 125%; //breaks container out of parent width constraint, needs a better fix
 
-	@include oGridRespondTo($until: S) {
-		@include stackTags;
-		width: inherit;
-	}
+	@include oGridRespondTo(M) {
+		width: 45%;
+	};
 
 	.article-topper__brand {
 		font-weight: 400;
@@ -113,7 +120,6 @@
 		}
 	}
 }
-
 
 @supports (object-fit: cover) {
 	.article-topper__slot-1 {
