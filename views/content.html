@@ -26,11 +26,11 @@
 		{{#defineBlock 'above-header'}}{{> ads/top }}{{/defineBlock}}
 	{{/if}}
 
-	{{#if topper}}
+	{{#ifAll @root.flags.articleTopper topper}}
 		{{> topper/main}}
 	{{else}}
 		{{> header/content-header}}
-	{{/if}}
+	{{/ifAll}}
 	{{> body-wrapper}}
 
 {{>propensity-messaging-promo-unit}}
