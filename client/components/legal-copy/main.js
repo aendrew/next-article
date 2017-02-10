@@ -15,6 +15,7 @@ const countWords = text => text.split(/\s+/).length;
 let altPressed = false;
 const ALT = 18;
 const C = 67;
+let contextMenuEvents = [];
 
 function setClipboard (e, html, text){
 	if(hasEventClipboardSupport(e)){
@@ -60,26 +61,55 @@ module.exports = function (flags) {
 	if(!flags.get('articleCopyLegalNotice')){
 		return;
 	}
+
+	// Helps detect copy event without interfering with Text-to-speech software
 	document.body.addEventListener('keydown', interceptKeys);
+	document.body.addEventListener('contextmenu', rememberContextMenu);
+	document.body.addEventListener('copy', handleCopyFromContextMenu);
 };
 
-// Prevents Alt+Esc from triggering 'copy' event in chrome,
+// Alt+Esc triggers 'copy' event in chrome 56 and under
 // A lot of text-to-speech software relies on these keys to read out text to the user.
-// Alt+Esc triggers 'copy' in chrome 56 and under
-function interceptKeys (evt) {
+function interceptKeys (e) {
 
-	if (evt.keyCode === ALT) {
+	// Remember if alt was pressed
+	if (e.keyCode === ALT) {
 		altPressed = true;
+
+		// Clean up after 1 second
+		// TTS triggers copy event immediately
+		setTimeout(function () {
+			altPressed = false;
+		}, 1000);
 		return;
 	}
 
-	evt = evt || window.event;
-	const ctrlDown = evt.ctrlKey || evt.metaKey; // Mac support
+	e = e || window.event;
+	const ctrlDown = e.ctrlKey || e.metaKey; // Mac support
 
 	// Check for ctrl+c
-	if (!altPressed && ctrlDown && evt.keyCode === C) {
-		onCopy();
+	if (!altPressed && ctrlDown && e.keyCode === C) {
+		onCopy(e);
 	}
 
 	altPressed = false;
 }
+
+// If we detect a copy event right after a contextmenu event
+// there's a good chance the user is actually trying to copy
+// (rather than TTS having fired the copy event)
+function handleCopyFromContextMenu (e) {
+	if (contextMenuEvents.length > 0) {
+		onCopy(e);
+	}
+	contextMenuEvents = []
+};
+
+function rememberContextMenu (e) {
+	contextMenuEvents.push(e);
+
+	// clean up after 5 seconds
+	setTimeout(function () {
+		contextMenuEvents = [];
+	}, 5000);
+};
