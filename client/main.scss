@@ -33,12 +33,6 @@ $n-ui-output-critical: true;
 	@import 'components/read-next/main';
 	@import 'components/suggested-reads/main';
 
-	.next-header {
-		margin-bottom: 0;
-	}
-	.myft-ui__qr-code {
-		display: none;
-	}
 	.o-labels {
 		@include oTypographySansBold('xs');
 	}
