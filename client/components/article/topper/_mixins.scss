@@ -10,7 +10,7 @@
 }
 
 @mixin setButtonColor($theme, $hex) {
-	.article-topper__extras {
+	.article-topper__tags {
 		.n-myft-ui__button { //currently hacked in until button for myFT is done
 			@include oButtonsTheme($theme);
 
@@ -59,7 +59,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 		text-align: $position;
 	}
 
-	.article-topper__extras {
+	.article-topper__tags {
 		justify-content: map-get($value, #{$position});
 	}
 }
@@ -160,7 +160,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 }
 
 @mixin stackTags {
-	.article-topper__extras {
+	.article-topper__tags {
 		flex-direction: column;
 		justify-content: center;
 		padding-bottom: 15px;

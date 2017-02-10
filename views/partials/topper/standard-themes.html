@@ -3,15 +3,15 @@
 		<div class="article-topper__background" data-textbox-background="{{topper.bgColor}}">
 			<div class="article-topper__text-box o-grid-container">
 				<div class="article-topper__text-wrapper">
-
-							{{#if primaryTag}}
-								{{> header/primary-tag}}
-							{{/if}}
-
-					<div class="article-topper__headline" data-trackable="header">{{topper.headline}}</div>
-					{{#if topper.standfirst}}
-					<div class="article-topper__stand-first">{{{topper.standfirst}}}</div>
-				{{/if}}
+					{{#if primaryTag}}
+						{{> header/primary-tag}}
+					{{/if}}
+					<div class="article-topper__text">
+						<div class="article-topper__headline" data-trackable="header">{{topper.headline}}</div>
+						{{#if topper.standfirst}}
+							<div class="article-topper__stand-first">{{{topper.standfirst}}}</div>
+						{{/if}}
+					</div>
 				</div>
 			</div>
 		</div>
