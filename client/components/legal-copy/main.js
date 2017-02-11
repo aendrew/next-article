@@ -14,8 +14,6 @@ const countWords = text => text.split(/\s+/).length;
 
 let altPressed = false;
 const ALT = 18;
-const C = 67;
-let contextMenuEvents = [];
 
 function setClipboard (e, html, text){
 	if(hasEventClipboardSupport(e)){
@@ -64,8 +62,7 @@ module.exports = function (flags) {
 
 	// Helps detect copy event without interfering with Text-to-speech software
 	document.body.addEventListener('keydown', interceptKeys);
-	document.body.addEventListener('contextmenu', rememberContextMenu);
-	document.body.addEventListener('copy', handleCopyFromContextMenu);
+	document.body.addEventListener('copy', handleCopy);
 };
 
 // Alt+Esc triggers 'copy' event in chrome 56 and under
@@ -81,35 +78,13 @@ function interceptKeys (e) {
 		setTimeout(function () {
 			altPressed = false;
 		}, 1000);
-		return;
 	}
-
-	e = e || window.event;
-	const ctrlDown = e.ctrlKey || e.metaKey; // Mac support
-
-	// Check for ctrl+c
-	if (!altPressed && ctrlDown && e.keyCode === C) {
-		onCopy(e);
-	}
-
-	altPressed = false;
 }
 
-// If we detect a copy event right after a contextmenu event
-// there's a good chance the user is actually trying to copy
-// (rather than TTS having fired the copy event)
-function handleCopyFromContextMenu (e) {
-	if (contextMenuEvents.length > 0) {
+// Trigger onCopy only if alt hasn't been pressed immediately prior
+function handleCopy (e) {
+	if (!altPressed) {
 		onCopy(e);
 	}
-	contextMenuEvents = []
-};
-
-function rememberContextMenu (e) {
-	contextMenuEvents.push(e);
-
-	// clean up after 5 seconds
-	setTimeout(function () {
-		contextMenuEvents = [];
-	}, 5000);
+	altPressed = false;
 };
