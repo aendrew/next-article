@@ -1,3 +1,14 @@
-<div id="inline-barrier" class="n-util-visually-hidden" data-n-component="inline-barrier" data-n-type="{{type}}" data-trackable="inline-barrier"></div>
 
-<div class="n-util-hide-enhanced">Core messaging</div>
+{{#ifEquals @root.flags.inArticlePreview 'psp'}}
+
+	<div class="inline-barrier" data-n-component="inline-barrier" data-n-type="{{type}}" data-trackable="inline-barrier">
+		<div class="inline-barrier__fader">
+			<p class="n-util-visually-hidden">This is the end of your free article preview.</p>
+		</div>
+		<div class="n-util-hide-enhanced">
+			<p class="inline-barrier__heading">Want to read more?</p>
+			<a href="/products" class="o-buttons o-buttons--standout o-buttons--big" aria-label="Subscribe to the Financial Times">Subscribe to the FT</a>
+		</div>
+	</div>
+
+{{/ifEquals}}

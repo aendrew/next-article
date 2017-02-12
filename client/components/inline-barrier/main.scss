@@ -1,0 +1,19 @@
+.inline-barrier__fader {
+	background: oColorsGetPaletteColor('pink');
+	background: linear-gradient(to bottom, transparent 0%, oColorsGetPaletteColor('pink') 80%, oColorsGetPaletteColor('pink') 100%);
+	height: 160px;
+	margin-top: -200px;
+	position: relative;
+}
+
+.inline-barrier__heading {
+	@include oTypographySansBold('l', true);
+	color: oColorsGetPaletteColor('cold-1');
+	margin: 0 0 5px;
+}
+
+// Horrible hack for an MVT, to avoid shaving a humongous yak. Sorry, Internet.
+// scss-lint:disable QualifyingElement
+p.barrier-grid__heading-pretext {
+	margin-top: 15px;
+}
