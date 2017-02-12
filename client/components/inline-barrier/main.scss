@@ -5,3 +5,8 @@
 	margin-top: -200px;
 	position: relative;
 }
+
+// Horrible hack for an MVT, to avoid shaving a humongous yak. Sorry, Internet.
+p.barrier-grid__heading-pretext {
+	margin-top: 15px;
+}
