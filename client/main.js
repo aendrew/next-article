@@ -97,10 +97,9 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 			affinity(flags);
 		}
 
-		if (document.querySelector('#inline-barrier')) {
+		if (flags.get('inArticlePreview') === 'psp') {
 			inlineBarrier(flags);
 		}
-
 	});
 
 });

@@ -5,22 +5,20 @@
 * In future this could become an n/o-component
 */
 
-const populateWithBarrier = (el) => {
-	return fetch('/products?fragment=true&inline=true&narrow=true', { credentials: 'same-origin' })
-		.then(response => {
-			if (response.ok) {
-				return response.text().then(html => {
-					el.insertAdjacentHTML('beforeend', html);
-					el.classList.remove('n-util-visually-hidden');
-				});
-			}
-		});
-}
+const populateWithPsp = (el) => fetch('/products?fragment=true&inline=true&narrow=true', { credentials: 'same-origin' })
+	.then(response => {
+		if (response.ok) {
+			return response.text().then(html => {
+				el.insertAdjacentHTML('beforeend', html);
+				el.classList.remove('n-util-visually-hidden');
+			});
+		}
+	});
 
-export default () => {
-	const el = document.querySelector('#inline-barrier');
+export default (flags) => {
+	const el = document.querySelector('.inline-barrier');
 
-	if (el && el.dataset.nType === 'standard') {
-		populateWithBarrier(el);
+	if (el && el.dataset.nType === 'standard' && flags.get('inArticlePreview') === 'psp') {
+		populateWithPsp(el);
 	}
 }
