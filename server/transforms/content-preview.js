@@ -17,8 +17,8 @@ const cheerio = require('cheerio');
 const getParaToTruncateFrom = ($) => {
 	const maxNumParas = 4;
 	const $paras = $('p');
-	const midPoint = Math.floor($paras.length / 2);
-	const cutoffPoint = midPoint > maxNumParas ? maxNumParas : midPoint;
+	const contentMidPoint = Math.floor($paras.length / 2);
+	const cutoffPoint = Math.min(contentMidPoint, maxNumParas);
 
 	return $paras.eq(cutoffPoint-1);
 }
