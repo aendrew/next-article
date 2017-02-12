@@ -6,10 +6,41 @@
 	position: relative;
 }
 
+.inline-barrier__content {
+	background-color: oColorsGetPaletteColor('warm-5');
+	border: 1px solid oColorsGetPaletteColor('warm-3');
+	box-sizing: border-box;
+	padding: 15px 15px 0;
+	text-align: center;
+}
+
 .inline-barrier__heading {
 	@include oTypographySansBold('l', true);
 	color: oColorsGetPaletteColor('cold-1');
 	margin: 0 0 5px;
+}
+
+.inline-barrier__description {
+	font-size: 17px;
+	font-weight: 400;
+	line-height: 23px;
+	margin: 0 0 10px;
+}
+
+.inline-barrier__more {
+	@include oTypographySansSize('s', true);
+	margin: 0 0 10px;
+}
+
+.inline-barrier__terms {
+	@include oTypographySansSize('xs', true);
+	margin: 0 0 20px;
+}
+
+@include oGridRespondTo($until: 'M') {
+	.inline-barrier__button {
+		display: block;
+	}
 }
 
 // Horrible hack for an MVT, to avoid shaving a humongous yak. Sorry, Internet.
