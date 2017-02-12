@@ -6,6 +6,12 @@
 	position: relative;
 }
 
+.inline-barrier__heading {
+	@include oTypographySansBold('l', true);
+	color: oColorsGetPaletteColor('cold-1');
+	margin: 0 0 5px;
+}
+
 // Horrible hack for an MVT, to avoid shaving a humongous yak. Sorry, Internet.
 p.barrier-grid__heading-pretext {
 	margin-top: 15px;
