@@ -40,7 +40,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	}
 
 	if (flags.get('articleShareButtons')) {
-		share.init();
+		share.init(flags);
 	}
 
 	if (flags.get('tearsheetHovers')) {
