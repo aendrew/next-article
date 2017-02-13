@@ -21,12 +21,9 @@ function isArticleVideo ({ webUrl = '' } = {}) {
 }
 
 function getInteractive (contentId) {
-	try {
-		return interactivePoller.getData().find(
-			mapping => mapping.articleuuid === contentId
-		);
-	}
-	catch (e) {}
+	return interactivePoller.getData().find(
+		mapping => mapping.articleuuid === contentId
+	);
 }
 
 function getArticle (contentId) {
