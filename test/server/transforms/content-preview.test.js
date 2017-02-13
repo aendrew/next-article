@@ -26,13 +26,6 @@ describe('Preview content', function () {
 		expect(result.bodyHTML).to.equal('<p>1</p><p>2</p>');
 	});
 
-	// This isn’t really possible now that we’re only preserving 2 paragraphs.
-	// TODO: Check that we’re all ok with this
-	it.skip('should keep o-ads content', function () {
-		const result = contentPreviewTransform(mockContent, {inArticlePreview: true});
-		expect(result.bodyHTML).to.contain('<div class="o-ads in-article-advert advert" data-o-ads-name="mpu" data-o-ads-center="true" data-o-ads-label="true" data-o-ads-targeting="pos=mid;" data-o-ads-formats-default="MediumRectangle,Responsive" data-o-ads-formats-small="MediumRectangle,Responsive" data-o-ads-formats-medium="MediumRectangle,Responsive" data-o-ads-formats-large="Responsive" data-o-ads-formats-extra="Responsive" data-o-ads-collapse-empty="true" aria-hidden="true"></div>');
-	});
-
 	it('should preserve nested elements if their parent paragraph is at the cut-off point', function () {
 		const result = contentPreviewTransform('<p>1</p><p>2<a href="#">link</a></p><p>3</p><p>4</p><p>5</p><p>6</p>', {inArticlePreview: true});
 		expect(result.bodyHTML).to.equal('<p>1</p><p>2<a href="#">link</a></p>');
