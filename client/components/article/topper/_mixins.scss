@@ -9,36 +9,22 @@
 	}
 }
 
-@mixin setButtonColor($theme, $hex) {
-	.article-topper__extras {
-		.n-myft-ui__button { //currently hacked in until button for myFT is done
-			@include oButtonsTheme($theme);
-
-			&::before {
-				background-image: url('https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:plus?source=o-icons&tint=#{$hex}');
-			}
-
-			&:hover {
-				background-color: rgba(0, 0, 0, 0.2) !important;
-				border-color: #505050 !important;
-			}
-		}
-	}
-}
-
 $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 @each $color in $colors {
 	[data-textbox-background~='#{$color}'] {
 		$text-color: black;
 		$contrast: lightness(oColorsGetPaletteColor($color));
-		@include setButtonColor(uncolored, '000000');
 		@if $contrast <= 50% {
 			$text-color: white;
-			@include setButtonColor(inverse, ffffff);
 		}
 		@include colorBorder($text-color);
 		background-color: oColorsGetPaletteColor('#{$color}');
 		color: $text-color;
+		@if $color == 'pink' {
+			.article-topper__tags {
+				color: oColorsGetPaletteColor('claret');
+			}
+		}
 	}
 }
 
@@ -59,7 +45,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 		text-align: $position;
 	}
 
-	.article-topper__extras {
+	.article-topper__tags {
 		justify-content: map-get($value, #{$position});
 	}
 }
@@ -160,7 +146,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 }
 
 @mixin stackTags {
-	.article-topper__extras {
+	.article-topper__tags {
 		flex-direction: column;
 		justify-content: center;
 		padding-bottom: 15px;

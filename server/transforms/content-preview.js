@@ -12,13 +12,13 @@ const cheerio = require('cheerio');
 /**
  * Decide where to cut content.
  * Current logic: content up to and including half of the article's paragraphs
- * (up to a max of 4).
+ * (up to the declared maximum).
  */
 const getParaToTruncateFrom = ($) => {
-	const maxNumParas = 4;
+	const maxNumParas = 2;
 	const $paras = $('p');
-	const midPoint = Math.floor($paras.length / 2);
-	const cutoffPoint = midPoint > maxNumParas ? maxNumParas : midPoint;
+	const contentMidPoint = Math.floor($paras.length / 2);
+	const cutoffPoint = Math.min(contentMidPoint, maxNumParas);
 
 	return $paras.eq(cutoffPoint-1);
 }

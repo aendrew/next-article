@@ -4,5 +4,12 @@
 	@include oGridRespondTo(S) {
 		@include overlayText;
 		@include fullBleedImage;
+		.article-topper__tags {
+			width: inherit;
+		}
+
+		.article-topper__text {
+			width: 50%;
+		}
 	}
 }

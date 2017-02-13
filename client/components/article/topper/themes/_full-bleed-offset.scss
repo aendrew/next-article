@@ -13,6 +13,10 @@
 		padding: 20px 0 10px;
 	}
 
+	.article-topper__tags {
+		color: oColorsGetPaletteColor('claret');
+		width: inherit;
+	}
 
 	@include oGridRespondTo($until: S) {
 		.article-topper__slot-1 {

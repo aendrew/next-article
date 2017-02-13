@@ -14,7 +14,6 @@ const countWords = text => text.split(/\s+/).length;
 
 let altPressed = false;
 const ALT = 18;
-const C = 67;
 
 function setClipboard (e, html, text){
 	if(hasEventClipboardSupport(e)){
@@ -60,26 +59,32 @@ module.exports = function (flags) {
 	if(!flags.get('articleCopyLegalNotice')){
 		return;
 	}
+
+	// Helps detect copy event without interfering with Text-to-speech software
 	document.body.addEventListener('keydown', interceptKeys);
+	document.body.addEventListener('copy', handleCopy);
 };
 
-// Prevents Alt+Esc from triggering 'copy' event in chrome,
+// Alt+Esc triggers 'copy' event in chrome 56 and under
 // A lot of text-to-speech software relies on these keys to read out text to the user.
-// Alt+Esc triggers 'copy' in chrome 56 and under
-function interceptKeys (evt) {
+function interceptKeys (e) {
 
-	if (evt.keyCode === ALT) {
+	// Remember if alt was pressed
+	if (e.keyCode === ALT) {
 		altPressed = true;
-		return;
+
+		// Clean up after 1 second
+		// TTS triggers copy event immediately
+		setTimeout(function () {
+			altPressed = false;
+		}, 1000);
 	}
-
-	evt = evt || window.event;
-	const ctrlDown = evt.ctrlKey || evt.metaKey; // Mac support
-
-	// Check for ctrl+c
-	if (!altPressed && ctrlDown && evt.keyCode === C) {
-		onCopy();
-	}
-
-	altPressed = false;
 }
+
+// Trigger onCopy only if alt hasn't been pressed immediately prior
+function handleCopy (e) {
+	if (!altPressed) {
+		onCopy(e);
+	}
+	altPressed = false;
+};

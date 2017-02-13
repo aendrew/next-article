@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { EmailArticleData, emailArticleModes, EmailArticleView } from '@financial-times/n-email-article';
 import OShare from 'o-share';
 
-exports.init = function () {
+exports.init = function (flags) {
 	const shareContainer = document.querySelector('[data-o-component=o-share]');
 	if (shareContainer && !shareContainer.classList.contains('data-o-share--js')) {
 		new OShare(shareContainer);
@@ -26,7 +26,8 @@ exports.init = function () {
 					isTop: isTop,
 					store: emailArticle.data.store,
 					actions: emailArticle.data.actions,
-					dispatch: emailArticle.data.dispatch
+					dispatch: emailArticle.data.dispatch,
+					customMessage: flags.articleShareEmailCustomMessage
 				};
 				emailArticle[id] = React.createElement(EmailArticleView, props);
 				const container = document.querySelector(`[data-n-article-email-${id}-container]`);

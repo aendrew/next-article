@@ -33,12 +33,6 @@ $n-ui-output-critical: true;
 	@import 'components/read-next/main';
 	@import 'components/suggested-reads/main';
 
-	.next-header {
-		margin-bottom: 0;
-	}
-	.myft-ui__qr-code {
-		display: none;
-	}
 	.o-labels {
 		@include oTypographySansBold('xs');
 	}
@@ -64,6 +58,7 @@ $o-video-is-silent: false;
 @import 'components/tearsheets/main';
 @import 'components/video/main';
 @import 'components/ftlabsSpokenLayer/main';
+@import 'components/inline-barrier/main';
 
 // Print Styling
 @media print {
