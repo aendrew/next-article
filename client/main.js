@@ -49,8 +49,12 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 	toc.init(flags);
 
-	if(flags.get('articleScrollDepthTracking')) {
-		tracking.scrollDepth.init('next-article', { selector: '.article__body' });
+	if (flags.get('articleScrollDepthTracking')) {
+		if (document.querySelector('.content__video')) {
+			tracking.scrollDepth.init('video-page', { selector: '.content__video' });
+		} else {
+			tracking.scrollDepth.init('next-article', { selector: '.article__body' });
+		}
 	}
 
 	legalCopy(flags);
