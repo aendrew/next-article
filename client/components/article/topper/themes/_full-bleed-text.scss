@@ -14,11 +14,12 @@
 	}
 
 	.article-topper__headline {
+		@include oGridRespondTo(M,L) {
+			@include fontSize(52px);
+		}
+
 		@include oGridRespondTo(L) {
-			font-size: 84px;
-			.o-typography--loaded-serifDisplayBold & {
-				font-size: 84px * 1.077;
-			}
+			@include fontSize(84px);
 		}
 	}
 }

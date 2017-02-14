@@ -84,30 +84,27 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 	@include setStandfirstFont;
 }
 
+@mixin fontSize($size) {
+	font-size: $size;
+	.o-typography--loaded-serifDisplayBold & {
+		font-size: $size * 1.077
+	}
+}
+
 @mixin setHeadlineFont {
 	.article-topper__headline {
 		display: flex; // for responsive bottom border
 		flex-direction: column;
+		@include fontSize(32px);
 		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
 		line-height: 1;
-		font-size: 32px;
-
-		.o-typography--loaded-serifDisplayBold & {
-			font-size: 32px * 1.077;
-		}
 
 		@include oGridRespondTo(S) {
-			font-size: 38px;
-			.o-typography--loaded-serifDisplayBold & {
-				font-size: 38px * 1.077;
-			}
+			@include fontSize(38px);
 		}
 
 		@include oGridRespondTo(L) {
-			font-size: 52px;
-			.o-typography--loaded-serifDisplayBold & {
-				font-size: 52px * 1.077;
-			}
+			@include fontSize(52px);
 		}
 	}
 }
