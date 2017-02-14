@@ -74,7 +74,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 		[...document.querySelectorAll('[data-o-component="o-video"]')].forEach(videoEl => {
 			const video = new Video(videoEl, {
 				advertising: flags.get('videoPlayerAdvertising'),
-				upNextVariant: flags.get('videoArticlePageV2') ? 'no-autoplay' : flags.get('videoUpNext')
+				upNextVariant: flags.get('videoArticlePage') ? 'no-autoplay' : flags.get('videoUpNext')
 			});
 			video.init({ autoplay: videoEl.hasAttribute('data-video-autoplay') });
 		});
