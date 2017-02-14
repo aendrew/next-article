@@ -185,7 +185,7 @@ module.exports = function articleV3Controller (req, res, next, content) {
 		content.jsonLd = res.locals.jsonLd;
 	}
 
-	if (res.locals.flags.ftlabsSpokenLayer) {
+	if (res.locals.flags.ftlabsAudioPlayer) {
 		content.isAudioArticle = content.metadata.some(tag => tag.idV1 === 'MjgwYzIyNjUtMmQ1ZC00NTNiLTgyMTQtMWU5ZDc3YzIzNWUy-VG9waWNz');
 	}
 

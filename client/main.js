@@ -18,7 +18,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const toc = require('./components/toc/main');
 	const share = require('./components/share/main');
 	const promotedContent = require('./components/ads/promoted-content');
-	const ftlabsSpokenLayer = require('./components/ftlabsSpokenLayer/main');
+	const ftlabsAudioPlayer = require('./components/ftlabs-audio-player/main');
 	const legalCopy = require('./components/legal-copy/main');
 	const Video = require('./components/video/video');
 	const affinity = require('./components/affinity/main');
@@ -83,8 +83,8 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 			commentsInit();
 		}
 
-		if (flags.get('ftlabsSpokenLayer')){
-			ftlabsSpokenLayer(flags);
+		if (flags.get('ftlabsAudioPlayer')){
+			ftlabsAudioPlayer(flags);
 		}
 
 		if (flags.get('affinityMvt')) {
