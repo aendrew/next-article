@@ -1,21 +1,9 @@
-
 .article-topper--full-bleed-offset {
 	@include alignText(left);
-	@include setAllFonts;
 	@include fullBleedImage;
 
 	@include oGridRespondTo(S) {
 		@include overlayText;
-	}
-
-	.article-topper__text-wrapper {
-		width: 100%;
-		padding: 20px 0 10px;
-	}
-
-	.article-topper__tags {
-		color: oColorsGetPaletteColor('claret');
-		width: inherit;
 	}
 
 	@include oGridRespondTo($until: S) {
@@ -28,11 +16,6 @@
 			padding-top: 15px;
 		}
 	};
-
-	.article-topper__offset-container {
-		margin: -90px -20px 0;
-		padding: 0 20px;
-	}
 
 	@include oGridRespondTo(M) {
 		.article-topper__offset-container {
@@ -48,5 +31,20 @@
 		.article-topper__visual {
 			margin-bottom: 30px;
 		}
+	}
+
+	.article-topper__offset-container {
+		margin: -90px -20px 0;
+		padding: 0 20px;
+	}
+
+	.article-topper__text-wrapper {
+		width: 100%;
+		padding: 20px 0 10px;
+	}
+
+	.article-topper__tags {
+		color: oColorsGetPaletteColor('claret');
+		width: inherit;
 	}
 }
