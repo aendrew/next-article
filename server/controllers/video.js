@@ -70,6 +70,8 @@ module.exports = function (req, res, next, payload) {
 		payload.readNextTopic = payload.primaryTag;
 	}
 
+	payload.autoplay = !res.locals.flags.videoArticlePageV2;
+
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
 			payload.contentType = 'video';
