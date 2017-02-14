@@ -5,7 +5,6 @@ const api = (process.env.EXPERIMENTAL_CONTENT_SOURCE && process.env.NODE_ENV !==
 	: require('next-ft-api-client');
 const interactivePoller = require('../lib/ig-poller');
 const shellpromise = require('shellpromise');
-const richArticleModel = require('../lib/rich-article');
 
 const controllerInteractive = require('./interactive');
 const controllerPodcast = require('./podcast');
@@ -41,24 +40,6 @@ function getArticle (contentId) {
 		});
 }
 
-function getRichArticle (contentId) {
-	return fetch(`https://rj-up.ft.com/internalcontent/${contentId}`,
-	{
-		headers: {
-			'Authorization': process.env.RJUP_INTERNAL_CONTENT_KEY
-		},
-		timeout: 3000
-	})
-		.then(fetchres.json)
-		.then(richArticleModel)
-		.catch(err => {
-			logger.error({
-				event: 'INTERNAL_CONTENT_FETCH_FAIL',
-				uuid: contentId
-			}, err);
-		});
-}
-
 module.exports = function negotiationController (req, res, next) {
 	res.set('surrogate-key', `contentUuid:${req.params.id}`);
 
@@ -68,16 +49,8 @@ module.exports = function negotiationController (req, res, next) {
 		return controllerInteractive(req, res, next, interactive);
 	}
 
-	const contentPromises = [getArticle(req.params.id)];
-
-	if(res.locals.flags.articleTopper) {
-		contentPromises.push(getRichArticle(req.params.id));
-	}
-
-	return Promise.all(contentPromises)
-		.then(data => {
-			const article = data[0];
-			const richArticle = data.length > 1 ? data[1] : null;
+	return getArticle(req.params.id)
+		.then(article => {
 			const webUrl = article && article.webUrl || '';
 
 			// Redirect ftalphaville to old FT.com.  Next is not currently planning to absorb FTAlphaville
@@ -112,8 +85,7 @@ module.exports = function negotiationController (req, res, next) {
 						return controllerVideo(req, res, next, article);
 					}
 				} else {
-
-					return controllerArticle(req, res, next, article, richArticle);
+					return controllerArticle(req, res, next, article);
 				}
 			}
 

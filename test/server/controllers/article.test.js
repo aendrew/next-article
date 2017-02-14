@@ -7,6 +7,7 @@ const fixture = require('../../fixtures/v3-elastic-article-found').docs[0]._sour
 const fixtureBlog = require('../../fixtures/v3-elastic-article-found-blog').docs[0]._source;
 const fixtureFastFT = require('../../fixtures/v3-elastic-article-found-fastft').docs[0]._source;
 const fixturePremium = require('../../fixtures/v3-elastic-article-found-premium').docs[0]._source;
+const fixtureWithTopper = require('../../fixtures/v3-elastic-article-found-topper').docs[0]._source;
 
 const stubs = {
 	onwardJourneyArticles: sinon.stub(),
@@ -142,16 +143,33 @@ describe('Article Controller', () => {
 		});
 	});
 
-	context('has rich article model', () => {
+	context('Has rich journalism content', () => {
 
-		it('sets the topper on the view model', () => {
-			return createInstance(null, { articleTopper: true }, null, { topper: 'something' } ).then(() => {
-				let result = response._getRenderData()
-				expect(result.topper).to.equal('something');
+		it('sets the topper on the view model if flag is on', () => {
+			return createInstance(null, { articleTopper: true }, fixtureWithTopper).then(() => {
+				let result = response._getRenderData();
+				expect(result.topper.headline).to.equal('Mosul: Voices from a war zone');
+				expect(result.topper.theme).to.equal('full-bleed-image-center');
+				expect(result.topper.themeImageRatio).to.equal('full-bleed');
 				expect(response.statusCode).to.equal(200);
 			});
 		});
 
+		it('does not set topper if flag is off', () => {
+			return createInstance(null, { articleTopper: false }, fixtureWithTopper).then(() => {
+				let result = response._getRenderData()
+				expect(result.topper).to.be.null;
+				expect(response.statusCode).to.equal(200);
+			});
+		})
+
+		it('does not accept topper with an unknown theme', () => {
+			return createInstance(null, { articleTopper: true }, { metadata: [], topper: { theme: 'some-crazy-theme' }}).then(() => {
+				let result = response._getRenderData()
+				expect(result.topper).to.be.null;
+				expect(response.statusCode).to.equal(200);
+			});
+		});;
 	});
 
 	context('article preview layout', () => {
