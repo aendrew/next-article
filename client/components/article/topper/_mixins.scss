@@ -43,6 +43,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 
 	.article-topper__text-wrapper {
 		text-align: $position;
+		align-self: map-get($value, #{$position});
 	}
 
 	.article-topper__tags {
@@ -79,54 +80,10 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 	}
 }
 
-@mixin setAllFonts {
-	@include setHeadlineFont;
-	@include setStandfirstFont;
-}
-
 @mixin fontSize($size) {
 	font-size: $size;
 	.o-typography--loaded-serifDisplayBold & {
-		font-size: $size * 1.077
-	}
-}
-
-@mixin setHeadlineFont {
-	.article-topper__headline {
-		display: flex; // for responsive bottom border
-		flex-direction: column;
-		@include fontSize(32px);
-		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
-		line-height: 1;
-
-		@include oGridRespondTo(S) {
-			@include fontSize(38px);
-		}
-
-		@include oGridRespondTo(L) {
-			@include fontSize(52px);
-		}
-	}
-}
-
-@mixin setStandfirstFont {
-	.article-topper__stand-first {
-		@include oTypographySans(m, $load-progressively: true);
-		opacity: 0.8;
-		font-size: round(18px * 0.9);
-		line-height: 1.4;
-
-		.o-typography--loaded-sans & {
-			font-size: 18px;
-			line-height: 1.2;
-		}
-
-		@include oGridRespondTo(L) {
-			font-size: round(22px * 0.9);
-			.o-typography--loaded-sans & {
-				font-size: 22px;
-			}
-		}
+		font-size: $size * 1.077;
 	}
 }
 

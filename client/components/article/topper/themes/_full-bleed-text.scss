@@ -1,7 +1,6 @@
 // scss-lint:disable SelectorFormat
 .article-topper--full-bleed-text {
 	@include alignText(center);
-	@include setAllFonts;
 	@include resizeTextbox;
 
 	.article-topper__visual {
@@ -14,7 +13,7 @@
 	}
 
 	.article-topper__headline {
-		@include oGridRespondTo(M,L) {
+		@include oGridRespondTo(M, L) {
 			@include fontSize(52px);
 		}
 
