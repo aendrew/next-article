@@ -80,7 +80,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 	}
 }
 
-@mixin fontSize($size) {
+@mixin headlineFontSize($size) {
 	font-size: $size;
 	.o-typography--loaded-serifDisplayBold & {
 		font-size: $size * 1.077;

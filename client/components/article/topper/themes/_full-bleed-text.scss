@@ -14,11 +14,11 @@
 
 	.article-topper__headline {
 		@include oGridRespondTo(M, L) {
-			@include fontSize(52px);
+			@include headlineFontSize(52px);
 		}
 
 		@include oGridRespondTo(L) {
-			@include fontSize(84px);
+			@include headlineFontSize(84px);
 		}
 	}
 }

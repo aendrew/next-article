@@ -39,7 +39,7 @@
 }
 
 .article-topper__headline {
-	@include fontSize(32px);
+	@include headlineFontSize(32px);
 	@include oTypographySerifDisplayBold(xl, $load-progressively: true);
 
 	display: flex; // for responsive bottom border
@@ -47,11 +47,11 @@
 	line-height: 1;
 
 	@include oGridRespondTo(S) {
-		@include fontSize(38px);
+		@include headlineFontSize(38px);
 	}
 
 	@include oGridRespondTo(L) {
-		@include fontSize(52px);
+		@include headlineFontSize(52px);
 	}
 }
 
