@@ -205,9 +205,15 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 			};
 		}
 
-		// const currentIndex =
-		// ctx.previous =
-		// ctx.next =
+		package.url = package.url.replace('https://www.ft.com', '');
+		package.contains.forEach(item => item.url = item.url.replace('https://www.ft.com', ''));
+
+		const currentIndex = package.contains.findIndex(item => item.id === content.id);
+		ctx.prev = package.contains[currentIndex - 1];
+		ctx.next = package.contains[currentIndex + 1];
+		ctx.home = package;
+
+		content.ctx = ctx;
 	}
 
 
