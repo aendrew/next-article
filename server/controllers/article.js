@@ -195,6 +195,16 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 	if(res.locals.flags.contentPackages && content.isContainedInPackage) {
 		const package = content.package = content.containedIn[0];
 		const ctx = package.context = {};
+
+		if (!content.topper) {
+			content.topper = {
+				standfirst: content.standfirst,
+				headline: content.title,
+				theme: 'split-text-left',
+				bgColor: 'slate'
+			};
+		}
+
 		// const currentIndex =
 		// ctx.previous =
 		// ctx.next =

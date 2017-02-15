@@ -1,0 +1,10 @@
+<div class="package--embedded" data-textbox-background="{{#if @root.topper}}{{@root.topper.bgColor}}{{else}}slate{{/if}}">
+	<h3 class="package__title">{{title}}</h3>
+	<ul class="package__contents">
+		{{#each contains}}
+			<li class="package__content-item">
+				<a href="{{url}}" class="package__link">{{title}}</a>
+			</li>
+		{{/each}}
+	</ul>
+</div>

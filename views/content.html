@@ -35,7 +35,12 @@
 	{{else}}
 		{{> header/content-header}}
 	{{/ifAll}}
+
 	{{> body-wrapper}}
+
+	{{#ifAll @root.flags.contentPackages package}}
+		{{> package/bottom package}}
+	{{/ifAll}}
 
 {{>propensity-messaging-promo-unit}}
 
