@@ -14,60 +14,33 @@ const controllerArticle = require('./article');
 const controllerPackage = require('./package');
 
 // HACK: remove
-const bboty = [
-"315c348e-b819-11e6-ba85-95d1533d9a62",
-"ffdb7ae0-b819-11e6-ba85-95d1533d9a62",
-"156f0328-b81e-11e6-ba85-95d1533d9a62",
-"6c126eae-b81e-11e6-ba85-95d1533d9a62",
-"c2736eba-b81e-11e6-ba85-95d1533d9a62",
-"0ddeb68e-b81f-11e6-ba85-95d1533d9a62",
-"536e6672-b81f-11e6-ba85-95d1533d9a62",
-"a9c4758e-b81f-11e6-ba85-95d1533d9a62",
-"fe2da1cc-b81f-11e6-ba85-95d1533d9a62",
-"49c3edda-b820-11e6-ba85-95d1533d9a62",
-"82be3bcc-b820-11e6-ba85-95d1533d9a62",
-"ad99928c-b821-11e6-ba85-95d1533d9a62",
-"23c18f5a-b822-11e6-ba85-95d1533d9a62",
-"9583417e-b822-11e6-ba85-95d1533d9a62",
-"952faba8-b823-11e6-ba85-95d1533d9a62",
-"f90a98ea-b823-11e6-ba85-95d1533d9a62",
-"41008f7e-b824-11e6-ba85-95d1533d9a62",
-"99d67032-b824-11e6-ba85-95d1533d9a62",
-"de4fa4a4-b824-11e6-ba85-95d1533d9a62",
-"3d3ffbc6-b825-11e6-ba85-95d1533d9a62",
-"84e8912c-b825-11e6-ba85-95d1533d9a62",
-"c0eaa1b0-b825-11e6-ba85-95d1533d9a62",
-"0447a2b4-b826-11e6-ba85-95d1533d9a62",
-"503fb2ec-b826-11e6-ba85-95d1533d9a62"
-];
-
-// HACK: remove
-const bbotyIndex = bboty.reduce((map, uuid) => map.set(uuid), new Map());
-// HACK: remove
-const bbotyLandingPageId = 'aec5898e-b88c-11e6-ba85-95d1533d9a62';
+const {
+	landingPageIds,
+	childPageIds,
+	packageLookup
+} = require('../../package-hack-list');
 
 // HACK: remove this function and all references to it
 function hackPackageData(content) {
-	const isParentPage = content.id === bbotyLandingPageId;
-	const isChildPage = bbotyIndex.has(content.id);
-
+	const isParentPage = landingPageIds.includes(content.id);
+	const isChildPage = childPageIds.includes(content.id);
 	if (isParentPage) {
 		content.type = 'package';
-		content.contains = bboty.map(id => ({id}));
+		content.contains = packageLookup.find(package => package.landing === content.id).contains;
 		content.containedIn = [];
 	} else if (isChildPage) {
 		content.contains = [];
-		content.containedIn = [{id: bbotyLandingPageId}];
+		content.containedIn = [{id: packageLookup.find(package => package.contains.includes(content.id)).landing}];
 	} else {
 		content.contains = [];
 		content.containedIn = [];
 	}
-
+	logger.info('ADDING_PACKAGE', content.id, content.contains, content.containedIn, content.type);
 	return content;
 }
 
 function isContainedInPackage(content) {
-	return Array.isArray(content.containedIn) && content.containedIn.length > 0
+	return Array.isArray(content.containedIn) && content.containedIn.length > 0;
 }
 
 function isArticlePodcast ({ provenance = [] } = {}) {
@@ -89,7 +62,7 @@ function getInteractive (contentId) {
 }
 
 function decoratePackageWithContents(package) {
-	const ids = package.contains.map(({ id }) => id);
+	const ids = package.contains; // why was this mapping the id out?
 	return getArticle(ids).then(contents => {
 		contents.forEach(hackPackageData);
 		package.contains = contents;
@@ -114,8 +87,8 @@ function decorateContentWithPackage(content) {
 		// HACK: hard-code the first parent package
 		const parentAndSiblingsPromises = getArticle(content.containedIn[0].id).then(package => {
 			hackPackageData(package);
-			content.containedIn[0] = Object.assign({}, content.containedIn[0], package);
-			return decoratePackageWithContents(content.containedIn[0]);
+			content.containedIn[0] = Object.assign({}, content.containedIn[0], package); // hmmm why the fu?
+			return decoratePackageWithContents(content.containedIn[0]); // this is not a fucking package
 		});
 
 		promises  = promises.concat(parentAndSiblingsPromises);
