@@ -1,4 +1,4 @@
-{{#if topper.theme}}
+{{#ifAll @root.flags.articleTopper topper.theme}}
 	{{> header/topper-primary-tag}}
 {{else}}
 	<div class="article__primary-theme">
@@ -7,4 +7,4 @@
 			{{>n-ui/myft/templates/follow conceptId=primaryTag.idV1 name=primaryTag.prefLabel taxonomy=primaryTag.taxonomy}}
 		{{/ifAll}}
 	</div>
-{{/if}}
+{{/ifAll}}

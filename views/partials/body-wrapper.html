@@ -12,8 +12,8 @@
 					{{> topper/offset-text}}
 				{{/ifEquals}}
 
-				{{#ifAll isAudioArticle @root.flags.ftlabsSpokenLayer}}
-					{{> ftlabsSpokenLayerPlayer}}
+				{{#ifAll isAudioArticle @root.flags.ftlabsAudioPlayer}}
+					{{> ftlabs-audio-player}}
 				{{/ifAll}}
 
 				{{#ifEquals contentType 'article'}}

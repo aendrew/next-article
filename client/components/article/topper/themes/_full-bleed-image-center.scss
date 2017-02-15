@@ -1,5 +1,4 @@
 .article-topper--full-bleed-image-center {
-	@include setAllFonts;
 	@include alignText(left);
 	@include oGridRespondTo(S) {
 		@include alignText(center);

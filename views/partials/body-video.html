@@ -6,7 +6,7 @@
 					{{#if attachments}}
 						<div
 							class="o-video"
-							data-video-autoplay
+							{{#if autoplay}}data-video-autoplay{{/if}}
 							data-o-component="o-video"
 							data-o-video-id="{{video.id}}"
 						{{#if captions}}

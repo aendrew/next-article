@@ -1,6 +1,6 @@
 .article-topper--split-text-center {
 	@include alignText(left);
-	@include setAllFonts;
+
 	@include oGridRespondTo(S) {
 		@include alignText(center);
 	}
