@@ -5,6 +5,17 @@ module.exports = function packageController (req, res, next, content) {
 		Promise.resolve(true)
 	];
 
+
+	if (!content.topper) {
+		content.topper = {
+			standfirst: content.standfirst,
+			headline: content.title,
+			theme: 'split-text-left',
+			bgColor: 'slate'
+		};
+	}
+
+
 	content.url = content.url.replace('https://www.ft.com', '');
 	content.contains.forEach(item => item.url = item.url.replace('https://www.ft.com', ''));
 
