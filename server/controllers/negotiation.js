@@ -28,6 +28,7 @@ function hackPackageData (content) {
 		content.type = 'package';
 		content.contains = packageLookup.find(pkg => pkg.landing === content.id).contains;
 		content.containedIn = [];
+		content.description = packageLookup.find(pkg => pkg.landing === content.id).description;
 	} else if (isChildPage) {
 		content.contains = [];
 		content.containedIn = [{id: packageLookup.find(pkg => pkg.contains.includes(content.id)).landing}];
