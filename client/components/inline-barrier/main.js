@@ -51,6 +51,9 @@ const populateWithTrial = (el) => fetch(`https://next-signup-api.ft.com/offer/41
 		//TODO: investigate localization of symbol/value ordering
 		priceables.forEach(priceable => priceable.innerHTML = `${trialOffer.amount.symbol}${trialOffer.amount.value}`);
 		el.classList.remove('inline-barrier--no-prices');
+	})
+	.then(() => {
+		el.classList.add('inline-barrier--done');
 	});
 
 export default (flags) => {
