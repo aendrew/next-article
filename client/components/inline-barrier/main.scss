@@ -49,3 +49,7 @@
 p.barrier-grid__heading-pretext {
 	margin-top: 15px;
 }
+
+.inline-barrier--no-prices .inline-barrier__needs-price {
+	display: none;
+}
