@@ -31,6 +31,10 @@
 	padding: 1em;
 }
 
+.package__content-item--current {
+	color: yellow;
+}
+
 .package__content-item:first-child {
 	border-top: 1px solid white;
 }

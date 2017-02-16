@@ -7,7 +7,7 @@
 	</div>
 	<ul class="package__contents package__contents--scrollable o-expander__content">
 		{{#each contains}}
-			<li class="package__content-item">
+			<li class="package__content-item {{#ifEquals id @root.ctx.current.id}}package__content-item--current{{/ifEquals}}">
 				<a href="{{url}}" class="package__link">{{title}}</a>
 			</li>
 		{{/each}}

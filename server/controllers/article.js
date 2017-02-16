@@ -210,6 +210,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 
 		const currentIndex = contentPackage.contains.findIndex(item => item.id === content.id);
 		ctx.prev = contentPackage.contains[currentIndex - 1];
+		ctx.current = contentPackage.contains[currentIndex];
 		ctx.next = contentPackage.contains[currentIndex + 1];
 		ctx.home = contentPackage;
 
