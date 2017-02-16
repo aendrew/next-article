@@ -42,6 +42,8 @@ const populateWithTrial = (el) => fetch(`https://next-signup-api.ft.com/offer/41
 	.then(response => {
 		if (response.ok) {
 			return response.json();
+		} else {
+			throw new Error('Network response was not ok.');
 		}
 	})
 	.then(json => json.data)
@@ -51,6 +53,10 @@ const populateWithTrial = (el) => fetch(`https://next-signup-api.ft.com/offer/41
 		//TODO: investigate localization of symbol/value ordering
 		priceables.forEach(priceable => priceable.innerHTML = `${trialOffer.amount.symbol}${trialOffer.amount.value}`);
 		el.classList.remove('inline-barrier--no-prices');
+	})
+	.catch(() => {
+		// eslint-disable-next-line no-console
+		console.error('Failed to retrieve/process trial offer data');
 	})
 	.then(() => {
 		el.classList.add('inline-barrier--done');
