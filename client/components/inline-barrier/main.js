@@ -28,9 +28,29 @@ const populateWithPsp = (el) => fetch('/products?fragment=true&inline=true&narro
 					pspTitle.remove();
 				}
 
+				el.classList.remove('inline-barrier--no-prices');
 				el.insertAdjacentElement('beforeend', pspEl);
 			});
 		}
+	});
+
+const populateWithTrial = (el) => fetch(`https://next-signup-api.ft.com/offer/41218b9e-c8ae-c934-43ad-71b13fcb4465?countryCode=GBR`, {
+	headers: {
+		'x-api-env': 'prod'
+	}
+})
+	.then(response => {
+		if (response.ok) {
+			return response.json();
+		}
+	})
+	.then(json => json.data)
+	.then(({offer}) => {
+		const priceables = [...document.querySelectorAll('.js-barrier-trial-price')];
+		const trialOffer = offer.charges.find(charge => charge.billing_period === 'trial');
+		//TODO: investigate localization of symbol/value ordering
+		priceables.forEach(priceable => priceable.innerHTML = `${trialOffer.amount.symbol}${trialOffer.amount.value}`);
+		el.classList.remove('inline-barrier--no-prices');
 	});
 
 export default (flags) => {
@@ -38,5 +58,8 @@ export default (flags) => {
 
 	if (el && el.dataset.nType === 'standard' && flags.get('inArticlePreview') === 'psp') {
 		populateWithPsp(el);
+	}
+	else if (el && el.dataset.nType === 'standard' && flags.get('inArticlePreview') === 'trial') {
+		populateWithTrial(el);
 	}
 }

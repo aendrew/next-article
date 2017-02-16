@@ -91,7 +91,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 			affinity(flags);
 		}
 
-		if (flags.get('inArticlePreview') === 'psp') {
+		if (flags.get('inArticlePreview')) {
 			inlineBarrier(flags);
 		}
 	});
