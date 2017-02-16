@@ -28,9 +28,38 @@ const populateWithPsp = (el) => fetch('/products?fragment=true&inline=true&narro
 					pspTitle.remove();
 				}
 
+				el.classList.remove('inline-barrier--no-prices');
 				el.insertAdjacentElement('beforeend', pspEl);
 			});
 		}
+	});
+
+const populateWithTrial = (el) => fetch(`https://next-signup-api.ft.com/offer/41218b9e-c8ae-c934-43ad-71b13fcb4465?countryCode=${el.dataset.countryCode}`, {
+	headers: {
+		'x-api-env': 'prod'
+	}
+})
+	.then(response => {
+		if (response.ok) {
+			return response.json();
+		} else {
+			throw new Error('Network response was not ok.');
+		}
+	})
+	.then(json => json.data)
+	.then(({offer}) => {
+		const priceables = [...document.querySelectorAll('.js-barrier-trial-price')];
+		const trialOffer = offer.charges.find(charge => charge.billing_period === 'trial');
+		//TODO: investigate localization of symbol/value ordering
+		priceables.forEach(priceable => priceable.innerHTML = `${trialOffer.amount.symbol}${trialOffer.amount.value.replace('.00', '')}`);
+		el.classList.remove('inline-barrier--no-prices');
+	})
+	.catch(() => {
+		// eslint-disable-next-line no-console
+		console.error('Failed to retrieve/process trial offer data');
+	})
+	.then(() => {
+		el.classList.add('inline-barrier--done');
 	});
 
 export default (flags) => {
@@ -38,5 +67,8 @@ export default (flags) => {
 
 	if (el && el.dataset.nType === 'standard' && flags.get('inArticlePreview') === 'psp') {
 		populateWithPsp(el);
+	}
+	else if (el && el.dataset.nType === 'standard' && el.dataset.countryCode && flags.get('inArticlePreview') === 'trial') {
+		populateWithTrial(el);
 	}
 }

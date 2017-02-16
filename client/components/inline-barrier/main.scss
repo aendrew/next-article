@@ -49,3 +49,21 @@
 p.barrier-grid__heading-pretext {
 	margin-top: 15px;
 }
+
+.enhanced {
+	.inline-barrier--trial {
+		.inline-barrier__content {
+			display: none;
+		}
+	}
+
+	.inline-barrier--trial.inline-barrier--done {
+		.inline-barrier__content {
+			display: block;
+		}
+	}
+}
+
+.inline-barrier--no-prices .inline-barrier__needs-price {
+	display: none;
+}

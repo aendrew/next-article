@@ -116,11 +116,12 @@ module.exports = function articleV3Controller (req, res, next, content) {
 		res.set('X-Robots-Tag', 'noindex');
 	}
 
-	// Inline barrier page & type
+	// Inline barrier page & data
 	content.inlineBarrier = {
 		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && req.get('ft-access-preview') && !req.query.fragment && res.locals.flags.inArticlePreview,
+		countryCode: req.get('country-code'),
 		type: 'standard' // TODO - set inline barrier type via preflight decision
-	}
+	};
 
 	// Apply content and article specific transforms to bodyHTML
 	Object.assign(content, transformArticleBody(content.bodyHTML, res.locals.flags, {
