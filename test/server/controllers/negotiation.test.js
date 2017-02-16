@@ -322,6 +322,11 @@ describe('Negotiation Controller', function () {
 					.get('/internalcontent/352210c4-7b17-11e5-a1fe-567b37f80b64')
 					.reply(200, richArticleFixture);
 
+				// just allow the mocked bucket for now...?
+				nock('https://s3-eu-west-1.amazonaws.com')
+					.get('/rj-xcapi-mock/352210c4-7b17-11e5-a1fe-567b37f80b64')
+					.reply(200, richArticleFixture);
+
 				return createInstance({
 					params: {
 						id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
