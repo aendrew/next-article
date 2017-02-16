@@ -193,8 +193,8 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 	}
 
 	if(res.locals.flags.contentPackages && content.isContainedInPackage) {
-		const package = content.package = content.containedIn[0];
-		const ctx = package.context = {};
+		const contentPackage = content.package = content.containedIn[0];
+		const ctx = contentPackage.context = {};
 
 		if (!content.topper) {
 			content.topper = {
@@ -205,13 +205,13 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 			};
 		}
 
-		package.url = package.url.replace('https://www.ft.com', '');
-		package.contains.forEach(item => item.url = item.url.replace('https://www.ft.com', ''));
+		contentPackage.url = contentPackage.url.replace('https://www.ft.com', '');
+		contentPackage.contains.forEach(item => item.url = item.url.replace('https://www.ft.com', ''));
 
-		const currentIndex = package.contains.findIndex(item => item.id === content.id);
-		ctx.prev = package.contains[currentIndex - 1];
-		ctx.next = package.contains[currentIndex + 1];
-		ctx.home = package;
+		const currentIndex = contentPackage.contains.findIndex(item => item.id === content.id);
+		ctx.prev = contentPackage.contains[currentIndex - 1];
+		ctx.next = contentPackage.contains[currentIndex + 1];
+		ctx.home = contentPackage;
 
 		content.ctx = ctx;
 	}

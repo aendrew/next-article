@@ -21,16 +21,16 @@ const {
 } = require('../../package-hack-list');
 
 // HACK: remove this function and all references to it
-function hackPackageData(content) {
+function hackPackageData (content) {
 	const isParentPage = landingPageIds.includes(content.id);
 	const isChildPage = childPageIds.includes(content.id);
 	if (isParentPage) {
 		content.type = 'package';
-		content.contains = packageLookup.find(package => package.landing === content.id).contains;
+		content.contains = packageLookup.find(pkg => pkg.landing === content.id).contains;
 		content.containedIn = [];
 	} else if (isChildPage) {
 		content.contains = [];
-		content.containedIn = [{id: packageLookup.find(package => package.contains.includes(content.id)).landing}];
+		content.containedIn = [{id: packageLookup.find(pkg => pkg.contains.includes(content.id)).landing}];
 	} else {
 		content.contains = [];
 		content.containedIn = [];
@@ -39,7 +39,7 @@ function hackPackageData(content) {
 	return content;
 }
 
-function isContainedInPackage(content) {
+function isContainedInPackage (content) {
 	return Array.isArray(content.containedIn) && content.containedIn.length > 0;
 }
 
@@ -51,7 +51,7 @@ function isArticleVideo ({ webUrl = '' } = {}) {
 	return webUrl.includes('video.ft.com');
 }
 
-function isArticlePackage({ id, type }) {
+function isArticlePackage ({ type }) {
 	return type && type === 'package';
 }
 
@@ -61,16 +61,15 @@ function getInteractive (contentId) {
 	);
 }
 
-function decoratePackageWithContents(package) {
-	const ids = package.contains; // why was this mapping the id out?
-	return getArticle(ids).then(contents => {
+function decoratePackageWithContents (pkg) {
+	return getArticle(pkg.contains).then(contents => {
 		contents.forEach(hackPackageData);
-		package.contains = contents;
-		return package;
+		pkg.contains = contents;
+		return pkg;
 	});
 }
 
-function decorateContentWithPackage(content) {
+function decorateContentWithPackage (content) {
 	hackPackageData(content);
 
 	let promises = [];
@@ -85,13 +84,13 @@ function decorateContentWithPackage(content) {
 
 		// fetch the ContentPackage from CAPI
 		// HACK: hard-code the first parent package
-		const parentAndSiblingsPromises = getArticle(content.containedIn[0].id).then(package => {
-			hackPackageData(package);
-			content.containedIn[0] = Object.assign({}, content.containedIn[0], package); // hmmm why the fu?
-			return decoratePackageWithContents(content.containedIn[0]); // this is not a fucking package
+		const parentAndSiblingsPromises = getArticle(content.containedIn[0].id).then(pkg => {
+			hackPackageData(pkg);
+			content.containedIn[0] = Object.assign({}, content.containedIn[0], pkg);
+			return decoratePackageWithContents(content.containedIn[0]);
 		});
 
-		promises  = promises.concat(parentAndSiblingsPromises);
+		promises = promises.concat(parentAndSiblingsPromises);
 	}
 
 	return Promise.all(promises);

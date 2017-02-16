@@ -1,29 +1,31 @@
 {{#defineBlock 'globalDataAttributes'}}data-content-id="{{id}}"{{/defineBlock}}
 {{#defineBlock 'head'}}
-	{{> rel-canonical}}
-	{{> rel-alternate}}
-	{{#unless @root.flags.newSchema}}
-		{{> schemaDotOrg}}
-	{{/unless}}
-	{{#if isPremium}}
-		<meta name="robots" content="noindex">
-	{{/if}}
-	<link rel="amphtml" href="https://amp.ft.com/content/{{id}}" />
-	<meta name="description" content="{{description}}"/>
+{{> rel-canonical}}
+{{> rel-alternate}}
+{{#unless @root.flags.newSchema}}
+{{> schemaDotOrg}}
+{{/unless}}
+{{#if isPremium}}
+<meta name="robots" content="noindex">
+{{/if}}
+<link rel="amphtml" href="https://amp.ft.com/content/{{id}}" />
+<meta name="description" content="{{description}}"/>
+<link rel="stylesheet" href="https://build.origami.ft.com/v2/bundles/css?modules=o-expander@^4.2.2" />
+<script src="https://build.origami.ft.com/v2/bundles/js?modules=o-expander@^4.2.2"></script>
 {{/defineBlock}}
 <article
-		id="site-content"
-		role="main"
-		class="article{{#if designGenre}} article--brand{{/if}}"
-		data-content-id="{{id}}"
-		data-content-sources="{{#if articleV1}}v1{{/if}} {{#if articleV2}}v2{{/if}}"
-		data-syndicatable="{{canBeSyndicated}}"
+	id="site-content"
+	role="main"
+	class="article{{#if designGenre}} article--brand{{/if}}"
+	data-content-id="{{id}}"
+	data-content-sources="{{#if articleV1}}v1{{/if}} {{#if articleV2}}v2{{/if}}"
+	data-syndicatable="{{canBeSyndicated}}"
 >
 
-	{{> package/nav this}}
+	{{> package/nav}}
 
-  <h1>PACKAGE:</h1>
-  <h1>{{ title }}</h1>
+	<h1>PACKAGE:</h1>
+	<h1>{{ title }}</h1>
 
 	{{#if description}}
 	<p>{{description}}</p>
@@ -31,6 +33,7 @@
 
 	{{> body-wrapper}}
 
-  {{>propensity-messaging-promo-unit}}
+	{{>propensity-messaging-promo-unit}}
 
-<script type="text/json" id="dehydrated-metadata">{{{json dehydratedMetadata}}}</script>
+	<script type="text/json" id="dehydrated-metadata">{{{json dehydratedMetadata}}}</script>
+</article>
