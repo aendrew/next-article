@@ -34,7 +34,7 @@ const populateWithPsp = (el) => fetch('/products?fragment=true&inline=true&narro
 		}
 	});
 
-const populateWithTrial = (el) => fetch(`https://next-signup-api.ft.com/offer/41218b9e-c8ae-c934-43ad-71b13fcb4465?countryCode=GBR`, {
+const populateWithTrial = (el) => fetch(`https://next-signup-api.ft.com/offer/41218b9e-c8ae-c934-43ad-71b13fcb4465?countryCode=${el.dataset.countryCode}`, {
 	headers: {
 		'x-api-env': 'prod'
 	}
@@ -68,7 +68,7 @@ export default (flags) => {
 	if (el && el.dataset.nType === 'standard' && flags.get('inArticlePreview') === 'psp') {
 		populateWithPsp(el);
 	}
-	else if (el && el.dataset.nType === 'standard' && flags.get('inArticlePreview') === 'trial') {
+	else if (el && el.dataset.nType === 'standard' && el.dataset.countryCode && flags.get('inArticlePreview') === 'trial') {
 		populateWithTrial(el);
 	}
 }
