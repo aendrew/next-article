@@ -51,7 +51,7 @@ const populateWithTrial = (el) => fetch(`https://next-signup-api.ft.com/offer/41
 		const priceables = [...document.querySelectorAll('.js-barrier-trial-price')];
 		const trialOffer = offer.charges.find(charge => charge.billing_period === 'trial');
 		//TODO: investigate localization of symbol/value ordering
-		priceables.forEach(priceable => priceable.innerHTML = `${trialOffer.amount.symbol}${trialOffer.amount.value}`);
+		priceables.forEach(priceable => priceable.innerHTML = `${trialOffer.amount.symbol}${trialOffer.amount.value.replace('.00', '')}`);
 		el.classList.remove('inline-barrier--no-prices');
 	})
 	.catch(() => {
