@@ -9,36 +9,22 @@
 	}
 }
 
-@mixin setButtonColor($theme, $hex) {
-	.article-topper__tags {
-		.n-myft-ui__button { //currently hacked in until button for myFT is done
-			@include oButtonsTheme($theme);
-
-			&::before {
-				background-image: url('https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:plus?source=o-icons&tint=#{$hex}');
-			}
-
-			&:hover {
-				background-color: rgba(0, 0, 0, 0.2) !important;
-				border-color: #505050 !important;
-			}
-		}
-	}
-}
-
 $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 @each $color in $colors {
 	[data-textbox-background~='#{$color}'] {
 		$text-color: black;
 		$contrast: lightness(oColorsGetPaletteColor($color));
-		@include setButtonColor(uncolored, '000000');
 		@if $contrast <= 50% {
 			$text-color: white;
-			@include setButtonColor(inverse, ffffff);
 		}
 		@include colorBorder($text-color);
 		background-color: oColorsGetPaletteColor('#{$color}');
 		color: $text-color;
+		@if $color == 'pink' {
+			.article-topper__tags {
+				color: oColorsGetPaletteColor('claret');
+			}
+		}
 	}
 }
 
@@ -57,6 +43,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 
 	.article-topper__text-wrapper {
 		text-align: $position;
+		align-self: map-get($value, #{$position});
 	}
 
 	.article-topper__tags {
@@ -93,57 +80,10 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 	}
 }
 
-@mixin setAllFonts {
-	@include setHeadlineFont;
-	@include setStandfirstFont;
-}
-
-@mixin setHeadlineFont {
-	.article-topper__headline {
-		display: flex; // for responsive bottom border
-		flex-direction: column;
-		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
-		line-height: 1;
-		font-size: 32px;
-
-		.o-typography--loaded-serifDisplayBold & {
-			font-size: 32px * 1.077;
-		}
-
-		@include oGridRespondTo(S) {
-			font-size: 38px;
-			.o-typography--loaded-serifDisplayBold & {
-				font-size: 38px * 1.077;
-			}
-		}
-
-		@include oGridRespondTo(L) {
-			font-size: 52px;
-			.o-typography--loaded-serifDisplayBold & {
-				font-size: 52px * 1.077;
-			}
-		}
-	}
-}
-
-@mixin setStandfirstFont {
-	.article-topper__stand-first {
-		@include oTypographySans(m, $load-progressively: true);
-		opacity: 0.8;
-		font-size: round(18px * 0.9);
-		line-height: 1.4;
-
-		.o-typography--loaded-sans & {
-			font-size: 18px;
-			line-height: 1.2;
-		}
-
-		@include oGridRespondTo(L) {
-			font-size: round(22px * 0.9);
-			.o-typography--loaded-sans & {
-				font-size: 22px;
-			}
-		}
+@mixin headlineFontSize($size) {
+	font-size: $size;
+	.o-typography--loaded-serifDisplayBold & {
+		font-size: $size * 1.077;
 	}
 }
 

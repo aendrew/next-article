@@ -1,5 +1,4 @@
 const oViewport = require('n-ui/viewport');
-const OVideo = require('o-video');
 const lightSignup = require('o-email-only-signup');
 const expander = require('n-ui/expander');
 const tracking = require('n-ui/tracking');
@@ -19,9 +18,9 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const toc = require('./components/toc/main');
 	const share = require('./components/share/main');
 	const promotedContent = require('./components/ads/promoted-content');
-	const ftlabsSpokenLayer = require('./components/ftlabsSpokenLayer/main');
+	const ftlabsAudioPlayer = require('./components/ftlabs-audio-player/main');
 	const legalCopy = require('./components/legal-copy/main');
-	const AutoplayVideo = require('./components/video/autoplay-video');
+	const Video = require('./components/video/video');
 	const affinity = require('./components/affinity/main');
 	const inlineBarrier = require('./components/inline-barrier/main');
 
@@ -49,8 +48,12 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 	toc.init(flags);
 
-	if(flags.get('articleScrollDepthTracking')) {
-		tracking.scrollDepth.init('next-article', { selector: '.article__body' });
+	if (flags.get('articleScrollDepthTracking')) {
+		if (document.querySelector('.content__video')) {
+			tracking.scrollDepth.init('video-page', { selector: '.content__video' });
+		} else {
+			tracking.scrollDepth.init('next-article', { selector: '.article__body' });
+		}
 	}
 
 	legalCopy(flags);
@@ -69,28 +72,19 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 		});
 
 		[...document.querySelectorAll('[data-o-component="o-video"]')].forEach(videoEl => {
-			if (videoEl.hasAttribute('data-video-autoplay')) {
-				const video = new AutoplayVideo(videoEl, {
-					advertising: flags.get('videoPlayerAdvertising'),
-					upNextVariant: flags.get('videoUpNext')
-				});
-				video.init();
-			} else {
-				new OVideo(videoEl, {
-					placeholder: true,
-					classes: ['video'],
-					advertising: flags.get('videoPlayerAdvertising'),
-					placeholderInfo: ['brand', 'title'],
-				});
-			}
+			const video = new Video(videoEl, {
+				advertising: flags.get('videoPlayerAdvertising'),
+				upNextVariant: flags.get('videoArticlePage') ? 'no-autoplay' : flags.get('videoUpNext')
+			});
+			video.init({ autoplay: videoEl.hasAttribute('data-video-autoplay') });
 		});
 
 		if (flags.get('articleComments') && document.querySelector('#comments')) {
 			commentsInit();
 		}
 
-		if (flags.get('ftlabsSpokenLayer')){
-			ftlabsSpokenLayer(flags);
+		if (flags.get('ftlabsAudioPlayer')){
+			ftlabsAudioPlayer(flags);
 		}
 
 		if (flags.get('affinityMvt')) {

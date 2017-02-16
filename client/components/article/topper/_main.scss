@@ -1,6 +1,5 @@
 @import 'themes';
 
-
 @include oGridRespondTo($until: S) {
 	@include stackTags;
 	.article-topper__tags {
@@ -25,6 +24,54 @@
 
 	@include oGridRespondTo(XL) {
 		max-height: 800px;
+	}
+}
+
+//default text setting
+.article-topper__text-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: inherit;
+	min-height: inherit;
+	margin: 0 auto;
+	-webkit-font-smoothing: antialiased;
+}
+
+.article-topper__headline {
+	@include headlineFontSize(32px);
+	@include oTypographySerifDisplayBold(xl, $load-progressively: true);
+
+	display: flex; // for responsive bottom border
+	flex-direction: column;
+	line-height: 1;
+
+	@include oGridRespondTo(S) {
+		@include headlineFontSize(38px);
+	}
+
+	@include oGridRespondTo(L) {
+		@include headlineFontSize(52px);
+	}
+}
+
+.article-topper__stand-first {
+	@include oTypographySans(m, $load-progressively: true);
+
+	opacity: 0.8;
+	font-size: round(18px * 0.9);
+	line-height: 1.4;
+
+	@include oGridRespondTo(L) {
+		font-size: round(22px * 0.9);
+		.o-typography--loaded-sans & {
+			font-size: 22px;
+		}
+	}
+
+	.o-typography--loaded-sans & {
+		font-size: 18px;
+		line-height: 1.2;
 	}
 }
 
@@ -75,17 +122,6 @@
 	opacity: 0.6;
 }
 
-//default text setting
-.article-topper__text-box {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	height: inherit;
-	min-height: inherit;
-	margin: 0 auto;
-	-webkit-font-smoothing: antialiased;
-}
-
 //IE9 support
 .article-topper__text-wrapper {
 	width: 100%;
@@ -99,6 +135,10 @@
 	}
 }
 
+.article-topper__brand {
+	font-weight: 400;
+}
+
 .article-topper__tags {
 	display: flex;
 	padding-bottom: 5px;
@@ -106,10 +146,6 @@
 	@include oGridRespondTo(M) {
 		width: 45%;
 	};
-
-	.article-topper__brand {
-		font-weight: 400;
-	}
 
 	.n-content-tag {
 		color: inherit;

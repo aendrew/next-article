@@ -9,6 +9,7 @@ const openGraphHelper = require('./article-helpers/open-graph');
 const bylineTransform = require('../transforms/byline');
 const getMoreOnTags = require('./article-helpers/get-more-on-tags');
 const addTagTitlePrefix = require('./article-helpers/tag-title-prefix');
+const topperThemeMap = require('./article-helpers/topper-theme-map');
 const getAdsLayout = require('../utils/get-ads-layout');
 const cheerio = require('cheerio');
 
@@ -76,7 +77,7 @@ const showGcs = (req, res, isFreeArticle) => {
 	}
 };
 
-module.exports = function articleV3Controller (req, res, next, content, richContent) {
+module.exports = function articleV3Controller (req, res, next, content) {
 	let asyncWorkToDo = [];
 
 	res.vary('ft-is-aud-dev');
@@ -184,12 +185,14 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 		content.jsonLd = res.locals.jsonLd;
 	}
 
-	if (res.locals.flags.ftlabsSpokenLayer) {
+	if (res.locals.flags.ftlabsAudioPlayer) {
 		content.isAudioArticle = content.metadata.some(tag => tag.idV1 === 'MjgwYzIyNjUtMmQ1ZC00NTNiLTgyMTQtMWU5ZDc3YzIzNWUy-VG9waWNz');
 	}
 
-	if(res.locals.flags.articleTopper && richContent) {
-		content.topper = richContent.topper;
+	if(res.locals.flags.articleTopper) {
+		content.topper = topperThemeMap(content.topper);
+	} else {
+		content.topper = null;
 	}
 
 	return Promise.all(asyncWorkToDo)
