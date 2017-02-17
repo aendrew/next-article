@@ -5,7 +5,7 @@
 * In future this could become an n/o-component
 */
 
-const populateWithPsp = (el) => fetch('/products?fragment=true&inline=true&narrow=true', { credentials: 'same-origin' })
+const populateWithPsp = (el) => fetch('/products?fragment=true&inline=true&narrow=true&in-article=true', { credentials: 'same-origin' })
 	.then(response => {
 		if (response.ok) {
 			return response.text().then(html => {

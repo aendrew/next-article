@@ -7,7 +7,7 @@
 
 			<div class="n-util-hide-enhanced">
 				<p class="inline-barrier__heading">Want to read more?</p>
-				<a href="/products" class="o-buttons o-buttons--standout o-buttons--big" aria-label="Subscribe to the Financial Times">Subscribe to the FT</a>
+				<a href="/products?in-article=true" class="o-buttons o-buttons--standout o-buttons--big" aria-label="Subscribe to the Financial Times">Subscribe to the FT</a>
 			</div>
 
 		{{else ifEquals @root.flags.inArticlePreview 'trial'}}
@@ -16,8 +16,8 @@
 				<p class="inline-barrier__heading inline-barrier__needs-price">Keep reading for just <span class="js-barrier-trial-price"></span></p>
 				<p class="inline-barrier__description inline-barrier__needs-price">Receive 4 weeks of unlimited Premium <span aria-label="F T dot com">FT.com</span> access for just <span class="js-barrier-trial-price"></span>*</p>
 				<img src="https://www.ft.com/__origami/service/image/v2/images/raw/https%3A%2F%2Fwww.ft.com%2F__assets%2Fcreatives%2Fstandard_digital.png?width=160&amp;source=next&amp;fit=scale-down" alt="" role="presentation" aria-hidden="true">
-				<p><a href="/signup?offerId=41218b9e-c8ae-c934-43ad-71b13fcb4465" class="o-buttons o-buttons--big o-buttons--standout inline-barrier__button" data-trackable="sign-up">Sign up<span class="inline-barrier__needs-price"> for <span class="js-barrier-trial-price"></span> trial now</a></p>
-				<p class="inline-barrier__more"><a href="/products" data-trackable="view-all">View all subscription options</a></p>
+				<p><a href="/signup?offerId=41218b9e-c8ae-c934-43ad-71b13fcb4465&in-article=true" class="o-buttons o-buttons--big o-buttons--standout inline-barrier__button" data-trackable="sign-up">Sign up<span class="inline-barrier__needs-price"> for <span class="js-barrier-trial-price"></span> trial now</a></p>
+				<p class="inline-barrier__more"><a href="/products?in-article=true" data-trackable="view-all">View all subscription options</a></p>
 				<p class="inline-barrier__terms inline-barrier__needs-price"><a href="http://help.ft.com/help/legal-privacy/terms-conditions/" data-trackable="terms-conditions">*Terms &amp; conditions apply.</a></p>
 			</div>
 
