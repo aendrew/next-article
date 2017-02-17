@@ -49,6 +49,13 @@ function isMethodeArticle (webUrl = '') {
 	return false;
 }
 
+function isFastftArticle (webUrl = '') {
+	if (webUrl.indexOf('http://www.ft.com/fastft/') === 0) {
+		return true;
+	}
+	return false;
+}
+
 function getDescription ({ standfirst, openingHTML }) {
 	if (standfirst) {
 		return standfirst;
@@ -60,7 +67,7 @@ function getDescription ({ standfirst, openingHTML }) {
 }
 
 function getCanonicalUrl (webUrl, id) {
-	if (isMethodeArticle(webUrl)) {
+	if (isMethodeArticle(webUrl) || isFastftArticle(webUrl)) {
 		return `https://www.ft.com/content/${id}`;
 	} else {
 		return webUrl;
