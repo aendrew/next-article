@@ -101,7 +101,7 @@ describe('Article Controller', () => {
 		it('has the correct canonical URL and X-Robots-Tag for FastFT', () => {
 			return createInstance(null, { openGraph: true }, fixtureFastFT).then(() => {
 				let result = response._getRenderData()
-				expect(result.canonicalUrl).to.equal('https://www.ft.com/content/6adb986e-339a-3f14-ab82-ed48bd883b84');
+				expect(result.canonicalUrl).to.equal('http://www.ft.com/fastft/2016/09/13/linde-cfo-denoke-out-a-day-after-praxair-deal-talks-end/');
 				expect(response.getHeader('X-Robots-Tag')).to.equal('noindex');
 			});
 		});
