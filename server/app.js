@@ -1,7 +1,6 @@
 const nUi = require('@financial-times/n-ui');
 const logger = require('@financial-times/n-logger').default;
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 const checks = require('./checks/main.js');
 // Starts polling checks
 checks.init();
@@ -49,13 +48,6 @@ app.get(`^/content/:id(${uuid})$`, (req, res, next) => {
 	res.set('Surrogate-Control', res.FT_SHORT_CACHE);
 	next();
 }, require('./controllers/negotiation'));
-
-// normal caching on popular calls, no caching on other affinity calls
-app.get('^/[_]{0,2}affinity/:type(popular)', require('./controllers/affinity-proxy'));
-app.get(`^/[_]{0,2}affinity/:type/:id(${uuid})?`, (req, res, next) => {
-	res.set('Surrogate-Control', res.FT_NO_CACHE);
-	next();
-}, cookieParser(), require('./controllers/affinity-proxy'));
 
 app.get('/__gtg', (req, res) => {
 	res.status(200).end();
