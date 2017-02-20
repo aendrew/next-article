@@ -5,6 +5,32 @@
 * In future this could become an n/o-component
 */
 
+import { broadcast } from 'n-ui/utils';
+
+const broadcastOpportunity = (subtype) => {
+	const appNameEl = document.querySelector('[data-next-app]');
+	const appVersionEl = document.querySelector('[data-next-version]');
+	const context = {
+		product: 'next',
+		app: appNameEl && appNameEl.getAttribute('data-next-app'),
+		appVersion: appVersionEl && appVersionEl.getAttribute('data-next-version')
+	};
+	const acquisitionContextEls = document.querySelectorAll('[data-acquisition-context]');
+	const offersEls = document.querySelectorAll('[data-offer-id]');
+
+	broadcast('oTracking.event', Object.assign({
+		category: 'barrier',
+		action: 'view',
+		opportunity: {
+			type: 'barrier',
+			subtype
+		},
+		type: 'barrier',
+		acquisitionContext: Array.from(acquisitionContextEls).map(e => e.getAttribute('data-acquisition-context')),
+		offers: Array.from(offersEls).map(e => e.getAttribute('data-offer-id'))
+	}, context))
+};
+
 const populateWithPsp = (el) => fetch('/products?fragment=true&inline=true&narrow=true&in-article=true', { credentials: 'same-origin' })
 	.then(response => {
 		if (response.ok) {
@@ -30,6 +56,8 @@ const populateWithPsp = (el) => fetch('/products?fragment=true&inline=true&narro
 
 				el.classList.remove('inline-barrier--no-prices');
 				el.insertAdjacentElement('beforeend', pspEl);
+
+				broadcastOpportunity('inline-psp');
 			});
 		}
 	});
@@ -53,6 +81,8 @@ const populateWithTrial = (el) => fetch(`https://next-signup-api.ft.com/offer/41
 		//TODO: investigate localization of symbol/value ordering
 		priceables.forEach(priceable => priceable.innerHTML = `${trialOffer.amount.symbol}${trialOffer.amount.value.replace('.00', '')}`);
 		el.classList.remove('inline-barrier--no-prices');
+
+		broadcastOpportunity('inline-trial');
 	})
 	.catch(() => {
 		// eslint-disable-next-line no-console
