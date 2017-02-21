@@ -10,6 +10,7 @@ const inlineAd = require('./inline-ad');
 const extractToc = require('./extract-toc');
 const extractMainImage = require('./extract-main-image');
 const gcsConflicts = require('./gcs-conflicts');
+const series = require('./series');
 
 function transform ($, flags, options) {
 	const proto = {
@@ -31,7 +32,8 @@ module.exports = function (body, flags, options) {
 		.with(ariaHiddenMidContentInterruptions)
 		.with(tableOfContents)
 		.with(inlineAd)
-		.with(lightSignup);
+		.with(lightSignup)
+		.with(series);
 
 	const resultObject = { bodyHTML: $bodyHTML.html() };
 
