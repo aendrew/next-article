@@ -1,17 +1,20 @@
 <div class="article__aside o-grid-remove-gutters--XL" data-o-grid-colspan="0 L4 XL3 XLoffset1" aria-hidden="true">
 
 	{{> ads/mid}}
-	{{{tocHTML}}}
-	{{#if @root.flags.affinityMvt}}
-		<div class="o-teaser-collection" data-trackable="suggested-reads">
-			<div data-trackable="affinity" id="affinity-rhs"></div>
-		</div>
-	{{else}}
-		{{#if @root.flags.articleSuggestedRead}}
-			{{> right-hand/suggested-reads-teaser-collection items=readNextArticles topic=readNextTopic }}
-		{{/if}}
-	{{/if}}
 
+	{{#ifAll package @root.flags.contentPackages}}
+	{{else}}
+		{{{tocHTML}}}
+		{{#if @root.flags.affinityMvt}}
+			<div class="o-teaser-collection" data-trackable="suggested-reads">
+				<div data-trackable="affinity" id="affinity-rhs"></div>
+			</div>
+		{{else}}
+			{{#if @root.flags.articleSuggestedRead}}
+				{{> right-hand/suggested-reads-teaser-collection items=readNextArticles topic=readNextTopic }}
+			{{/if}}
+		{{/if}}
+	{{/ifAll}}
 	{{test}}
 
 </div>
