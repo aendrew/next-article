@@ -15,11 +15,7 @@
 			<div class="related-content" data-o-grid-colspan="12 L8 XL8 XLoffset1">
 				{{#if @root.flags.articleRelatedContent}}
 					<div class="js-story-package" data-trackable="story-package"></div>
-					{{#if @root.flags.affinityMvt}}
-						<section class="o-teaser-collection" role="region" data-trackable="more-on">
-							<div id="affinity-bottom" data-trackable="affinity"></div>
-						</section>
-					{{else if moreOns}}
+					{{#if moreOns}}
 						{{#slice moreOns limit=1}}
 							{{> related/more-ons-teaser-collection index=0}}
 						{{/slice}}

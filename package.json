@@ -20,7 +20,6 @@
     "forever": "^0.15.1",
     "ft-n-article-branding": "^3.0.0",
     "ft-n-content-transform": "^2.0.0",
-    "ft-next-affinity-client": "^1.0.0",
     "ft-next-article-genre": "^1.1.0",
     "ft-next-article-primary-tag": "^2.0.1",
     "ft-poller": "^2.0.3",

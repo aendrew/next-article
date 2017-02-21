@@ -21,7 +21,6 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const ftlabsAudioPlayer = require('./components/ftlabs-audio-player/main');
 	const legalCopy = require('./components/legal-copy/main');
 	const Video = require('./components/video/video');
-	const affinity = require('./components/affinity/main');
 	const inlineBarrier = require('./components/inline-barrier/main');
 
 	// cacheJourney();
@@ -87,11 +86,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 			ftlabsAudioPlayer(flags);
 		}
 
-		if (flags.get('affinityMvt')) {
-			affinity(flags);
-		}
-
-		if (flags.get('inArticlePreview') === 'psp') {
+		if (flags.get('inArticlePreview')) {
 			inlineBarrier(flags);
 		}
 	});
