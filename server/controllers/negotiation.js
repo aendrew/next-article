@@ -29,15 +29,29 @@ function hackPackageData (content) {
 		content.contains = packageLookup.find(pkg => pkg.landing === content.id).contains;
 		content.containedIn = [];
 		content.description = packageLookup.find(pkg => pkg.landing === content.id).description;
+		content.isSpecialReport = isSpecialReport(content);
 	} else if (isChildPage) {
 		content.contains = [];
 		content.containedIn = [{id: packageLookup.find(pkg => pkg.contains.includes(content.id)).landing}];
+		content.isSpecialReport = isSpecialReport(content);
 	} else {
 		content.contains = [];
 		content.containedIn = [];
+		content.isSpecialReport = isSpecialReport(content);
 	}
-	logger.info('ADDING_PACKAGE', content.id, content.contains, content.containedIn, content.type);
+	logger.info({
+		event: 'ADDING_PACKAGE',
+		id: content.id,
+		contains: content.contains,
+		containedIn: content.containedIn,
+		type: content.type,
+		isSpecialReport: content.isSpecialReport
+	});
 	return content;
+}
+
+function isSpecialReport (content) {
+	return !!content.metadata.find(tag => tag.prefLabel === 'Special Report');
 }
 
 function isContainedInPackage (content) {
