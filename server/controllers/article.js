@@ -121,15 +121,6 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 		type: 'standard' // TODO - set inline barrier type via preflight decision
 	}
 
-	// Apply content and article specific transforms to bodyHTML
-	Object.assign(content, transformArticleBody(content.bodyHTML, res.locals.flags, {
-			fragment: req.query.fragment,
-			adsLayout: content.adsLayout,
-			userIsAnonymous: res.locals.anon && res.locals.anon.userIsAnonymous,
-			previewArticle: req.get('ft-access-preview') // TODO: match on res.get() ?
-		}
-	));
-
 	content.designGenre = articleBranding(content.metadata);
 
 	if(req.app && req.app.getHashedAssetUrl) {
@@ -228,6 +219,21 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 		contentPackage.isSpecialReport = !!content.metadata.find(tag => tag.prefLabel === 'Special Report');
 
 	}
+
+	// Apply content and article specific transforms to bodyHTML
+	Object.assign(
+		content,
+		transformArticleBody(content.bodyHTML, res.locals.flags, {
+			fragment: req.query.fragment,
+			adsLayout: content.adsLayout,
+			userIsAnonymous: res.locals.anon && res.locals.anon.userIsAnonymous,
+			previewArticle: req.get('ft-access-preview'), // TODO: match on res.get() ?
+			contentPackage: {
+				package: content.package,
+				context: content.context
+			}
+		})
+	);
 
 
 	return Promise.all(asyncWorkToDo)
