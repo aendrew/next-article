@@ -26,7 +26,7 @@ const books = {
 		'0447a2b4-b826-11e6-ba85-95d1533d9a62',
 		'503fb2ec-b826-11e6-ba85-95d1533d9a62'
 	]
-}
+};
 
 const xiChina = {
 	landing: '57371736-4b69-11e6-88c5-db83e98a590a',
@@ -73,28 +73,47 @@ const animals = {
 		'869c8c04-c184-11e6-9bca-2b93a6856354',
 		'aeb23f84-d2ca-11e6-b06b-680c49b4b4c0',
 		'909b5f16-d203-11e6-b06b-680c49b4b4c0'
-	]
+	],
+	description: 'Would you LOOK at these super-cute little animals! Even powerful humans love little animals!'
+};
+
+const businessInGreece = {
+	landing: 'e6d0cd70-b724-11e6-961e-a1acd97f622d', // actually 'https://www.ft.com/reports/doing-business-greece' but obvs not content so taking the first article in the list
+	contains: [
+		'063f2d4e-b727-11e6-961e-a1acd97f622d',
+		'ea01d1e2-b724-11e6-961e-a1acd97f622d',
+		'128303aa-b727-11e6-961e-a1acd97f622d',
+		'436b20f8-b725-11e6-961e-a1acd97f622d',
+		'04084f5e-b729-11e6-961e-a1acd97f622d',
+		'ed349728-b724-11e6-961e-a1acd97f622d',
+		'0c1614a8-b727-11e6-961e-a1acd97f622d',
+		'08db5474-b727-11e6-961e-a1acd97f622d'
+	],
+	description: 'From airports to utilities, foreign investors are buying assets being privatised by Alexis Tsipras’ leftwing government. While politicians and creditors wrangle over the terms of Greece’s €86bn bailout, businesses and entrepreneurs are adapting to new realities and opportunities'
 };
 
 const landingPageIds = [
 	books.landing,
 	xiChina.landing,
 	womenOTY.landing,
-	animals.landing
+	animals.landing,
+	businessInGreece.landing
 ];
 
 const childPageIds = [].concat(
 	books.contains,
 	xiChina.contains,
 	womenOTY.contains,
-	animals.contains
+	animals.contains,
+	businessInGreece.contains
 );
 
 const packageLookup = [].concat(
 	books,
 	xiChina,
 	womenOTY,
-	animals
+	animals,
+	businessInGreece
 );
 
 module.exports = {

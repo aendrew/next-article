@@ -193,8 +193,6 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 	}
 
 	if(res.locals.flags.contentPackages && content.isContainedInPackage) {
-		const contentPackage = content.package = content.containedIn[0];
-		const ctx = contentPackage.context = {};
 
 		if (!content.topper) {
 			content.topper = {
@@ -205,16 +203,30 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 			};
 		}
 
+		const contentPackage = content.package = content.containedIn[0];
 		contentPackage.url = contentPackage.url.replace('https://www.ft.com', '');
 		contentPackage.contains.forEach(item => item.url = item.url.replace('https://www.ft.com', ''));
 
 		const currentIndex = contentPackage.contains.findIndex(item => item.id === content.id);
+		const ctx = content.context = {};
 		ctx.prev = contentPackage.contains[currentIndex - 1];
 		ctx.current = contentPackage.contains[currentIndex];
 		ctx.next = contentPackage.contains[currentIndex + 1];
 		ctx.home = contentPackage;
 
-		content.ctx = ctx;
+		const MAX_LENGTH = 6;
+		if (contentPackage.contains.length > MAX_LENGTH) {
+			const from = currentIndex - (MAX_LENGTH / 2);
+			const to = currentIndex + (MAX_LENGTH / 2);
+			if (from < 0) {
+				contentPackage.shortenedPackage = contentPackage.contains.slice(0, MAX_LENGTH);
+			} else {
+				contentPackage.shortenedPackage = contentPackage.contains.slice(from, to);
+			}
+		}
+
+		contentPackage.isSpecialReport = !!content.metadata.find(tag => tag.prefLabel === 'Special Report');
+
 	}
 
 

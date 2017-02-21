@@ -1,0 +1,13 @@
+<ul class="package__contents">
+	<!-- we should probably rely on the order of the contains array already having this at the top.
+		 also because current article should only go at the top if a package is unordered -->
+	<li class="package__content-item package__content-item--current">{{@root.title}}</li>
+	{{#each this}}
+		{{#ifEquals id @root.context.current.id}}
+		{{else}}
+			<li class="package__content-item">
+				<a href="{{url}}" class="package__link">{{title}}</a>
+			</li>
+		{{/ifEquals}}
+	{{/each}}
+</ul>

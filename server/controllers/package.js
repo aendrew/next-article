@@ -19,6 +19,8 @@ module.exports = function packageController (req, res, next, content) {
 	content.url = content.url.replace('https://www.ft.com', '');
 	content.contains.forEach(item => item.url = item.url.replace('https://www.ft.com', ''));
 
+	content.isSpecialReport = !!content.metadata.find(tag => tag.prefLabel === 'Special Report');
+
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
 			content.contentType = 'article';
