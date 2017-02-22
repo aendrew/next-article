@@ -3,6 +3,7 @@
 		<div class="inline-barrier__fader">
 			<p class="n-util-visually-hidden">This is the end of your free article preview.</p>
 		</div>
+		<div class="inline-barrier__content">
 		{{#ifEquals @root.flags.inArticlePreview 'psp'}}
 
 			<div class="n-util-hide-enhanced">
@@ -12,7 +13,6 @@
 
 		{{else ifEquals @root.flags.inArticlePreview 'trial'}}
 
-			<div class="inline-barrier__content">
 				<p class="inline-barrier__heading inline-barrier__needs-price">
 					Keep reading for just <span class="js-barrier-trial-price"></span>
 				</p>
@@ -35,8 +35,9 @@
 						*Terms &amp; conditions apply.
 					</a>
 				</p>
-			</div>
 
 		{{/ifEquals}}
+
+		</div>
 	</div>
 {{/if}}
