@@ -4,14 +4,15 @@
 			<p class="n-util-visually-hidden">This is the end of your free article preview.</p>
 		</div>
 		<div class="inline-barrier__content">
-		{{#ifEquals @root.flags.inArticlePreview 'psp'}}
 
-			<div class="n-util-hide-enhanced">
-				<p class="inline-barrier__heading">Want to read more?</p>
-				<a href="/products?in-article=true" class="o-buttons o-buttons--standout o-buttons--big" aria-label="Subscribe to the Financial Times">Subscribe to the FT</a>
-			</div>
+			{{#ifEquals @root.flags.inArticlePreview 'psp'}}
 
-		{{else ifEquals @root.flags.inArticlePreview 'trial'}}
+				<div class="n-util-hide-enhanced">
+					<p class="inline-barrier__heading">Want to read more?</p>
+					<a href="/products?in-article=true" class="o-buttons o-buttons--standout o-buttons--big" aria-label="Subscribe to the Financial Times">Subscribe to the FT</a>
+				</div>
+
+			{{else ifEquals @root.flags.inArticlePreview 'trial'}}
 
 				<p class="inline-barrier__heading inline-barrier__needs-price">
 					Keep reading for just <span class="js-barrier-trial-price"></span>
@@ -36,7 +37,7 @@
 					</a>
 				</p>
 
-		{{/ifEquals}}
+			{{/ifEquals}}
 
 		</div>
 	</div>
