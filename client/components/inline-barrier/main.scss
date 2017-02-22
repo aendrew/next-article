@@ -51,13 +51,13 @@ p.barrier-grid__heading-pretext {
 }
 
 .enhanced {
-	.inline-barrier--trial {
+	.inline-barrier {
 		.inline-barrier__content {
 			display: none;
 		}
 	}
 
-	.inline-barrier--trial.inline-barrier--done {
+	.inline-barrier--done {
 		.inline-barrier__content {
 			display: block;
 		}
