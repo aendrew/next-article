@@ -5,24 +5,30 @@ module.exports = function series ($, flags, options) {
 	if (pars.length < 6) return $;
 
 	positionComponent(pars.length / 2);
+
 	return $;
 
 	function positionComponent (position) {
-		const context = options.contentPackage.context;
-		const seriesMarkup = `<section class="package__context">
-			<a class="package__context-element package__link" href="${context.prev.url}"><h3>Previous:</h3><h4>${context.prev.title}</h4></a>
-			<a class="package__context-element package__link" href="${context.home.url}"><h3>Home:</h3><h4>${context.home.title}</h4></a>
-			<a class="package__context-element package__link" href="${context.next.url}"><h3>Next:</h3><h4>${context.next.title}</h4></a>
-		</section>`;
-
 		pars.each((index, par) => {
 			let indexMatches = ((index + 1) >= position);
 			let isOrphan = !par.parent;
 			let hasNextP = (par.next && par.next.name === 'p');
 			if (indexMatches && isOrphan && hasNextP) {
-				$(par).after(seriesMarkup);
+				$(par).after(seriesMarkup(options.contentPackage.package));
 				return false;
 			}
 		});
 	}
 };
+
+function seriesMarkup (pkg) {
+	return `<section data-o-component="o-expander" class="package__mid-article o-expander" data-o-expander-shrink-to="hidden"
+		data-o-expander-collapsed-toggle-text="" data-o-expander-expanded-toggle-text="">
+		<h1>Series</h1><h1>${pkg.title}</h1>
+		<p>${pkg.description}</p>
+		<h1>Explore the whole series</h1><button class="o-expander__toggle"></button>
+		<ul class="o-expander__content">
+			${pkg.contains.map(item => `<li>${item.title}</li>`).join('')}
+		</ul>
+	</section>`
+}
