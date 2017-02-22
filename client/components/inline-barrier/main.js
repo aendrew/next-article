@@ -65,6 +65,12 @@ const populateWithPsp = (el) => fetch('/products?fragment=true&inline=true&narro
 			});
 		}
 	})
+	.catch(() => {
+		// eslint-disable-next-line no-console
+		console.error('Failed to retrieve/process PSP fragment');
+	})
+	.then(() => {
+		el.classList.add('inline-barrier--done');
 	});
 
 const populateWithTrial = (el) => fetch(`https://next-signup-api.ft.com/offer/41218b9e-c8ae-c934-43ad-71b13fcb4465?countryCode=${el.dataset.countryCode}`, {
