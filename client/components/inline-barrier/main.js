@@ -36,10 +36,14 @@ const populateWithPsp = (el) => fetch('/products?fragment=true&inline=true&narro
 		if (response.ok) {
 			return response.text().then(html => {
 				const parsedHtml = new DOMParser().parseFromString(html, 'text/html');
+				const coreWrapper = el.querySelector('.inline-barrier__content');
 				const pspEl = parsedHtml.querySelector('.barrier');
+
+				if (!el || !pspEl || !coreWrapper) { return; }
+
 				//Remove duplicate ID so pa11y passes
-				pspEl && pspEl.removeAttribute('id');
-				const pspTitle = pspEl && pspEl.querySelector('.barrier-grid__heading-pretext');
+				pspEl.removeAttribute('id');
+				const pspTitle = pspEl.querySelector('.barrier-grid__heading-pretext');
 
 				if (pspTitle) {
 					// Horrible hacks to modify the PSP title text, for a slightly dirty MVT
@@ -55,11 +59,12 @@ const populateWithPsp = (el) => fetch('/products?fragment=true&inline=true&narro
 				}
 
 				el.classList.remove('inline-barrier--no-prices');
-				el.insertAdjacentElement('beforeend', pspEl);
+				el.replaceChild(pspEl, coreWrapper);
 
 				broadcastOpportunity('inline-psp');
 			});
 		}
+	})
 	});
 
 const populateWithTrial = (el) => fetch(`https://next-signup-api.ft.com/offer/41218b9e-c8ae-c934-43ad-71b13fcb4465?countryCode=${el.dataset.countryCode}`, {
