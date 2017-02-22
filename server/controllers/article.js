@@ -185,6 +185,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 
 	if(res.locals.flags.contentPackages && content.isContainedInPackage) {
 
+		// TOPPER
 		if (!content.topper) {
 			content.topper = {
 				standfirst: content.standfirst,
@@ -194,10 +195,14 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 			};
 		}
 
+		// USE CONTAINED
 		const contentPackage = content.package = content.containedIn[0];
-		contentPackage.url = contentPackage.url.replace('https://www.ft.com', '');
-		contentPackage.contains = contentPackage.contains.map(trim);
 
+		// TRIM OFF COLONS AND USE RELATIVE URLs
+		contentPackage.contains = contentPackage.contains.map(trim);
+		contentPackage.url = contentPackage.url.replace('https://www.ft.com', '');
+
+		// CONTEXT INFO
 		const currentIndex = contentPackage.contains.findIndex(item => item.id === content.id);
 		const ctx = content.context = {};
 		ctx.prev = contentPackage.contains[currentIndex - 1];
@@ -205,6 +210,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 		ctx.next = contentPackage.contains[currentIndex + 1];
 		ctx.home = contentPackage;
 
+		// ADD A SHORTENED PACKAGE FOR NAV IF PACKAGE OVERLONG
 		const MAX_LENGTH = 6;
 		if (contentPackage.contains.length > MAX_LENGTH) {
 			const from = currentIndex - (MAX_LENGTH / 2);
@@ -214,6 +220,20 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 			} else {
 				contentPackage.shortenedPackage = contentPackage.contains.slice(from, to);
 			}
+		}
+
+		// OPRDERED / UNORDERED
+		if (contentPackage.sequence === 'ordered') {
+			contentPackage.contains.forEach(item => (
+				item.sequenceId = `PART ${contentPackage.contains.indexOf(item) + 1}`
+			));
+		} else if (contentPackage.sequence === 'none') {
+			contentPackage.contains = moveToTopOfPackage(ctx.current, contentPackage.contains);
+			if (contentPackage.shortenedPackage) contentPackage.shortenedPackage = moveToTopOfPackage(ctx.current, contentPackage.shortenedPackage);
+		}
+
+		function moveToTopOfPackage (top, pkg) {
+			return [].concat(top, pkg.filter(x => x !== top));
 		}
 
 		function trim (content) {
