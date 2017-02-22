@@ -259,10 +259,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 			adsLayout: content.adsLayout,
 			userIsAnonymous: res.locals.anon && res.locals.anon.userIsAnonymous,
 			previewArticle: req.get('ft-access-preview'), // TODO: match on res.get() ?
-			contentPackage: {
-				package: content.package,
-				context: content.context
-			}
+			contentPackage: content.package
 		})
 	);
 
