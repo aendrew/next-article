@@ -1,5 +1,6 @@
 import oDate from 'o-date';
 import crossDomainFetch from 'o-fetch-jsonp';
+import {broadcast} from 'n-ui/utils';
 
 const nImage = require('n-image');
 const template = require('../../../node_modules/@financial-times/n-teaser/templates/heavy.html');
@@ -88,7 +89,8 @@ const handleResponse = (el, response) => {
 		return;
 	}
 
-	el.dataset.trackable = `type-${response.type} | id-${response.id || response.advertiser.split(' ').join('-').toLowerCase()}`;
+	const idNormalized = response.id ? '' + response.id : response.advertiser.split(' ').join('-').toLowerCase();
+	el.dataset.trackable = `type-${response.type} | id-${idNormalized}`;
 
 	const container = document.querySelector('.promoted-content')
 	container.classList.add('promoted-content--loaded');
@@ -141,6 +143,13 @@ const handleResponse = (el, response) => {
 	nImage.lazyLoad({ root: el });
 
 	oDate.init(el);
+
+	broadcast('oTracking.event', {
+		action: 'native-render',
+		category: 'ads',
+		native_ad_type: response.type,
+		native_ad_id: idNormalized
+	});
 
 };
 
