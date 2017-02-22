@@ -216,8 +216,6 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 			}
 		}
 
-		contentPackage.isSpecialReport = !!content.metadata.find(tag => tag.prefLabel === 'Special Report');
-
 		function trim (content) {
 			let trimmedTitle;
 			if (content.title.indexOf(':')) {

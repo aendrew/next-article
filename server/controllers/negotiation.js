@@ -29,6 +29,8 @@ function hackPackageData (content) {
 		content.contains = packageLookup.find(pkg => pkg.landing === content.id).contains;
 		content.containedIn = [];
 		content.description = packageLookup.find(pkg => pkg.landing === content.id).description;
+		content.theme = !!content.metadata.find(tag => tag.prefLabel === 'Special Report') ? 'specialReport' : 'highlight'; // theme is a property of the package?
+		content.sequence = packageLookup.find(pkg => pkg.landing === content.id).sequence || 'none';
 	} else if (isChildPage) {
 		content.contains = [];
 		content.containedIn = [{id: packageLookup.find(pkg => pkg.contains.includes(content.id)).landing}];
@@ -36,13 +38,7 @@ function hackPackageData (content) {
 		content.contains = [];
 		content.containedIn = [];
 	}
-	logger.info({
-		event: 'ADDING_PACKAGE',
-		id: content.id,
-		contains: content.contains,
-		containedIn: content.containedIn,
-		type: content.type
-	});
+	logger.info({ event: 'ADDING_PACKAGE', id: content.id, contains: content.contains, containedIn: content.containedIn, type: content.type });
 	return content;
 }
 

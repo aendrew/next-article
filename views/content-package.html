@@ -22,7 +22,7 @@
 	data-syndicatable="{{canBeSyndicated}}"
 >
 
-	{{#if isSpecialReport}}
+	{{#ifEquals theme 'specialReport'}}
 		INSERT SPECIAL REPORT HERE
 	{{else}}
 		{{> package/nav}}
@@ -33,7 +33,7 @@
 		{{/if}}
 
 		{{> body-wrapper}}
-	{{/if}}
+	{{/ifEquals}}
 
 	{{>propensity-messaging-promo-unit}}
 
