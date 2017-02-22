@@ -1,6 +1,26 @@
 <div class="package--embedded" data-textbox-background="{{#if @root.topper}}{{@root.topper.bgColor}}{{else}}slate{{/if}}">
-	<h3 class="package__title">{{title}}</h3>
-	{{description}}
+	<h3 class="package__title">Expore the series</h3>
+
+	<div class="o-teaser o-teaser--large o-teaser--inverse o-teaser--has-image" data-o-component="o-teaser">
+		<div class="o-teaser__content">
+			<div class="o-teaser__meta">
+				<span class="o-teaser__tag">UP NEXT</span>
+			</div>
+
+			<h2 class="o-teaser__heading"><a href="{{@root.context.next.url}}">{{@root.context.next.title}}</a></h2>
+
+			<p class="o-teaser__standfirst">{{@root.context.next.standfirst}}</p>
+
+			<time data-o-component="o-date" class="o-date o-teaser__timestamp" datetime="{{@root.context.next.publishedDate}}">2016-02-29T12:35:48Z</time>
+		</div>
+
+		<div class="o-teaser__image-container">
+			<div class="o-teaser__image-placeholder image-placeholder">
+				<img src="{{@root.context.next.mainImage.url}}" class="o-teaser__image" alt="demo image"></img>
+			</div>
+		</div>
+	</div>
+
 	{{#if shortenedPackage}}
 		{{> package/package-contents shortenedPackage}}
 	{{else}}
