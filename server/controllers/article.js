@@ -196,7 +196,7 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 
 		const contentPackage = content.package = content.containedIn[0];
 		contentPackage.url = contentPackage.url.replace('https://www.ft.com', '');
-		contentPackage.contains.forEach(item => item.url = item.url.replace('https://www.ft.com', ''));
+		contentPackage.contains = contentPackage.contains.map(trim);
 
 		const currentIndex = contentPackage.contains.findIndex(item => item.id === content.id);
 		const ctx = content.context = {};
@@ -217,6 +217,19 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 		}
 
 		contentPackage.isSpecialReport = !!content.metadata.find(tag => tag.prefLabel === 'Special Report');
+
+		function trim (content) {
+			let trimmedTitle;
+			if (content.title.indexOf(':')) {
+				trimmedTitle = content.title
+					.substring(content.title.indexOf(':') + 2);
+			}
+
+			return Object.assign({}, content, {
+				url: content.url.replace('https://www.ft.com', ''),
+				title: trimmedTitle ? trimmedTitle : content.title
+			});
+		};
 
 	}
 
