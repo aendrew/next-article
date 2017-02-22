@@ -19,10 +19,6 @@ export default () => {
 
 	};
 
-	audioElement.addEventListener('play', () => { logPlayerInteractions('play') }, false);
-	audioElement.addEventListener('pause', () => { logPlayerInteractions('pause') }, false);
-	audioElement.addEventListener('seeked', () => { logPlayerInteractions('seek') }, false);
-	audioElement.addEventListener('ended', () => { logPlayerInteractions('ended') }, false);
 
 	fetch(`https://ftlabs-audio-available.herokuapp.com/check/${articleUUID}`)
 		.then(res => {
@@ -35,6 +31,12 @@ export default () => {
 		.then(res => res.json())
 		.then(data => {
 			if(data.haveFile === true){
+				if(audioElement !== null){
+					audioElement.addEventListener('play', () => { logPlayerInteractions('play') }, false);
+					audioElement.addEventListener('pause', () => { logPlayerInteractions('pause') }, false);
+					audioElement.addEventListener('seeked', () => { logPlayerInteractions('seek') }, false);
+					audioElement.addEventListener('ended', () => { logPlayerInteractions('ended') }, false);
+				}
 				audioElement.src = data.url;
 				if(audioElement.canPlayType('audio/mpeg;codecs=mp3')){
 					holder.classList.remove('ftlabsaudioplayerholder--inactive');
