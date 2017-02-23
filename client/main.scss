@@ -1,4 +1,6 @@
 @import 'n-ui/main';
+@import 'n-ui/myft-hint/main';
+
 @include nUiStylesheetStart('head');
 	$o-teaser-is-silent: false;
 	@import 'o-teaser/main';
