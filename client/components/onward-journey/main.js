@@ -1,6 +1,6 @@
 const fetchres = require('fetchres');
-const oDate = require('n-ui/date');
-import {broadcast} from 'n-ui/utils';
+const oDate = require('o-date');
+import {broadcast} from 'n-ui-foundations';
 const lazyLoadImages = require('n-image').lazyLoad;
 import * as serviceWorker from 'n-service-worker';
 

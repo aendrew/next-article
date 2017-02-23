@@ -5,7 +5,7 @@
 * In future this could become an n/o-component
 */
 
-import { broadcast } from 'n-ui/utils';
+import { broadcast } from 'n-ui-foundations';
 
 const broadcastOpportunity = (subtype) => {
 	const appNameEl = document.querySelector('[data-next-app]');

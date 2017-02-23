@@ -1,5 +1,3 @@
-@import 'n-ui/configure';
-
 // Fix o-comments at 2.2.0 and o-comment-ui at 2.1.0 so we can use the build service for images
 // Note needs to match the bower.json otherwise there is a risk that images from a different version
 // of o-comments/o-comment-ui will appear on the site.

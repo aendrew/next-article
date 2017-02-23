@@ -3,8 +3,7 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 @import 'n-email-article/main';
 
 // todo: this module is pretty grim and needs refactoring or deleting in favour of sticky header
-@include nUiCriticalStart();
-
+@include nUiStylesheetStart('head');
 	@include oShareBase(o-share);
 
 	.article__share {
@@ -121,7 +120,7 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 		margin-bottom: 20px;
 	}
 
-@include nUiCriticalEnd();
+@include nUiStylesheetEnd('head');
 
 
 

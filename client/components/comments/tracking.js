@@ -1,4 +1,4 @@
-import {broadcast} from 'n-ui/utils';
+import {broadcast} from 'n-ui-foundations';
 const superstore = require('superstore-sync');
 
 const engagementKey = 'next.comments.engagement';
