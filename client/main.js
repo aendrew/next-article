@@ -75,7 +75,11 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 				advertising: flags.get('videoPlayerAdvertising'),
 				upNextVariant: flags.get('videoArticlePage') ? 'no-autoplay' : flags.get('videoUpNext')
 			});
-			video.init({ autoplay: videoEl.hasAttribute('data-video-autoplay') });
+
+			// only initialise autoplay and playlists if we're on a video page
+			if (document.querySelector('.content__video')) {
+				video.init({ autoplay: videoEl.hasAttribute('data-video-autoplay') });
+			}
 		});
 
 		if (flags.get('articleComments') && document.querySelector('#comments')) {
