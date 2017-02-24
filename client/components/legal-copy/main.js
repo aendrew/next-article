@@ -73,11 +73,10 @@ function interceptKeys (e) {
 	if (e.keyCode === ALT) {
 		altPressed = true;
 
-		// Clean up after 1 second
-		// TTS triggers copy event immediately
+		// Clean up after 10 seconds
 		setTimeout(function () {
 			altPressed = false;
-		}, 1000);
+		}, 10000);
 	}
 }
 
