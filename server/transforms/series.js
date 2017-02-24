@@ -1,6 +1,7 @@
 const inArticleNav = require('../../views/partials/package/in-article');
 
 module.exports = function series ($, flags, options) {
+
 	if (!flags || !flags.contentPackages || (options && options.fragment) || (options && !options.contentPackage)) return $;
 
 	const pars = $('p');

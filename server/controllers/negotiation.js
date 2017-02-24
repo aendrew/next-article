@@ -5,46 +5,13 @@ const api = (process.env.EXPERIMENTAL_CONTENT_SOURCE && process.env.NODE_ENV !==
 	: require('next-ft-api-client');
 const interactivePoller = require('../lib/ig-poller');
 const shellpromise = require('shellpromise');
-const richArticleModel = require('../lib/rich-article');
+const getOnwardJourneyArticles = require('./article-helpers/onward-journey');
 
 const controllerInteractive = require('./interactive');
 const controllerPodcast = require('./podcast');
 const controllerVideo = require('./video');
 const controllerArticle = require('./article');
 const controllerPackage = require('./package');
-
-// HACK: remove
-const {
-	landingPageIds,
-	childPageIds,
-	packageLookup
-} = require('../../package-hack-list');
-
-// HACK: remove this function and all references to it
-function hackPackageData (content) {
-	const isParentPage = landingPageIds.includes(content.id);
-	const isChildPage = childPageIds.includes(content.id);
-	if (isParentPage) {
-		content.type = 'package';
-		content.contains = packageLookup.find(pkg => pkg.landing === content.id).contains;
-		content.containedIn = [];
-		content.description = packageLookup.find(pkg => pkg.landing === content.id).description;
-		content.theme = !!content.metadata.find(tag => tag.prefLabel === 'Special Report') ? 'specialReport' : 'highlight'; // theme is a property of the package?
-		content.sequence = packageLookup.find(pkg => pkg.landing === content.id).sequence || 'none';
-	} else if (isChildPage) {
-		content.contains = [];
-		content.containedIn = [{id: packageLookup.find(pkg => pkg.contains.includes(content.id)).landing}];
-	} else {
-		content.contains = [];
-		content.containedIn = [];
-	}
-	logger.info({ event: 'ADDING_PACKAGE', id: content.id, contains: content.contains, containedIn: content.containedIn, type: content.type });
-	return content;
-}
-
-function isContainedInPackage (content) {
-	return Array.isArray(content.containedIn) && content.containedIn.length > 0;
-}
 
 function isArticlePodcast ({ provenance = [] } = {}) {
 	return provenance.some(source => /acast\.com/.test(source));
@@ -64,40 +31,6 @@ function getInteractive (contentId) {
 	);
 }
 
-function decoratePackageWithContents (pkg) {
-	return getArticle(pkg.contains).then(contents => {
-		contents.forEach(hackPackageData);
-		pkg.contains = contents;
-		return pkg;
-	});
-}
-
-function decorateContentWithPackage (content) {
-	hackPackageData(content);
-
-	let promises = [];
-
-	if (isArticlePackage(content)) {
-		promises = [decoratePackageWithContents(content)];
-	}
-
-	content.isContainedInPackage = isContainedInPackage(content);
-
-	if (content.isContainedInPackage) {
-
-		// fetch the ContentPackage from CAPI
-		// HACK: hard-code the first parent package
-		const parentAndSiblingsPromises = getArticle(content.containedIn[0].id).then(pkg => {
-			hackPackageData(pkg);
-			content.containedIn[0] = Object.assign({}, content.containedIn[0], pkg);
-			return decoratePackageWithContents(content.containedIn[0]);
-		});
-
-		promises = promises.concat(parentAndSiblingsPromises);
-	}
-
-	return Promise.all(promises);
-}
 
 function getArticle (contentId) {
 	return api.content({
@@ -114,46 +47,25 @@ function getArticle (contentId) {
 		});
 }
 
-function getRichArticle (contentId) {
-	return fetch(`https://s3-eu-west-1.amazonaws.com/rj-xcapi-mock/${contentId}`)
-		.then(fetchres.json)
-		.then(richArticleModel)
-		.catch(err => {
-			logger.error({
-				event: 'INTERNAL_CONTENT_FETCH_FAIL',
-				uuid: contentId
-			}, err);
-		});
-}
 
 module.exports = function negotiationController (req, res, next) {
 	res.set('surrogate-key', `contentUuid:${req.params.id}`);
 
+	const contentPromises = [];
 	let interactive = getInteractive(req.params.id);
 
 	if (interactive) {
 		return controllerInteractive(req, res, next, interactive);
 	}
 
-	const articlePromise = getArticle(req.params.id);
-	const contentPromises = [articlePromise];
+	contentPromises.push(getArticle(req.params.id));
 
-	if (res.locals.flags.articleTopper || res.locals.flags.contentPackages) {
-		contentPromises.push(
-			getRichArticle(req.params.id)
-		);
+	if(res.locals.flags.articleSuggestedRead || res.locals.flags.contentPackages) {
+		contentPromises.push(getOnwardJourneyArticles(req.params.id, res.locals.flags));
 	}
 
-	if (res.locals.flags.contentPackages) {
-		contentPromises.push(
-			articlePromise.then(content => decorateContentWithPackage(content))
-		);
-	}
-
-	return Promise.all(contentPromises)
-		.then(data => {
-			const article = data[0];
-			const richArticle = data.length > 1 ? data[1] : null;
+	Promise.all(contentPromises)
+		.then(([article, onwardJourney]) => {
 			const webUrl = article && article.webUrl || '';
 
 			// Redirect ftalphaville to old FT.com.  Next is not currently planning to absorb FTAlphaville
@@ -178,15 +90,24 @@ module.exports = function negotiationController (req, res, next) {
 				return res.redirect(302, article.url);
 			}
 
+			article.readNextArticle = article && onwardJourney && onwardJourney.readNext;
+			article.readNextArticles = article && onwardJourney && onwardJourney.suggestedReads;
+
+
+			if(article && onwardJourney && (onwardJourney.package || onwardJourney.context)) {
+				article.package = onwardJourney.package;
+				article.context = onwardJourney.context;
+			}
+
 			if (article) {
 				if (isArticlePodcast(article)) {
 					return controllerPodcast(req, res, next, article);
 				} else if (isArticleVideo(article)) {
 					return controllerVideo(req, res, next, article);
-				} else if (isArticlePackage(article)) {
-					return controllerPackage(req, res, next, article, richArticle)
+				} else if (res.locals.flags.contentPackages && isArticlePackage(article)) {
+					return controllerPackage(req, res, next, article)
 				} else {
-					return controllerArticle(req, res, next, article, richArticle);
+					return controllerArticle(req, res, next, article);
 				}
 			}
 

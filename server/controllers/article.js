@@ -1,9 +1,7 @@
-const logger = require('@financial-times/n-logger').default;
 const genericContentTransform = require('ft-n-content-transform').transformAll;
 const nextJsonLd = require('@financial-times/next-json-ld');
 const applicationContentTransform = require('../transforms/body');
 const articleBranding = require('ft-n-article-branding');
-const getOnwardJourneyArticles = require('./article-helpers/onward-journey');
 const decorateMetadataHelper = require('./article-helpers/decorate-metadata');
 const openGraphHelper = require('./article-helpers/open-graph');
 const bylineTransform = require('../transforms/byline');
@@ -77,7 +75,6 @@ const showGcs = (req, res, isFreeArticle) => {
 };
 
 module.exports = function articleV3Controller (req, res, next, content, richContent) {
-	let asyncWorkToDo = [];
 
 	res.vary('ft-is-aud-dev');
 	res.vary('ft-blocked-url');
@@ -148,15 +145,6 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 	}
 
 	if (res.locals.flags.articleSuggestedRead && content.metadata.length) {
-
-		asyncWorkToDo.push(
-			getOnwardJourneyArticles(content.id, content.publishedDate)
-				.then(onwardJourney => {
-					content.readNextArticle = onwardJourney && onwardJourney.readNext;
-					content.readNextArticles = onwardJourney && onwardJourney.suggestedReads;
-				})
-		);
-
 		content.readNextTopic = addTagTitlePrefix(content.primaryTag);
 	}
 
@@ -183,9 +171,9 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 		content.topper = richContent.topper;
 	}
 
-	if(res.locals.flags.contentPackages && content.isContainedInPackage) {
+	if(res.locals.flags.contentPackages && content.contains) {
 
-		// TOPPER
+		// all series content have toppers
 		if (!content.topper) {
 			content.topper = {
 				standfirst: content.standfirst,
@@ -194,60 +182,6 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 				bgColor: 'slate'
 			};
 		}
-
-		// USE CONTAINED
-		const contentPackage = content.package = content.containedIn[0];
-
-		// TRIM OFF COLONS AND USE RELATIVE URLs
-		contentPackage.contains = contentPackage.contains.map(trim);
-		contentPackage.url = contentPackage.url.replace('https://www.ft.com', '');
-
-		// CONTEXT INFO
-		const currentIndex = contentPackage.contains.findIndex(item => item.id === content.id);
-		const ctx = content.context = {};
-		ctx.prev = contentPackage.contains[currentIndex - 1];
-		ctx.current = contentPackage.contains[currentIndex];
-		ctx.next = contentPackage.contains[currentIndex + 1];
-		ctx.home = contentPackage;
-
-		// ADD A SHORTENED PACKAGE FOR NAV IF PACKAGE OVERLONG
-		const MAX_LENGTH = 6;
-		if (contentPackage.contains.length > MAX_LENGTH) {
-			const from = currentIndex - (MAX_LENGTH / 2);
-			const to = currentIndex + (MAX_LENGTH / 2);
-			if (from < 0) {
-				contentPackage.shortenedPackage = contentPackage.contains.slice(0, MAX_LENGTH);
-			} else {
-				contentPackage.shortenedPackage = contentPackage.contains.slice(from, to);
-			}
-		}
-
-		// OPRDERED / UNORDERED
-		if (contentPackage.sequence === 'ordered') {
-			contentPackage.contains.forEach(item => (
-				item.sequenceId = `PART ${contentPackage.contains.indexOf(item) + 1}`
-			));
-		} else if (contentPackage.sequence === 'none') {
-			contentPackage.contains = moveToTopOfPackage(ctx.current, contentPackage.contains);
-			if (contentPackage.shortenedPackage) contentPackage.shortenedPackage = moveToTopOfPackage(ctx.current, contentPackage.shortenedPackage);
-		}
-
-		function moveToTopOfPackage (top, pkg) {
-			return [].concat(top, pkg.filter(x => x !== top));
-		}
-
-		function trim (content) {
-			let trimmedTitle;
-			if (content.title.indexOf(':')) {
-				trimmedTitle = content.title
-					.substring(content.title.indexOf(':') + 2);
-			}
-
-			return Object.assign({}, content, {
-				url: content.url.replace('https://www.ft.com', ''),
-				title: trimmedTitle ? trimmedTitle : content.title
-			});
-		};
 
 	}
 
@@ -264,20 +198,13 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 	);
 
 
-	return Promise.all(asyncWorkToDo)
-		.then(() => {
-			content.contentType = 'article';
-			content.shouldRenderMyftHint = true;
-			if (req.query.fragment) {
-				res.render('fragment', content);
-			} else {
-				content.layout = 'wrapper';
-				content.viewStyle = 'compact';
-				res.render('content', content);
-			}
-		})
-		.catch(error => {
-			logger.error(error);
-			next(error);
-		});
+	content.contentType = 'article';
+	content.shouldRenderMyftHint = true;
+	if (req.query.fragment) {
+		res.render('fragment', content);
+	} else {
+		content.layout = 'wrapper';
+		content.viewStyle = 'compact';
+		res.render('content', content);
+	}
 };

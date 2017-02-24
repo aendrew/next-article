@@ -5,7 +5,6 @@ module.exports = function packageController (req, res, next, content) {
 		Promise.resolve(true)
 	];
 
-
 	if (!content.topper) {
 		content.topper = {
 			standfirst: content.standfirst,
@@ -16,8 +15,7 @@ module.exports = function packageController (req, res, next, content) {
 	}
 
 
-	content.url = content.url.replace('https://www.ft.com', '');
-	content.contains.forEach(item => item.url = item.url.replace('https://www.ft.com', ''));
+	content.url = content.webUrl.replace('https://www.ft.com', '');
 
 	content.isSpecialReport = !!content.metadata.find(tag => tag.prefLabel === 'Special Report');
 
