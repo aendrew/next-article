@@ -20,6 +20,10 @@
 	@include oGridRespondTo(M) {
 		.article-topper__offset-container {
 			margin-top: -100px;
+			margin-left: -20px;
+			margin-right: -20px;
+			padding-left: 20px;
+			padding-right: 20px;
 		}
 	}
 
@@ -34,8 +38,8 @@
 	}
 
 	.article-topper__offset-container {
-		margin: -90px -20px 0;
-		padding: 0 20px;
+		margin: -90px -10px 0;
+		padding: 0 10px;
 	}
 
 	.article-topper__text-wrapper {
