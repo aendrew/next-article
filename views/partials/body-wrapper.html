@@ -26,7 +26,7 @@
 					{{#if lightSignup.show}}
 						{{> light-signup tag=primaryTag articleUuid=id isInferred=lightSignup.isInferred}}
 					{{/if}}
-					{{#if inlineBarrier.show}}
+					{{#if inlineBarrier.shouldShow}}
 						{{> inline-barrier inlineBarrier}}
 					{{/if}}
 				{{/ifEquals}}

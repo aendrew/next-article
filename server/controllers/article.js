@@ -78,6 +78,7 @@ const showGcs = (req, res, isFreeArticle) => {
 };
 
 module.exports = function articleV3Controller (req, res, next, content) {
+	const userIsAnonymous = res.locals.anon && res.locals.anon.userIsAnonymous;
 	let asyncWorkToDo = [];
 
 	res.vary('ft-is-aud-dev');
@@ -117,8 +118,9 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	}
 
 	// Inline barrier page & data
+	const shouldShow = userIsAnonymous && req.get('ft-access-preview') && !req.query.fragment && res.locals.flags.inArticlePreview;
 	content.inlineBarrier = {
-		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && req.get('ft-access-preview') && !req.query.fragment && res.locals.flags.inArticlePreview,
+		shouldShow,
 		countryCode: req.get('country-code'),
 		type: 'standard' // TODO - set inline barrier type via preflight decision
 	};
@@ -127,7 +129,7 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	Object.assign(content, transformArticleBody(content.bodyHTML, res.locals.flags, {
 			fragment: req.query.fragment,
 			adsLayout: content.adsLayout,
-			userIsAnonymous: res.locals.anon && res.locals.anon.userIsAnonymous,
+			userIsAnonymous,
 			previewArticle: req.get('ft-access-preview') // TODO: match on res.get() ?
 		}
 	));
