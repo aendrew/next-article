@@ -27,7 +27,7 @@
 						{{> light-signup tag=primaryTag articleUuid=id isInferred=lightSignup.isInferred}}
 					{{/if}}
 					{{#if inlineBarrier.shouldShow}}
-						{{> inline-barrier inlineBarrier}}
+						{{> inline-barrier/template inlineBarrier}}
 					{{/if}}
 				{{/ifEquals}}
 				{{#ifEquals contentType 'podcast'}}
