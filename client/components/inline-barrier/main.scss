@@ -15,27 +15,30 @@
 	text-align: center;
 }
 
+.inline-barrier__bridge {
+	@include oTypographySansBold('s');
+	background: getColor('white');
+	color: getColor('cold-1');
+	margin: -15px -15px 15px;
+	padding: 10px;
+}
+
 .inline-barrier__heading {
-	@include oTypographySansBold('l', true);
+	@include oTypographySansBold('m');
 	color: getColor('cold-1');
 	margin: 0 0 5px;
 }
 
-.inline-barrier__description {
+.inline-barrier__body {
 	font-size: 17px;
 	font-weight: 400;
 	line-height: 23px;
 	margin: 0 0 10px;
 }
 
-.inline-barrier__more {
-	@include oTypographySansSize('s', true);
+.inline-barrier__cta-secondary {
+	@include oTypographySansSize('s');
 	margin: 0 0 10px;
-}
-
-.inline-barrier__terms {
-	@include oTypographySansSize('xs', true);
-	margin: 0 0 20px;
 }
 
 @include oGridRespondTo($until: 'M') {
@@ -44,26 +47,43 @@
 	}
 }
 
-// Horrible hack for an MVT, to avoid shaving a humongous yak. Sorry, Internet.
-// scss-lint:disable QualifyingElement
-p.barrier-grid__heading-pretext {
-	margin-top: 15px;
+.core {
+	.inline-barrier__if-has-prices {
+		display: none;
+	}
 }
 
 .enhanced {
 	.inline-barrier {
-		.inline-barrier__content {
+		display: none;
+	}
+	.inline-barrier--done {
+		display: block;
+	}
+}
+
+.inline-barrier--done {
+	&.inline-barrier--no-prices {
+		.inline-barrier__if-no-prices {
+			display: block;
+		}
+		.inline-barrier__if-has-prices {
 			display: none;
 		}
 	}
 
-	.inline-barrier--done {
-		.inline-barrier__content {
+	&.inline-barrier--has-prices {
+		.inline-barrier__if-no-prices {
+			display: none;
+		}
+		.inline-barrier__if-has-prices {
 			display: block;
 		}
 	}
 }
 
-.inline-barrier--no-prices .inline-barrier__needs-price {
-	display: none;
+// Horrible hack for an MVT, to avoid shaving a humongous yak. Sorry, Internet.
+// scss-lint:disable QualifyingElement
+p.barrier-grid__heading-pretext {
+	margin-top: 15px;
 }
