@@ -47,38 +47,12 @@
 	}
 }
 
-.core {
-	.inline-barrier__if-has-prices {
-		display: none;
-	}
-}
-
 .enhanced {
 	.inline-barrier {
 		display: none;
 	}
 	.inline-barrier--done {
 		display: block;
-	}
-}
-
-.inline-barrier--done {
-	&.inline-barrier--no-prices {
-		.inline-barrier__if-no-prices {
-			display: block;
-		}
-		.inline-barrier__if-has-prices {
-			display: none;
-		}
-	}
-
-	&.inline-barrier--has-prices {
-		.inline-barrier__if-no-prices {
-			display: none;
-		}
-		.inline-barrier__if-has-prices {
-			display: block;
-		}
 	}
 }
 
