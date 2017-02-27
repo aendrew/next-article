@@ -1,4 +1,4 @@
-import { broadcast } from 'n-ui/utils';
+import { broadcast } from 'n-ui-foundations';
 
 module.exports = (subtype) => {
 	const appNameEl = document.querySelector('[data-next-app]');
