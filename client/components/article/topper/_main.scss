@@ -1,15 +1,22 @@
 @import 'themes';
 
+@include oGridRespondTo($until: S) {
+	@include stackTags;
+	.article-topper__tags {
+		width: inherit;
+	}
+
+	.article-topper__text-box {
+		padding: 0 5%;
+	}
+}
+
 // default and only size for the full bleed container
 .article-topper__slot-1 {
 	width: 100%;
 	height: 50vh;
 	position: relative;
-	min-height: auto; //IE9 support
-
-	@include oGridRespondTo($until: S) {
-		min-height: 350px;
-	}
+	min-height: 350px;
 
 	@include oGridRespondTo(S, L) {
 		min-height: 400px;
@@ -17,6 +24,54 @@
 
 	@include oGridRespondTo(XL) {
 		max-height: 800px;
+	}
+}
+
+//default text setting
+.article-topper__text-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: inherit;
+	min-height: inherit;
+	margin: 0 auto;
+	-webkit-font-smoothing: antialiased;
+}
+
+.article-topper__headline {
+	@include headlineFontSize(32px);
+	@include oTypographySerifDisplayBold(xl, $load-progressively: true);
+
+	display: flex; // for responsive bottom border
+	flex-direction: column;
+	line-height: 1;
+
+	@include oGridRespondTo(S) {
+		@include headlineFontSize(38px);
+	}
+
+	@include oGridRespondTo(L) {
+		@include headlineFontSize(52px);
+	}
+}
+
+.article-topper__stand-first {
+	@include oTypographySans(m, $load-progressively: true);
+
+	opacity: 0.8;
+	font-size: round(18px * 0.9);
+	line-height: 1.4;
+
+	@include oGridRespondTo(L) {
+		font-size: round(22px * 0.9);
+		.o-typography--loaded-sans & {
+			font-size: 22px;
+		}
+	}
+
+	.o-typography--loaded-sans & {
+		font-size: 18px;
+		line-height: 1.2;
 	}
 }
 
@@ -67,54 +122,30 @@
 	opacity: 0.6;
 }
 
-//default text setting
-.article-topper__text-box {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	height: inherit;
-	min-height: inherit;
-	margin: 0 auto;
-	-webkit-font-smoothing: antialiased;
-}
-
 //IE9 support
 .article-topper__text-wrapper {
 	width: 100%;
-	padding: 0 5%;
-	margin-top: 5%;
 	box-sizing: border-box;
+}
+
+.article-topper__text {
+	width: 100%;
 	@include oGridRespondTo(M) {
-		width: 50%;
-		padding: 0 5% 0 0;
+		width: 45%;
 	}
 }
 
-.article-topper__extras {
+.article-topper__brand {
+	font-weight: 400;
+}
+
+.article-topper__tags {
 	display: flex;
 	padding-bottom: 5px;
 
-	@include oGridRespondTo($until: S) {
-		flex-direction: column;
-		justify-content: center;
-		padding-bottom: 15px;
-		.n-content-tag {
-			padding-bottom: 5px;
-		}
-	}
-
-	@include oGridRespondTo(M, L) {
-		flex-direction: column;
-		justify-content: center;
-		padding-bottom: 15px;
-		.n-content-tag {
-			padding-bottom: 5px;
-		}
-	}
-
-	.article-topper__brand {
-		font-weight: 400;
-	}
+	@include oGridRespondTo(M) {
+		width: 45%;
+	};
 
 	.n-content-tag {
 		color: inherit;
@@ -125,7 +156,6 @@
 		}
 	}
 }
-
 
 @supports (object-fit: cover) {
 	.article-topper__slot-1 {

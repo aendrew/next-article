@@ -1,26 +1,26 @@
-/**
-* !WIP Proof of Concept
-*
-* For now we simply render an inline barrier page similar to fastft.
-* In future this could become an n/o-component
-*/
+import populateWithPsp from './populate-with-psp';
+import populateWithTrial from './populate-with-trial';
+import broadcastOpportunity from './broadcast-opportunity';
 
-const populateWithBarrier = (el) => {
-	return fetch('/products?fragment=true&inline=true&narrow=true', { credentials: 'same-origin' })
-		.then(response => {
-			if (response.ok) {
-				return response.text().then(html => {
-					el.insertAdjacentHTML('beforeend', html);
-					el.classList.remove('n-util-visually-hidden');
-				});
-			}
+export default (flags) => {
+	const el = document.querySelector('.inline-barrier');
+	const inArticlePreviewVariant = flags.get('inArticlePreview');
+
+	if (!el || !inArticlePreviewVariant || !el.dataset.countryCode) { return; }
+
+	const populateWithOffer = (inArticlePreviewVariant === 'trial') ? populateWithTrial : populateWithPsp;
+
+	populateWithOffer(el)
+		.then(() => {
+			// Tracking for MVT analysis
+			broadcastOpportunity(`inline-${inArticlePreviewVariant}`);
+		})
+		.catch((err) => {
+			// eslint-disable-next-line no-console
+			console.error('Failed to retrieve/process offer data', err);
+		})
+		.then(() => {
+			// Show either the core or enhanced barrier, depending on success of fetching offer data
+			el.classList.add('inline-barrier--done');
 		});
-}
-
-export default () => {
-	const el = document.querySelector('#inline-barrier');
-
-	if (el && el.dataset.nType === 'standard') {
-		populateWithBarrier(el);
-	}
 }

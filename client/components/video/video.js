@@ -46,7 +46,7 @@ const defaults = {
 	classes: [ 'video' ],
 	// TODO: add A/B test variants
 	upNextVariant: false
-}
+};
 
 export default class {
 
@@ -64,16 +64,16 @@ export default class {
 		this.videoPlaceholderElement = this.videoEl.parentNode.querySelector('.video__placeholder');
 	}
 
-	init () {
+	init ({ autoplay = false } = {}) {
 		removeCoreFallback(this.videoEl);
 		document.body.addEventListener('oTracking.event', eventForwarder.bind(this));
 
 		this.setupUpNext();
+		const getCanPlay = autoplay ? playCheck() : Promise.resolve(false);
 
-		return Promise.all([playCheck(), this.video.init()])
+		return Promise.all([getCanPlay, this.video.init()])
 			.then(([canPlay]) => {
 				if (canPlay) {
-
 					// NOTE: confusingly, #getVisibility returns true if hidden
 					if (oViewport.getVisibility() === true) {
 						const visibilityHandler = ({ detail: { hidden } = {} }) => {

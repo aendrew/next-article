@@ -7,6 +7,7 @@ const openGraphHelper = require('./article-helpers/open-graph');
 const bylineTransform = require('../transforms/byline');
 const getMoreOnTags = require('./article-helpers/get-more-on-tags');
 const addTagTitlePrefix = require('./article-helpers/tag-title-prefix');
+const topperThemeMap = require('./article-helpers/topper-theme-map');
 const getAdsLayout = require('../utils/get-ads-layout');
 const cheerio = require('cheerio');
 
@@ -74,7 +75,8 @@ const showGcs = (req, res, isFreeArticle) => {
 	}
 };
 
-module.exports = function articleV3Controller (req, res, next, content, richContent) {
+module.exports = function articleV3Controller (req, res, next, content) {
+	const userIsAnonymous = res.locals.anon && res.locals.anon.userIsAnonymous;
 
 	res.vary('ft-is-aud-dev');
 	res.vary('ft-blocked-url');
@@ -112,11 +114,25 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 		res.set('X-Robots-Tag', 'noindex');
 	}
 
-	// Inline barrier page & type
+	// Inline barrier page & data
+	const shouldShow = userIsAnonymous && req.get('ft-access-preview') && !req.query.fragment && res.locals.flags.inArticlePreview;
 	content.inlineBarrier = {
-		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && req.get('ft-access-preview') && !req.query.fragment && res.locals.flags.inArticlePreview,
+		shouldShow,
+		countryCode: req.get('country-code'),
 		type: 'standard' // TODO - set inline barrier type via preflight decision
-	}
+	};
+
+	// Apply content and article specific transforms to bodyHTML
+	Object.assign(
+		content,
+		transformArticleBody(content.bodyHTML, res.locals.flags, {
+			fragment: req.query.fragment,
+			adsLayout: content.adsLayout,
+			userIsAnonymous,
+			previewArticle: req.get('ft-access-preview'), // TODO: match on res.get() ?
+			contentPackage: content.package
+		})
+	);
 
 	content.designGenre = articleBranding(content.metadata);
 
@@ -163,12 +179,14 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 		content.jsonLd = res.locals.jsonLd;
 	}
 
-	if (res.locals.flags.ftlabsSpokenLayer) {
+	if (res.locals.flags.ftlabsAudioPlayer) {
 		content.isAudioArticle = content.metadata.some(tag => tag.idV1 === 'MjgwYzIyNjUtMmQ1ZC00NTNiLTgyMTQtMWU5ZDc3YzIzNWUy-VG9waWNz');
 	}
 
-	if(res.locals.flags.articleTopper && richContent) {
-		content.topper = richContent.topper;
+	if(res.locals.flags.articleTopper) {
+		content.topper = topperThemeMap(content.topper);
+	} else {
+		content.topper = null;
 	}
 
 	if(res.locals.flags.contentPackages && content.contains) {
@@ -184,18 +202,6 @@ module.exports = function articleV3Controller (req, res, next, content, richCont
 		}
 
 	}
-
-	// Apply content and article specific transforms to bodyHTML
-	Object.assign(
-		content,
-		transformArticleBody(content.bodyHTML, res.locals.flags, {
-			fragment: req.query.fragment,
-			adsLayout: content.adsLayout,
-			userIsAnonymous: res.locals.anon && res.locals.anon.userIsAnonymous,
-			previewArticle: req.get('ft-access-preview'), // TODO: match on res.get() ?
-			contentPackage: content.package
-		})
-	);
 
 
 	content.contentType = 'article';

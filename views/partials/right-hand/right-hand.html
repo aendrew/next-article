@@ -5,16 +5,9 @@
 	{{#ifAll package @root.flags.contentPackages}}
 	{{else}}
 		{{{tocHTML}}}
-		{{#if @root.flags.affinityMvt}}
-			<div class="o-teaser-collection" data-trackable="suggested-reads">
-				<div data-trackable="affinity" id="affinity-rhs"></div>
-			</div>
-		{{else}}
-			{{#if @root.flags.articleSuggestedRead}}
-				{{> right-hand/suggested-reads-teaser-collection items=readNextArticles topic=readNextTopic }}
-			{{/if}}
+		{{#if @root.flags.articleSuggestedRead}}
+			{{> right-hand/suggested-reads-teaser-collection items=readNextArticles topic=readNextTopic }}
 		{{/if}}
 	{{/ifAll}}
-	{{test}}
 
 </div>

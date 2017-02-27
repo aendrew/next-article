@@ -1,0 +1,64 @@
+.inline-barrier__fader {
+	// scss-lint:disable DuplicateProperty
+	background: getColor('pink');
+	//Super verbose in order to keep Safari happy
+	background: linear-gradient(to bottom, rgba(getColor('pink'), 0), rgba(getColor('pink'), 0.8), rgba(getColor('pink'), 1));
+	height: 160px;
+	margin-top: -200px;
+	position: relative;
+}
+
+.inline-barrier__content {
+	background-color: getColor('warm-5');
+	border: 1px solid getColor('warm-3');
+	box-sizing: border-box;
+	padding: 15px 15px 0;
+	text-align: center;
+}
+
+.inline-barrier__bridge {
+	@include oTypographySansBold('s');
+	background: getColor('white');
+	color: getColor('cold-1');
+	margin: -15px -15px 15px;
+	padding: 10px;
+}
+
+.inline-barrier__heading {
+	@include oTypographySansBold('m');
+	color: getColor('cold-1');
+	margin: 0 0 5px;
+}
+
+.inline-barrier__body {
+	font-size: 17px;
+	font-weight: 400;
+	line-height: 23px;
+	margin: 0 0 10px;
+}
+
+.inline-barrier__cta-secondary {
+	@include oTypographySansSize('s');
+	margin: 0 0 10px;
+}
+
+@include oGridRespondTo($until: 'M') {
+	.inline-barrier__button {
+		display: block;
+	}
+}
+
+.enhanced {
+	.inline-barrier {
+		display: none;
+	}
+	.inline-barrier--done {
+		display: block;
+	}
+}
+
+// Horrible hack for an MVT, to avoid shaving a humongous yak. Sorry, Internet.
+// scss-lint:disable QualifyingElement
+p.barrier-grid__heading-pretext {
+	margin-top: 15px;
+}

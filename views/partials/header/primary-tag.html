@@ -1,13 +1,10 @@
-{{#if topper.theme}}
-	<div class="article-topper__extras">
-		{{#if designGenre}}
-			<div class="article-topper__brand n-content-tag--with-follow" aria-label="part of the {{designGenre.prefLabel}} column">{{designGenre.prefLabel}}</div>
-		{{/if}}
+{{#ifAll @root.flags.articleTopper topper.theme}}
+	{{> header/topper-primary-tag}}
 {{else}}
 	<div class="article__primary-theme">
-{{/if}}
-	<a href="{{primaryTag.relativeUrl}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="primary-theme" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
-	{{#ifAll @root.flags.myFtApi @root.flags.articleFollowPrimayTag}}
-		{{>n-ui/myft/templates/follow conceptId=primaryTag.idV1 name=primaryTag.prefLabel taxonomy=primaryTag.taxonomy}}
-	{{/ifAll}}
-</div>
+		<a href="{{primaryTag.relativeUrl}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="primary-theme" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
+		{{#ifAll @root.flags.myFtApi @root.flags.articleFollowPrimayTag}}
+			{{>n-ui/myft/templates/follow conceptId=primaryTag.idV1 name=primaryTag.prefLabel taxonomy=primaryTag.taxonomy}}
+		{{/ifAll}}
+	</div>
+{{/ifAll}}

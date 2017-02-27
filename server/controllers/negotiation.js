@@ -47,7 +47,6 @@ function getArticle (contentId) {
 		});
 }
 
-
 module.exports = function negotiationController (req, res, next) {
 	res.set('surrogate-key', `contentUuid:${req.params.id}`);
 
@@ -103,7 +102,11 @@ module.exports = function negotiationController (req, res, next) {
 				if (isArticlePodcast(article)) {
 					return controllerPodcast(req, res, next, article);
 				} else if (isArticleVideo(article)) {
-					return controllerVideo(req, res, next, article);
+					if (res.locals.flags.videoArticlePage === 'v2') {
+						return res.redirect(`/video/${req.params.id}`)
+					} else {
+						return controllerVideo(req, res, next, article);
+					}
 				} else if (res.locals.flags.contentPackages && isArticlePackage(article)) {
 					return controllerPackage(req, res, next, article)
 				} else {

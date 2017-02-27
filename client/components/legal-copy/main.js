@@ -12,6 +12,9 @@ const hasEventClipboardSupport = e => !!(e.clipboardData && e.clipboardData.setD
 const getSelectionText = () => window.getSelection().toString();
 const countWords = text => text.split(/\s+/).length;
 
+let altPressed = false;
+const ALT = 18;
+
 function setClipboard (e, html, text){
 	if(hasEventClipboardSupport(e)){
 		e.clipboardData.setData('text/html', html);
@@ -37,6 +40,7 @@ function getTextMessage (selectedText){
 }
 
 function onCopy (e){
+
 	if(!supportsClipboard(e)){
 		return;
 	}
@@ -56,5 +60,30 @@ module.exports = function (flags) {
 		return;
 	}
 
-	document.body.addEventListener('copy', onCopy);
+	// Helps detect copy event without interfering with Text-to-speech software
+	document.body.addEventListener('keydown', interceptKeys);
+	document.body.addEventListener('copy', handleCopy);
+};
+
+// Alt+Esc triggers 'copy' event in chrome 56 and under
+// A lot of text-to-speech software relies on these keys to read out text to the user.
+function interceptKeys (e) {
+
+	// Remember if alt was pressed
+	if (e.keyCode === ALT) {
+		altPressed = true;
+
+		// Clean up after 10 seconds
+		setTimeout(function () {
+			altPressed = false;
+		}, 10000);
+	}
+}
+
+// Trigger onCopy only if alt hasn't been pressed immediately prior
+function handleCopy (e) {
+	if (!altPressed) {
+		onCopy(e);
+	}
+	altPressed = false;
 };

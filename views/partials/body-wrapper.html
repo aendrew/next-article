@@ -12,8 +12,8 @@
 					{{> topper/offset-text}}
 				{{/ifEquals}}
 
-				{{#ifAll isAudioArticle @root.flags.ftlabsSpokenLayer}}
-					{{> ftlabsSpokenLayerPlayer}}
+				{{#ifAll isAudioArticle @root.flags.ftlabsAudioPlayer}}
+					{{> ftlabs-audio-player}}
 				{{/ifAll}}
 
 				{{#ifEquals contentType 'article'}}
@@ -26,8 +26,8 @@
 					{{#if lightSignup.show}}
 						{{> light-signup tag=primaryTag articleUuid=id isInferred=lightSignup.isInferred}}
 					{{/if}}
-					{{#if inlineBarrier.show}}
-						{{> inline-barrier type=inlineBarrier.type}}
+					{{#if inlineBarrier.shouldShow}}
+						{{> inline-barrier/template inlineBarrier}}
 					{{/if}}
 				{{/ifEquals}}
 				{{#ifEquals contentType 'podcast'}}

@@ -34,12 +34,6 @@ $n-ui-output-critical: true;
 	@import 'components/suggested-reads/main';
 	@import 'components/package/main'; // TODO: rename
 
-	.next-header {
-		margin-bottom: 0;
-	}
-	.myft-ui__qr-code {
-		display: none;
-	}
 	.o-labels {
 		@include oTypographySansBold('xs');
 	}
@@ -56,7 +50,6 @@ $o-video-is-silent: false;
 @import 'n-barriers/main';
 @import 'o-email-only-signup/main';
 @import 'components/comments/skeleton';
-@import 'components/affinity/loading-indicator';
 @import 'components/onward-journey/main';
 @import 'components/special-report/main';
 @import 'components/story-package';
@@ -64,7 +57,8 @@ $o-video-is-silent: false;
 @import 'components/light-signup/light-signup';
 @import 'components/tearsheets/main';
 @import 'components/video/main';
-@import 'components/ftlabsSpokenLayer/main';
+@import 'components/ftlabs-audio-player/main';
+@import 'components/inline-barrier/main';
 
 // Print Styling
 @media print {

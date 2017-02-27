@@ -1,69 +1,50 @@
-
 .article-topper--full-bleed-offset {
 	@include alignText(left);
-	@include setAllFonts;
+	@include fullBleedImage;
+
 	@include oGridRespondTo(S) {
-		@include fullBleedImage;
 		@include overlayText;
-	}
-
-	.article-topper__visual {
-		margin-bottom: 30px;
-	}
-
-	.article-topper__offset-container {
-		margin: -90px 0 0 -20px;
-		padding-left: 20px;
 	}
 
 	@include oGridRespondTo($until: S) {
 		.article-topper__slot-1 {
 			height: 0;
-		}
-
-		.article-topper__background {
-			height: 0;
 			min-height: 0;
 		}
 
-		.article-topper__visual {
-			margin-bottom: 0;
-		}
-
-		.article-topper__offset-container {
-			margin: 0;
-			padding-left: 0;
-		}
-
-		.article__primary-theme {
-			display: flex;
-			flex-direction: column;
-			.n-myft-ui {
-				top: 5px;
-				> a {
-					color: oColorsGetPaletteColor('claret');
-					font-size: 16px;
-				}
-			}
-		}
-
-		.article-topper__headline {
-			margin-top: 15px;
+		.article-topper__text-wrapper {
+			padding-top: 15px;
 		}
 	};
 
+	@include oGridRespondTo(M) {
+		.article-topper__offset-container {
+			margin-top: -100px;
+		}
+	}
+
+	@include oGridRespondTo(L) {
+		.article-topper__offset-container {
+			margin-top: -105px;
+		}
+
+		.article-topper__visual {
+			margin-bottom: 30px;
+		}
+	}
+
+	.article-topper__offset-container {
+		margin: -90px -20px 0;
+		padding: 0 20px;
+	}
+
 	.article-topper__text-wrapper {
 		width: 100%;
-		padding: 16px 0 0;
+		padding: 20px 0 10px;
 	}
 
-	.article-topper__stand-first {
-		margin-bottom: 20px;
-	}
-
-	.article-topper__extras {
-		.article__primary-theme {
-
-		}
+	.article-topper__tags {
+		color: oColorsGetPaletteColor('claret');
+		width: inherit;
 	}
 }

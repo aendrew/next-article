@@ -8,6 +8,7 @@ module.exports = [
 	},
 	{
 		timeout: 10000,
+		headers: { 'FT-Flags': 'ads:off' },
 		urls: {
 			// not in CAPI (redirected to ft.com -> redirected to barrier)
 			'/content/8f88c930-d00a-11da-80fb-0000779e2340': 'http://www.ft.com/cms/s/0/8f88c930-d00a-11da-80fb-0000779e2340.html?ft_site=falcon&desktop=true',
@@ -23,6 +24,8 @@ module.exports = [
 			'/embedded-components/slideshow/593496fc-a4d5-11e5-97e1-a754d5d9538c': 200,
 			// fragment view
 			'/content/a85bf481-457c-3bd4-bd49-3801d175d583?fragment=true': 200,
+			// article with topper
+			'/content/7b38ad62-d1a5-11e6-b06b-680c49b4b4c0': 200,
 			// related fragments - story package
 			'/article/02cad03a-844f-11e4-bae9-00144feabdc0/story-package?articleIds=b56232bc-adec-11e4-919e-00144feab7de,8a5c2c02-a47e-11e4-b943-00144feab7de,6bfcdc6e-a0b6-11e4-8ad8-00144feab7de,c0dbd6d6-8072-11e4-9907-00144feabdc0': 200,
 			// related fragments - more-ons
@@ -37,7 +40,7 @@ module.exports = [
 	},
 	{
 		timeout: 10000,
-		headers: { 'FT-Flags': 'articleTopper:on' },
+		headers: { 'FT-Flags': 'articleTopper:on,ads:off' },
 		urls: {
 			// not in CAPI (redirected to ft.com -> redirected to barrier)
 			'/content/8f88c930-d00a-11da-80fb-0000779e2340': 'http://www.ft.com/cms/s/0/8f88c930-d00a-11da-80fb-0000779e2340.html?ft_site=falcon&desktop=true',
@@ -52,7 +55,9 @@ module.exports = [
 			// video
 			'/content/c382002a-a839-366c-9b5f-c3e51a25e05d': 200,
 			// fragment view
-			'/content/a85bf481-457c-3bd4-bd49-3801d175d583?fragment=true': 200
+			'/content/a85bf481-457c-3bd4-bd49-3801d175d583?fragment=true': 200,
+			// article with topper
+			'/content/7b38ad62-d1a5-11e6-b06b-680c49b4b4c0': 200
 		}
 	}
 ];
