@@ -14,7 +14,10 @@ module.exports = function (articleId, flags) {
 	};
 
 	return fetchGraphqlData(readNextQuery(flags.articleSuggestedRead, flags.contentPackages), variables)
-		.then(({ article = [] } = {}) => {
+		.then(({ article = [] } = ({})) => {
+			if(!article) { 
+				return;
+			}
 			const { primaryTag, storyPackage } = article;
 			const topicArticles = primaryTag ? primaryTag.latestContent.filter(article => article.id !== articleId) : null;
 			let onwardJourney = {};
