@@ -2,7 +2,7 @@
   "name": "next-article",
   "dependencies": {
     "n-content-body": "^2.0.5",
-    "n-email-article": "^2.0.0",
+    "n-email-article": "^3.0.0",
     "n-image": "^4.3.0",
     "n-service-worker": "^1.1.0",
     "n-ui": "^v4.0.0",
@@ -22,11 +22,7 @@
     "superstore": "^2.1.0"
   },
   "resolutions": {
-    "o-typography": "^4.1.0",
-    "o-icons": "^5.2.0",
-    "superstore-sync": "b29aa99",
-    "n-ui": "^v4.0.0-beta.2",
-    "o-errors": "^3.5.1",
-    "raven-js": "^3.0.0"
+    "o-icons": "^5.2.2",
+    "o-typography": "^4.3.2"
   }
 }
