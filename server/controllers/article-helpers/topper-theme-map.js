@@ -14,7 +14,8 @@ const themeImageRatio = {
 module.exports = (topper) => {
 	if(topper && topper.theme && themeImageRatio.hasOwnProperty(topper.theme)) {
 		return Object.assign({
-			themeImageRatio: themeImageRatio[topper.theme]
+			themeImageRatio: themeImageRatio[topper.theme],
+			backgroundColour: 'pink' //default to pink bg
 		}, topper);
 	} else {
 		return null;

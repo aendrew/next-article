@@ -9,13 +9,18 @@ const fixturePodcast = require('../../fixtures/v3-elastic-podcast-found');
 const fixtureArticle = require('../../fixtures/v3-elastic-article-found');
 const fixtureNotFound = require('../../fixtures/v3-elastic-not-found');
 
+const fixtureOnwardJourney = require('../../fixtures/onward-journey');
+const fixtureOnwardJourneyInPackage = require('../../fixtures/onward-journey-in-package');
+
 const dependencyStubs = {
 	igPoller: { getData: () => fixtureInteractives },
 	podcast: sinon.spy(),
 	video: sinon.spy(),
+	package: sinon.spy(),
 	article: sinon.spy(),
 	interactive: sinon.spy(),
-	shellpromise: sinon.stub()
+	shellpromise: sinon.stub(),
+	onwardJourney: sinon.stub()
 };
 
 nock.disableNetConnect();
@@ -24,9 +29,11 @@ const subject = proxyquire('../../../server/controllers/negotiation', {
 	'../lib/ig-poller': dependencyStubs.igPoller,
 	'./podcast': dependencyStubs.podcast,
 	'./video': dependencyStubs.video,
+	'./package': dependencyStubs.package,
 	'./article': dependencyStubs.article,
 	'./interactive': dependencyStubs.interactive,
-	'shellpromise': dependencyStubs.shellpromise
+	'shellpromise': dependencyStubs.shellpromise,
+	'./article-helpers/onward-journey': dependencyStubs.onwardJourney
 });
 
 describe('Negotiation Controller', function () {
@@ -79,8 +86,6 @@ describe('Negotiation Controller', function () {
 				.post('/v3_api_v2/item/_mget')
 				.reply(200, fixturePodcast);
 
-	//		dependencyStubs.onwardJourney.returns(Promise.resolve());
-
 			return createInstance({
 				params: {
 					id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
@@ -124,12 +129,77 @@ describe('Negotiation Controller', function () {
 			dependencyStubs.video.reset();
 		});
 
-		it('defers to the podcast controller', function () {
+		it('defers to the video controller', function () {
 			expect(dependencyStubs.video.callCount).to.equal(1);
 			expect(response.statusCode).to.not.equal(404);
 		});
 	});
 
+	describe('when the requested article is a package landing page', function () {
+		beforeEach(function () {
+
+			nock('https://next-elastic.ft.com')
+				.post('/v3_api_v2/item/_mget')
+				.reply(200, {
+					docs: [{
+						found: true,
+						_source: {
+							type: 'package',
+							provenance: []
+						}
+					}]
+				});
+
+			dependencyStubs.onwardJourney.returns(Promise.resolve(fixtureOnwardJourneyInPackage));
+			return createInstance({
+				params: {
+					id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
+				}
+			}, { contentPackages: true });
+
+		});
+
+		afterEach(function () {
+			dependencyStubs.package.reset();
+			dependencyStubs.onwardJourney.reset();
+		});
+
+		it('defers to the package controller', function () {
+			expect(dependencyStubs.package.callCount).to.equal(1);
+			expect(response.statusCode).to.not.equal(404);
+		});
+	});
+
+	describe('when the requested article is a video', function () {
+		beforeEach(function () {
+			nock('https://next-elastic.ft.com')
+				.post('/v3_api_v2/item/_mget')
+				.reply(200, {
+					docs: [{
+						found: true,
+						_source: {
+							webUrl: 'http://video.ft.com/5030468875001',
+							provenance: []
+						}
+					}]
+				});
+
+			return createInstance({
+				params: {
+					id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
+				}
+			});
+		});
+
+		afterEach(function () {
+			dependencyStubs.video.reset();
+		});
+
+		it('defers to the video controller', function () {
+			expect(dependencyStubs.video.callCount).to.equal(1);
+			expect(response.statusCode).to.not.equal(404);
+		});
+	});
 	describe('when dealing with an article', function () {
 		context('and it is found', function () {
 			beforeEach(function () {
@@ -217,6 +287,144 @@ describe('Negotiation Controller', function () {
 		});
 	});
 
+
+	describe('with suggested read flag on', () => {
+		context('and onward journey fetch success', () => {
+			beforeEach(function () {
+
+				nock('https://next-elastic.ft.com')
+					.post('/v3_api_v2/item/_mget')
+					.reply(200, fixtureArticle);
+
+				dependencyStubs.onwardJourney.returns(Promise.resolve(fixtureOnwardJourney));
+				return createInstance({
+					params: {
+						id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
+					}
+				}, { articleSuggestedRead: true });
+
+			});
+
+			afterEach(function () {
+				dependencyStubs.onwardJourney.reset();
+				dependencyStubs.article.reset();
+			});
+
+			it('defers to the article controller after setting read next data', function () {
+				expect(dependencyStubs.onwardJourney.callCount).to.equal(1);
+				expect(dependencyStubs.article.callCount).to.equal(1);
+				expect(dependencyStubs.article.args[0][3].readNextArticle.title).to.equal('FT Health: Welcome to our new newsletter');
+				expect(dependencyStubs.article.args[0][3].readNextArticles.length).to.equal(5);
+				expect(response.statusCode).to.not.equal(404);
+			});
+
+		});
+
+
+		context('and onward journey fetch fail', () => {
+			beforeEach(function () {
+
+				nock('https://next-elastic.ft.com')
+					.post('/v3_api_v2/item/_mget')
+					.reply(200, fixtureArticle);
+
+				dependencyStubs.onwardJourney.returns(Promise.reject());
+				return createInstance({
+					params: {
+						id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
+					}
+				}, { articleSuggestedRead: true });
+
+			});
+
+			afterEach(function () {
+				dependencyStubs.onwardJourney.reset();
+				dependencyStubs.article.reset();
+			});
+
+			it('renders the article without the read nexts', function () {
+				expect(dependencyStubs.onwardJourney.callCount).to.equal(1);
+				expect(dependencyStubs.article.callCount).to.equal(1);
+				expect(dependencyStubs.article.args[0][3].readNextArticle).to.be.undefined;
+				expect(dependencyStubs.article.args[0][3].readNextArticles).to.be.undefined;
+				expect(response.statusCode).to.not.equal(404);
+			});
+
+		});
+
+
+	});
+
+	describe('with content packages flag on', () => {
+		context('and onward journey fetch success', () => {
+			beforeEach(function () {
+
+				nock('https://next-elastic.ft.com')
+					.post('/v3_api_v2/item/_mget')
+					.reply(200, fixtureArticle);
+
+				dependencyStubs.onwardJourney.returns(Promise.resolve(fixtureOnwardJourneyInPackage));
+				return createInstance({
+					params: {
+						id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
+					}
+				}, { articleSuggestedRead: true, contentPackages: true });
+
+			});
+
+			afterEach(function () {
+				dependencyStubs.onwardJourney.reset();
+				dependencyStubs.article.reset();
+			});
+
+			it('defers to the article controller after setting read next and package data', function () {
+				expect(dependencyStubs.onwardJourney.callCount).to.equal(1);
+				expect(dependencyStubs.article.callCount).to.equal(1);
+				expect(dependencyStubs.article.args[0][3].readNextArticle.title).to.equal('The End of the Asian Century by Michael Auslin – strategic games');
+				expect(dependencyStubs.article.args[0][3].readNextArticles.length).to.equal(5);
+				expect(dependencyStubs.article.args[0][3].package.title).to.equal('The best books of 2016');
+				expect(dependencyStubs.article.args[0][3].context.current.title).to.equal('Economics');
+				expect(response.statusCode).to.not.equal(404);
+			});
+
+		});
+
+
+		context('and onward journey fetch fail', () => {
+			beforeEach(function () {
+
+				nock('https://next-elastic.ft.com')
+					.post('/v3_api_v2/item/_mget')
+					.reply(200, fixtureArticle);
+
+				dependencyStubs.onwardJourney.returns(Promise.reject());
+				return createInstance({
+					params: {
+						id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
+					}
+				}, { articleSuggestedRead: true, contentPackages: true });
+
+			});
+
+			afterEach(function () {
+				dependencyStubs.onwardJourney.reset();
+				dependencyStubs.article.reset();
+			});
+
+			//TODO: is this correct behaviour?
+			it('renders the article without the read nexts or navigation', function () {
+				expect(dependencyStubs.onwardJourney.callCount).to.equal(1);
+				expect(dependencyStubs.article.callCount).to.equal(1);
+				expect(dependencyStubs.article.args[0][3].readNextArticle).to.be.undefined;
+				expect(dependencyStubs.article.args[0][3].readNextArticles).to.be.undefined;
+				expect(dependencyStubs.article.args[0][3].package).to.be.undefined;
+				expect(response.statusCode).to.not.equal(404);
+			});
+
+		});
+
+
+	});
 
 	describe('for unsupported Next pages', () => {
 

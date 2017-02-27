@@ -1,4 +1,3 @@
-const logger = require('@financial-times/n-logger').default;
 const fetchGraphqlData = require('../../lib/fetch-graphql-data');
 const readNextQuery = require('../../graphql-queries/read-next');
 const getSuggestedReads = require('./suggested');
@@ -30,5 +29,4 @@ module.exports = function (articleId, flags) {
 
 			return onwardJourney;
 		})
-		.catch(logger.warn.bind(null, 'Fetching onward journey data failed.'));
 };

@@ -60,7 +60,11 @@ module.exports = function negotiationController (req, res, next) {
 	contentPromises.push(getArticle(req.params.id));
 
 	if(res.locals.flags.articleSuggestedRead || res.locals.flags.contentPackages) {
-		contentPromises.push(getOnwardJourneyArticles(req.params.id, res.locals.flags));
+		contentPromises.push(
+			getOnwardJourneyArticles(req.params.id, res.locals.flags)
+			.catch(err => {
+				logger.warn({ event: 'ONWARD_JOURNEY_FETCH_FAIL' }, err);
+			}));
 	}
 
 	return Promise.all(contentPromises)
@@ -90,7 +94,6 @@ module.exports = function negotiationController (req, res, next) {
 			}
 
 			if(article && onwardJourney) {
-
 				article.readNextArticle = onwardJourney.readNext;
 				article.readNextArticles = onwardJourney.suggestedReads;
 
