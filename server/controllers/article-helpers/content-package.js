@@ -1,4 +1,3 @@
-
 const trim = (content) => {
 	let trimmedTitle;
 	if (content.title.indexOf(':')) {
@@ -50,7 +49,7 @@ module.exports = function (article) {
 		contentPackage.contains.forEach(item => (
 			item.sequenceId = `PART ${contentPackage.contains.indexOf(item) + 1}`
 		));
-	} else if (contentPackage.sequence === 'none') {
+	} else {
 		contentPackage.contains = moveToTopOfPackage(context.current, contentPackage.contains);
 		if (contentPackage.shortenedPackage) contentPackage.shortenedPackage = moveToTopOfPackage(context.current, contentPackage.shortenedPackage);
 	}
