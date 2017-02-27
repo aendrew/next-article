@@ -48,7 +48,7 @@ const fixture = {
 
 const fixtureWithoutPackage = {
 	article: {
-		primaryTag: { 
+		primaryTag: {
 			latestContent: primaryTagArticles
 		},
 		storyPackage: storyPackageArticles
