@@ -39,10 +39,6 @@
 	{{> body-wrapper}}
 
 	{{#ifAll @root.flags.contentPackages package}}
-		{{> package/context}}
-	{{/ifAll}}
-
-	{{#ifAll @root.flags.contentPackages package}}
 		{{> package/bottom package}}
 	{{/ifAll}}
 
