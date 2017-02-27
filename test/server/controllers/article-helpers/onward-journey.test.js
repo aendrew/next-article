@@ -5,13 +5,15 @@ const proxyquire = require('proxyquire');
 const stubs = {
 	fetchGraphqlData: sinon.stub(),
 	readNext: sinon.stub(),
-	suggestedReads: sinon.stub()
+	suggestedReads: sinon.stub(),
+	contentPackage: sinon.stub()
 };
 
 const subject = proxyquire('../../../../server/controllers/article-helpers/onward-journey', {
 	'../../lib/fetch-graphql-data': stubs.fetchGraphqlData,
 	'./read-next': stubs.readNext,
-	'./suggested': stubs.suggestedReads
+	'./suggested': stubs.suggestedReads,
+	'./content-package': stubs.contentPackage
 });
 
 const storyPackageArticles = [
@@ -38,13 +40,22 @@ const fixture = {
 		primaryTag: {
 			latestContent: primaryTagArticles
 		},
+		storyPackage: storyPackageArticles,
+		contains: [],
+		containedIn: []
+	}
+};
+
+const fixtureWithoutPackage = {
+	article: {
+		primaryTag: { 
+			latestContent: primaryTagArticles
+		},
 		storyPackage: storyPackageArticles
 	}
 };
 
-const publishedDate = '2015-09-10T18:32:34.000Z';
-
-describe('Onward Journey', () => {
+describe('Onward Journey with package', () => {
 
 	let result;
 
@@ -52,10 +63,12 @@ describe('Onward Journey', () => {
 		stubs.fetchGraphqlData.reset();
 		stubs.readNext.reset();
 		stubs.suggestedReads.reset();
+		stubs.contentPackage.reset();
 		stubs.fetchGraphqlData.returns(Promise.resolve(fixture));
 		stubs.readNext.returns('readNext');
 		stubs.suggestedReads.returns('suggestedReads');
-		return subject(articleId, publishedDate)
+		stubs.contentPackage.returns({ package: 'contentPackage' });
+		return subject(articleId, { articleSuggestedRead: true, contentPackages: true })
 			.then(res => result = res);
 	});
 
@@ -76,6 +89,55 @@ describe('Onward Journey', () => {
 
 	it('calls the suggested reads helper', () => {
 		expect(stubs.suggestedReads.calledOnce).to.be.true;
+	});
+
+	it('calls the contentPackage helper', () => {
+		expect(stubs.contentPackage.calledOnce).to.be.true;
+	});
+
+	it('returns the readNext and suggestedReads and package', () => {
+		expect(result).to.have.keys(['readNext', 'suggestedReads', 'package']);
+	});
+
+});
+
+describe('Onward Journey without package flag', () => {
+
+	let result;
+
+	beforeEach(() => {
+		stubs.fetchGraphqlData.reset();
+		stubs.readNext.reset();
+		stubs.suggestedReads.reset();
+		stubs.contentPackage.reset();
+		stubs.fetchGraphqlData.returns(Promise.resolve(fixtureWithoutPackage));
+		stubs.readNext.returns('readNext');
+		stubs.suggestedReads.returns('suggestedReads');
+		return subject(articleId, { articleSuggestedRead: true, contentPackages: false })
+			.then(res => result = res);
+	});
+
+	it('Fetches the data from next-api', () => {
+		expect(stubs.fetchGraphqlData.calledOnce).to.be.true;
+	});
+
+	it('dedupes the parent article from the topic articles', () => {
+		const topicArticles = stubs.readNext.getCall(0).args[0];
+		topicArticles.map(article => {
+			expect(article.id).to.not.equal(articleId);
+		});
+	});
+
+	it('calls the read next helper', () => {
+		expect(stubs.readNext.calledOnce).to.be.true;
+	});
+
+	it('calls the suggested reads helper', () => {
+		expect(stubs.suggestedReads.calledOnce).to.be.true;
+	});
+
+	it('does not call the contentPackage helper', () => {
+		expect(stubs.contentPackage.calledOnce).to.be.false;
 	});
 
 	it('returns the readNext and suggestedReads', () => {
