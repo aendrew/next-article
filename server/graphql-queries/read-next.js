@@ -5,7 +5,7 @@ module.exports = (readNext, contentPackage) => {
 	let query = `
 
 	${teaserFragments.teaserExtraLight}
-	${teaserFragments.teaserHeavy}
+	${contentPackage ? teaserFragments.teaserHeavy : ''}
 
 	query ContentPackage (
 		$uuid: Uuid!
