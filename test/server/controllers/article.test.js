@@ -182,7 +182,7 @@ describe('Article Controller', () => {
 		});
 
 		it('renders with an inline barrier', () => {
-			expect(result.inlineBarrier.show).to.equal(true);
+			expect(result.inlineBarrier.shouldShow).to.equal(true);
 		});
 
 		it('will not render lightSignup if inArticlePreview flag is on', () => {
