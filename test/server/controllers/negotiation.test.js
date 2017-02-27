@@ -29,7 +29,7 @@ const subject = proxyquire('../../../server/controllers/negotiation', {
 	'shellpromise': dependencyStubs.shellpromise
 });
 
-describe.only('Negotiation Controller', function () {
+describe('Negotiation Controller', function () {
 
 	let request;
 	let response;

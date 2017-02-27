@@ -32,11 +32,10 @@ describe('myFT metadata', () => {
 			openGraph: true
 		};
 
-		return createInstance({query: {
+		createInstance({query: {
 			myftTopics: 'NTc=-U2VjdGlvbnM=,NTQ=-U2VjdGlvbnM='
-		}}, flags).then(() => {
-			result = response._getRenderData();
-		});
+		}}, flags)
+		result = response._getRenderData();
 	});
 
 	it('it should promote users myft tags to be displayed', () => {

@@ -37,9 +37,8 @@ describe('Podcast Controller', () => {
 
 			result = null;
 
-			return createInstance(null, { articleSuggestedRead: true }).then(() => {
-				result = response._getRenderData()
-			});
+			createInstance(null, { articleSuggestedRead: true })
+			result = response._getRenderData()
 		});
 
 		it('returns a successful response', () => {
@@ -60,9 +59,8 @@ describe('Podcast Controller', () => {
 		beforeEach(() => {
 			result = null;
 
-			return createInstance({ query: { fragment: 1 } }).then(() => {
-				result = response._getRenderData()
-			});
+			createInstance({ query: { fragment: 1 } })
+			result = response._getRenderData()
 		});
 
 		it('renders supports rendering with fragment layout', () => {
@@ -70,19 +68,4 @@ describe('Podcast Controller', () => {
 		});
 	});
 
-	context('suggestions fail', () => {
-		beforeEach(() => {
-			stubs.onwardJourney.returns(Promise.reject());
-
-			result = null;
-
-			return createInstance(null, { articleSuggestedRead: true }).then(() => {
-				result = response._getRenderData()
-			});
-		});
-
-		it('returns a 50x', () => {
-			expect(next.callCount).to.equal(1);
-		});
-	});
 });
