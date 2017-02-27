@@ -8,6 +8,8 @@ const getAdsLayout = require('../utils/get-ads-layout');
 const podcastMainImageHTML = require('./article-helpers/podcast-main-image');
 
 module.exports = function podcastLegacyController (req, res, next, payload) {
+
+	console.log('asdasd');
 	let asyncWorkToDo = [];
 
 	// Decorate article with primary tags and tags for display

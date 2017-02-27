@@ -29,7 +29,7 @@ const subject = proxyquire('../../../server/controllers/negotiation', {
 	'shellpromise': dependencyStubs.shellpromise
 });
 
-describe('Negotiation Controller', function () {
+describe.only('Negotiation Controller', function () {
 
 	let request;
 	let response;
@@ -78,6 +78,8 @@ describe('Negotiation Controller', function () {
 			nock('https://next-elastic.ft.com')
 				.post('/v3_api_v2/item/_mget')
 				.reply(200, fixturePodcast);
+
+	//		dependencyStubs.onwardJourney.returns(Promise.resolve());
 
 			return createInstance({
 				params: {

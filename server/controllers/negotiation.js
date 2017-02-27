@@ -63,7 +63,7 @@ module.exports = function negotiationController (req, res, next) {
 		contentPromises.push(getOnwardJourneyArticles(req.params.id, res.locals.flags));
 	}
 
-	Promise.all(contentPromises)
+	return Promise.all(contentPromises)
 		.then(([article, onwardJourney]) => {
 			const webUrl = article && article.webUrl || '';
 
@@ -89,13 +89,15 @@ module.exports = function negotiationController (req, res, next) {
 				return res.redirect(302, article.url);
 			}
 
-			article.readNextArticle = article && onwardJourney && onwardJourney.readNext;
-			article.readNextArticles = article && onwardJourney && onwardJourney.suggestedReads;
+			if(article && onwardJourney) {
 
+				article.readNextArticle = onwardJourney.readNext;
+				article.readNextArticles = onwardJourney.suggestedReads;
 
-			if(article && onwardJourney && (onwardJourney.package || onwardJourney.context)) {
-				article.package = onwardJourney.package;
-				article.context = onwardJourney.context;
+				if(onwardJourney.package || onwardJourney.context) {
+					article.package = onwardJourney.package;
+					article.context = onwardJourney.context;
+				}
 			}
 
 			if (article) {

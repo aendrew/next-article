@@ -1,4 +1,3 @@
-const logger = require('@financial-times/n-logger').default;
 
 const trim = (content) => {
 	let trimmedTitle;
@@ -19,8 +18,12 @@ const moveToTopOfPackage = (top, pkg) => {
 
 module.exports = function (article) {
 	const { id, containedIn, contains } = article;
-	const contentPackage = containedIn[0];
-	contentPackage.contains = contentPackage.contains.map(trim);
+
+	if(!(contains || containedIn.length)) {
+		return;
+	}
+	const contentPackage = containedIn.length ? containedIn[0] : {};
+	contentPackage.contains = contentPackage ? contentPackage.contains.map(trim) : contains;
 
 	// CONTEXT INFO
 	const currentIndex = contentPackage.contains.findIndex(item => item.id === id);
@@ -48,8 +51,8 @@ module.exports = function (article) {
 			item.sequenceId = `PART ${contentPackage.contains.indexOf(item) + 1}`
 		));
 	} else if (contentPackage.sequence === 'none') {
-		contentPackage.contains = moveToTopOfPackage(ctx.current, contentPackage.contains);
-		if (contentPackage.shortenedPackage) contentPackage.shortenedPackage = moveToTopOfPackage(ctx.current, contentPackage.shortenedPackage);
+		contentPackage.contains = moveToTopOfPackage(context.current, contentPackage.contains);
+		if (contentPackage.shortenedPackage) contentPackage.shortenedPackage = moveToTopOfPackage(context.current, contentPackage.shortenedPackage);
 	}
 
 
