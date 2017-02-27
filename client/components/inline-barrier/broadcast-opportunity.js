@@ -23,4 +23,3 @@ module.exports = (subtype) => {
 		offers: Array.from(offersEls).map(e => e.getAttribute('data-offer-id'))
 	}, context))
 };
-

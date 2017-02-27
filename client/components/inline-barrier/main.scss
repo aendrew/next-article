@@ -1,4 +1,5 @@
 .inline-barrier__fader {
+	// scss-lint:disable DuplicateProperty
 	background: getColor('pink');
 	//Super verbose in order to keep Safari happy
 	background: linear-gradient(to bottom, rgba(getColor('pink'), 0), rgba(getColor('pink'), 0.8), rgba(getColor('pink'), 1));
