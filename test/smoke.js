@@ -59,5 +59,23 @@ module.exports = [
 			// article with topper
 			'/content/7b38ad62-d1a5-11e6-b06b-680c49b4b4c0': 200
 		}
+	},
+	// sugested reads
+	{
+		timeout: 10000,
+		headers: { 'FT-Flags': 'articleSuggestedRead:off' },
+		urls: {
+			// any old article
+			'/content/7a41c98c-fd85-11e6-96f8-3700c5664d30': 200
+		}
+	},
+	// content package
+	{
+		timeout: 10000,
+		headers: { 'FT-Flags': 'contentPackages:on' },
+		urls: {
+			// best books of the year article, in a package
+			'/content/156f0328-b81e-11e6-ba85-95d1533d9a62': 200
+		}
 	}
 ];
