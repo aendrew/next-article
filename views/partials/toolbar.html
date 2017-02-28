@@ -21,7 +21,7 @@
 						<a target="_blank" rel="noopener" href="whatsapp://send?text={{encode title mode='uriComponent'}}%20-%20{{encode shareUrl mode='uriComponent'}}" data-trackable="whatsapp"><i>Share on Whatsapp (opens new window)</i></a>
 					</li>
 					{{#ifAll signedIn @root.flags.giftArticle}}
-						<li class="article__share-action--email o-share__action o-share__action--email">
+						<li class="o-share__action o-share__action--mail">
 							<button
 								data-n-article-email-clickable
 								data-n-article-email-container="{{location}}"
