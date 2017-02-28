@@ -1,16 +1,9 @@
-$n-ui-output-critical: true;
+@import 'n-ui/main';
+@import 'n-ui/myft/main';
+@import 'n-ui/myft-hint/main';
 
-@import 'n-ui/configure';
-@include nUiConfigure(
-	$features: (
-		buttons: true,
-		tourTip: true,
-		myft: true
-	),
-	$preset: 'complete'
-);
-@import 'n-ui/bootstrap';
-@include nUiCriticalStart();
+@include nUiStylesheetStart('head');
+	@import 'n-ui/tour-tip/main';
 	$o-teaser-is-silent: false;
 	@import 'o-teaser/main';
 	$o-teaser-collection-is-silent: false;
@@ -36,7 +29,7 @@ $n-ui-output-critical: true;
 	.o-labels {
 		@include oTypographySansBold('xs');
 	}
-@include nUiCriticalEnd();
+@include nUiStylesheetEnd('head');
 
 @import 'components/share/main';
 @import 'components/ads/main';

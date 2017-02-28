@@ -23,4 +23,4 @@ export default (flags) => {
 			// Show either the core or enhanced barrier, depending on success of fetching offer data
 			el.classList.add('inline-barrier--done');
 		});
-}
+};

@@ -1,6 +1,6 @@
 const fetchres = require('fetchres');
 const Gallery = require('o-gallery');
-import {broadcast} from 'n-ui/utils';
+import {broadcast} from 'n-ui-foundations';
 
 module.exports = function (els) {
 	[].slice.call(els).forEach(function (el) {

@@ -1,6 +1,6 @@
 import oDate from 'o-date';
 import crossDomainFetch from 'o-fetch-jsonp';
-import {broadcast} from 'n-ui/utils';
+import {broadcast} from 'n-ui-foundations';
 
 const nImage = require('n-image');
 const template = require('../../../node_modules/@financial-times/n-teaser/templates/heavy.html');

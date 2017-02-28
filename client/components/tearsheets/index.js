@@ -1,4 +1,4 @@
-import { $$ } from 'n-ui/utils';
+import { $$ } from 'n-ui-foundations';
 import Tearsheet from './tearsheet';
 import Link from './link';
 
