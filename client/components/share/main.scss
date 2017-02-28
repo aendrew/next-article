@@ -11,7 +11,6 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 		margin-top: 15px;
 		padding: 5px 0;
 		border-top: 1px solid getColor('warm-3');
-		border-bottom: 1px solid getColor('warm-3');
 		clear: left;
 
 		> * {
@@ -63,11 +62,6 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 			display: block; // prevent inline-block spacing issue
 		}
 
-		.o-share__action {
-			position: relative;
-			margin: 0;
-		}
-
 		.o-share__action a {
 			border-bottom-width: 0;
 		}
@@ -75,12 +69,8 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 		.o-share__action button {
 			display: block;
 			border: 0;
+			padding: 0;
 			background-color: transparent;
-		}
-
-		.o-share__action a,
-		.o-share__action button {
-			padding: 0 6px;
 		}
 
 		.o-share__action--twitter a {
@@ -94,6 +84,10 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 
 		.article__save {
 			float: right;
+			button {
+				@include oButtonSize(bug);
+				min-height: 42px;
+			}
 		}
 
 		.n-myft-ui__button {
@@ -126,7 +120,7 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 
 // Lazy load all the icons
 .article__share {
-	$icon-size: 34;
+	$icon-size: 40;
 	$icon-padding: ($icon-size / 100) * 25;
 
 	> * {
@@ -143,15 +137,8 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 		}
 	}
 
-	&__comments {
-		&::before {
-			top: -8.25px;
-		}
-	}
-
 	&__print {
 		&:before {
-			top: -#{$icon-padding / 2}px;
 			@include oIconsGetIcon('print', getColor('cold-1'), $icon-size, $apply-base-styles: false, $apply-width-height: false, $iconset-version: 1);
 		}
 	}
@@ -161,4 +148,4 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 @include oShareActionIcon(twitter, o-share);
 @include oShareActionIcon(whatsapp, o-share);
 @include oShareActionIcon(linkedin, o-share);
-@include oShareActionIcon(email, o-share);
+@include oShareActionIcon(mail, o-share);
