@@ -30,10 +30,10 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 
 		&__comments {
 			@include oTypographySansSize(s);
-			line-height: 24px;
+			line-height: 40px;
 			position: relative;
 			border-bottom-width: 0;
-			margin-right: 16px;
+			margin-right: 10px;
 			padding-left: 22px;
 		}
 
@@ -77,6 +77,12 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 			padding-left: 0;
 		}
 
+		.o-share__action--linkedin {
+			@include oGridRespondTo($until: S) {
+				display: none;
+			}
+		}
+
 		.o-share__action--whatsapp {
 			@include oGridColspan((S: hide));
 			padding: 0;
@@ -84,16 +90,14 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 
 		.article__save {
 			float: right;
-			button {
-				@include oButtonSize(bug);
-				min-height: 42px;
-			}
 		}
 
 		.n-myft-ui__button {
-			min-height: 24px;
-			padding-top: 4px;
-			padding-bottom: 4px;
+			@include oButtonsSize(big);
+			min-height: 42px;
+			@include oGridRespondTo($until: S) {
+				padding: 4px 8px;
+			}
 		}
 
 	}
