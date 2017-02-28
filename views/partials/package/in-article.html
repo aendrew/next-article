@@ -1,13 +1,13 @@
 <section data-o-component="o-expander" class="package__mid-article o-expander" data-o-expander-shrink-to="hidden"
 	data-o-expander-collapsed-toggle-text="" data-o-expander-expanded-toggle-text="">
-	<h1>Series</h1><h1>{{title}}</h1>
+	<div>Series {{title}}</div>
 	<p>{{description}}</p>
-	<h1>Explore the whole series</h1><button class="o-expander__toggle"></button>
-	<ul class="o-expander__content">
+	<div class="package__title">Explore the whole series<button class="package__toggle o-expander__toggle"></button></div>
+	<div class="o-expander__content">
 		{{#if shortenedPackage}}
-			{{#each shortenedPackage}}<li>{{title}}</li>{{/each}}
+			{{> package/package-contents shortenedPackage}}
 		{{else}}
-			{{#each contains}}<li>{{title}}</li>{{/each}}
+			{{> package/package-contents contains}}
 		{{/if}}
-	</ul>
+	</div>
 </section>

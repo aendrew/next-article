@@ -1,9 +1,9 @@
 <nav data-o-component="o-expander" class="package--nav o-expander" data-o-expander-shrink-to="hidden"
 	data-o-expander-collapsed-toggle-text="" data-o-expander-expanded-toggle-text=""
 	data-textbox-background="{{#ifEquals theme 'specialReport'}}claret{{else}}slate{{/ifEquals}}">
-	<div>
-		<a class="package__link" href="{{url}}"><h3 class="package__title">{{title}}</h3></a>
-		<button class="o-expander__toggle"></button>
+	<div class="package__title">
+		<a class="package__link" href="{{url}}">{{title}}</a>
+		<button class="o-expander__toggle package__toggle"></button>
 	</div>
 	<div class="o-expander__content">
 		{{description}}
