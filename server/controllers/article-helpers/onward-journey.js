@@ -15,7 +15,7 @@ module.exports = function (articleId, flags) {
 
 	return fetchGraphqlData(readNextQuery(flags.articleSuggestedRead, flags.contentPackages), variables)
 		.then(({ article = [] } = ({})) => {
-			if(!article) { 
+			if(!article) {
 				return;
 			}
 			const { primaryTag, storyPackage } = article;
