@@ -16,7 +16,6 @@ const dependencyStubs = {
 	igPoller: { getData: () => fixtureInteractives },
 	podcast: sinon.spy(),
 	video: sinon.spy(),
-	package: sinon.spy(),
 	article: sinon.spy(),
 	interactive: sinon.spy(),
 	shellpromise: sinon.stub(),
@@ -29,7 +28,6 @@ const subject = proxyquire('../../../server/controllers/negotiation', {
 	'../lib/ig-poller': dependencyStubs.igPoller,
 	'./podcast': dependencyStubs.podcast,
 	'./video': dependencyStubs.video,
-	'./package': dependencyStubs.package,
 	'./article': dependencyStubs.article,
 	'./interactive': dependencyStubs.interactive,
 	'shellpromise': dependencyStubs.shellpromise,
@@ -131,41 +129,6 @@ describe('Negotiation Controller', function () {
 
 		it('defers to the video controller', function () {
 			expect(dependencyStubs.video.callCount).to.equal(1);
-			expect(response.statusCode).to.not.equal(404);
-		});
-	});
-
-	describe('when the requested article is a package landing page', function () {
-		beforeEach(function () {
-
-			nock('https://next-elastic.ft.com')
-				.post('/v3_api_v2/item/_mget')
-				.reply(200, {
-					docs: [{
-						found: true,
-						_source: {
-							type: 'package',
-							provenance: []
-						}
-					}]
-				});
-
-			dependencyStubs.onwardJourney.returns(Promise.resolve(fixtureOnwardJourneyInPackage));
-			return createInstance({
-				params: {
-					id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
-				}
-			}, { contentPackages: true });
-
-		});
-
-		afterEach(function () {
-			dependencyStubs.package.reset();
-			dependencyStubs.onwardJourney.reset();
-		});
-
-		it('defers to the package controller', function () {
-			expect(dependencyStubs.package.callCount).to.equal(1);
 			expect(response.statusCode).to.not.equal(404);
 		});
 	});

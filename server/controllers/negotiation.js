@@ -11,7 +11,6 @@ const controllerInteractive = require('./interactive');
 const controllerPodcast = require('./podcast');
 const controllerVideo = require('./video');
 const controllerArticle = require('./article');
-const controllerPackage = require('./package');
 
 function isArticlePodcast ({ provenance = [] } = {}) {
 	return provenance.some(source => /acast\.com/.test(source));
@@ -19,10 +18,6 @@ function isArticlePodcast ({ provenance = [] } = {}) {
 
 function isArticleVideo ({ webUrl = '' } = {}) {
 	return webUrl.includes('video.ft.com');
-}
-
-function isArticlePackage ({ type }) {
-	return type && type === 'package';
 }
 
 function getInteractive (contentId) {
@@ -112,8 +107,6 @@ module.exports = function negotiationController (req, res, next) {
 					} else {
 						return controllerVideo(req, res, next, article);
 					}
-				} else if (res.locals.flags.contentPackages && isArticlePackage(article)) {
-					return controllerPackage(req, res, next, article)
 				} else {
 					return controllerArticle(req, res, next, article);
 				}

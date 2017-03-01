@@ -63,7 +63,7 @@ module.exports = [
 	// sugested reads
 	{
 		timeout: 10000,
-		headers: { 'FT-Flags': 'articleSuggestedRead:off' },
+		headers: { 'FT-Flags': 'articleSuggestedRead:off,ads:off' },
 		urls: {
 			// any old article
 			'/content/7a41c98c-fd85-11e6-96f8-3700c5664d30': 200
@@ -72,7 +72,7 @@ module.exports = [
 	// content package
 	{
 		timeout: 10000,
-		headers: { 'FT-Flags': 'contentPackages:on' },
+		headers: { 'FT-Flags': 'contentPackages:on,ads:off' },
 		urls: {
 			'/content/aec5898e-b88c-11e6-ba85-95d1533d9a62': 200, //best books of the year, top level package
 			'/content/156f0328-b81e-11e6-ba85-95d1533d9a62': 200, // best books of the year article, in a package
