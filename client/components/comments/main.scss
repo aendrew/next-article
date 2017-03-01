@@ -6,10 +6,8 @@ body .fyre-modal .fyre-modal-title-close {
 	background-image: none;
 
 	&:before {
-		@include oIconsGetIcon('cross', #ffffff, 10, $iconset-version: 1);
+		@include oIconsGetIcon('cross', #505050, 20, $iconset-version: 1);
 		content: '';
-		position: relative;
-		top: 1px;
 	}
 }
 
