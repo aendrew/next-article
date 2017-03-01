@@ -59,5 +59,27 @@ module.exports = [
 			// article with topper
 			'/content/7b38ad62-d1a5-11e6-b06b-680c49b4b4c0': 200
 		}
+	},
+	// sugested reads
+	{
+		timeout: 10000,
+		headers: { 'FT-Flags': 'articleSuggestedRead:off,ads:off' },
+		urls: {
+			// any old article
+			'/content/7a41c98c-fd85-11e6-96f8-3700c5664d30': 200
+		}
+	},
+	// content package
+	{
+		timeout: 10000,
+		headers: { 'FT-Flags': 'contentPackages:on,ads:off' },
+		urls: {
+			'/content/aec5898e-b88c-11e6-ba85-95d1533d9a62': 200, //best books of the year, top level package
+			'/content/156f0328-b81e-11e6-ba85-95d1533d9a62': 200, // best books of the year article, in a package
+			'/content/395650fa-5b9c-11e5-a28b-50226830d644': 200, //normal article
+			'/content/5cf687c7-ddb9-4243-8fea-69e50b6b5682': 200, //podcast
+			'/content/c382002a-a839-366c-9b5f-c3e51a25e05d': 200, //video
+			'/content/a85bf481-457c-3bd4-bd49-3801d175d583?fragment=true': 200 //fragment view
+		}
 	}
 ];

@@ -1,0 +1,149 @@
+{
+  "readNext": {
+    "type": "Article",
+    "id": "98c97164-fcdd-11e6-96f8-3700c5664d30",
+    "isPremium": false,
+    "relativeUrl": "\/content\/98c97164-fcdd-11e6-96f8-3700c5664d30",
+    "title": "FT Health: Welcome to our new newsletter",
+    "promotionalTitle": "FT Health: Welcome to our new newsletter",
+    "publishedDate": "2017-02-27T14:52:33.000Z",
+    "initialPublishedDate": "2017-02-27T14:52:33Z",
+    "isEditorsChoice": false,
+    "canBeSyndicated": "verify",
+    "genreTag": null,
+    "primaryBrandTag": null,
+    "authorTags": [
+
+    ],
+    "isOpinion": false,
+    "moreRecent": true
+  },
+  "suggestedReads": [
+    {
+      "type": "Article",
+      "id": "98c97164-fcdd-11e6-96f8-3700c5664d30",
+      "isPremium": false,
+      "relativeUrl": "\/content\/98c97164-fcdd-11e6-96f8-3700c5664d30",
+      "title": "FT Health: Welcome to our new newsletter",
+      "promotionalTitle": "FT Health: Welcome to our new newsletter",
+      "publishedDate": "2017-02-27T14:52:33.000Z",
+      "initialPublishedDate": "2017-02-27T14:52:33Z",
+      "isEditorsChoice": false,
+      "canBeSyndicated": "verify",
+      "genreTag": null,
+      "primaryBrandTag": null,
+      "authorTags": [
+
+      ],
+      "isOpinion": false
+    },
+    {
+      "type": "Article",
+      "id": "43f094ca-f8f9-11e6-9516-2d969e0d3b65",
+      "isPremium": false,
+      "relativeUrl": "\/content\/43f094ca-f8f9-11e6-9516-2d969e0d3b65",
+      "title": "Second Scottish independence referendum expected next year",
+      "promotionalTitle": "New Scottish independence poll expected next year",
+      "publishedDate": "2017-02-27T14:50:24.000Z",
+      "initialPublishedDate": "2017-02-27T14:37:45Z",
+      "isEditorsChoice": false,
+      "canBeSyndicated": "yes",
+      "genreTag": null,
+      "primaryBrandTag": null,
+      "authorTags": [
+        {
+          "prefLabel": "Mure Dickie",
+          "relativeUrl": "\/stream\/authorsId\/Q0ItMDAwMDc0NA==-QXV0aG9ycw==",
+          "attributes": [
+
+          ],
+          "idV1": "Q0ItMDAwMDc0NA==-QXV0aG9ycw=="
+        }
+      ],
+      "isOpinion": false
+    },
+    {
+      "type": "Article",
+      "id": "ff891f9e-fce2-11e6-96f8-3700c5664d30",
+      "isPremium": false,
+      "relativeUrl": "\/content\/ff891f9e-fce2-11e6-96f8-3700c5664d30",
+      "title": "Spain\u2019s Telef\u00f3nica says UK needs more fibre in its broadband diet",
+      "promotionalTitle": "O2 says UK needs more fibre in its broadband diet",
+      "publishedDate": "2017-02-27T14:46:23.000Z",
+      "initialPublishedDate": "2017-02-27T14:46:23Z",
+      "isEditorsChoice": false,
+      "canBeSyndicated": "yes",
+      "genreTag": null,
+      "primaryBrandTag": null,
+      "authorTags": [
+        {
+          "prefLabel": "Nic Fildes",
+          "relativeUrl": "\/stream\/authorsId\/ZmI0M2QwZTAtODM2Yi00OTM2LWI1OWEtYmM2OGYwYTgyNDVj-QXV0aG9ycw==",
+          "attributes": [
+
+          ],
+          "idV1": "ZmI0M2QwZTAtODM2Yi00OTM2LWI1OWEtYmM2OGYwYTgyNDVj-QXV0aG9ycw=="
+        }
+      ],
+      "isOpinion": false
+    },
+    {
+      "type": "Article",
+      "id": "be06d073-a07f-3c78-bd8b-215634d3d86c",
+      "isPremium": false,
+      "relativeUrl": "\/content\/be06d073-a07f-3c78-bd8b-215634d3d86c",
+      "title": "Tesla shares drop as bear camp swells with Goldman downgrade",
+      "promotionalTitle": null,
+      "publishedDate": "2017-02-27T14:41:13.000Z",
+      "initialPublishedDate": "2017-02-27T14:41:13Z",
+      "isEditorsChoice": null,
+      "canBeSyndicated": "verify",
+      "genreTag": null,
+      "primaryBrandTag": {
+        "prefLabel": "Fast FT",
+        "relativeUrl": "\/fastft",
+        "taxonomy": "brand",
+        "attributes": [
+
+        ],
+        "idV1": "NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz"
+      },
+      "authorTags": [
+        {
+          "prefLabel": "Mamta Badkar",
+          "relativeUrl": "\/stream\/authorsId\/YWI2YWY5N2UtYTVhMC00YzljLWI0M2UtMzExZWQ4MDhkMTNl-QXV0aG9ycw==",
+          "attributes": [
+
+          ],
+          "idV1": "YWI2YWY5N2UtYTVhMC00YzljLWI0M2UtMzExZWQ4MDhkMTNl-QXV0aG9ycw=="
+        }
+      ],
+      "isOpinion": false
+    },
+    {
+      "type": "Article",
+      "id": "6cb02caa-fcef-11e6-96f8-3700c5664d30",
+      "isPremium": false,
+      "relativeUrl": "\/content\/6cb02caa-fcef-11e6-96f8-3700c5664d30",
+      "title": "Warren Buffett reveals Apple stake of more than $18bn",
+      "promotionalTitle": "Buffett reveals Apple stake of more than $18bn",
+      "publishedDate": "2017-02-27T14:41:01.000Z",
+      "initialPublishedDate": "2017-02-27T14:41:01Z",
+      "isEditorsChoice": false,
+      "canBeSyndicated": "yes",
+      "genreTag": null,
+      "primaryBrandTag": null,
+      "authorTags": [
+        {
+          "prefLabel": "Stephen Foley",
+          "relativeUrl": "\/stream\/authorsId\/Q0ItMDAxNzEwNA==-QXV0aG9ycw==",
+          "attributes": [
+
+          ],
+          "idV1": "Q0ItMDAxNzEwNA==-QXV0aG9ycw=="
+        }
+      ],
+      "isOpinion": false
+    }
+  ]
+}

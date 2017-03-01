@@ -5,6 +5,7 @@ const api = (process.env.EXPERIMENTAL_CONTENT_SOURCE && process.env.NODE_ENV !==
 	: require('next-ft-api-client');
 const interactivePoller = require('../lib/ig-poller');
 const shellpromise = require('shellpromise');
+const getOnwardJourneyArticles = require('./article-helpers/onward-journey');
 
 const controllerInteractive = require('./interactive');
 const controllerPodcast = require('./podcast');
@@ -25,6 +26,7 @@ function getInteractive (contentId) {
 	);
 }
 
+
 function getArticle (contentId) {
 	return api.content({
 		uuid: contentId,
@@ -43,14 +45,25 @@ function getArticle (contentId) {
 module.exports = function negotiationController (req, res, next) {
 	res.set('surrogate-key', `contentUuid:${req.params.id}`);
 
+	const contentPromises = [];
 	let interactive = getInteractive(req.params.id);
 
 	if (interactive) {
 		return controllerInteractive(req, res, next, interactive);
 	}
 
-	return getArticle(req.params.id)
-		.then(article => {
+	contentPromises.push(getArticle(req.params.id));
+
+	if(res.locals.flags.articleSuggestedRead || res.locals.flags.contentPackages) {
+		contentPromises.push(
+			getOnwardJourneyArticles(req.params.id, res.locals.flags)
+			.catch(err => {
+				logger.warn({ event: 'ONWARD_JOURNEY_FETCH_FAIL' }, err);
+			}));
+	}
+
+	return Promise.all(contentPromises)
+		.then(([article, onwardJourney]) => {
 			const webUrl = article && article.webUrl || '';
 
 			// Redirect ftalphaville to old FT.com.  Next is not currently planning to absorb FTAlphaville
@@ -73,6 +86,16 @@ module.exports = function negotiationController (req, res, next) {
 			// Redirect requests for placeholders
 			if (article && article.type === 'placeholder') {
 				return res.redirect(302, article.url);
+			}
+
+			if(article && onwardJourney) {
+				article.readNextArticle = onwardJourney.readNext;
+				article.readNextArticles = onwardJourney.suggestedReads;
+
+				if(onwardJourney.package || onwardJourney.context) {
+					article.package = onwardJourney.package;
+					article.context = onwardJourney.context;
+				}
 			}
 
 			if (article) {

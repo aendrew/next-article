@@ -1,9 +1,7 @@
-const logger = require('@financial-times/n-logger').default;
 const genericContentTransform = require('ft-n-content-transform').transformAll;
 const nextJsonLd = require('@financial-times/next-json-ld');
 const applicationContentTransform = require('../transforms/body');
 const articleBranding = require('ft-n-article-branding');
-const getOnwardJourneyArticles = require('./article-helpers/onward-journey');
 const decorateMetadataHelper = require('./article-helpers/decorate-metadata');
 const openGraphHelper = require('./article-helpers/open-graph');
 const bylineTransform = require('../transforms/byline');
@@ -79,7 +77,6 @@ const showGcs = (req, res, isFreeArticle) => {
 
 module.exports = function articleV3Controller (req, res, next, content) {
 	const userIsAnonymous = res.locals.anon && res.locals.anon.userIsAnonymous;
-	let asyncWorkToDo = [];
 
 	res.vary('ft-is-aud-dev');
 	res.vary('ft-blocked-url');
@@ -126,13 +123,16 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	};
 
 	// Apply content and article specific transforms to bodyHTML
-	Object.assign(content, transformArticleBody(content.bodyHTML, res.locals.flags, {
+	Object.assign(
+		content,
+		transformArticleBody(content.bodyHTML, res.locals.flags, {
 			fragment: req.query.fragment,
 			adsLayout: content.adsLayout,
 			userIsAnonymous,
-			previewArticle: req.get('ft-access-preview') // TODO: match on res.get() ?
-		}
-	));
+			previewArticle: req.get('ft-access-preview'), // TODO: match on res.get() ?
+			contentPackage: content.package
+		})
+	);
 
 	content.designGenre = articleBranding(content.metadata);
 
@@ -161,15 +161,6 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	}
 
 	if (res.locals.flags.articleSuggestedRead && content.metadata.length) {
-
-		asyncWorkToDo.push(
-			getOnwardJourneyArticles(content.id, content.publishedDate)
-				.then(onwardJourney => {
-					content.readNextArticle = onwardJourney && onwardJourney.readNext;
-					content.readNextArticles = onwardJourney && onwardJourney.suggestedReads;
-				})
-		);
-
 		content.readNextTopic = addTagTitlePrefix(content.primaryTag);
 	}
 
@@ -198,20 +189,28 @@ module.exports = function articleV3Controller (req, res, next, content) {
 		content.topper = null;
 	}
 
-	return Promise.all(asyncWorkToDo)
-		.then(() => {
-			content.contentType = 'article';
-			content.shouldRenderMyftHint = true;
-			if (req.query.fragment) {
-				res.render('fragment', content);
-			} else {
-				content.layout = 'wrapper';
-				content.viewStyle = 'compact';
-				res.render('content', content);
-			}
-		})
-		.catch(error => {
-			logger.error(error);
-			next(error);
-		});
+	if(res.locals.flags.contentPackages && content.contains) {
+
+		// all series content have toppers
+		if (!content.topper) {
+			content.topper = {
+				standfirst: content.standfirst,
+				headline: content.title,
+				theme: 'split-text-left',
+				bgColor: 'slate'
+			};
+		}
+
+	}
+
+
+	content.contentType = 'article';
+	content.shouldRenderMyftHint = true;
+	if (req.query.fragment) {
+		res.render('fragment', content);
+	} else {
+		content.layout = 'wrapper';
+		content.viewStyle = 'compact';
+		res.render('content', content);
+	}
 };

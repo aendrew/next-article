@@ -46,9 +46,8 @@ describe('Article Controller', () => {
 
 			result = null;
 
-			return createInstance(null, { articleSuggestedRead: true }).then(() => {
-				result = response._getRenderData()
-			});
+			createInstance(null, { articleSuggestedRead: true });
+			result = response._getRenderData();
 		});
 
 		it('returns a successful response', () => {
@@ -77,9 +76,8 @@ describe('Article Controller', () => {
 		});
 
 		it('does not add X-Robots-Tag headers for Methode articles', () => {
-			return createInstance(null, { openGraph: true }, fixturePremium).then(() => {
-				expect(response.getHeader('X-Robots-Tag')).to.be.undefined;
-			});
+			createInstance(null, { openGraph: true }, fixturePremium);
+			expect(response.getHeader('X-Robots-Tag')).to.be.undefined;
 		});
 
 		it('has the correct description field', () => {
@@ -91,19 +89,17 @@ describe('Article Controller', () => {
 		});
 
 		it('has the correct canonical URL and X-Robots-Tag for a blog', () => {
-			return createInstance(null, { openGraph: true }, fixtureBlog).then(() => {
-				let result = response._getRenderData()
-				expect(result.canonicalUrl).to.equal('http://blogs.ft.com/gavyndavies/2016/09/11/what-investors-should-know-about-r-star/');
-				expect(response.getHeader('X-Robots-Tag')).to.equal('noindex');
-			});
+			createInstance(null, { openGraph: true }, fixtureBlog)
+			let result = response._getRenderData()
+			expect(result.canonicalUrl).to.equal('http://blogs.ft.com/gavyndavies/2016/09/11/what-investors-should-know-about-r-star/');
+			expect(response.getHeader('X-Robots-Tag')).to.equal('noindex');
 		});
 
 		it('has the correct canonical URL and X-Robots-Tag for FastFT', () => {
-			return createInstance(null, { openGraph: true }, fixtureFastFT).then(() => {
-				let result = response._getRenderData()
-				expect(result.canonicalUrl).to.equal('http://www.ft.com/fastft/2016/09/13/linde-cfo-denoke-out-a-day-after-praxair-deal-talks-end/');
-				expect(response.getHeader('X-Robots-Tag')).to.equal('noindex');
-			});
+			createInstance(null, { openGraph: true }, fixtureFastFT)
+			let result = response._getRenderData()
+			expect(result.canonicalUrl).to.equal('http://www.ft.com/fastft/2016/09/13/linde-cfo-denoke-out-a-day-after-praxair-deal-talks-end/');
+			expect(response.getHeader('X-Robots-Tag')).to.equal('noindex');
 		});
 
 
@@ -117,9 +113,8 @@ describe('Article Controller', () => {
 		beforeEach(() => {
 			result = null;
 
-			return createInstance({ query: { fragment: 1 } }).then(() => {
-				result = response._getRenderData()
-			});
+			createInstance({ query: { fragment: 1 } })
+			result = response._getRenderData()
 		});
 
 		it('renders supports rendering with fragment layout', () => {
@@ -127,58 +122,38 @@ describe('Article Controller', () => {
 		});
 	});
 
-	context('suggestions fail', () => {
-		beforeEach(() => {
-			stubs.onwardJourneyArticles.returns(Promise.reject());
-
-			result = null;
-
-			return createInstance(null, { articleSuggestedRead: true }).then(() => {
-				result = response._getRenderData()
-			});
-		});
-
-		it('returns a 50x', () => {
-			expect(next.callCount).to.equal(1);
-		});
-	});
-
 	context('Has rich journalism content', () => {
 
 		it('sets the topper on the view model if flag is on', () => {
-			return createInstance(null, { articleTopper: true }, fixtureWithTopper).then(() => {
-				let result = response._getRenderData();
-				expect(result.topper.headline).to.equal('Mosul: Voices from a war zone');
-				expect(result.topper.theme).to.equal('full-bleed-image-center');
-				expect(result.topper.themeImageRatio).to.equal('full-bleed');
-				expect(response.statusCode).to.equal(200);
-			});
+			createInstance(null, { articleTopper: true }, fixtureWithTopper);
+			let result = response._getRenderData();
+			expect(result.topper.headline).to.equal('Mosul: Voices from a war zone');
+			expect(result.topper.theme).to.equal('full-bleed-image-center');
+			expect(result.topper.themeImageRatio).to.equal('full-bleed');
+			expect(response.statusCode).to.equal(200);
 		});
 
 		it('does not set topper if flag is off', () => {
-			return createInstance(null, { articleTopper: false }, fixtureWithTopper).then(() => {
-				let result = response._getRenderData()
-				expect(result.topper).to.be.null;
-				expect(response.statusCode).to.equal(200);
-			});
+			createInstance(null, { articleTopper: false }, fixtureWithTopper)
+			let result = response._getRenderData()
+			expect(result.topper).to.be.null;
+			expect(response.statusCode).to.equal(200);
 		})
 
 		it('does not accept topper with an unknown theme', () => {
-			return createInstance(null, { articleTopper: true }, { metadata: [], topper: { theme: 'some-crazy-theme' }}).then(() => {
-				let result = response._getRenderData()
-				expect(result.topper).to.be.null;
-				expect(response.statusCode).to.equal(200);
-			});
-		});;
+			createInstance(null, { articleTopper: true }, { metadata: [], topper: { theme: 'some-crazy-theme' }})
+			let result = response._getRenderData()
+			expect(result.topper).to.be.null;
+			expect(response.statusCode).to.equal(200);
+		});
 	});
 
 	context('article preview layout', () => {
 		beforeEach(() => {
 			result = null;
 
-			return createInstance({ headers: { 'ft-access-preview': 'TRUE' }}, { inArticlePreview: true }, null, null, true).then(() => {
-				result = response._getRenderData()
-			});
+			createInstance({ headers: { 'ft-access-preview': 'TRUE' }}, { inArticlePreview: true }, null, null, true)
+			result = response._getRenderData()
 		});
 
 		it('renders with an inline barrier', () => {
