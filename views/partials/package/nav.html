@@ -1,10 +1,7 @@
 <nav data-o-component="o-expander" class="package--nav o-expander" data-o-expander-shrink-to="hidden"
-	data-o-expander-collapsed-toggle-text="" data-o-expander-expanded-toggle-text=""
-	data-textbox-background="{{#ifEquals theme 'specialReport'}}claret{{else}}slate{{/ifEquals}}">
-	<div class="package__title">
-		<a class="package__link" href="{{url}}">{{title}}</a>
-		<button class="o-expander__toggle package__toggle" title="other articles in series"></button>
-	</div>
+	data-o-expander-collapsed-toggle-text="<span class='package__nav-bar package__nav-bar--collapsed'>Series <strong>{{title}}</strong></span>"
+	data-o-expander-expanded-toggle-text="<span class='package__nav-bar package__nav-bar--expanded'>Series <strong>{{title}}</strong></span>">
+	<button class="o-expander__toggle package__toggle"></button>
 	<div class="o-expander__content">
 		{{description}}
 		{{#if shortenedPackage}}

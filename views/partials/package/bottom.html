@@ -1,9 +1,9 @@
 <div class="package--embedded" data-textbox-background="{{#ifEquals @root.package.theme 'specalReport'}}claret{{else}}slate{{/ifEquals}}">
-	<h3 class="package__title">Expore the series</h3>
+	<h3 class="package__title">Explore the series</h3>
 
 	<div class="package__next-up">
-		<div class="o-teaser o-teaser--large o-teaser--inverse o-teaser--has-image" data-o-component="o-teaser">
-			<div class="o-teaser__content">
+		<div class="o-teaser o-teaser--large o-teaser--inverse o-teaser--has-image package__next-up-body" data-o-component="o-teaser">
+			<div class="o-teaser__content package__xdb">
 				<div class="o-teaser__meta">
 					<span class="o-teaser__tag">UP NEXT</span>
 				</div>
@@ -11,7 +11,7 @@
 				<p class="o-teaser__standfirst">{{@root.context.next.standfirst}}</p>
 				<time data-o-component="o-date" class="o-date o-teaser__timestamp" datetime="{{@root.context.next.publishedDate}}">2016-02-29T12:35:48Z</time>
 			</div>
-			<div class="o-teaser__image-container">
+			<div class="o-teaser__image-container package__elf">
 				<div class="o-teaser__image-placeholder image-placeholder">
 					<img src="{{@root.context.next.mainImage.url}}" class="o-teaser__image" alt="demo image"></img>
 				</div>
