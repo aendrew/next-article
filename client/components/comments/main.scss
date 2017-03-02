@@ -2,15 +2,6 @@
 	padding-top: 10px;
 }
 
-body .fyre-modal .fyre-modal-title-close {
-	background-image: none;
-
-	&:before {
-		@include oIconsGetIcon('cross', oColorsGetPaletteColor('grey-tint4'), 20, $iconset-version: 1);
-		content: '';
-	}
-}
-
 .comments__rum-indicator {
 	z-index: -1;
 	margin-top: 100px;
