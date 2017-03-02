@@ -91,15 +91,15 @@ describe('Article Controller', () => {
 		it('has the correct canonical URL and X-Robots-Tag for a blog', () => {
 			createInstance(null, { openGraph: true }, fixtureBlog)
 			let result = response._getRenderData()
-			expect(result.canonicalUrl).to.equal('http://blogs.ft.com/gavyndavies/2016/09/11/what-investors-should-know-about-r-star/');
-			expect(response.getHeader('X-Robots-Tag')).to.equal('noindex');
+			expect(result.canonicalUrl).to.equal('https://www.ft.com/content/da86ba6a-f1a4-37e5-af23-d7fa64d47466');
+			expect(response.getHeader('X-Robots-Tag')).not.to.equal('noindex');
 		});
 
 		it('has the correct canonical URL and X-Robots-Tag for FastFT', () => {
 			createInstance(null, { openGraph: true }, fixtureFastFT)
 			let result = response._getRenderData()
 			expect(result.canonicalUrl).to.equal('https://www.ft.com/content/6adb986e-339a-3f14-ab82-ed48bd883b84');
-			expect(response.getHeader('X-Robots-Tag')).to.equal('noindex');
+			expect(response.getHeader('X-Robots-Tag')).not.to.equal('noindex');
 		});
 
 

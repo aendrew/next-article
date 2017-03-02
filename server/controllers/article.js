@@ -54,6 +54,13 @@ function isFastftArticle (webUrl = '') {
 	return false;
 }
 
+function isBlogsArticle (webUrl = '') {
+	if (webUrl.indexOf('http://blogs.ft.com/') === 0) {
+		return true;
+	}
+	return false;
+}
+
 function getDescription ({ standfirst, openingHTML }) {
 	if (standfirst) {
 		return standfirst;
@@ -65,7 +72,7 @@ function getDescription ({ standfirst, openingHTML }) {
 }
 
 function getCanonicalUrl (webUrl, id) {
-	if (isMethodeArticle(webUrl) || isFastftArticle(webUrl)) {
+	if (isMethodeArticle(webUrl) || isFastftArticle(webUrl) || isBlogsArticle(webUrl)) {
 		return `https://www.ft.com/content/${id}`;
 	} else {
 		return webUrl;
@@ -115,11 +122,6 @@ module.exports = function articleV3Controller (req, res, next, content) {
 
 	// Set the canonical URL, it's needed by Open Graph'
 	content.canonicalUrl = getCanonicalUrl(content.webUrl, content.id);
-
-	// If the article is not a Methode article (i.e. it is Blogs, Fast FT or Videos, tell search engines not to index it)
-	if (!isMethodeArticle(content.webUrl)) {
-		res.set('X-Robots-Tag', 'noindex');
-	}
 
 	// Inline barrier page & data
 	const shouldShow = userIsAnonymous && req.get('ft-access-preview') && !req.query.fragment && res.locals.flags.inArticlePreview;
