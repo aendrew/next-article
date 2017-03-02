@@ -7,7 +7,7 @@ $pkgBlack: #252830;
 	z-index: 99;
 }
 .package__nav--in-article {
-	font-family: MetricWeb, sans-serif;
+	@include oTypographySans(m);
 
 	margin-top: 2.5em;
 	margin-bottom: 2em;
