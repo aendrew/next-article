@@ -22,6 +22,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const legalCopy = require('./components/legal-copy/main');
 	const Video = require('./components/video/video');
 	const inlineBarrier = require('./components/inline-barrier/main');
+	const lazyLoad = require('./components/lazy-load');
 
 	// cacheJourney();
 
@@ -59,7 +60,10 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 	mainCss.then(() => {
 		slideshow(document.querySelectorAll('.article ft-slideshow'));
-		onwardJourney.init(flags);
+
+		lazyLoad(document.querySelector('.related-content'), { threshold: 1000, lazy: flags.lazyLoadMoreOns })
+			.then(onwardJourney.init.bind(null, flags));
+
 		lightSignup.init();
 		expander.init();
 		promotedContent(flags);
