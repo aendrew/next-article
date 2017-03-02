@@ -8,17 +8,3 @@
 	margin-bottom: -100px;
 	pointer-events: none;
 }
-
-
-body .fyre-modal .fyre-modal-facebook-icon {
-	@include oIconsGetIcon('social-facebook', oColorsGetPaletteColor('pink-tint5'), 20, $iconset-version: 1);
-	&:hover {
-		@include oIconsGetIcon('social-facebook', oColorsGetPaletteColor('blue'), 20, $iconset-version: 1);
-	}
-}
-body .fyre-modal .fyre-modal-twitter-icon {
-	@include oIconsGetIcon('social-twitter', oColorsGetPaletteColor('pink-tint5'), 20, $iconset-version: 1);
-	&:hover {
-		@include oIconsGetIcon('social-twitter', oColorsGetPaletteColor('blue'), 20, $iconset-version: 1);
-	}
-}
