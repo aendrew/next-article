@@ -1,27 +1,33 @@
-<div class="package__nav--article-end" data-textbox-background="{{#ifEquals @root.package.theme 'specalReport'}}claret{{else}}slate{{/ifEquals}}">
-	<h3 class="package__article-end-title">Explore the series</h3>
-
-	<div class="package__article-end-teaser-container">
-		<div class="o-teaser o-teaser--large o-teaser--inverse o-teaser--has-image package__article-end-teaser" data-o-component="o-teaser">
-			<div class="o-teaser__content">
-				<div class="o-teaser__meta">
-					<span class="o-teaser__tag">UP NEXT</span>
+<div class="o-grid-container o-grid-container--bleed">
+	<div class="o-grid-row o-grid-row--compact">
+		<div data-o-grid-colspan="XL10">
+			<div class="package__nav--article-end">
+				<div class="o-grid-container o-grid-container--bleed">
+					<div class="o-grid-row o-grid-row--compact">
+						<div data-o-grid-colspan="12 M6">
+							<h2 class="package__article-end-title">Explore the series</h2>
+							{{#if @root.content.next}}
+								{{> package/next-up @root.context.next}}
+							{{else}}
+								{{> package/next-up @root.context.prev}}
+							{{/if}}
+						</div>
+						{{#if descriptionHTML}}
+							<div data-o-grid-colspan="hide M6">
+								<div class="package__article-end-about">
+									<div>ABOUT THIS SERIES</div>
+									{{{descriptionHTML}}}
+								</div>
+							</div>
+						{{/if}}
+					</div>
 				</div>
-				<h2 class="o-teaser__heading"><a href="{{@root.context.next.relativeUrl}}">{{@root.context.next.title}}</a></h2>
-				<p class="o-teaser__standfirst">{{@root.context.next.standfirst}}</p>
-				<time data-o-component="o-date" class="o-date o-teaser__timestamp" datetime="{{@root.context.next.publishedDate}}">2016-02-29T12:35:48Z</time>
-			</div>
-			<div class="o-teaser__image-container">
-				<div class="o-teaser__image-placeholder image-placeholder">
-					<img src="{{@root.context.next.mainImage.relativeUrl}}" class="o-teaser__image" alt="demo image"></img>
-				</div>
+				{{#if shortenedPackage}}
+					{{> package/package-contents shortenedPackage}}
+				{{else}}
+					{{> package/package-contents contains}}
+				{{/if}}
 			</div>
 		</div>
 	</div>
-
-	{{#if shortenedPackage}}
-		{{> package/package-contents shortenedPackage}}
-	{{else}}
-		{{> package/package-contents contains}}
-	{{/if}}
 </div>
