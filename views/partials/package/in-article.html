@@ -1,8 +1,9 @@
-<section data-o-component="o-expander" class="package__mid-article o-expander" data-o-expander-shrink-to="hidden"
-	data-o-expander-collapsed-toggle-text="" data-o-expander-expanded-toggle-text="">
-	<div>Series {{title}}</div>
+<section data-o-component="o-expander" class="package__nav--in-article o-expander" data-o-expander-shrink-to="hidden"
+	data-o-expander-collapsed-toggle-text="<div class='package__expander-bar package__expander-bar--solid-collapsed'><strong>Explore the whole series</strong></div>"
+	data-o-expander-expanded-toggle-text="<div class='package__expander-bar package__expander-bar--split-expanded'><strong>Explore the whole series</strong></div>">
+	<div>Series <strong>{{title}}</strong></div>
 	<p>{{description}}</p>
-	<div class="package__title">Explore the whole series<button class="package__toggle o-expander__toggle" title="explore the whole series"></button></div>
+	<button class="o-expander__toggle package__expander-toggle"></button>
 	<div class="o-expander__content">
 		{{#if shortenedPackage}}
 			{{> package/package-contents shortenedPackage}}

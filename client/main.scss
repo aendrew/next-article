@@ -25,6 +25,8 @@
 	@import 'components/headline/main';
 	@import 'components/read-next/main';
 	@import 'components/suggested-reads/main';
+	$o-expander-is-silent: false;
+	@import 'o-expander/main';
 	@import 'components/package/main'; // TODO: rename
 
 	.o-labels {
@@ -34,8 +36,6 @@
 
 @import 'components/share/main';
 @import 'components/ads/main';
-$o-expander-is-silent: false;
-@import 'o-expander/main';
 $o-gallery-is-silent: false;
 @import 'o-gallery/main';
 $o-video-is-silent: false;
