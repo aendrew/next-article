@@ -49,7 +49,10 @@
 				</div>
 				{{/if}}
 			</div>
+			{{#ifAll @root.flags.contentPackages package}}
+			{{else}}
 				{{> header/read-next-header-teaser article=readNextArticle}}
+			{{/ifAll}}
 		</div>
 	</div>
 </div>
