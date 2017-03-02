@@ -12,14 +12,6 @@ const controllerPodcast = require('./podcast');
 const controllerVideo = require('./video');
 const controllerArticle = require('./article');
 
-function isArticlePodcast ({ provenance = [] } = {}) {
-	return provenance.some(source => /acast\.com/.test(source));
-}
-
-function isArticleVideo ({ webUrl = '' } = {}) {
-	return webUrl.includes('video.ft.com');
-}
-
 function getInteractive (contentId) {
 	return interactivePoller.getData().find(
 		mapping => mapping.articleuuid === contentId
@@ -32,7 +24,7 @@ function getArticle (contentId) {
 		uuid: contentId,
 		index: 'v3_api_v2'
 	})
-		// Some things aren't in CAPI v3 (e.g. Syndicated content)
+	// Some things aren't in CAPI v3 (e.g. Syndicated content)
 		.catch(function (error) {
 			if (fetchres.originatedError(error)) {
 				return;
@@ -57,9 +49,9 @@ module.exports = function negotiationController (req, res, next) {
 	if(res.locals.flags.articleSuggestedRead || res.locals.flags.contentPackages) {
 		contentPromises.push(
 			getOnwardJourneyArticles(req.params.id, res.locals.flags)
-			.catch(err => {
-				logger.warn({ event: 'ONWARD_JOURNEY_FETCH_FAIL' }, err);
-			}));
+				.catch(err => {
+					logger.warn({ event: 'ONWARD_JOURNEY_FETCH_FAIL' }, err);
+				}));
 	}
 
 	return Promise.all(contentPromises)
@@ -83,12 +75,7 @@ module.exports = function negotiationController (req, res, next) {
 				return res.redirect(302, `${webUrl}${webUrl.includes('?') ? '&' : '?'}ft_site=falcon&desktop=true`);
 			}
 
-			// Redirect requests for placeholders
-			if (article && article.type === 'placeholder') {
-				return res.redirect(302, article.url);
-			}
-
-			if(article && onwardJourney) {
+			if (article && onwardJourney) {
 				article.readNextArticle = onwardJourney.readNext;
 				article.readNextArticles = onwardJourney.suggestedReads;
 
@@ -99,16 +86,17 @@ module.exports = function negotiationController (req, res, next) {
 			}
 
 			if (article) {
-				if (isArticlePodcast(article)) {
-					return controllerPodcast(req, res, next, article);
-				} else if (isArticleVideo(article)) {
-					if (res.locals.flags.videoArticlePage === 'v2') {
-						return res.redirect(`/video/${req.params.id}`)
-					} else {
-						return controllerVideo(req, res, next, article);
-					}
-				} else {
-					return controllerArticle(req, res, next, article);
+				switch (article.type) {
+					case 'podcast':
+						return controllerPodcast(req, res, next, article);
+					case 'video':
+						return (res.locals.flags.videoArticlePage === 'v2')
+							? res.redirect(`/video/${req.params.id}`)
+							: controllerVideo(req, res, next, article);
+					case 'placeholder':
+						return res.redirect(article.url);
+					default:
+						return controllerArticle(req, res, next, article);
 				}
 			}
 

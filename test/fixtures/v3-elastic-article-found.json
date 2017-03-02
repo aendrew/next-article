@@ -7,6 +7,7 @@
 			"_version":43,
 			"found":true,
 			"_source":{
+				"type":"article",
 				"id":"352210c4-7b17-11e5-a1fe-567b37f80b64",
 				"title":"Bank directors have lack of technology know-how, study finds",
 				"alternativeTitles": { },

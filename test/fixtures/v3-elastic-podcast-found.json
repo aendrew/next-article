@@ -7,6 +7,7 @@
 			"_version":43,
 			"found":true,
 			"_source":{
+				"type":"podcast",
 				"id":"457bbf3d-99b4-4f61-8aa8-b5db3accb2cd",
 				"title":"The life of a song: Nessun Dorma",
 				"alternativeTitles": { },

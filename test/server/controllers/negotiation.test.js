@@ -110,6 +110,7 @@ describe('Negotiation Controller', function () {
 					docs: [{
 						found: true,
 						_source: {
+							type: 'video',
 							webUrl: 'http://video.ft.com/5030468875001',
 							provenance: []
 						}
@@ -133,7 +134,7 @@ describe('Negotiation Controller', function () {
 		});
 	});
 
-	describe('when the requested article is a video', function () {
+	describe('when the requested content is a placeholder', function () {
 		beforeEach(function () {
 			nock('https://next-elastic.ft.com')
 				.post('/v3_api_v2/item/_mget')
@@ -141,8 +142,10 @@ describe('Negotiation Controller', function () {
 					docs: [{
 						found: true,
 						_source: {
-							webUrl: 'http://video.ft.com/5030468875001',
-							provenance: []
+							type: 'placeholder',
+							url: 'http://howtospendit.ft.com/whatever',
+							provenance: [],
+							type: 'placeholder'
 						}
 					}]
 				});
@@ -154,15 +157,11 @@ describe('Negotiation Controller', function () {
 			});
 		});
 
-		afterEach(function () {
-			dependencyStubs.video.reset();
-		});
-
-		it('defers to the video controller', function () {
-			expect(dependencyStubs.video.callCount).to.equal(1);
-			expect(response.statusCode).to.not.equal(404);
+		it('redirects to the url', function () {
+			expect(response.statusCode).to.equal(302);
 		});
 	});
+
 	describe('when dealing with an article', function () {
 		context('and it is found', function () {
 			beforeEach(function () {
