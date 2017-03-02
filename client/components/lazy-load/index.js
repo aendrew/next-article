@@ -96,7 +96,7 @@ module.exports = (el, opts) => {
 			 * a load event triggering
 			 */
 
-			 let loadEvents = [
+			let loadEvents = [
 				checkDepthOnInitialScrollEvent(el, opts),
 				initObserver(el, opts)
 			];
