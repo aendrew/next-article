@@ -2,34 +2,9 @@
 	padding-top: 10px;
 }
 
-body .fyre-modal .fyre-modal-title-close {
-	background-image: none;
-
-	&:before {
-		@include oIconsGetIcon('cross', #ffffff, 10, $iconset-version: 1);
-		content: '';
-		position: relative;
-		top: 1px;
-	}
-}
-
 .comments__rum-indicator {
 	z-index: -1;
 	margin-top: 100px;
 	margin-bottom: -100px;
 	pointer-events: none;
-}
-
-
-body .fyre-modal .fyre-modal-facebook-icon {
-	@include oIconsGetIcon('social-facebook', #74736c, 20, $iconset-version: 1);
-	&:hover {
-		@include oIconsGetIcon('social-facebook', #2e6e9e, 20, $iconset-version: 1);
-	}
-}
-body .fyre-modal .fyre-modal-twitter-icon {
-	@include oIconsGetIcon('social-twitter', #74736c, 20, $iconset-version: 1);
-	&:hover {
-		@include oIconsGetIcon('social-twitter', #2e6e9e, 20, $iconset-version: 1);
-	}
 }
