@@ -7,7 +7,7 @@ import * as serviceWorker from 'n-service-worker';
 const $ = selector => [].slice.call(document.querySelectorAll(selector));
 
 function createPromise (el, url) {
-	return fetch(url, { credentials: 'same-origin' })
+	return fetch(url)
 		.then(fetchres.text)
 		.then(resp => {
 			if (!resp) {
