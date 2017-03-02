@@ -13,7 +13,7 @@ module.exports = function (req, res, next) {
 
 	let count = parseInt(req.query.count, 10) || 3;
 
-	return fetchGraphQlData(storyPackageQuery, { uuid: req.params.id, limit: count })
+	return fetchGraphQlData(storyPackageQuery, { uuid: req.params.id, limit: count }, 4000)
 		.then(({ article = {}}) => {
 			const storyPackage = article.storyPackage || [];
 			if (!storyPackage.length) {

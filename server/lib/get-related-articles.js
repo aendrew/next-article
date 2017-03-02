@@ -4,7 +4,7 @@ const NoRelatedResultsException = require('./no-related-results-exception');
 const logger = require('@financial-times/n-logger').default;
 
 module.exports = (tagId, count, parentId) => {
-	return fetchGraphQlData(relatedContentQuery, { tagId, limit: count + 1 })
+	return fetchGraphQlData(relatedContentQuery, { tagId, limit: count + 1 }, 4000)
 		.then((data) => {
 			const articles = Array.isArray(data.search) ? data.search : [];
 
