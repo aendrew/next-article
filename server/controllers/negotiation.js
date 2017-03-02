@@ -1,8 +1,6 @@
 const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
-const api = (process.env.EXPERIMENTAL_CONTENT_SOURCE && process.env.NODE_ENV !== 'production')
-	? require('../lib/experimental-content-client')
-	: require('next-ft-api-client');
+const api = require('next-ft-api-client');
 const interactivePoller = require('../lib/ig-poller');
 const shellpromise = require('shellpromise');
 const getOnwardJourneyArticles = require('./article-helpers/onward-journey');
