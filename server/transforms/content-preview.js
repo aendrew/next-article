@@ -5,8 +5,6 @@ const cheerio = require('cheerio');
 *
 * If the user has been granted "preview" access to an article,
 * then we cut the content to a sensible length.
-*
-* [1] currently this functionality is behind a flag while testing.
 */
 
 /**
@@ -25,10 +23,8 @@ const getParaToTruncateFrom = ($) => {
 
 const asObj = ($) => ({ bodyHTML: $.html() });
 
-module.exports = (bodyHTML, flags) => {
+module.exports = (bodyHTML) => {
 	const $ = cheerio.load(bodyHTML);
-
-	if (!flags.inArticlePreview) { return asObj($); } // [1]
 
 	getParaToTruncateFrom($)
 		.nextAll()

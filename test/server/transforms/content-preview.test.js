@@ -6,33 +6,28 @@ const mockContent = '<p><a href="https://www.ft.com/theresa-may" data-trackable=
 
 describe('Preview content', function () {
 
-	it('should not cut content if the inArticlePreview flag is false', function () {
-		const result = contentPreviewTransform(mockContent, {inArticlePreview: false});
-		expect(result.bodyHTML).to.equal(mockContent);
-	});
-
 	it('should cut short-form content paragraph count in half', function () {
-		const result = contentPreviewTransform('<p>1</p><p>2</p><p>3</p><p>4</p>', {inArticlePreview: true});
+		const result = contentPreviewTransform('<p>1</p><p>2</p><p>3</p><p>4</p>');
 		expect(result.bodyHTML).to.equal('<p>1</p><p>2</p>');
 	});
 
 	it('should cut short-form content paragraph count in half and round down', function () {
-		const result = contentPreviewTransform('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>', {inArticlePreview: true});
+		const result = contentPreviewTransform('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>');
 		expect(result.bodyHTML).to.equal('<p>1</p><p>2</p>');
 	});
 
 	it('should cut long-form content to a maximum of 2 paragraphs', function () {
-		const result = contentPreviewTransform('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p>', {inArticlePreview: true});
+		const result = contentPreviewTransform('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p>');
 		expect(result.bodyHTML).to.equal('<p>1</p><p>2</p>');
 	});
 
 	it('should preserve nested elements if their parent paragraph is at the cut-off point', function () {
-		const result = contentPreviewTransform('<p>1</p><p>2<a href="#">link</a></p><p>3</p><p>4</p><p>5</p><p>6</p>', {inArticlePreview: true});
+		const result = contentPreviewTransform('<p>1</p><p>2<a href="#">link</a></p><p>3</p><p>4</p><p>5</p><p>6</p>');
 		expect(result.bodyHTML).to.equal('<p>1</p><p>2<a href="#">link</a></p>');
 	});
 
 	it('preserves the markup of remaining content, verbatim', function () {
-		const result = contentPreviewTransform(mockContent, {inArticlePreview: true});
+		const result = contentPreviewTransform(mockContent);
 		expect(result.bodyHTML).to.equal('<p><a href="https://www.ft.com/theresa-may" data-trackable="link">Theresa May</a> will reveal her blueprint for Britain&#x2019;s industrial strategy next week, pitching how she will, in her own words, &#x201C;get the whole economy firing&#x201D;. </p><div class="p402_hide" data-o-email-only-signup-position-mvt="" aria-hidden="true"></div><p>One of her early moves as prime minister was to rebrand the business ministry as the Department for Business, Energy and Industrial Strategy. She picked <a href="/content/40665648-c6e3-11e6-8f29-9445cac8966f" data-trackable="link">Greg Clark</a>, a sceptic of free markets, as her business secretary. </p>');
 	});
 });

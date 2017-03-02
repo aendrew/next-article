@@ -48,8 +48,8 @@ module.exports = function (body, flags, options) {
 	Object.assign(resultObject, gcsConflicts(resultObject.bodyHTML));
 
 	// "preview" access — cut article content
-	if (options.userIsAnonymous && options.previewArticle && !options.fragment) {
-		Object.assign(resultObject, contentPreview(resultObject.bodyHTML, flags));
+	if (options.previewArticle) {
+		Object.assign(resultObject, contentPreview(resultObject.bodyHTML));
 	}
 
 	return resultObject;

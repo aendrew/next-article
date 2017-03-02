@@ -136,7 +136,7 @@ module.exports = function articleV3Controller (req, res, next, content) {
 			fragment: req.query.fragment,
 			adsLayout: content.adsLayout,
 			userIsAnonymous,
-			previewArticle: req.get('ft-access-preview'), // TODO: match on res.get() ?
+			previewArticle: req.get('ft-access-preview'),
 			contentPackage: content.package
 		})
 	);
