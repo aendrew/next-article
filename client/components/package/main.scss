@@ -79,6 +79,10 @@ $pkgBlack: #252830;
 	background-color: $pkgYellow;
 }
 
+.package__article-end-bar {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 .package__article-end-title {
 	display: block;
 	padding: 1em;
@@ -113,6 +117,7 @@ $pkgBlack: #252830;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 	padding: 1em;
 }
+
 .package__content-item--current {
 	color: $pkgYellow;
 	border-right: $pkgYellow solid 1em;
