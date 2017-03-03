@@ -84,6 +84,7 @@ $dark: getColor('slate');
 }
 
 .package__article-end-bar {
+	padding-bottom: 40px;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -99,7 +100,7 @@ $dark: getColor('slate');
 }
 
 .package__article-end-teaser {
-	padding: 1em 0;
+	padding-top: 1em;
 	margin-top: -76px;
 	margin-right: 20px;
 	margin-left: 20px;
@@ -175,4 +176,8 @@ $dark: getColor('slate');
 
 .package__text--strong {
 	@include oTypographySansBold(m, $load-progressively: true);
+}
+
+.package__no-bottom-margin {
+	margin-bottom: 0;
 }
