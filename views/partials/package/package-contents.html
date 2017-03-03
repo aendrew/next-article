@@ -7,8 +7,10 @@
 			</li>
 		{{else}}
 			<li class="package__content-item">
-				{{#ifEquals @root.package.sequence 'ordered'}}{{sequenceId}}{{/ifEquals}}
-				<a href="{{relativeUrl}}" class="package__link">{{title}}</a>
+				<a href="{{url}}" class="package__link">
+					{{#ifEquals @root.package.sequence 'ordered'}}{{sequenceId}}{{/ifEquals}}
+					{{title}}
+				</a>
 			</li>
 		{{/ifEquals}}
 	{{/each}}

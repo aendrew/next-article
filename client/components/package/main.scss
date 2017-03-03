@@ -115,12 +115,13 @@ $pkgBlack: #252830;
 	color: white;
 	font-size: large;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-	padding: 1em;
 }
 
 .package__content-item--current {
 	color: $pkgYellow;
 	border-right: $pkgYellow solid 1em;
+
+	padding: 1em;
 }
 
 .package__content-item:last-child {
@@ -130,6 +131,9 @@ $pkgBlack: #252830;
 .package__link {
 	border: 0;
 	color: inherit;
+
+	display: block;
+	padding: 1em;
 }
 
 .package__expander-toggle i {
