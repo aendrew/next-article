@@ -88,9 +88,14 @@ $pkgBlack: #252830;
 	height: 50px;
 	margin-top: -20px;
 }
+
 .package__article-end-teaser {
 	padding: 1em;
 	margin-top: -76px;
+
+	@include oGridRespondTo($from: M) {
+		padding-right: 0;
+	}
 }
 
 .package__contents {
