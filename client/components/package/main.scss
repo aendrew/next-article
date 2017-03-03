@@ -2,11 +2,14 @@ $pkgYellow: #ffec1a;
 $dark: getColor('slate');
 
 .package__nav--top {
+	@include oTypographySans(m, $load-progressively: true);
+	-webkit-font-smoothing: antialiased;
 	background-color: $dark;
 }
 
 .package__nav--in-article {
 	@include oTypographySans(m, $load-progressively: true);
+	-webkit-font-smoothing: antialiased;
 	margin-top: 2.5em;
 	margin-bottom: 2em;
 	border-top: 1px rgba(0, 0, 0, 0.2) solid;
@@ -16,6 +19,7 @@ $dark: getColor('slate');
 
 .package__nav--article-end {
 	@include oTypographySans(m, $load-progressively: true);
+	-webkit-font-smoothing: antialiased;
 	background-color: $dark;
 	margin-top: 20px;
 	margin-bottom: 2em;
