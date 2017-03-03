@@ -43,6 +43,10 @@ $pkgBlack: #252830;
 	top: 0;
 	height: 100%;
 	width: 50px;
+
+	@include oGridRespondTo($from: L) {
+		width: 80px;
+	}
 }
 
 .package__expander-bar--split-expanded {
