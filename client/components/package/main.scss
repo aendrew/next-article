@@ -6,7 +6,7 @@ $dark: getColor('slate');
 }
 
 .package__nav--in-article {
-	@include oTypographySans(m);
+	@include oTypographySans(m, $load-progressively: true);
 	margin-top: 2.5em;
 	margin-bottom: 2em;
 	border-top: 1px rgba(0, 0, 0, 0.2) solid;
@@ -15,7 +15,7 @@ $dark: getColor('slate');
 }
 
 .package__nav--article-end {
-	@include oTypographySans(m);
+	@include oTypographySans(m, $load-progressively: true);
 	background-color: $dark;
 	margin-top: 20px;
 	margin-bottom: 2em;
@@ -170,5 +170,5 @@ $dark: getColor('slate');
 }
 
 .package__text--strong {
-	@include oTypographySansBold(m);
+	@include oTypographySansBold(m, $load-progressively: true);
 }
