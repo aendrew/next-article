@@ -53,6 +53,10 @@ $dark: getColor('slate');
 	}
 }
 
+.package__expander-bar:hover:after {
+	opacity: 0.2;
+}
+
 .package__expander-bar--split-expanded {
 	background-color: $pkgYellow;
 	color: $dark;
