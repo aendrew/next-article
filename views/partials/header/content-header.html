@@ -16,9 +16,6 @@
 							{{/if}}
 						{{/if}}
 
-						{{#ifAll @root.flags.contentPackages package}}
-							<a href="{{ package.url }}">{{ package.title }}</a>
-						{{/ifAll}}
 						<h1 class="article-headline">
 							<span class="article-classifier__gap">{{title}}</span>
 							{{#ifAll @root.flags.premiumContentIndicator isPremium}}

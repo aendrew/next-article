@@ -130,6 +130,7 @@
 }
 
 .article__aside {
+	margin-top: 20px;
 	@include oGridRespondTo($from: L, $until: XL) {
 		width: 310px;
 	}

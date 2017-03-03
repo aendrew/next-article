@@ -43,6 +43,7 @@
 	@include oTypographySerifDisplayBold(xl, $load-progressively: true);
 
 	display: flex; // for responsive bottom border
+	position: relative; //so it appears above the full width background
 	flex-direction: column;
 	line-height: 1;
 

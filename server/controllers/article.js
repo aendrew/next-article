@@ -198,17 +198,15 @@ module.exports = function articleV3Controller (req, res, next, content) {
 		content.topper = null;
 	}
 
-	if(res.locals.flags.contentPackages && content.contains) {
+	if(res.locals.flags.contentPackages && content.containedIn && content.containedIn && content.containedIn.length) {
 
-		// all series content have toppers
-		if (!content.topper) {
-			content.topper = {
-				standfirst: content.standfirst,
-				headline: content.title,
-				theme: 'split-text-left',
-				bgColor: 'slate'
-			};
-		}
+		content.topper = {
+			standfirst: content.standfirst,
+			headline: content.title,
+			theme: 'full-bleed-offset',
+			backgroundColour: 'slate',
+			offsetFullWidth: true
+		};
 
 	}
 

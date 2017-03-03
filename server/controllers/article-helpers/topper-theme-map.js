@@ -13,6 +13,11 @@ const themeImageRatio = {
 
 module.exports = (topper) => {
 	if(topper && topper.theme && themeImageRatio.hasOwnProperty(topper.theme)) {
+
+		if(topper.theme === 'full-bleed-offset') {
+			topper.backgroundColour = 'pink';
+		}
+
 		return Object.assign({
 			themeImageRatio: themeImageRatio[topper.theme],
 			backgroundColour: 'pink' //default to pink bg

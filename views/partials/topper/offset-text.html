@@ -1,9 +1,13 @@
-<div class="article-topper--full-bleed-offset">
-	<div class="article-topper__offset-container" data-textbox-background="pink">
+<div class="article-topper--full-bleed-offset" data-o-grid-colspan="12 L8 XL7 XLoffset1">
+	<div class="article-topper__offset-container" data-textbox-background="{{topper.backgroundColour}}">
 		<div class="article-topper__text-box">
 			<div class="article-topper__text-wrapper">
-				{{#if primaryTag}}
-					{{> header/primary-tag}}
+				{{#if containedIn}}
+
+				{{else}}
+					{{#if primaryTag}}
+						{{> header/primary-tag}}
+					{{/if}}
 				{{/if}}
 				<div class="article-topper__headline" data-trackable="header">{{topper.headline}}</div>
 				{{#if topper.standfirst}}
@@ -11,21 +15,6 @@
 			{{/if}}
 			</div>
 		</div>
-		<div class="article-topper__utils">
-			{{> toolbar location='top'}}
-			<div class="article__time-byline">
-				{{#if publishedDate}}
-				<time class="article__timestamp o-date" data-o-component="o-date" datetime="{{#dateformat}}{{publishedDate}}{{/dateformat}}" data-o-date-js>
-					{{#dateformat "mmmm d, yyyy"}}{{publishedDate}}{{/dateformat}}
-				</time>
-				{{/if}}
-				{{#if byline}}
-				<p class="article__byline">{{#ifEquals contentType 'article'}}by: {{/ifEquals}}{{{byline}}}</p>
-				{{/if}}
-				{{#ifAll @root.flags.premiumContentIndicator isPremium}}
-				<span class="article-classifier">Premium</span>
-				{{/ifAll}}
-			</div>
-		</div>
+
 	</div>
 </div>

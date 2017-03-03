@@ -1,0 +1,16 @@
+<div class="article-topper__utils">
+	{{> toolbar location='top'}}
+	<div class="article__time-byline">
+		{{#if publishedDate}}
+		<time class="article__timestamp o-date" data-o-component="o-date" datetime="{{#dateformat}}{{publishedDate}}{{/dateformat}}" data-o-date-js>
+			{{#dateformat "mmmm d, yyyy"}}{{publishedDate}}{{/dateformat}}
+		</time>
+		{{/if}}
+		{{#if byline}}
+		<p class="article__byline">{{#ifEquals contentType 'article'}}by: {{/ifEquals}}{{{byline}}}</p>
+		{{/if}}
+		{{#ifAll @root.flags.premiumContentIndicator isPremium}}
+		<span class="article-classifier">Premium</span>
+		{{/ifAll}}
+			</div>
+		</div>
