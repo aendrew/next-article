@@ -131,7 +131,7 @@ $dark: getColor('slate');
 
 .package__content-item--current {
 	color: $pkgYellow;
-	border-right: $pkgYellow solid 1em;
+	border-right: $pkgYellow solid 15px;
 
 	padding: 1em;
 }
