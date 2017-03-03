@@ -1,8 +1,8 @@
 $pkgYellow: #ffec1a;
-$pkgBlack: #252830;
+$dark: getColor('slate');
 
 .package__nav--top {
-	background-color: $pkgBlack;
+	background-color: $dark;
 }
 
 .package__nav--in-article {
@@ -16,7 +16,7 @@ $pkgBlack: #252830;
 
 .package__nav--article-end {
 	@include oTypographySans(m);
-	background-color: $pkgBlack;
+	background-color: $dark;
 	margin-top: 20px;
 	margin-bottom: 2em;
 }
@@ -51,16 +51,16 @@ $pkgBlack: #252830;
 
 .package__expander-bar--split-expanded {
 	background-color: $pkgYellow;
-	color: $pkgBlack;
+	color: $dark;
 }
 
 .package__expander-bar--split-expanded:after {
 	background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-up?source=next-article&tint=%23ffec1a,%23ffec1a&format=svg);
-	background-color: $pkgBlack;
+	background-color: $dark;
 }
 
 .package__expander-bar--split-collapsed {
-	background-color: $pkgBlack;
+	background-color: $dark;
 	color: $pkgYellow;
 }
 
@@ -71,7 +71,7 @@ $pkgBlack: #252830;
 
 .package__expander-bar--solid-collapsed {
 	background-color: $pkgYellow;
-	color: $pkgBlack;
+	color: $dark;
 }
 
 .package__expander-bar--solid-collapsed:after {
@@ -88,7 +88,7 @@ $pkgBlack: #252830;
 	padding: 1em 0;
 	padding-left: 20px;
 	background-color: $pkgYellow;
-	color: $pkgBlack;
+	color: $dark;
 	font-size: 1.5em;
 	height: 50px;
 	margin-top: -20px;
@@ -111,7 +111,7 @@ $pkgBlack: #252830;
 	position: absolute;
 	right: 0;
 	z-index: 99;
-	background-color: $pkgBlack;
+	background-color: $dark;
 }
 
 .package__content-item {
@@ -162,7 +162,7 @@ $pkgBlack: #252830;
 }
 
 .package__highlight-background {
-	background-color: $pkgBlack;
+	background-color: $dark;
 }
 
 .package__highlight-text {
