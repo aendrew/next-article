@@ -168,3 +168,7 @@ $pkgBlack: #252830;
 .package__highlight-text {
 	color: $pkgYellow;
 }
+
+.package__text--strong {
+	@include oTypographySansBold(m);
+}
