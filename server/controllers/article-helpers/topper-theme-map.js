@@ -11,6 +11,15 @@ const themeImageRatio = {
 	'full-bleed-text': null
 };
 
+
+const myFtButtonVariant = (backgroundColour) => {
+	if(backgroundColour === 'pink' || backgroundColour === 'white') {
+		return 'uncolored';
+	} else {
+		return 'inverse';
+	}
+};
+
 module.exports = (topper) => {
 	if(topper && topper.theme && themeImageRatio.hasOwnProperty(topper.theme)) {
 
@@ -20,6 +29,7 @@ module.exports = (topper) => {
 
 		return Object.assign({
 			themeImageRatio: themeImageRatio[topper.theme],
+			myFtButtonVariant: myFtButtonVariant(topper.backgroundColour),
 			backgroundColour: 'pink' //default to pink bg
 		}, topper);
 	} else {

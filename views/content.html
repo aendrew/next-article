@@ -30,11 +30,7 @@
 		{{> package/nav package}}
 	{{/ifAll}}
 
-	{{#ifAll @root.flags.articleTopper topper}}
-		{{> topper/main}}
-	{{else}}
-		{{> header/content-header}}
-	{{/ifAll}}
+	{{> topper/main}}
 
 	{{> body-wrapper}}
 

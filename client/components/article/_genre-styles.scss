@@ -2,9 +2,7 @@ $brand-color: getColor('warm-1');
 
 .article--brand {
 
-	.article__header,
-	.follow-promo__header-logo,
-		.next-up__intro__header {
+	.article__header {
 		background: $brand-color;
 	}
 	&--headshot {
@@ -45,21 +43,4 @@ $brand-color: getColor('warm-1');
 .article__brand--title {
 	@include oTypographySerifDisplay(l, $load-progressively: true);
 	margin-left: 30px;
-}
-
-.article__header-headshot {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	width: 100px;
-	overflow: hidden;
-	@include oGridRespondTo(M) {
-		width: 150px;
-	}
-}
-
-.article__header-headshot--image {
-	max-width: 100%;
-	display: block;
-	margin-left: 8px;
 }

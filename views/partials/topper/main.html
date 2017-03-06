@@ -6,5 +6,10 @@
 {{#ifEquals topper.theme 'full-bleed-offset'}}
 	{{> topper/offset-image}}
 {{else}}
-	{{> topper/themed}}
+
+	{{#ifAll topper topper.theme}}
+		{{> topper/themed}}
+	{{else}}
+		{{> topper/basic}}
+	{{/ifAll}}
 {{/ifEquals}}

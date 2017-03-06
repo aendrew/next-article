@@ -21,13 +21,6 @@
 	margin-top: $spacing-unit / 2;
 }
 
-.article__header-time-byline {
-	@include oGridRespondTo(M) {
-		margin-right: 10px;
-		display: inline-block;
-	}
-}
-
 .article__header-actions {
 	@include oGridRespondTo(M) {
 		max-width: 25%;
@@ -37,18 +30,6 @@
 
 //ARTICLE META ELEMENTS
 
-.article__stand-first {
-	@include oTypographySansData('l', $load-progressively: true);
-	@include oTypographyFallbackFontSize('sansData', 20px);
-	line-height: 24px;
-
-	margin: 0 0 $spacing-unit / 4;
-	@include oGridRespondTo(L) {
-		@include oTypographySansDataSize('xl', $with-progressive-size: true);
-		@include oTypographyFallbackFontSize('sansData', 26px);
-		line-height: 27px;
-	}
-}
 
 .article__wrapper {
 	background-color: getColor('pink');
@@ -77,15 +58,6 @@
 
 .article__primary-theme {
 	margin: 0 0 5px;
-}
-
-.article__actions {
-	margin-top: 10px;
-	text-align: left;
-	@include oGridRespondTo(M) {
-		margin-top: 0;
-		text-align: right;
-	}
 }
 
 .article__main {
@@ -136,20 +108,6 @@
 	}
 	@include oGridRespondTo($from: XL) {
 		padding-left: 0;
-	}
-}
-
-.article__warning {
-	background-color: oColorsGetPaletteColor('warm-2');
-	padding: 14px;
-	display: block;
-	margin: 0.3em 0 0.8em;
-	> p {
-		@include oTypographySans('m', $load-progressively: true);
-		margin: 0;
-	}
-	&__link {
-		@include oTypographySansBold('m', $load-progressively: true);
 	}
 }
 
