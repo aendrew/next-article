@@ -1,0 +1,26 @@
+<div class="topper__tags">
+
+	{{#if containedIn}}
+
+	{{else}}
+		{{#if designGenre}}
+			<div class="topper__brand n-content-tag--with-follow" aria-label="part of the {{designGenre.prefLabel}} column">{{designGenre.prefLabel}}</div>
+		{{/if}}
+
+		{{#ifAll @root.flags.myFtApi @root.flags.articleFollowPrimayTag}}
+			<div class="topper__primary-theme">
+				<a href="{{primaryTag.relativeUrl}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="primary-theme" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
+				{{#ifEquals topper.backgroundColour 'pink'}}
+					{{>n-ui/myft/templates/follow variant='uncolored' conceptId=primaryTag.idV1 name=primaryTag.prefLabel taxonomy=primaryTag.taxonomy}}
+				{{else}}
+					{{#ifEquals topper.backgroundColour 'white'}}
+						{{>n-ui/myft/templates/follow variant='uncolored' conceptId=primaryTag.idV1 name=primaryTag.prefLabel taxonomy=primaryTag.taxonomy}}
+					{{else}}
+						{{>n-ui/myft/templates/follow variant='inverse' conceptId=primaryTag.idV1 name=primaryTag.prefLabel taxonomy=primaryTag.taxonomy}}
+					{{/ifEquals}}
+				{{/ifEquals}}
+			</div>
+		{{/ifAll}}
+
+	{{/if}}
+</div>
