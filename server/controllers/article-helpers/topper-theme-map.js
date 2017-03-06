@@ -23,14 +23,13 @@ const myFtButtonVariant = (backgroundColour) => {
 module.exports = (topper) => {
 	if(topper && topper.theme && themeImageRatio.hasOwnProperty(topper.theme)) {
 
-		if(topper.theme === 'full-bleed-offset') {
+		if(topper.theme === 'full-bleed-offset' || !topper.backgroundColour) {
 			topper.backgroundColour = 'pink';
 		}
 
 		return Object.assign({
 			themeImageRatio: themeImageRatio[topper.theme],
-			myFtButtonVariant: myFtButtonVariant(topper.backgroundColour),
-			backgroundColour: 'pink' //default to pink bg
+			myFtButtonVariant: myFtButtonVariant(topper.backgroundColour)
 		}, topper);
 	} else {
 		return null;
