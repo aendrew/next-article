@@ -158,6 +158,7 @@
 	}
 }
 
+
 @supports (object-fit: cover) {
 	.article-topper__slot-1 {
 		@include oGridRespondTo(L) {

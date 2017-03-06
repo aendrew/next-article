@@ -6,6 +6,8 @@
 		@include overlayText;
 	}
 
+	margin-bottom: 20px;
+
 	@include oGridRespondTo($until: S) {
 		.article-topper__slot-1 {
 			height: 0;
@@ -60,7 +62,7 @@
 
 	.article-topper__text-wrapper {
 		width: 100%;
-		padding: 20px 0 10px;
+		padding: 20px 0;
 	}
 
 	.article-topper__tags {
