@@ -1,200 +1,13 @@
 $pkgYellow: #ffec1a;
-$dark: getColor('slate');
+
+@import 'expander';
+@import 'contents';
+@import 'in-article-nav';
+@import 'end-article-nav';
 
 .package__nav {
 	@include oTypographySans(m, $load-progressively: true);
 	-webkit-font-smoothing: antialiased;
-}
-
-.package__nav--in-article {
-	margin-top: 2.5em;
-	margin-bottom: 2em;
-	border-top: 1px rgba(0, 0, 0, 0.2) solid;
-	border-left: 1px rgba(0, 0, 0, 0.2) solid;
-	padding: 18px 0 0 18px;
-}
-
-.package__nav--article-end {
-	margin-top: 20px;
-	margin-bottom: 2em;
-	@include oGridRespondTo($from: M) {
-		margin-left: 15px;
-		margin-right: 15px;
-	}
-	@include oGridRespondTo($from: L) {
-		margin-right: 10px;
-	}
-}
-
-.package__expander-toggle {
-	display: block;
-	width: 100%;
-	position: relative;
-}
-
-.package__expander-toggle:after {
-	background-repeat: no-repeat;
-	background-position: center;
-	content: "";
-	position: absolute;
-	right: 0;
-	top: 0;
-	height: 100%;
-	width: 50px;
-
-	@include oGridRespondTo($from: L) {
-		width: 80px;
-	}
-}
-
-.package__expander-toggle:hover:after {
-	opacity: 0.2;
-}
-
-.package__expander-toggle[aria-expanded="true"] {
-	background-color: $pkgYellow;
-	color: $dark;
-}
-
-.package__expander-toggle--split[aria-expanded="true"]:before {
-	content: '';
-	position: absolute;
-	left: 50%;
-	width: 100vw;
-	margin-left: -50vw;
-	background: inherit;
-	top: 0;
-	height: 100%;
-}
-
-.package__expander-toggle--split[aria-expanded="false"] {
-	background-color: $dark;
-	color: $pkgYellow;
-}
-
-.package__expander-toggle--solid[aria-expanded="false"] {
-	background-color: $pkgYellow;
-	color: $dark;
-}
-
-.package__expander-toggle[aria-expanded="true"] {
-	background-color: $pkgYellow;
-	color: $dark;
-}
-
-.package__expander-toggle[aria-expanded="true"]:after {
-	background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-up?source=next-article&tint=%23ffec1a,%23ffec1a&format=svg);
-	background-color: $dark;
-}
-
-.package__expander-toggle[aria-expanded="false"]:after {
-	background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-down?source=next-article&tint=%23252830,%23252830&format=svg);
-	background-color: $pkgYellow;
-}
-
-.package__expander-bar {
-	display: block;
-	padding: 0.5em 0.5em 0.5em 16px;
-	height: 40px;
-	box-sizing: border-box;
-	z-index: 1;
-	position: relative;
-	text-align: left;
-}
-
-.package__article-end-bar {
-	padding-bottom: 40px;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.package__article-end-title {
-	display: block;
-	padding: 1em 0;
-	padding-left: 20px;
-	height: 55px;
-	margin-top: -20px;
-}
-
-.package__article-end-teaser {
-	padding-top: 1em;
-	margin-top: -71px;
-	margin-right: 20px;
-	margin-left: 20px;
-
-	@include oGridRespondTo($from: M) {
-		margin-right: 0;
-	}
-}
-
-.package__contents {
-	width: 100%;
-	max-width: 490px;
-	position: absolute;
-	right: 0;
-	z-index: 99;
-}
-
-.package__content-item {
-	color: white;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.package__content-item--current {
-	color: $pkgYellow;
-	border-right: $pkgYellow solid 15px;
-
-	padding: 1em;
-}
-
-.package__content-item:last-child {
-	border: 0;
-}
-
-.package__link {
-	border: 0;
-	color: inherit;
-
-	display: block;
-	padding: 15px 15px 15px 20px;
-}
-
-.package__expander-toggle i {
-	display: none;
-}
-
-.package__in-article-container {
-	display: inline-block;
-	width: 100%;
-}
-
-.package__article-end-about {
-	color: white;
-	padding-left: 2em;
-	padding-right: 2em;
-	margin-top: 60px;
-}
-
-.package__article-end-about > p {
-	margin: 0;
-}
-
-.package__list {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-.package__highlight-background {
-	background-color: $dark;
-}
-
-.package__highlight-background--light {
-	background-color: $pkgYellow;
-	color: $dark;
-}
-
-.package__highlight-text {
-	color: $pkgYellow;
 }
 
 .package__text--m {
@@ -218,6 +31,19 @@ $dark: getColor('slate');
 	font-size: 24px;
 }
 // scss-lint:enable SelectorFormat
+
+.package__highlight-background {
+	background-color: getColor('slate');
+}
+
+.package__highlight-background--light {
+	background-color: $pkgYellow;
+	color: getColor('slate');
+}
+
+.package__highlight-text {
+	color: $pkgYellow;
+}
 
 .package__no-bottom-margin {
 	margin-bottom: 0;
