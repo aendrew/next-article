@@ -200,3 +200,11 @@ $dark: getColor('slate');
 .package__no-bottom-margin {
 	margin-bottom: 0;
 }
+
+.package__highlight-border.package__highlight-border {
+	border-color: $pkgYellow;
+}
+
+.package__article-end-teaser .package__highlight-border.package__highlight-border:after {
+	border-color: $pkgYellow;
+}
