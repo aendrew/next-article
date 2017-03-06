@@ -17,6 +17,13 @@ $dark: getColor('slate');
 .package__nav--article-end {
 	margin-top: 20px;
 	margin-bottom: 2em;
+	@include oGridRespondTo($from: M) {
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+	@include oGridRespondTo($from: L) {
+		margin-right: 10px;
+	}
 }
 
 .package__expander-toggle {
