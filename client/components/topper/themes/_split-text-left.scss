@@ -1,4 +1,4 @@
-.article-topper--split-text-left {
+.topper--split-text-left {
 	@include alignText(left);
 
 	@include oGridRespondTo(M, L) {

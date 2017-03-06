@@ -1,18 +1,18 @@
 // scss-lint:disable SelectorFormat
-.article-topper--full-bleed-text {
+.topper--full-bleed-text {
 	@include alignText(center);
 	@include resizeTextbox;
 
-	.article-topper__visual {
+	.topper__visual {
 		display: none;
 	}
 
-	.article-topper__tags,
-	.article-topper__text {
+	.topper__tags,
+	.topper__text {
 		width: inherit;
 	}
 
-	.article-topper__headline {
+	.topper__headline {
 		@include oGridRespondTo(M, L) {
 			@include headlineFontSize(52px);
 		}

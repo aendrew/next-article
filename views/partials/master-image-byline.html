@@ -1,6 +1,9 @@
 {{#if mainImageHTML}}
-	{{{mainImageHTML}}}
+	{{#unless topper}}
+		{{{mainImageHTML}}}
+	{{/unless}}
 {{/if}}
+
 {{> toolbar location='top'}}
 <div class="article__time-byline">
 	{{#if publishedDate}}

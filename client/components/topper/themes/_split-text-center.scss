@@ -1,4 +1,4 @@
-.article-topper--split-text-center {
+.topper--split-text-center {
 	@include alignText(left);
 
 	@include oGridRespondTo(S) {

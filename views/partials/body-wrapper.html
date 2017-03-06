@@ -13,19 +13,7 @@
 
 			<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
 
-				{{#if @root.flags.articleTopper}}
-					{{#ifEquals topper.theme 'full-bleed-offset'}}
-						{{> topper/offset-utils}}
-					{{/ifEquals}}
-				{{/if}}
-
-				{{#if @root.flags.articleTopper}}
-					{{#unless topper}}
-						{{> master-image-byline}}
-					{{/unless}}
-				{{else}}
-					{{> master-image-byline}}
-				{{/if}}
+				{{> master-image-byline}}
 
 
 				{{#ifAll isAudioArticle @root.flags.ftlabsAudioPlayer}}
