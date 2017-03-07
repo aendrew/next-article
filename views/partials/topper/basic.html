@@ -3,18 +3,17 @@
 		<div class="o-grid-row">
 			<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
 
-				<div class="topper__text-wrapper">
-					{{> topper/components/tags withBrand=false}}
+				{{> topper/components/tags withBrand=false}}
 
-					<h1 class="topper__headline">
-						<span class="article-classifier__gap">{{title}}</span>
-						{{#ifAll @root.flags.premiumContentIndicator isPremium}}
-							<span class="article-classifier">Premium</span>
-						{{/ifAll}}
-					</h1>
+				<h1 class="topper__headline">
+					<span class="article-classifier__gap">{{title}}</span>
+					{{#ifAll @root.flags.premiumContentIndicator isPremium}}
+						<span class="article-classifier">Premium</span>
+					{{/ifAll}}
+				</h1>
 
-					{{> topper/components/standfirst}}
-				</div>
+				{{> topper/components/standfirst}}
+				{{> topper/components/brand}}
 
 				{{> topper/components/headshot}}
 
