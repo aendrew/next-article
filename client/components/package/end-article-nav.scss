@@ -1,0 +1,45 @@
+.package__nav--article-end {
+	margin-top: 20px;
+	margin-bottom: 2em;
+	@include oGridRespondTo($from: M) {
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+	@include oGridRespondTo($from: L) {
+		margin-right: 10px;
+	}
+}
+
+.package__article-end-bar {
+	padding-bottom: 40px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.package__article-end-title {
+	display: block;
+	padding: 1em 0;
+	padding-left: 20px;
+	height: 55px;
+	margin-top: -20px;
+}
+
+.package__article-end-teaser {
+	padding-top: 1em;
+	margin-top: -71px;
+	margin-right: 20px;
+	margin-left: 20px;
+	@include oGridRespondTo($from: M) {
+		margin-right: 0;
+	}
+}
+
+.package__article-end-about {
+	color: white;
+	padding-left: 2em;
+	padding-right: 2em;
+	margin-top: 60px;
+}
+
+.package__article-end-about > p {
+	margin: 0;
+}
