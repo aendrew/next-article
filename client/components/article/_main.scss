@@ -1,35 +1,3 @@
-//ARTICLE HEADER
-.article__header {
-	position: relative;
-	background: getColor('pink');
-}
-
-.article__header--wrapper {
-	position: relative;
-	padding-bottom: 8px;
-}
-
-.article__header-inner {
-	padding-top: 12px;
-
-	@include oGridRespondTo(L) {
-		display: flex;
-	}
-}
-
-.article__header-secondary {
-	margin-top: $spacing-unit / 2;
-}
-
-.article__header-actions {
-	@include oGridRespondTo(M) {
-		max-width: 25%;
-		display: inline-block;
-	}
-}
-
-//ARTICLE META ELEMENTS
-
 
 .article__wrapper {
 	background-color: getColor('pink');
@@ -125,5 +93,3 @@
 	@include nGetImage('logo', 'brand-myft', getColorFor(title, text), 26);
 	width: 40px;
 }
-
-@import 'genre-styles';

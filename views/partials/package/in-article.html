@@ -1,14 +1,16 @@
-<section data-o-component="o-expander" class="package__nav--in-article o-expander" data-o-expander-shrink-to="hidden"
-	data-o-expander-collapsed-toggle-text="<div class='package__expander-bar package__expander-bar--solid-collapsed'><strong>Explore the whole series</strong></div>"
-	data-o-expander-expanded-toggle-text="<div class='package__expander-bar package__expander-bar--split-expanded'><strong>Explore the whole series</strong></div>">
-	<div>Series <strong>{{title}}</strong></div>
-	<p>{{description}}</p>
-	<button class="o-expander__toggle package__expander-toggle"></button>
-	<div class="o-expander__content">
-		{{#if shortenedPackage}}
-			{{> package/package-contents shortenedPackage}}
-		{{else}}
-			{{> package/package-contents contains}}
-		{{/if}}
-	</div>
-</section>
+<div class="package__in-article-container">
+	<section data-o-component="o-expander" class="package__nav package__nav--in-article o-expander" data-o-expander-shrink-to="hidden"
+		data-o-expander-collapsed-toggle-text="<div class='package__expander-bar package__text--m package__text--strong'>Explore the whole series</div>"
+		data-o-expander-expanded-toggle-text="<div class='package__expander-bar package__text--m package__text--strong'>Explore the whole series</div>">
+		<div class="package__text--l">Series <span class="package__text--l package__text--strong">{{title}}</span></div>
+		<div class="package__text--m">{{{descriptionHTML}}}</div>
+		<button class="o-expander__toggle package__expander-toggle package__expander-toggle--solid"><span class="n-util-visually-hidden">Explore the whole series</span></button>
+		<div class="o-expander__content package__highlight-background">
+			{{#if shortenedPackage}}
+				{{> package/package-contents shortenedPackage}}
+			{{else}}
+				{{> package/package-contents contains}}
+			{{/if}}
+		</div>
+	</section>
+</div>

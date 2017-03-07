@@ -21,7 +21,7 @@ module.exports = function (req, res, next, payload) {
 	const mp4s = payload.attachments.filter(attachment => attachment.mediaType === 'video/mp4' && 'codec' in attachment);
 
 	if (mp4s.length) {
-		payload.brightcoveData = {
+		payload.videoData = {
 			videoStillURL: payload.mainImage && payload.mainImage.url,
 			renditions: mp4s.map(rendition => ({
 				url: rendition.url,

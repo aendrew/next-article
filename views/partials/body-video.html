@@ -3,17 +3,17 @@
 		<div class="o-grid-container">
 			<div class="o-grid-row">
 				<div class="video__container" data-o-grid-colspan="12">
-					{{#if attachments}}
+					{{#if videoData}}
 						<div
 							class="o-video"
 							{{#if autoplay}}data-video-autoplay{{/if}}
 							data-o-component="o-video"
 							data-o-video-id="{{video.id}}"
+							data-o-video-data="{{json videoData}}"
 							{{#if captions}}data-o-video-captions-url="{{captions.url}}"{{/if}}
-							{{#if brightcoveData}}data-o-video-data="{{json brightcoveData}}"{{/if}}
 						>
 								{{! Add a non-js fallback for core users }}
-								<video controls class="video video__core-fallback" poster="{{#resize 1024}}{{mainImage.url}}{{/resize}}" src="{{attachments.0.url}}" preload="none" crossorigin>
+								<video controls class="video video__core-fallback" poster="{{#resize 1204}}{{videoData.videoStillURL}}{{/resize}}" src="{{videoData.renditions.0.url}}" preload="none" crossorigin>
 									{{#if captions}}
 										<track label="English" kind="captions" srclang="en" src="{{captions.url}}" default crossorigin>
 									{{/if}}

@@ -22,8 +22,6 @@
 	@import 'n-image/main';
 	@import 'components/article/main';
 	@import 'components/classifier/main';
-	@import 'components/headline/main';
-	@import 'components/read-next/main';
 	@import 'components/suggested-reads/main';
 	@import 'components/topper/main';
 	$o-expander-is-silent: false;
@@ -153,7 +151,7 @@ $o-video-is-silent: false;
 		border-bottom: 4px solid oColorsGetPaletteColor(black);
 		position: absolute;
 		z-index: 1;
-}
+ }
 
 }
 
