@@ -1,13 +1,11 @@
 machine:
   node:
     version: 6.6.0
-
 deployment:
   production:
     branch: master
     commands:
-      - make deploy
-
+      - make deploy-by-day
 notify:
   webhooks:
-    - url: https://ft-next-webhooks.herokuapp.com/circleci
+    - url: 'https://ft-next-webhooks.herokuapp.com/circleci'
