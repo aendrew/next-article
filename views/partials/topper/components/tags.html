@@ -3,20 +3,20 @@
 	{{#if containedIn}}
 
 	{{else}}
-		{{#if designGenre}}
+		{{#ifAll withBrand designGenre}}
 			<div class="topper__brand n-content-tag--with-follow" aria-label="part of the {{designGenre.prefLabel}} column">{{designGenre.prefLabel}}</div>
-		{{/if}}
+		{{/ifAll}}
 
+		<div class="topper__primary-theme">
 		{{#ifAll @root.flags.myFtApi @root.flags.articleFollowPrimayTag}}
-			<div class="topper__primary-theme">
 				<a href="{{primaryTag.relativeUrl}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="primary-theme" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
 				{{#if topper.myFtButtonVariant}}
 					{{>n-ui/myft/templates/follow variant=topper.myFtButtonVariant conceptId=primaryTag.idV1 name=primaryTag.prefLabel taxonomy=primaryTag.taxonomy}}
 				{{else}}
 					{{>n-ui/myft/templates/follow variant='standard' conceptId=primaryTag.idV1 name=primaryTag.prefLabel taxonomy=primaryTag.taxonomy}}
 				{{/if}}
-			</div>
 		{{/ifAll}}
+		</div>
 
 	{{/if}}
 </div>

@@ -3,13 +3,12 @@
 	<p>{{{standfirst}}}</p>
 </header>
 
-{{#ifEquals topper.theme 'full-bleed-offset'}}
+{{#ifEquals topper.template 'offset'}}
 	{{> topper/offset-image}}
-{{else}}
-
-	{{#ifAll topper topper.theme}}
-		{{> topper/themed}}
-	{{else}}
-		{{> topper/basic}}
-	{{/ifAll}}
+{{/ifEquals}}
+{{#ifEquals topper.template 'themed'}}
+	{{> topper/themed}}
+{{/ifEquals}}
+{{#ifEquals topper.template 'basic'}}
+	{{> topper/basic}}
 {{/ifEquals}}

@@ -11,27 +11,49 @@ const themeImageRatio = {
 	'full-bleed-text': null
 };
 
+const getTopperSettings = (content, flags) => {
+	if(flags.articleTopper && content.topper && content.topper.theme && themeImageRatio.hasOwnProperty(content.topper.theme)) {
+
+		const backgroundColour = content.topper.theme === 'full-bleed-offset' ? 'pink' : (content.topper.backgroundColour || 'pink');
+		return {
+			theme: content.topper.theme,
+			template: content.topper.theme === 'full-bleed-offset' ? 'offset' : 'themed',
+			themeImageRatio: themeImageRatio[content.topper.theme],
+			backgroundColour,
+			myFtButtonVariant: myFtButtonVariant(backgroundColour)
+		};
+	} else if (flags.contentPackages && content.containedIn && content.containedIn.length) {
+		return {
+			theme: 'full-bleed-offset',
+			template: 'offset',
+			backgroundColour: 'slate',
+			myFtButtonVariant: myFtButtonVariant('slate')
+		};
+	} else if(content.designGenre) {
+		return {
+			theme: 'branded',
+			template: 'basic',
+			backgroundColour: 'warm-1',
+			myFtButtonVariant: 'standard'
+		};
+	} else {
+		return {
+			theme: null,
+			template: 'basic',
+			backgroundColour: 'pink',
+			myFtButtonVariant: myFtButtonVariant('pink')
+		};
+	}
+};
 
 const myFtButtonVariant = (backgroundColour) => {
-	if(backgroundColour === 'pink' || backgroundColour === 'white') {
+	if(!backgroundColour || ['pink', 'warm-1', 'white'].includes(backgroundColour)) {
 		return 'uncolored';
 	} else {
 		return 'inverse';
 	}
 };
 
-module.exports = (topper) => {
-	if(topper && topper.theme && themeImageRatio.hasOwnProperty(topper.theme)) {
-
-		if(topper.theme === 'full-bleed-offset' || !topper.backgroundColour) {
-			topper.backgroundColour = 'pink';
-		}
-
-		return Object.assign({
-			themeImageRatio: themeImageRatio[topper.theme],
-			myFtButtonVariant: myFtButtonVariant(topper.backgroundColour)
-		}, topper);
-	} else {
-		return null;
-	};
+module.exports = (content, flags) => {
+	return Object.assign({}, content.topper, getTopperSettings(content, flags));
 }
