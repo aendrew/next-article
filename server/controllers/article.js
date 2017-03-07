@@ -206,7 +206,7 @@ module.exports = function articleV3Controller (req, res, next, content) {
 				standfirst: content.standfirst,
 				headline: content.title,
 				theme: 'split-text-left',
-				bgColor: 'slate'
+				backgroundColour: 'pink'
 			};
 		}
 

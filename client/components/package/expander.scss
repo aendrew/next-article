@@ -1,0 +1,82 @@
+$pkgYellow: #ffec1a;
+
+.package__expander-bar {
+	display: block;
+	padding: 0.5em 0.5em 0.5em 16px;
+	height: 40px;
+	box-sizing: border-box;
+	z-index: 1;
+	position: relative;
+	text-align: left;
+}
+
+.package__expander-toggle {
+	display: block;
+	width: 100%;
+	position: relative;
+}
+
+.package__expander-toggle:after {
+	background-repeat: no-repeat;
+	background-position: center;
+	content: "";
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 100%;
+	width: 50px;
+	@include oGridRespondTo($from: L) {
+		width: 80px;
+	}
+}
+
+.package__expander-toggle:hover:after {
+	opacity: 0.2;
+}
+
+.package__expander-toggle--split[aria-expanded="true"]:before {
+	content: '';
+	position: absolute;
+	left: 50%;
+	width: 100vw;
+	margin-left: -50vw;
+	background: inherit;
+	top: 0;
+	height: 100%;
+}
+
+.package__expander-toggle i {
+	display: none;
+}
+
+// theme: extra
+
+.package__expander-toggle[aria-expanded="true"] {
+	background-color: $pkgYellow;
+	color: getColor('slate');
+}
+
+.package__expander-toggle--split[aria-expanded="false"] {
+	background-color: getColor('slate');
+	color: $pkgYellow;
+}
+
+.package__expander-toggle--solid[aria-expanded="false"] {
+	background-color: $pkgYellow;
+	color: getColor('slate');
+}
+
+.package__expander-toggle[aria-expanded="true"] {
+	background-color: $pkgYellow;
+	color: getColor('slate');
+}
+
+.package__expander-toggle[aria-expanded="true"]:after {
+	background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-up?source=next-article&tint=%23ffec1a,%23ffec1a&format=svg);
+	background-color: getColor('slate');
+}
+
+.package__expander-toggle[aria-expanded="false"]:after {
+	background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-down?source=next-article&tint=%23252830,%23252830&format=svg);
+	background-color: $pkgYellow;
+}

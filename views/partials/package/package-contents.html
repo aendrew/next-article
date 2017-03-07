@@ -1,14 +1,16 @@
-<ul class="package__contents">
+<ul class="package__list">
 	{{#each this}}
 		{{#ifEquals id @root.context.current.id}}
-			<li class="package__content-item package__content-item--current">
+			<li class="package__content-item package__content-item--current package__text--m">
 				{{#ifEquals @root.package.sequence 'ordered'}}{{sequenceId}}{{/ifEquals}}
 				{{@root.title}}
 			</li>
 		{{else}}
 			<li class="package__content-item">
-				{{#ifEquals @root.package.sequence 'ordered'}}{{sequenceId}}{{/ifEquals}}
-				<a href="{{url}}" class="package__link">{{title}}</a>
+				<a href="{{url}}" class="package__link package__text--m">
+					{{#ifEquals @root.package.sequence 'ordered'}}{{sequenceId}}{{/ifEquals}}
+					{{title}}
+				</a>
 			</li>
 		{{/ifEquals}}
 	{{/each}}

@@ -1,18 +1,5 @@
-const trim = (content) => {
-	let trimmedTitle;
-	if (content.title.indexOf(':')) {
-		trimmedTitle = content.title
-			.substring(content.title.indexOf(':') + 2);
-	}
-
-	return Object.assign({}, content, {
-		url: content.relativeUrl,
-		title: trimmedTitle ? trimmedTitle : content.title
-	});
-};
-
-const moveToTopOfPackage = (top, pkg) => {
-	return [].concat(top, pkg.filter(x => x !== top));
+const placeFirst = ({ first, pkg }) => {
+	return [].concat(first, pkg.filter(x => x !== first));
 };
 
 module.exports = function (article) {
@@ -21,8 +8,8 @@ module.exports = function (article) {
 	if(!(contains || containedIn.length)) {
 		return;
 	}
+
 	const contentPackage = containedIn.length ? containedIn[0] : {};
-	contentPackage.contains = contentPackage ? contentPackage.contains.map(trim) : contains;
 
 	// CONTEXT INFO
 	const currentIndex = contentPackage.contains.findIndex(item => item.id === id);
@@ -50,10 +37,17 @@ module.exports = function (article) {
 			item.sequenceId = `PART ${contentPackage.contains.indexOf(item) + 1}`
 		));
 	} else {
-		contentPackage.contains = moveToTopOfPackage(context.current, contentPackage.contains);
-		if (contentPackage.shortenedPackage) contentPackage.shortenedPackage = moveToTopOfPackage(context.current, contentPackage.shortenedPackage);
+		contentPackage.contains = placeFirst({
+			first: context.current,
+			pkg: contentPackage.contains
+		});
+		if (contentPackage.shortenedPackage) {
+			contentPackage.shortenedPackage = placeFirst({
+				first: context.current,
+				pkg: contentPackage.shortenedPackage
+			});
+		}
 	}
-
 
 	return {
 		package: contentPackage,
