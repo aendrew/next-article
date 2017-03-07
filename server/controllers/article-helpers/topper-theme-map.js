@@ -20,7 +20,8 @@ const getTopperSettings = (content, flags) => {
 			template: content.topper.theme === 'full-bleed-offset' ? 'offset' : 'themed',
 			themeImageRatio: themeImageRatio[content.topper.theme],
 			backgroundColour,
-			myFtButtonVariant: myFtButtonVariant(backgroundColour)
+			myFtButtonVariant: myFtButtonVariant(backgroundColour),
+			includesImage: content.topper.theme !== 'full-bleed-text'
 		};
 	} else if (flags.contentPackages && content.containedIn && content.containedIn.length) {
 		return {
