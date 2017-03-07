@@ -1,6 +1,8 @@
 @import 'n-ui/main';
 @import 'n-ui/myft/main';
 @import 'n-ui/myft-hint/main';
+$n-notification-is-silent: false;
+@import 'n-ui/notification/main';
 
 @include nUiStylesheetStart('head');
 	@import 'n-ui/tour-tip/main';
