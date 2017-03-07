@@ -1,29 +1,30 @@
-<header class="topper topper--{{topper.theme}} o-grid-container{{#if designGenre.headshot}} topper--has-headshot{{/if}}" data-trackable="header" data-textbox-background="{{topper.backgroundColour}}">
+<header class="topper topper--{{topper.theme}} {{#if designGenre.headshot}} topper--has-headshot{{/if}}" data-trackable="header" data-textbox-background="{{topper.backgroundColour}}">
+	<div class="o-grid-container">
+		<div class="o-grid-row">
+			<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
 
-	<div class="o-grid-row">
-		<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
+				<div class="topper__text-wrapper">
+					{{> topper/components/tags withBrand=false}}
 
-			<div class="topper__text-wrapper">
-				{{> topper/components/tags withBrand=false}}
+					<h1 class="topper__headline">
+						<span class="article-classifier__gap">{{title}}</span>
+						{{#ifAll @root.flags.premiumContentIndicator isPremium}}
+							<span class="article-classifier">Premium</span>
+						{{/ifAll}}
+					</h1>
 
-				<h1 class="topper__headline">
-					<span class="article-classifier__gap">{{title}}</span>
-					{{#ifAll @root.flags.premiumContentIndicator isPremium}}
-						<span class="article-classifier">Premium</span>
-					{{/ifAll}}
-				</h1>
+					{{> topper/components/standfirst}}
+				</div>
 
-				{{> topper/components/standfirst}}
+				{{> topper/components/headshot}}
+
 			</div>
 
-			{{> topper/components/headshot}}
+			<aside class="o-grid-remove-gutters--XL" data-o-grid-colspan="hide L4 XL3 XLoffset1">
+				{{> topper/components/read-next article=readNextArticle}}
+			</aside>
 
 		</div>
-
-		<aside class="o-grid-remove-gutters--XL" data-o-grid-colspan="hide L4 XL3 XLoffset1">
-			{{> topper/components/read-next article=readNextArticle}}
-		</aside>
-
 	</div>
 
 
