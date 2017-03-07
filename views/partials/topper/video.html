@@ -1,8 +1,8 @@
-<header class="video__header" data-trackable="header">
-	<div class="article__header-primary">
+<header class="topper video__header" data-trackable="header">
+	<div>
 		<div class="video__header-info n-util-clearfix">
 			<div class="video__share-container">
-				{{> toolbar}}
+				{{> toolbar inverse=true}}
 			</div>
 			{{#if primaryTag}}
 				<a href="{{primaryTag.relativeUrl}}" class="n-content-tag n-content-tag--medium standalone-teaser-heading" data-trackable="primary-theme" aria-label="posted in category {{primaryTag.prefLabel}}" data-concept-id="{{primaryTag.idV1}}">{{primaryTag.prefLabel}}</a>
@@ -12,8 +12,6 @@
 			</span>
 		</div>
 
-		<h1 class="article-headline">
-			<span class="article-classifier__gap">{{title}}</span>
-		</h1>
+		{{>topper/components/headline}}
 	</div>
 </header>

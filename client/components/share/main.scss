@@ -120,7 +120,7 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 @include nUiStylesheetEnd('head');
 
 
-
+@include oShareInverse('o-share');
 // Lazy load all the icons
 .article__share {
 	$icon-size: 40;
