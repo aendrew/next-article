@@ -55,27 +55,29 @@ module.exports = {
 	init: () => {
 		getInitialEngagement();
 
-		const rumIndicatorEl = document.querySelector('.comments__rum-indicator');
-		const rumObserver = new IntersectionObserver(
-			() => {
-				window.FT.commentsRumInView = Date.now();
+		if (window.IntersectionObserver) {
+			const rumIndicatorEl = document.querySelector('.comments__rum-indicator');
+			const rumObserver = new IntersectionObserver(
+				() => {
+					window.FT.commentsRumInView = Date.now();
 
-				broadcast('oTracking.event', {
-					action: 'view',
-					category: 'comments',
-					context: {
-						product: 'next',
-						source: 'next-article',
-						uiIsDelayed: !window.FT.commentsRumLoaded,
-						userEngagement: initialCommentEngagement
-					}
-				});
-				logCommentEngagement('passive')
-				rumObserver.unobserve(rumIndicatorEl);
-			},
-			{ rootMargin: '0px' }
-		);
-		rumObserver.observe(rumIndicatorEl);
+					broadcast('oTracking.event', {
+						action: 'view',
+						category: 'comments',
+						context: {
+							product: 'next',
+							source: 'next-article',
+							uiIsDelayed: !window.FT.commentsRumLoaded,
+							userEngagement: initialCommentEngagement
+						}
+					});
+					logCommentEngagement('passive')
+					rumObserver.unobserve(rumIndicatorEl);
+				},
+				{ rootMargin: '0px' }
+			);
+			rumObserver.observe(rumIndicatorEl);
+		}
 
 		document.body.addEventListener('oComments.widget.renderComplete', () => {
 			window.FT.commentsRumLoaded = Date.now();
