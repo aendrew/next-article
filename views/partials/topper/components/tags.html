@@ -1,6 +1,6 @@
 <div class="topper__tags">
 
-	{{#if containedIn}}
+	{{#ifAll @root.flags.contentPackages containedIn}}
 
 	{{else}}
 		{{#ifAll withBrand designGenre}}
@@ -18,5 +18,5 @@
 		{{/ifAll}}
 		</div>
 
-	{{/if}}
+	{{/ifAll}}
 </div>
