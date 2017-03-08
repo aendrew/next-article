@@ -32,8 +32,17 @@ const getTopperSettings = (content, flags) => {
 		return Object.assign(topperProperties, extraProperty);
 
 	} else if (flags.contentPackages && content.containedIn && content.containedIn.length) {
+<<<<<<< HEAD
 		return allProperties('full-bleed-offset', 'offset', 'slate', true, topperOrLeadImages)
 
+=======
+		return {
+			theme: 'full-bleed-offset',
+			template: 'offset',
+			backgroundColour: 'pink', //TODO make the background work
+			myFtButtonVariant: myFtButtonVariant('pink')
+		};
+>>>>>>> 87ab56d9c4cc547334f45fe232b1e66a61bc81b7
 	} else if(content.designGenre) {
 		const topperProperties = basicProperties('branded', 'basic', 'warm-1');
 
