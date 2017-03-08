@@ -12,16 +12,19 @@ const themeImageRatio = {
 };
 
 const getTopperSettings = (content, flags) => {
-	if(flags.articleTopper && content.topper && content.topper.theme && themeImageRatio.hasOwnProperty(content.topper.theme)) {
+	//TODO: change to layout only when migration is complete
+	const themeOrLayout = content.topper.theme || content.topper.layout
 
-		const backgroundColour = content.topper.theme === 'full-bleed-offset' ? 'pink' : (content.topper.backgroundColour || 'pink');
+	if(flags.articleTopper && content.topper && themeOrLayout && themeImageRatio.hasOwnProperty(themeOrLayout)) {
+
+		const backgroundColour = themeOrLayout === 'full-bleed-offset' ? 'pink' : (content.topper.backgroundColour || 'pink');
 		return {
-			theme: content.topper.theme,
-			template: content.topper.theme === 'full-bleed-offset' ? 'offset' : 'themed',
-			themeImageRatio: themeImageRatio[content.topper.theme],
+			layout: themeOrLayout,
+			template: themeOrLayout === 'full-bleed-offset' ? 'offset' : 'themed',
+			themeImageRatio: themeImageRatio[themeOrLayout],
 			backgroundColour,
 			myFtButtonVariant: myFtButtonVariant(backgroundColour),
-			includesImage: content.topper.theme !== 'full-bleed-text'
+			includesImage: themeOrLayout !== 'full-bleed-text'
 		};
 	} else if (flags.contentPackages && content.containedIn && content.containedIn.length) {
 		return {
