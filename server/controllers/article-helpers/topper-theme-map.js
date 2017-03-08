@@ -27,8 +27,8 @@ const getTopperSettings = (content, flags) => {
 		return {
 			theme: 'full-bleed-offset',
 			template: 'offset',
-			backgroundColour: 'slate',
-			myFtButtonVariant: myFtButtonVariant('slate')
+			backgroundColour: 'pink', //TODO make the background work
+			myFtButtonVariant: myFtButtonVariant('pink')
 		};
 	} else if(content.designGenre) {
 		return {
