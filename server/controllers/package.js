@@ -1,4 +1,5 @@
 const logger = require('@financial-times/n-logger').default;
+const topperThemeMap = require('./article-helpers/topper-theme-map');
 
 module.exports = function packageController (req, res, next, content) {
 	const asyncWorkToDo = [
@@ -16,6 +17,8 @@ module.exports = function packageController (req, res, next, content) {
 
 
 	content.url = content.webUrl.replace('https://www.ft.com', '');
+
+	content.topper = topperThemeMap(content, res.locals.flags);
 
 	content.isSpecialReport = !!content.metadata.find(tag => tag.prefLabel === 'Special Report');
 

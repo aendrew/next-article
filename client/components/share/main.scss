@@ -8,8 +8,7 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 
 	.article__share {
 		position: relative;
-		margin-top: 15px;
-		padding: 5px 0 20px;
+		padding: 0 0 20px;
 		border-bottom: 1px solid getColor('warm-3');
 		clear: left;
 
@@ -121,7 +120,7 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 @include nUiStylesheetEnd('head');
 
 
-
+@include oShareInverse('o-share');
 // Lazy load all the icons
 .article__share {
 	$icon-size: 40;

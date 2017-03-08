@@ -1,25 +1,24 @@
-.article-topper--full-bleed-image-right {
+.topper--full-bleed-image-right {
+
+	padding: 0;
+
 	@include alignText(left);
 	@include oGridRespondTo(S) {
 		@include overlayText;
 		@include fullBleedImage;
 		@include alignText(right);
 
-		.article-topper__text {
+		.topper__text {
 			width: 50%;
 			float: right;
 		}
 	}
 
-	.article-topper__text {
+	.topper__text {
 		width: 100%;
 	}
 
-	.article-topper__text-wrapper {
+	.topper__text-wrapper {
 		float: right;
-	}
-
-	.article-topper__tags {
-		width: inherit;
 	}
 }

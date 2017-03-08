@@ -1,7 +1,7 @@
 // scss-lint:disable SelectorFormat
 
 @mixin colorBorder($color) {
-	.article-topper__headline::after {
+	.topper__headline::after {
 		border-bottom: 6px solid $color;
 		@include oGridRespondTo($from: L) {
 			border-bottom-width: 8px;
@@ -9,7 +9,7 @@
 	}
 }
 
-$colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
+$colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate', 'warm-1';
 @each $color in $colors {
 	[data-textbox-background~='#{$color}'] {
 		$text-color: black;
@@ -20,8 +20,8 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 		@include colorBorder($text-color);
 		background-color: oColorsGetPaletteColor('#{$color}');
 		color: $text-color;
-		@if $color == 'pink' {
-			.article-topper__tags {
+		@if $color == 'pink' or $color == 'warm-1' {
+			.topper__tags {
 				color: oColorsGetPaletteColor('claret');
 			}
 		}
@@ -30,7 +30,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 
 @mixin alignText($position) {
 	$value: ("left": flex-start, "center": center, "right": flex-end);
-	.article-topper__headline::after {
+	.topper__headline::after {
 		content: '';
 		align-self: map-get($value, #{$position});
 		width: 120px;
@@ -41,27 +41,27 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 		};
 	}
 
-	.article-topper__text-wrapper {
+	.topper__text-wrapper {
 		text-align: $position;
 		align-self: map-get($value, #{$position});
 	}
 
-	.article-topper__tags {
+	.topper__tags {
 		justify-content: map-get($value, #{$position});
 	}
 }
 
 @mixin resizeTextbox {
-	.article-topper__text-wrapper {
+	.topper__text-wrapper {
 		width: 100%;
 		padding: 0;
 	}
 
-	.article-topper__headline {
+	.topper__headline {
 		margin-top: 20px;
 	}
 
-	.article-topper__stand-first {
+	.topper__standfirst {
 		@include oGridRespondTo(M) {
 			width: 50%;
 			margin: 0 auto;
@@ -70,7 +70,7 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 }
 
 @mixin overlayText {
-	.article-topper__background {
+	.topper__background {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -88,19 +88,19 @@ $colors: 'white', 'black', 'claret', 'blue', 'pink', 'slate';
 }
 
 @mixin fullBleedImage {
-	.article-topper__text-box {
+	.topper__text-box {
 		background: transparent;
 	}
-	.article-topper__visual {
+	.topper__visual {
 		width: 100%;
 	}
-	.article-topper__text-wrapper {
+	.topper__text-wrapper {
 		z-index: 1;
 	}
 }
 
 @mixin stackTags {
-	.article-topper__tags {
+	.topper__tags {
 		flex-direction: column;
 		justify-content: center;
 		padding-bottom: 15px;

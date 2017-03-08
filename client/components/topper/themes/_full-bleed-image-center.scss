@@ -1,4 +1,7 @@
-.article-topper--full-bleed-image-center {
+.topper--full-bleed-image-center {
+
+	padding: 0;
+
 	@include alignText(left);
 	@include oGridRespondTo(S) {
 		@include alignText(center);
@@ -7,8 +10,7 @@
 		@include resizeTextbox;
 	}
 
-	.article-topper__tags,
-	.article-topper__text {
+	.topper__text {
 		width: inherit;
 	}
 }

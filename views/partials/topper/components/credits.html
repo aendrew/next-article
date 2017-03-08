@@ -1,0 +1,7 @@
+<div class="topper__credits" data-o-grid-colspan="12 L8 XL7 XLoffset1">
+	{{#each topper.images}}
+		{{#ifEquals type 'square'}}<span class='topper__s-credits' data-o-grid-colspan="12 Mhide">{{copyright}}</span>{{/ifEquals}}
+		{{#ifEquals type 'standard'}}<span class='topper__m-credits'  data-o-grid-colspan="hide M12 Lhide">{{copyright}}</span>{{/ifEquals}}
+		{{#ifEquals type 'wide'}}<span class='topper__l-credits' data-o-grid-colspan="hide L12">{{copyright}}</span>{{/ifEquals}}
+	{{/each}}
+</div>

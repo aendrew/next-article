@@ -1,9 +1,0 @@
-.article-headline {
-	@include oTypographySerifDisplay('l', $load-progressively: true);
-
-	margin: 0;
-
-	@include oGridRespondTo(L) {
-		@include oTypographySerifDisplaySize('xl', $with-progressive-size: true);
-	}
-}

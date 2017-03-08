@@ -1,0 +1,34 @@
+<div class="topper topper--{{topper.theme}}" aria-hidden="true" role="presentation">
+	<div class="topper__slot-1">
+		<div class="topper__background" data-textbox-background="{{topper.backgroundColour}}">
+			<div class="topper__text-box o-grid-container">
+				<div class="topper__text-wrapper">
+
+					{{> topper/components/tags withBrand=true}}
+
+					<div class="topper__text">
+						{{> topper/components/headline size="large"}}
+
+						{{> topper/components/standfirst}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="topper__visual">
+			{{#ifEquals topper.themeImageRatio 'full-bleed'}}
+				{{> topper/components/picture-full-bleed}}
+			{{/ifEquals}}
+
+			{{#ifEquals topper.themeImageRatio 'split'}}
+				{{> topper/components/picture-split}}
+			{{/ifEquals}}
+		</div>
+	</div>
+
+	<div class="topper__slot-2 o-grid-container">
+		<div class="o-grid-row">
+			{{> topper/components/credits}}
+		</div>
+	</div>
+
+</div>

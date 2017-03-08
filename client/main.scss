@@ -24,9 +24,8 @@ $n-notification-is-silent: false;
 	@import 'n-image/main';
 	@import 'components/article/main';
 	@import 'components/classifier/main';
-	@import 'components/headline/main';
-	@import 'components/read-next/main';
 	@import 'components/suggested-reads/main';
+	@import 'components/topper/main';
 	$o-expander-is-silent: false;
 	@import 'o-expander/main';
 	@import 'components/package/main'; // TODO: rename
@@ -58,7 +57,6 @@ $o-video-is-silent: false;
 // Print Styling
 @media print {
 	body > section,
-	.article__actions,
 	.article__aside,
 	.article__body > div,
 	.article__comments,
@@ -155,7 +153,7 @@ $o-video-is-silent: false;
 		border-bottom: 4px solid oColorsGetPaletteColor(black);
 		position: absolute;
 		z-index: 1;
-}
+	}
 
 }
 

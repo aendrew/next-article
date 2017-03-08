@@ -1,18 +1,70 @@
-@import 'themes';
+@import 'mixins';
+
+.topper {
+	padding: 10px 0;
+}
+
+.topper__headline {
+	@include oTypographySerifDisplay('l', $load-progressively: true);
+	margin: 0 0 20px;
+
+	@include oGridRespondTo(L) {
+		@include oTypographySerifDisplaySize('xl', $with-progressive-size: true);
+	}
+
+	&--large {
+		@include headlineFontSize(32px);
+		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
+
+		display: flex; // for responsive bottom border
+		position: relative; //so it appears above the full width background
+		flex-direction: column;
+		line-height: 1;
+		margin: 0;
+
+		@include oGridRespondTo(S) {
+			@include headlineFontSize(38px);
+		}
+
+		@include oGridRespondTo(L) {
+			@include headlineFontSize(52px);
+		}
+	}
+}
+
+.topper__standfirst {
+	@include oTypographySans(m, $load-progressively: true);
+	opacity: 0.8;
+	font-size: round(18px * 0.9);
+	line-height: 1.4;
+
+	.o-typography--loaded-sans & {
+		font-size: 18px;
+		line-height: 1.2;
+	}
+
+	@include oGridRespondTo(L) {
+		font-size: round(22px * 0.9);
+		.o-typography--loaded-sans & {
+			font-size: 22px;
+		}
+	}
+
+}
 
 @include oGridRespondTo($until: S) {
 	@include stackTags;
-	.article-topper__tags {
+	.topper__tags {
 		width: inherit;
 	}
 
-	.article-topper__text-box {
+	.topper__text-box {
 		padding: 0 5%;
 	}
 }
 
 // default and only size for the full bleed container
-.article-topper__slot-1 {
+.topper__slot-1 {
 	width: 100%;
 	height: 50vh;
 	position: relative;
@@ -28,7 +80,7 @@
 }
 
 //default text setting
-.article-topper__text-box {
+.topper__text-box {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -38,45 +90,8 @@
 	-webkit-font-smoothing: antialiased;
 }
 
-.article-topper__headline {
-	@include headlineFontSize(32px);
-	@include oTypographySerifDisplayBold(xl, $load-progressively: true);
-
-	display: flex; // for responsive bottom border
-	flex-direction: column;
-	line-height: 1;
-
-	@include oGridRespondTo(S) {
-		@include headlineFontSize(38px);
-	}
-
-	@include oGridRespondTo(L) {
-		@include headlineFontSize(52px);
-	}
-}
-
-.article-topper__stand-first {
-	@include oTypographySans(m, $load-progressively: true);
-
-	opacity: 0.8;
-	font-size: round(18px * 0.9);
-	line-height: 1.4;
-
-	@include oGridRespondTo(L) {
-		font-size: round(22px * 0.9);
-		.o-typography--loaded-sans & {
-			font-size: 22px;
-		}
-	}
-
-	.o-typography--loaded-sans & {
-		font-size: 18px;
-		line-height: 1.2;
-	}
-}
-
 //default for all themes
-.article-topper__background {
+.topper__background {
 	height: inherit;
 	min-height: inherit;
 	width: 100%;
@@ -89,7 +104,7 @@
 }
 
 //default size for all themes
-.article-topper__visual {
+.topper__visual {
 	width: 100%;
 	height: 100vw;
 	float: right;
@@ -105,17 +120,17 @@
 	}
 }
 
-.article-topper__picture {
+.topper__picture {
 	position: relative;
 }
 
 //IE9 support
-.article-topper__image {
+.topper__image {
 	position: relative;
 	width: 100%;
 }
 
-.article-topper__credits {
+.topper__credits {
 	font-style: italic;
 	font-size: 13px;
 	margin-top: 15px;
@@ -123,29 +138,25 @@
 }
 
 //IE9 support
-.article-topper__text-wrapper {
+.topper__text-wrapper {
 	width: 100%;
 	box-sizing: border-box;
 }
 
-.article-topper__text {
+.topper__text {
 	width: 100%;
 	@include oGridRespondTo(M) {
 		width: 45%;
 	}
 }
 
-.article-topper__brand {
+.topper__brand {
 	font-weight: 400;
 }
 
-.article-topper__tags {
+.topper__tags {
 	display: flex;
 	padding-bottom: 5px;
-
-	@include oGridRespondTo(M) {
-		width: 45%;
-	};
 
 	.n-content-tag {
 		color: inherit;
@@ -157,25 +168,30 @@
 	}
 }
 
+
+
+
 @supports (object-fit: cover) {
-	.article-topper__slot-1 {
+	.topper__slot-1 {
 		@include oGridRespondTo(L) {
 			min-height: 600px;
 		}
 	}
 
-	.article-topper__text-wrapper {
+	.topper__text-wrapper {
 		margin-top: 0;
 	}
 
-	.article-topper__visual {
+	.topper__visual {
 		overflow: none;
 	}
 
-	.article-topper__image {
+	.topper__image {
 		position: static;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 	}
 }
+
+@import 'themes';

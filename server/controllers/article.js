@@ -192,26 +192,7 @@ module.exports = function articleV3Controller (req, res, next, content) {
 		content.isAudioArticle = content.metadata.some(tag => tag.idV1 === 'MjgwYzIyNjUtMmQ1ZC00NTNiLTgyMTQtMWU5ZDc3YzIzNWUy-VG9waWNz');
 	}
 
-	if(res.locals.flags.articleTopper) {
-		content.topper = topperThemeMap(content.topper);
-	} else {
-		content.topper = null;
-	}
-
-	if(res.locals.flags.contentPackages && content.contains) {
-
-		// all series content have toppers
-		if (!content.topper) {
-			content.topper = {
-				standfirst: content.standfirst,
-				headline: content.title,
-				theme: 'split-text-left',
-				backgroundColour: 'pink'
-			};
-		}
-
-	}
-
+	content.topper = topperThemeMap(content, res.locals.flags);
 
 	content.contentType = 'article';
 	content.shouldRenderMyftHint = true;

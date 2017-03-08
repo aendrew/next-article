@@ -4,6 +4,7 @@ const externalPodcastLinksUtil = require('../utils/external-podcast-links');
 const getMoreOnTags = require('./article-helpers/get-more-on-tags');
 const getAdsLayout = require('../utils/get-ads-layout');
 const podcastMainImageHTML = require('./article-helpers/podcast-main-image');
+const topperThemeMap = require('./article-helpers/topper-theme-map');
 
 module.exports = function podcastLegacyController (req, res, next, payload) {
 
@@ -39,6 +40,8 @@ module.exports = function podcastLegacyController (req, res, next, payload) {
 	if (res.locals.flags.articleSuggestedRead && payload.metadata.length) {
 		payload.readNextTopic = payload.primaryTag;
 	}
+
+	payload.topper = topperThemeMap(payload, res.locals.flags);
 
 	payload.contentType = 'podcast';
 	payload.adsLayout = getAdsLayout(req.query.adsLayout);

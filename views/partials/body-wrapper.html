@@ -1,16 +1,20 @@
 <div class="article__wrapper">
 	{{#ifSome bodyHTML media}}
 	<div class="o-grid-container">
+
+
 		<div class="article__main o-grid-row">
-			<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
 
-				{{#unless topper}}
-					{{> master-image-byline}}
-				{{/unless}}
-
+			{{#if @root.flags.articleTopper}}
 				{{#ifEquals topper.theme 'full-bleed-offset'}}
 					{{> topper/offset-text}}
 				{{/ifEquals}}
+			{{/if}}
+
+			<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
+
+				{{> master-image-byline}}
+
 
 				{{#ifAll isAudioArticle @root.flags.ftlabsAudioPlayer}}
 					{{> ftlabs-audio-player}}
