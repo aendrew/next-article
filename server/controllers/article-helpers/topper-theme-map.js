@@ -13,7 +13,9 @@ const themeImageRatio = {
 
 const getTopperSettings = (content, flags) => {
 	//TODO: change to layout only when migration is complete
-	const themeOrLayout = content.topper.theme || content.topper.layout
+	const themeOrLayout = content.topper.theme || content.topper.layout;
+	//TODO: change to leadImages only when migration is complete
+	const topperOrLeadImages = content.topper.images || content.leadImages;
 
 	if(flags.articleTopper && content.topper && themeOrLayout && themeImageRatio.hasOwnProperty(themeOrLayout)) {
 
@@ -24,25 +26,28 @@ const getTopperSettings = (content, flags) => {
 			themeImageRatio: themeImageRatio[themeOrLayout],
 			backgroundColour,
 			myFtButtonVariant: myFtButtonVariant(backgroundColour),
-			includesImage: themeOrLayout !== 'full-bleed-text'
+			includesImage: themeOrLayout !== 'full-bleed-text',
+			images: topperOrLeadImages
 		};
 	} else if (flags.contentPackages && content.containedIn && content.containedIn.length) {
 		return {
-			theme: 'full-bleed-offset',
+			layout: 'full-bleed-offset',
 			template: 'offset',
 			backgroundColour: 'slate',
-			myFtButtonVariant: myFtButtonVariant('slate')
+			myFtButtonVariant: myFtButtonVariant('slate'),
+			includesImage: 'true',
+			images: topperOrLeadImages
 		};
 	} else if(content.designGenre) {
 		return {
-			theme: 'branded',
+			layout: 'branded',
 			template: 'basic',
 			backgroundColour: 'warm-1',
 			myFtButtonVariant: 'standard'
 		};
 	} else {
 		return {
-			theme: null,
+			layout: null,
 			template: 'basic',
 			backgroundColour: 'pink',
 			myFtButtonVariant: myFtButtonVariant('pink')
