@@ -136,7 +136,7 @@ describe('Article Controller', () => {
 		it('does not set topper if flag is off', () => {
 			createInstance(null, { articleTopper: false }, fixtureWithTopper)
 			let result = response._getRenderData()
-			expect(result.topper.theme).to.equal('branded');
+			expect(result.topper.layout).to.equal('branded');
 			expect(result.topper.template).to.equal('basic');
 			expect(response.statusCode).to.equal(200);
 		})
@@ -144,7 +144,7 @@ describe('Article Controller', () => {
 		it('does not accept topper with an unknown theme', () => {
 			createInstance(null, { articleTopper: true }, { metadata: [], topper: { theme: 'some-crazy-theme' }})
 			let result = response._getRenderData()
-			expect(result.topper.theme).to.equal(null);
+			expect(result.topper.layout).to.equal(null);
 			expect(result.topper.template).to.equal('basic');
 			expect(response.statusCode).to.equal(200);
 		});

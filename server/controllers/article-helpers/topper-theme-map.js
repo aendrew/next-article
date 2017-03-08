@@ -12,45 +12,48 @@ const themeImageRatio = {
 };
 
 const getTopperSettings = (content, flags) => {
-	//TODO: change to layout only when migration is complete
-	const themeOrLayout = content.topper.theme || content.topper.layout;
-	//TODO: change to leadImages only when migration is complete
-	const topperOrLeadImages = content.topper.images || content.leadImages;
-	const imageProperties = (includesImage) => {
-		return {
-			includesImage,
-			images: topperOrLeadImages
-		}
-	};
+	let themeOrLayout;
+	let topperOrLeadImages;
 
-	let basicProperties;
-	let extraProperties;
+	if(content.topper) {
+		//TODO: change to layout only when migration is complete
+		themeOrLayout = content.topper.theme || content.topper.layout;
+		//TODO: change to leadImages only when migration is complete
+		topperOrLeadImages = content.topper.images || content.leadImages;
+	}
 
 	if(flags.articleTopper && content.topper && themeOrLayout && themeImageRatio.hasOwnProperty(themeOrLayout)) {
 		const template = themeOrLayout === 'full-bleed-offset' ? 'offset' : 'themed';
+		const hasImage = themeOrLayout !== 'full-bleed-text';
 		const backgroundColour = themeOrLayout === 'full-bleed-offset' ? 'pink' : (content.topper.backgroundColour || 'pink');
-		basicProperties = topperProperties(themeOrLayout, template, backgroundColour);
-		extraProperties = Object.assign(imageProperties(themeOrLayout !== 'full-bleed-text'), {themeImageRatio: themeImageRatio[themeOrLayout]});
+		const topperProperties = allProperties(themeOrLayout, template, backgroundColour, hasImage, topperOrLeadImages);
+		const extraProperty = {themeImageRatio: themeImageRatio[themeOrLayout]};
 
-		return Object.assign(basicProperties, extraProperties);
+		return Object.assign(topperProperties, extraProperty);
 
 	} else if (flags.contentPackages && content.containedIn && content.containedIn.length) {
-		basicProperties = topperProperties('full-bleed-offset', 'offset', 'slate');
-		extraProperties = imageProperties(true);
-
-		return Object.assign(basicProperties, extraProperties);
+		return allProperties('full-bleed-offset', 'offset', 'slate', true, topperOrLeadImages)
 
 	} else if(content.designGenre) {
-		basicProperties = topperProperties('branded', 'basic', 'warm-1');
+		const topperProperties = basicProperties('branded', 'basic', 'warm-1');
 
-		return Object.assign(basicProperties, { myFtButtonVariant: 'standard' });
+		return Object.assign(topperProperties, { myFtButtonVariant: 'standard' });
 
 	} else {
-		return topperProperties(null, 'basic', 'pink');
+		return basicProperties(null, 'basic', 'pink');
 	}
 };
 
-const topperProperties = (layout, template, backgroundColour) => {
+
+const allProperties = (layout, template, backgroundColour, includesImage, images) => {
+	const addOn = {
+			includesImage,
+			images
+	}
+
+	return Object.assign(basicProperties(layout, template, backgroundColour), addOn)
+}
+const basicProperties = (layout, template, backgroundColour) => {
 	return {
 		layout,
 		template,
