@@ -9,7 +9,10 @@ whitesource.config.json:
 	@if $(call IS_GIT_IGNORED); then echo '{ "apiKey": "$(WHITESOURCE_API_KEY)", "productName":"Next", "projectName":"$(call APP_NAME)" }' > $@ && $(DONE); fi
 
 coverage-report:
-	export apikey=12345; export api2key=67890; export AWS_SIGNED_FETCH_DISABLE_DNS_RESOLUTION=true; export NODE_ENV=test; \
+	export apikey=12345; \
+	export api2key=67890; \
+	export AWS_SIGNED_FETCH_DISABLE_DNS_RESOLUTION=true; \
+	export NODE_ENV=test; \
 	istanbul cover node_modules/.bin/_mocha --require server/setup --report=$(if $(CIRCLECI),lcovonly,lcov) 'test/server/**/*.test.js'
 
 unit-test:
@@ -19,7 +22,7 @@ unit-test:
 test:
 	make verify
 
-ifeq ($(CIRCLE_BRANCH),master)
+ifeq ($(CIRCLECI),true)
 	make coverage-report && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
 else
 	make unit-test
