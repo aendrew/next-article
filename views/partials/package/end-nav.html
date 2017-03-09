@@ -1,15 +1,15 @@
-<div class="o-grid-container o-grid-container--bleed">
+<div class="o-grid-container o-grid-container--bleed {{#ifEquals design.theme 'extra'}}package--extra{{/ifEquals}}">
 	<div class="o-grid-row o-grid-row--compact">
 		<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
-			<div class="package__nav package__nav--article-end package__highlight-background">
+			<div class="package__text package__nav--article-end package__highlight-background">
 				<div class="o-grid-container o-grid-container--bleed package__article-end-bar">
 					<div class="o-grid-row o-grid-row--compact">
 						<div data-o-grid-colspan="12 M6">
 							<h2 class="package__article-end-title package__highlight-background--light package__text--l package__text--strong">Explore the series</h2>
-							{{#if @root.content.next}}
-								{{> package/next-up @root.context.next}}
+							{{#if @root.context.next}}
+								{{> package/teaser @root.context.next}}
 							{{else}}
-								{{> package/next-up @root.context.prev}}
+								{{> package/teaser @root.context.prev}}
 							{{/if}}
 						</div>
 						{{#if descriptionHTML}}
@@ -22,11 +22,7 @@
 						{{/if}}
 					</div>
 				</div>
-				{{#if shortenedPackage}}
-					{{> package/package-contents shortenedPackage}}
-				{{else}}
-					{{> package/package-contents contains}}
-				{{/if}}
+				{{> package/contents}}
 			</div>
 		</div>
 	</div>

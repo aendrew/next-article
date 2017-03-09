@@ -28,7 +28,7 @@ $n-notification-is-silent: false;
 	@import 'components/topper/main';
 	$o-expander-is-silent: false;
 	@import 'o-expander/main';
-	@import 'components/package/main'; // TODO: rename
+	@import 'components/package/head';
 
 	.o-labels {
 		@include oTypographySansBold('xs');
@@ -53,6 +53,7 @@ $o-video-is-silent: false;
 @import 'components/video/main';
 @import 'components/ftlabs-audio-player/main';
 @import 'components/inline-barrier/main';
+@import 'components/package/main';
 
 // Print Styling
 @media print {

@@ -27,7 +27,7 @@
 	{{/if}}
 
 	{{#ifAll @root.flags.contentPackages package}}
-		{{> package/nav package}}
+		{{> package/top-nav package}}
 	{{/ifAll}}
 
 	{{> topper/main}}
@@ -35,7 +35,7 @@
 	{{> body-wrapper}}
 
 	{{#ifAll @root.flags.contentPackages package}}
-		{{> package/bottom package}}
+		{{> package/end-nav package}}
 	{{/ifAll}}
 
 {{>propensity-messaging-promo-unit}}

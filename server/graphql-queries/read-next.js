@@ -49,6 +49,13 @@ module.exports = (readNext, contentPackage) => {
 						taxonomy
 						url
 					}
+					design {
+						theme
+					}
+					tableOfContents {
+						sequence
+						labelType
+					}
 					contains {
 						...TeaserExtraLight
 						...TeaserHeavy

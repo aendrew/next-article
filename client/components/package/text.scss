@@ -1,0 +1,26 @@
+.package__text {
+	@include oTypographySans(m, $load-progressively: true);
+	-webkit-font-smoothing: antialiased;
+}
+
+.package__text--m {
+	font-size: 18px;
+}
+
+.package__text--l {
+	font-size: 24px;
+}
+
+.package__text--strong {
+	@include oTypographySansBold(m, $load-progressively: true);
+}
+
+// scss-lint:disable SelectorFormat
+.o-typography--loaded-sansBold .package__text--m {
+	font-size: 18px;
+}
+
+.o-typography--loaded-sansBold .package__text--l {
+	font-size: 24px;
+}
+// scss-lint:enable SelectorFormat

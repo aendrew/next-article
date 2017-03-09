@@ -1,8 +1,8 @@
-const inArticleNav = require('../../views/partials/package/in-article');
+const inArticleNav = require('../../views/partials/package/mid-nav');
 
 module.exports = function series ($, flags, options) {
 
-	if (!flags || !flags.contentPackages || (options && options.fragment) || (options && !options.contentPackage)) return $;
+	if (!flags || !flags.contentPackages || !options || options.fragment || !options.contentPackage || !options.contentPackage.contents) return $;
 
 	const pars = $('p');
 	if (pars.length < 6) return $;

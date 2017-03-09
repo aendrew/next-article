@@ -139,7 +139,7 @@ module.exports = function articleV3Controller (req, res, next, content) {
 			adsLayout: content.adsLayout,
 			userIsAnonymous,
 			previewArticle: req.get('ft-access-preview'),
-			contentPackage: content.package
+			contentPackage: Object.assign({ context: content.context }, content.package)
 		})
 	);
 

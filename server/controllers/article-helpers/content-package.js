@@ -1,5 +1,5 @@
-const placeFirst = ({ first, pkg }) => {
-	return [].concat(first, pkg.filter(x => x !== first));
+const placeFirst = ({ first, all }) => {
+	return [].concat(first, all.filter(x => x !== first));
 };
 
 module.exports = function (article) {
@@ -9,48 +9,43 @@ module.exports = function (article) {
 		return;
 	}
 
-	const contentPackage = containedIn.length ? containedIn[0] : {};
+	const pkg = containedIn.length ? containedIn[0] : {};
 
 	// CONTEXT INFO
-	const currentIndex = contentPackage.contains.findIndex(item => item.id === id);
+	const currentIndex = pkg.contains.findIndex(item => item.id === id);
 	const context = {};
-	context.prev = contentPackage.contains[currentIndex - 1];
-	context.current = contentPackage.contains[currentIndex];
-	context.next = contentPackage.contains[currentIndex + 1];
-	context.home = contentPackage;
+	context.prev = pkg.contains[currentIndex - 1];
+	context.current = pkg.contains[currentIndex];
+	context.next = pkg.contains[currentIndex + 1];
+	context.home = pkg;
 
 	// ADD A SHORTENED PACKAGE FOR NAV IF PACKAGE OVERLONG
 	const MAX_LENGTH = 6;
-	if (contentPackage.contains.length > MAX_LENGTH) {
+	if (pkg.contains.length > MAX_LENGTH) {
 		const from = currentIndex - (MAX_LENGTH / 2);
 		const to = currentIndex + (MAX_LENGTH / 2);
 		if (from < 0) {
-			contentPackage.shortenedPackage = contentPackage.contains.slice(0, MAX_LENGTH);
+			pkg.shortenedPackage = pkg.contains.slice(0, MAX_LENGTH);
 		} else {
-			contentPackage.shortenedPackage = contentPackage.contains.slice(from, to);
+			pkg.shortenedPackage = pkg.contains.slice(from, to);
 		}
 	}
 
 	// ORDERED / UNORDERED
-	if (contentPackage.sequence === 'ordered') {
-		contentPackage.contains.forEach(item => (
-			item.sequenceId = `PART ${contentPackage.contains.indexOf(item) + 1}`
-		));
-	} else {
-		contentPackage.contains = placeFirst({
-			first: context.current,
-			pkg: contentPackage.contains
+	if (pkg.tableOfContents && pkg.tableOfContents.sequence === 'exact-order' && pkg.tableOfContents.labelType === 'part-number') {
+		pkg.contents = pkg.contains.map(item => {
+			const sequenceId = `PART ${pkg.contains.indexOf(item) + 1}`;
+			return Object.assign({}, item, { sequenceId });
 		});
-		if (contentPackage.shortenedPackage) {
-			contentPackage.shortenedPackage = placeFirst({
-				first: context.current,
-				pkg: contentPackage.shortenedPackage
-			});
-		}
+	} else {
+		pkg.contents = placeFirst({
+			first: context.current,
+			all: pkg.shortenedPackage ? pkg.shortenedPackage : pkg.contains
+		});
 	}
 
 	return {
-		package: contentPackage,
+		package: pkg,
 		context
 	};
 };

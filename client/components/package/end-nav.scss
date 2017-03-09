@@ -12,7 +12,8 @@
 
 .package__article-end-bar {
 	padding-bottom: 40px;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+	border-bottom: 1px solid;
+	border-bottom-color: #979797;
 }
 
 .package__article-end-title {
@@ -34,7 +35,6 @@
 }
 
 .package__article-end-about {
-	color: white;
 	padding-left: 2em;
 	padding-right: 2em;
 	margin-top: 60px;
@@ -42,4 +42,20 @@
 
 .package__article-end-about > p {
 	margin: 0;
+}
+
+.package__no-bottom-margin {
+	margin-bottom: 0;
+}
+
+.package--extra {
+
+	.package__article-end-about {
+		color: getColor('white');
+	}
+
+	.package__article-end-bar {
+		border-bottom-color: rgba(255, 255, 255, 0.2);
+	}
+
 }

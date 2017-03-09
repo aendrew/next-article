@@ -9,15 +9,13 @@ $pkgYellow: #ffec1a;
 }
 
 .package__content-item {
-	color: white;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+	border-bottom: 1px solid #979797;
 }
 
 .package__content-item--current {
-	color: $pkgYellow;
-	border-right: $pkgYellow solid 15px;
-
-	padding: 1em;
+	padding: 1em 1em 1em 10px;
+	border-left: solid 10px;
+	border-left-color: getColor('claret');
 }
 
 .package__content-item:last-child {
@@ -36,4 +34,46 @@ $pkgYellow: #ffec1a;
 	list-style: none;
 	padding: 0;
 	margin: 0;
+}
+
+.package--extra {
+	.package__content-item--current {
+		color: $pkgYellow;
+		border-left-color: $pkgYellow;
+	}
+
+	.package__content-item {
+		border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+		color: getColor('white');
+	}
+}
+
+.package__link--block {
+	background-color: getColor('claret');
+	color: getColor('white');
+	border: 0;
+	height: 40px;
+	display: block;
+	position: relative;
+}
+
+.package__link-container--block {
+	padding: 20px;
+}
+
+.package__link-inner--block {
+	padding: 9px;
+	display: block;
+}
+
+.package__link-inner--block:after {
+	background-repeat: no-repeat;
+	background-position: center;
+	content: "";
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 100%;
+	width: 50px;
+	background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-right?source=next-article&tint=%23ffffff,%23ffffff&format=svg);
 }
