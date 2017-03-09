@@ -7,16 +7,18 @@
 	</div>
 	<div class="topper__slot-2 o-grid-container">
 		<div class="topper__text-box o-grid-row" data-textbox-background="{{topper.backgroundColour}}" >
-			<div class="topper__text-wrapper" data-textbox-background="{{topper.backgroundColour}}" data-o-grid-colspan="12 L8 XL7 XLoffset1">
-				{{#if containedIn}}
+			<div class="topper__offset-margin">
+				<div class="topper__text-wrapper" data-textbox-background="{{topper.backgroundColour}}" data-o-grid-colspan="12 L8 XL7 XLoffset1">
+					{{#if containedIn}}
 
-				{{else}}
-					{{> topper/components/tags withBrand=true}}
-				{{/if}}
+					{{else}}
+						{{> topper/components/tags withBrand=true}}
+					{{/if}}
 
-				{{> topper/components/headline size="large"}}
+					{{> topper/components/headline size="large"}}
 
-				{{> topper/components/standfirst}}
+					{{> topper/components/standfirst}}
+				</div>
 			</div>
 		</div>
 	</div>
