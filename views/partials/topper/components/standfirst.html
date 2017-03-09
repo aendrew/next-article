@@ -1,9 +1,3 @@
 {{#unlessEquals contentType 'podcast'}}
-	{{#if topper.standfirst}}
-		<div class="topper__standfirst">{{{topper.standfirst}}}</div>
-	{{else}}
-		{{#if standfirst}}
-			<div class="topper__standfirst">{{{standfirst}}}</div>
-		{{/if}}
-	{{/if}}
+	<div class="topper__standfirst">{{{topper.standfirst}}}</div>
 {{/unlessEquals}}

@@ -58,6 +58,7 @@ const allProperties = (layout, template, backgroundColour, includesImage, images
 }
 
 const basicProperties = (layout, template, backgroundColour) => {
+
 	return {
 		layout,
 		template,
@@ -73,5 +74,13 @@ const myFtButtonVariant = (backgroundColour) => {
 };
 
 module.exports = (content, flags) => {
-	return Object.assign({}, content.topper, getTopperSettings(content, flags));
+	
+	const topper = content.topper || {};
+	return Object.assign({}, 
+		topper,
+		{
+			headline: topper.headline || content.title,
+			standfirst: content.descriptionHTML || topper.standfirst || content.standfirst
+		},
+		getTopperSettings(content, flags));
 }
