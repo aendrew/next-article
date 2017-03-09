@@ -17,9 +17,9 @@ const getTopperSettings = (content, flags) => {
 
 	if(content.topper) {
 		//TODO: change to layout only when migration is complete
-		themeOrLayout = content.topper.theme || content.topper.layout;
+		themeOrLayout = content.topper.layout || content.topper.theme;
 		//TODO: change to leadImages only when migration is complete
-		topperOrLeadImages = content.topper.images || content.leadImages;
+		topperOrLeadImages = content.leadImages || content.topper.images;
 	}
 
 	if(flags.articleTopper && content.topper && themeOrLayout && themeImageRatio.hasOwnProperty(themeOrLayout)) {
