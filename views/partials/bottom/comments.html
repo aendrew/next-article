@@ -1,10 +1,9 @@
 <div class="o-grid-row">
-
-	{{#if @root.flags.threeAdProposition}}
+	{{#ifSome @root.flags.threeAdProposition @root.isBusinessEducation}}
 	<div data-o-grid-colspan="12 Lfalse">
 		{{>ads/bottom-mobile}}
 	</div>
-	{{/if}}
+	{{/ifSome}}
 
 	<div data-o-grid-colspan="12 L8 XLoffset1">
 		<div class="comments__rum-indicator"></div>
@@ -16,11 +15,11 @@
 			class="article__comments o-comments n-util-hide@print"></div>
 	</div>
 
-	{{#if @root.flags.threeAdProposition}}
+	{{#ifSome @root.flags.threeAdProposition @root.isBusinessEducation}}
 	<div data-o-grid-colspan="false L4 XL3">
 		{{>ads/bottom}}
 	</div>
-	{{/if}}
+	{{/ifSome}}
 
 
 </div>
