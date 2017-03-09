@@ -28,7 +28,7 @@ const getTopperSettings = (content, flags) => {
 	//otherwise use the editorially selected topper if it exists
 	} else if (flags.contentPackages && content.type === 'package' && content.design && content.design.theme === 'extra') {
 		return allProperties('split-text-left', 'themed', 'slate', true, topperOrLeadImages);
-	} else if (flags.contentPackages && content.type === 'package' && content.package.design && content.package.design.theme === 'special-report') {
+	} else if (flags.contentPackages && content.type === 'package') {
 		return allProperties('split-text-left', 'themed', 'claret', true, topperOrLeadImages);
 	} else if(flags.articleTopper && content.topper && themeOrLayout && themeImageRatio.hasOwnProperty(themeOrLayout)) {
 		const template = themeOrLayout === 'full-bleed-offset' ? 'offset' : 'themed';
