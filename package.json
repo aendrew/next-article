@@ -55,7 +55,7 @@
     "pa11y-ci": "^0.5.0",
     "proxyquire": "^1.7.3",
     "sinon": "^1.15.3",
-    "whitesource": "^0.3.3",
+    "whitesource": "^0.3.9",
     "ws-bower": "^1.1.0"
   },
   "engines": {
