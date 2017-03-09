@@ -57,3 +57,12 @@ provision:
 smoke:
 	nht test-urls ${TEST_APP} --throttle 1;
 	export TEST_APP=${TEST_APP}; nht nightwatch test/browser/tests/*
+
+build:
+	nui build
+
+build-production:
+	nui build --production
+
+watch:
+	nui watch
