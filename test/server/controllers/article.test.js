@@ -8,6 +8,7 @@ const fixtureBlog = require('../../fixtures/v3-elastic-article-found-blog').docs
 const fixtureFastFT = require('../../fixtures/v3-elastic-article-found-fastft').docs[0]._source;
 const fixturePremium = require('../../fixtures/v3-elastic-article-found-premium').docs[0]._source;
 const fixtureWithTopper = require('../../fixtures/v3-elastic-article-found-topper').docs[0]._source;
+const fixtureWithNewModel = require('../../fixtures/v3-elastic-article-found-new-model').docs[0]._source;
 
 const stubs = {
 	onwardJourneyArticles: sinon.stub(),
@@ -136,7 +137,7 @@ describe('Article Controller', () => {
 		it('does not set topper if flag is off', () => {
 			createInstance(null, { articleTopper: false }, fixtureWithTopper)
 			let result = response._getRenderData()
-			expect(result.topper.theme).to.equal('branded');
+			expect(result.topper.layout).to.equal('branded');
 			expect(result.topper.template).to.equal('basic');
 			expect(response.statusCode).to.equal(200);
 		})
@@ -144,9 +145,52 @@ describe('Article Controller', () => {
 		it('does not accept topper with an unknown theme', () => {
 			createInstance(null, { articleTopper: true }, { metadata: [], topper: { theme: 'some-crazy-theme' }})
 			let result = response._getRenderData()
-			expect(result.topper.theme).to.equal(null);
+			expect(result.topper.layout).to.equal(null);
 			expect(result.topper.template).to.equal('basic');
 			expect(response.statusCode).to.equal(200);
+		});
+
+		context('images', () => {
+			it('are set by topper images field', () => {
+				createInstance(null, { articleTopper: true }, fixtureWithTopper)
+				let result = response._getRenderData()
+				expect(result.topper.images.length).to.equal(3);
+			});
+
+			it('are set by article leadImages field', () => {
+				createInstance(null, { articleTopper: true }, fixtureWithNewModel);
+				let result = response._getRenderData()
+				expect(result.topper.images.length).to.equal(3);
+			});
+		});
+
+		context('layout', () => {
+			it('is set by topper theme field', () => {
+				createInstance(null, { articleTopper: true }, fixtureWithTopper)
+				let result = response._getRenderData()
+				expect(result.topper.layout).to.equal('branded');
+			});
+
+			it('is set by topper layout field', () => {
+				createInstance(null, { articleTopper: true }, fixtureWithNewModel)
+				let result = response._getRenderData()
+				expect(result.topper.layout).to.equal('full-bleed-image-center');
+			});
+
+		});
+
+		context('background colour', () => {
+			it('is set to pink if theme is full-bleed-offset', () => {
+				createInstance(null, { articleTopper: true }, { metadata: [], topper: { theme: 'full-bleed-offset' }})
+				let result = response._getRenderData()
+				expect(result.topper.backgroundColour).to.equal('pink');
+			});
+
+			it('is set by editorial if theme is not full-bleed-offset', () => {
+				createInstance(null, { articleTopper: true }, fixtureWithTopper);
+				let result = response._getRenderData()
+				expect(result.topper.backgroundColour).to.equal('warm-1');
+			});
 		});
 	});
 
