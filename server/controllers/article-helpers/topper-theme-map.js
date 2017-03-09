@@ -21,7 +21,7 @@ const getTopperSettings = (content, flags) => {
 	themeOrLayout = content.topper.layout || content.topper.theme;
 	//TODO: change to leadImages only when migration is complete
 	topperOrLeadImages = content.leadImages || content.topper.images;
-	
+
 	//Articles within a package get a slate offset topper if the package has the 'extra' theme
 	if (flags.contentPackages && content.containedIn && content.containedIn.length) {
 		return allProperties('full-bleed-offset', 'offset', 'slate', true, topperOrLeadImages);
@@ -74,9 +74,9 @@ const myFtButtonVariant = (backgroundColour) => {
 };
 
 module.exports = (content, flags) => {
-	
+
 	const topper = content.topper || {};
-	return Object.assign({}, 
+	return Object.assign({},
 		topper,
 		{
 			headline: topper.headline || content.title,
