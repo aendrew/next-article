@@ -19,12 +19,12 @@ const addContext = ({ pkg, currentIndex }) => ({
 });
 
 const addContents = ({ pkg, currentIndex }) => {
-	if (pkg.tableOfContents && pkg.tableOfContents.sequence === 'exact-order' && pkg.tableOfContents.labelType === 'part-number') {
-		return pkg.contains.map(item => {
+	const addSequenceId = pkgContents => {
+		return pkgContents.map(item => {
 			const sequenceId = `PART ${pkg.contains.indexOf(item) + 1}`;
 			return Object.assign({}, item, { sequenceId });
 		});
-	}
+	};
 
 	let shortenedPackage;
 	if (pkg.contains.length > MAX_LENGTH) {
@@ -33,10 +33,21 @@ const addContents = ({ pkg, currentIndex }) => {
 		shortenedPackage = (start >= 0) ? pkg.contains.slice(start, end) : pkg.contains.slice(0, MAX_LENGTH);
 	}
 
-	return placeFirst({
-		first: pkg.contains[currentIndex],
-		all: shortenedPackage ? shortenedPackage : pkg.contains
-	});
+	let contents;
+	if (pkg.tableOfContents && pkg.tableOfContents.sequence === 'exact-order' && pkg.tableOfContents.labelType === 'part-number') {
+		contents = !!shortenedPackage ? addSequenceId(shortenedPackage) : addSequenceId(pkg.contains);
+	} else {
+		contents = placeFirst({
+			first: pkg.contains[currentIndex],
+			all: shortenedPackage ? shortenedPackage : pkg.contains
+		});
+	}
+
+	return {
+		contents,
+		shortened: !!shortenedPackage,
+		goToPackagePageText: pkg.design.theme === 'special-report' ? 'See all stories in the report' : 'See all stories in this series'
+	};
 };
 
 module.exports = ({ id, containedIn }) => {
@@ -44,10 +55,9 @@ module.exports = ({ id, containedIn }) => {
 	const pkg = containedIn[0];
 	const currentIndex = pkg.contains.findIndex(item => item.id === id);
 	const contents = addContents({ pkg, currentIndex });
-
 	const context = addContext({ pkg, currentIndex });
 	return {
-		package: Object.assign({}, pkg, { contents }),
+		package: Object.assign({}, pkg, contents),
 		context
 	};
 };
