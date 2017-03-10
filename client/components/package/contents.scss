@@ -3,10 +3,12 @@ $darkClaret: #780032;
 
 .package__contents {
 	width: 100%;
-	max-width: 490px;
 	position: absolute;
 	right: 0;
 	z-index: 99;
+	@include oGridRespondTo($from: M) {
+		max-width: 320px;
+	}
 }
 
 .package__content-item {
