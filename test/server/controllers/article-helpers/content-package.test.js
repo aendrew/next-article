@@ -3,6 +3,7 @@ const { expect } = require('chai');
 const subject = require('../../../../server/controllers/article-helpers/content-package');
 
 describe('Content package', () => {
+
 	context('guards', () => {
 		it('if empty or nonexistent containedIn', () => {
 			expect(subject({ id: '123', containedIn: [] })).eql({});
@@ -12,11 +13,13 @@ describe('Content package', () => {
 			expect(subject({ containedIn: [{id: '123'}] })).eql({});
 		});
 	});
+
 	context('unordered', () => {
 		it('should place current one first in contents', () => {
 			const packageArticleStub = {
 				id: '123',
 				containedIn: [{
+					design: { theme: 'special-report' },
 					id: '456',
 					contains: [{id: '789'}, {id: 'abc'}, {id: '123'}]
 				}]
@@ -31,6 +34,7 @@ describe('Content package', () => {
 			const packageArticleStub = {
 				id: '456',
 				containedIn: [{
+					design: { theme: 'special-report' },
 					contains: [
 						{id: '123'},
 						{id: '789'},
@@ -59,6 +63,7 @@ describe('Content package', () => {
 		const packageArticleStub = {
 			id: '123',
 			containedIn: [{
+				design: { theme: 'special-report' },
 				id: 'ghi',
 				contains: [{id: 'abc'}, {id: 'def'}, {id: '123'}, {id: 'jkl'}]
 			}]
@@ -66,7 +71,7 @@ describe('Content package', () => {
 		expect(subject(packageArticleStub).context).eql({
 			prev: {id: 'def'},
 			next: {id: 'jkl'},
-			home: {id: 'ghi', contains: [{id: 'abc'}, {id: 'def'}, {id: '123'}, {id: 'jkl'}]},
+			home: {id: 'ghi', contains: [{id: 'abc'}, {id: 'def'}, {id: '123'}, {id: 'jkl'}], design: { theme: 'special-report' }},
 			current: {id: '123'},
 			sequenceId: undefined
 		});
@@ -77,6 +82,7 @@ describe('Content package', () => {
 			id: '123',
 			containedIn: [{
 				id: '456',
+				design: { theme: 'special-report' },
 				contains: [{id: '456'}, {id: '123'}, {id: '789'}],
 				tableOfContents: {
 					sequence: 'exact-order',
