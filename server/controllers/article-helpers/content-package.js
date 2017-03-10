@@ -4,11 +4,18 @@ const placeFirst = ({ first, all }) => {
 	return [].concat(first, all.filter(x => x !== first));
 };
 
-const addContext = ({ pkg, currentIndex, contents }) => ({
+const getSequenceId = (pkg, currentIndex) => {
+	if (pkg.tableOfContents && pkg.tableOfContents.sequence === 'exact-order' && pkg.tableOfContents.labelType === 'part-number') {
+		return `PART ${currentIndex + 1}`;
+	}
+}
+
+const addContext = ({ pkg, currentIndex }) => ({
 	prev: pkg.contains[currentIndex - 1],
-	current: contents[0],
+	current: pkg.contains[currentIndex],
 	next: pkg.contains[currentIndex + 1],
-	home: pkg
+	home: pkg,
+	sequenceId: getSequenceId(pkg, currentIndex)
 });
 
 const addContents = ({ pkg, currentIndex }) => {
@@ -37,6 +44,7 @@ module.exports = ({ id, containedIn }) => {
 	const pkg = containedIn[0];
 	const currentIndex = pkg.contains.findIndex(item => item.id === id);
 	const contents = addContents({ pkg, currentIndex });
+
 	const context = addContext({ pkg, currentIndex, contents });
 	return {
 		package: Object.assign({}, pkg, { contents }),
