@@ -11,10 +11,6 @@
 	color: getColor('white');
 }
 
-.package__highlight-text {
-	color: #33302c;
-}
-
 .package--extra {
 	.package__highlight-background {
 		background-color: getColor('slate');
@@ -23,10 +19,6 @@
 	.package__highlight-background--light {
 		background-color: $pkgYellow;
 		color: getColor('slate');
-	}
-
-	.package__highlight-text {
-		color: $pkgYellow;
 	}
 
 	.package__highlight-border.package__highlight-border,

@@ -5,7 +5,9 @@
 				<div class="o-grid-container o-grid-container--bleed package__article-end-bar">
 					<div class="o-grid-row o-grid-row--compact">
 						<div data-o-grid-colspan="12 M6">
-							<h2 class="package__article-end-title package__highlight-background--light package__text--l package__text--strong">Explore the series</h2>
+							<div class="package__end-title-container package__highlight-background--light">
+								<span class="package__end-title package__text--m package__text--strong">Explore the series</span>
+							</div>
 							{{#if @root.context.next}}
 								{{> package/teaser @root.context.next}}
 							{{else}}

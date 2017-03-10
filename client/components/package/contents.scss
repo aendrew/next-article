@@ -1,11 +1,14 @@
 $pkgYellow: #ffec1a;
+$darkClaret: #780032;
 
 .package__contents {
 	width: 100%;
-	max-width: 490px;
 	position: absolute;
 	right: 0;
 	z-index: 99;
+	@include oGridRespondTo($from: M) {
+		max-width: 320px;
+	}
 }
 
 .package__content-item {
@@ -55,6 +58,11 @@ $pkgYellow: #ffec1a;
 	height: 40px;
 	display: block;
 	position: relative;
+}
+
+.package__link--block.package__link--block:hover {
+	color: getColor('white');
+	background-color: $darkClaret;
 }
 
 .package__link-container--block {

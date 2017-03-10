@@ -2,13 +2,13 @@
 	{{#each contents}}
 		{{#ifEquals id @root.context.current.id}}
 			<li class="package__content-item package__content-item--current package__text--m">
-				{{#if sequenceId}}<div>{{sequenceId}}</div>{{/if}}
-				{{title}}
+				{{#if sequenceId}}<div class="package__text--highlit">{{sequenceId}}</div>{{/if}}
+				<div class="package__text--highlit">{{title}}
 			</li>
 		{{else}}
 			<li class="package__content-item">
 				<a href="{{relativeUrl}}" class="package__link package__text--m">
-					{{#if sequenceId}}<div>{{sequenceId}}</div>{{/if}}
+					{{#if sequenceId}}<div class="package__text--highlit">{{sequenceId}}</div>{{/if}}
 					{{title}}
 				</a>
 			</li>
