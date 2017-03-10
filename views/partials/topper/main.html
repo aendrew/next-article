@@ -1,12 +1,16 @@
-<header class="n-util-visually-hidden">
-	<h1>{{title}}</h1>
-	<p>{{{standfirst}}}</p>
-</header>
 
 {{#ifEquals topper.template 'offset'}}
+	<header class="n-util-visually-hidden">
+		<h1>{{title}}</h1>
+		<p>{{{standfirst}}}</p>
+	</header>
 	{{> topper/offset}}
 {{/ifEquals}}
 {{#ifEquals topper.template 'themed'}}
+	<header class="n-util-visually-hidden">
+		<h1>{{title}}</h1>
+		<p>{{{standfirst}}}</p>
+	</header>
 	{{> topper/themed}}
 {{/ifEquals}}
 {{#ifEquals topper.template 'basic'}}

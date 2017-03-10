@@ -1,4 +1,6 @@
-<div class="topper topper--full-bleed-offset" aria-hidden="true" role="presentation">
+<div class="topper topper--{{topper.layout}}
+	{{#if contains}} topper--package{{/if}}
+	{{#if design.theme}} topper--package-{{design.theme}}{{/if}}" aria-hidden="true" role="presentation">
 	<div class="topper__slot-1">
 		<div class="topper__background"></div>
 		<div class="topper__visual">

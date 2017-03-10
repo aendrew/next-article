@@ -14,8 +14,8 @@
 	}
 
 	&--large {
-		@include headlineFontSize(32px);
 		@include oTypographySerifDisplayBold(xl, $load-progressively: true);
+		@include headlineFontSize(32px);
 
 		display: flex; // for responsive bottom border
 		position: relative; //so it appears above the full width background
@@ -50,6 +50,10 @@
 		.o-typography--loaded-sans & {
 			font-size: 22px;
 		}
+	}
+
+	>p {
+		margin: 0;
 	}
 
 }
