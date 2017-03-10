@@ -45,7 +45,7 @@ module.exports = ({ id, containedIn }) => {
 	const currentIndex = pkg.contains.findIndex(item => item.id === id);
 	const contents = addContents({ pkg, currentIndex });
 
-	const context = addContext({ pkg, currentIndex, contents });
+	const context = addContext({ pkg, currentIndex });
 	return {
 		package: Object.assign({}, pkg, { contents }),
 		context
