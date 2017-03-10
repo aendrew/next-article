@@ -16,17 +16,19 @@
 	border-bottom-color: #979797;
 }
 
-.package__article-end-title {
-	display: block;
-	padding: 1em 0;
+.package__end-title-container {
+	height: 115px;
+	margin-top: -26px;
+}
+
+.package__end-title {
+	display: inline-block;
 	padding-left: 20px;
-	height: 55px;
-	margin-top: -20px;
+	padding-top: 30px;
 }
 
 .package__article-end-teaser {
-	padding-top: 1em;
-	margin-top: -71px;
+	margin-top: -32px;
 	margin-right: 20px;
 	margin-left: 20px;
 	@include oGridRespondTo($from: M) {
@@ -37,7 +39,7 @@
 .package__article-end-about {
 	padding-left: 2em;
 	padding-right: 2em;
-	margin-top: 60px;
+	margin-top: 71px;
 }
 
 .package__article-end-about > p {
