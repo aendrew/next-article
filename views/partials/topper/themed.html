@@ -1,6 +1,6 @@
 <div class="topper topper--{{topper.layout}}
-	{{#if contains}} topper--package{{/if}}
-	{{#if design.theme}} topper--package-{{design.theme}}{{/if}}" aria-hidden="true" role="presentation">
+	{{#ifAll @root.flags.contentPackages contains}} topper--package{{/ifAll}}
+	{{#ifAll @root.glags.contentPackages  design.theme}} topper--package-{{design.theme}}{{/ifAll}}" aria-hidden="true" role="presentation">
 	<div class="topper__slot-1">
 		<div class="topper__background" data-textbox-background="{{topper.backgroundColour}}">
 			<div class="topper__text-box o-grid-container">
