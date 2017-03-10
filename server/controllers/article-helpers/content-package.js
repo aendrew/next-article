@@ -4,10 +4,10 @@ const placeFirst = ({ first, all }) => {
 	return [].concat(first, all.filter(x => x !== first));
 };
 
-const addContext = ({ pkg, currentIndex }) => ({
-	prev: pkg.contains[currentIndex - 1],
-	current: pkg.contains[currentIndex],
-	next: pkg.contains[currentIndex + 1],
+const addContext = ({ pkg, currentIndex, contents }) => ({
+	prev: contents[currentIndex - 1],
+	current: contents[currentIndex],
+	next: contents[currentIndex + 1],
 	home: pkg
 });
 
@@ -37,7 +37,7 @@ module.exports = ({ id, containedIn }) => {
 	const pkg = containedIn[0];
 	const currentIndex = pkg.contains.findIndex(item => item.id === id);
 	const contents = addContents({ pkg, currentIndex });
-	const context = addContext({ pkg, currentIndex });
+	const context = addContext({ pkg, currentIndex, contents });
 	return {
 		package: Object.assign({}, pkg, { contents }),
 		context

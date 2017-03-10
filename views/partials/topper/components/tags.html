@@ -1,7 +1,6 @@
 <div class="topper__tags">
-
-	{{#ifAll @root.flags.contentPackages containedIn}}
-
+	{{#ifAll @root.flags.contentPackages containedIn context.current.sequenceId}}
+		<span class="topper__package-sequence-id">{{context.current.sequenceId}}</span>
 	{{else}}
 		{{#ifAll withBrand designGenre}}
 			<div class="topper__brand n-content-tag--with-follow" aria-label="part of the {{designGenre.prefLabel}} column">{{designGenre.prefLabel}}</div>
