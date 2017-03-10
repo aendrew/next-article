@@ -24,3 +24,13 @@
 	font-size: 24px;
 }
 // scss-lint:enable SelectorFormat
+
+.package__text--highlit {
+	color: #33302c;
+}
+
+.package--extra {
+	.package__text--highlit {
+		color: $pkgYellow;
+	}
+}
