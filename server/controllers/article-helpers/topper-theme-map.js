@@ -23,48 +23,55 @@ const getTopperSettings = (content, flags) => {
 	topperOrLeadImages = content.leadImages || content.topper.images;
 
 	//Articles within a package get a slate offset topper if the package has the 'extra' theme
-	if (flags.contentPackages && content.containedIn && content.containedIn.length) {
-		return allProperties('full-bleed-offset', 'offset', 'slate', true, topperOrLeadImages);
-	//otherwise use the editorially selected topper if it exists
+	if (flags.contentPackages && content.containedIn && content.containedIn.length && content.package && content.package.design.theme === 'extra') {
+		return allProperties('full-bleed-offset', 'offset', 'slate', ['package-extra'], true, topperOrLeadImages);
+
+	//'extra' themed package landing pages are slate
 	} else if (flags.contentPackages && content.type === 'package' && content.design && content.design.theme === 'extra') {
-		return allProperties('split-text-left', 'themed', 'slate', true, topperOrLeadImages);
+		return allProperties('split-text-left', 'themed', 'slate', ['package', 'package-extra'], true, topperOrLeadImages);
+
+	//all other package landing pages get split claret
 	} else if (flags.contentPackages && content.type === 'package') {
-		return allProperties('split-text-left', 'themed', 'claret', true, topperOrLeadImages);
+		return allProperties('split-text-left', 'themed', 'claret', ['package'], true, topperOrLeadImages);
+
+	//otherwise use the editorially selected topper if it exists
 	} else if(flags.articleTopper && content.topper && themeOrLayout && themeImageRatio.hasOwnProperty(themeOrLayout)) {
 		const template = themeOrLayout === 'full-bleed-offset' ? 'offset' : 'themed';
 		const hasImage = themeOrLayout !== 'full-bleed-text';
 		const backgroundColour = themeOrLayout === 'full-bleed-offset' ? 'pink' : (content.topper.backgroundColour || 'pink');
-		const topperProperties = allProperties(themeOrLayout, template, backgroundColour, hasImage, topperOrLeadImages);
+		const topperProperties = allProperties(themeOrLayout, template, backgroundColour, [], hasImage, topperOrLeadImages);
 
 		return Object.assign(topperProperties);
 
 		//Branded regular toppers
 	} else if(content.designGenre) {
-		const topperProperties = basicProperties('branded', 'basic', 'warm-1');
+		const modifiers = content.designGenre.headshot ? ['has-headshot'] : [];
+		const topperProperties = basicProperties('branded', 'basic', 'warm-1', modifiers);
 		return Object.assign(topperProperties, { myFtButtonVariant: 'standard' });
 
 	//everything else gets a regular topper
 	} else {
-		return basicProperties(null, 'basic', 'pink');
+		return basicProperties(null, 'basic', 'pink', []);
 	}
 };
 
-const allProperties = (layout, template, backgroundColour, includesImage, images) => {
+const allProperties = (layout, template, backgroundColour, modifiers, includesImage, images) => {
 	const addOn = {
 		includesImage,
 		images
 	}
-	return Object.assign(basicProperties(layout, template, backgroundColour), addOn)
+	return Object.assign(basicProperties(layout, template, backgroundColour, modifiers), addOn)
 }
 
-const basicProperties = (layout, template, backgroundColour) => {
+const basicProperties = (layout, template, backgroundColour, modifiers) => {
 
 	return {
 		layout,
 		template,
 		backgroundColour,
 		myFtButtonVariant: myFtButtonVariant(backgroundColour),
-		themeImageRatio: themeImageRatio[layout]
+		themeImageRatio: themeImageRatio[layout],
+		modifiers: [layout].concat(modifiers)
 	};
 }
 

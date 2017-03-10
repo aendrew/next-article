@@ -54,6 +54,7 @@ describe('Content package', () => {
 			]);
 		});
 	});
+
 	it('should add context', () => {
 		const packageArticleStub = {
 			id: '123',
@@ -66,9 +67,11 @@ describe('Content package', () => {
 			prev: {id: 'def'},
 			next: {id: 'jkl'},
 			home: {id: 'ghi', contains: [{id: 'abc'}, {id: 'def'}, {id: '123'}, {id: 'jkl'}]},
-			current: {id: '123'}
+			current: {id: '123'},
+			sequenceId: undefined
 		});
 	});
+
 	it('should add sequenceId if exact-ordered and part-numbered', () => {
 		const packageArticleStub = {
 			id: '123',
@@ -81,7 +84,8 @@ describe('Content package', () => {
 				}
 			}]
 		};
-		expect(subject(packageArticleStub).package.contents).eql([
+		const data = subject(packageArticleStub);
+		expect(data.package.contents).eql([
 			{sequenceId: 'PART 1', id: '456'},
 			{sequenceId: 'PART 2', id: '123'},
 			{sequenceId: 'PART 3', id: '789'}
