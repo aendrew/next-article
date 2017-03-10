@@ -1,4 +1,5 @@
 $pkgYellow: #ffec1a;
+$darkClaret: #780032;
 
 .package__contents {
 	width: 100%;
@@ -55,6 +56,11 @@ $pkgYellow: #ffec1a;
 	height: 40px;
 	display: block;
 	position: relative;
+}
+
+.package__link--block.package__link--block:hover {
+	color: getColor('white');
+	background-color: $darkClaret;
 }
 
 .package__link-container--block {
