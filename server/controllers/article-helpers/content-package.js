@@ -5,9 +5,9 @@ const placeFirst = ({ first, all }) => {
 };
 
 const addContext = ({ pkg, currentIndex, contents }) => ({
-	prev: contents[currentIndex - 1],
-	current: contents[currentIndex],
-	next: contents[currentIndex + 1],
+	prev: pkg.contains[currentIndex - 1],
+	current: contents[0],
+	next: pkg.contains[currentIndex + 1],
 	home: pkg
 });
 

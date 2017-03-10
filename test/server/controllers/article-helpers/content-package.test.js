@@ -54,6 +54,7 @@ describe('Content package', () => {
 			]);
 		});
 	});
+
 	it('should add context', () => {
 		const packageArticleStub = {
 			id: '123',

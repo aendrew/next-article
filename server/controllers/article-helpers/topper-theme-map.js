@@ -24,11 +24,11 @@ const getTopperSettings = (content, flags) => {
 
 	//Articles within a package get a slate offset topper if the package has the 'extra' theme
 	if (flags.contentPackages && content.containedIn && content.containedIn.length && content.package && content.package.design.theme === 'extra') {
-		return allProperties('full-bleed-offset', 'offset', 'slate', ['package', 'package-extra'], true, topperOrLeadImages);
+		return allProperties('full-bleed-offset', 'offset', 'slate', ['package-extra'], true, topperOrLeadImages);
 
 	//'extra' themed package landing pages are slate
 	} else if (flags.contentPackages && content.type === 'package' && content.design && content.design.theme === 'extra') {
-		return allProperties('split-text-left', 'themed', 'slate', ['package-extra'], true, topperOrLeadImages);
+		return allProperties('split-text-left', 'themed', 'slate', ['package', 'package-extra'], true, topperOrLeadImages);
 
 	//all other package landing pages get split claret
 	} else if (flags.contentPackages && content.type === 'package') {
