@@ -15,11 +15,10 @@
 		{{/ifEquals}}
 	{{/each}}
 </ul>
-{{#ifEquals design.theme 'extra'}}
-{{else}}
+{{#if shortened}}
 	<div class="package__link-container--block">
 		<a href="{{@root.context.home.url}}" class="package__link--block">
-			<span class="package__link-inner--block package__text--m package__text--strong">See all stories in the report</span>
+			<span class="package__link-inner--block package__text--m package__text--strong">{{goToPackagePageText}}</span>
 		</a>
 	</div>
-{{/ifEquals}}
+{{/if}}
