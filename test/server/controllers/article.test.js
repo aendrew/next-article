@@ -9,6 +9,7 @@ const fixtureFastFT = require('../../fixtures/v3-elastic-article-found-fastft').
 const fixturePremium = require('../../fixtures/v3-elastic-article-found-premium').docs[0]._source;
 const fixtureWithTopper = require('../../fixtures/v3-elastic-article-found-topper').docs[0]._source;
 const fixtureWithNewModel = require('../../fixtures/v3-elastic-article-found-new-model').docs[0]._source;
+const fixtureWithNewPackageModel = require('../../fixtures/v3-elastic-article-found-new-package-model').docs[0]._source;
 
 const stubs = {
 	onwardJourneyArticles: sinon.stub(),
@@ -123,7 +124,7 @@ describe('Article Controller', () => {
 		});
 	});
 
-	context.only('Has rich journalism content', () => {
+	context('Has rich journalism content', () => {
 
 		it('sets the topper on the view model if flag is on', () => {
 			createInstance(null, { articleTopper: true }, fixtureWithTopper);
@@ -186,9 +187,28 @@ describe('Article Controller', () => {
 				expect(result.topper.backgroundColour).to.equal('pink');
 			});
 
+			it('is set to pink if no backgroundColour', () => {
+				createInstance(null, { articleTopper: true }, { metadata: [], topper: { theme: 'split-text-left' }})
+				let result = response._getRenderData()
+				expect(result.topper.backgroundColour).to.equal('pink');
+			});
+
 			it('is set by editorial if theme is not full-bleed-offset', () => {
 				createInstance(null, { articleTopper: true }, fixtureWithTopper);
 				let result = response._getRenderData()
+				expect(result.topper.backgroundColour).to.equal('warm-1');
+			});
+
+			it('is set to slate if package theme is \'extra\'', () => {
+				createInstance(null, { contentPackages: true }, fixtureWithNewModel)
+				let result = response._getRenderData()
+				expect(result.topper.backgroundColour).to.equal('slate');
+			});
+
+			it('is set to warm-1 if package theme is \'basic\'', () => {
+				createInstance(null, { contentPackages: true }, fixtureWithNewPackageModel)
+				let result = response._getRenderData()
+				expect(result.topper.backgroundColour).to.equal('warm-1');
 				expect(result.topper.backgroundColour).to.equal('warm-1');
 			});
 		});
