@@ -26,13 +26,17 @@ const getTopperSettings = (content, flags) => {
 	if (flags.contentPackages && content.containedIn && content.containedIn.length && content.package && content.package.design.theme === 'extra') {
 		return allProperties('full-bleed-offset', 'offset', 'slate', ['package-extra'], true, topperOrLeadImages);
 
-	//'extra' themed package landing pages are slate
-	} else if (flags.contentPackages && content.type === 'package' && content.design && content.design.theme === 'extra') {
-		return allProperties('split-text-left', 'themed', 'slate', ['package', 'package-extra'], true, topperOrLeadImages);
-
+	//package landing pages
+	} else if (flags.contentPackages && content.type === 'package' && content.design && content.design.theme) {
+		const bgMap = {
+			'basic': 'warm-1',
+			'special-report': 'claret',
+			'extra': 'slate'
+		};
+		const modifiers = ['package', `package-${content.design.theme}`]
+		return allProperties('split-text-left', 'themed', bgMap[content.design.theme], modifiers, true, topperOrLeadImages);
 	//all other package landing pages get split claret
 	} else if (flags.contentPackages && content.type === 'package') {
-		return allProperties('split-text-left', 'themed', 'claret', ['package'], true, topperOrLeadImages);
 
 	//otherwise use the editorially selected topper if it exists
 	} else if(flags.articleTopper && content.topper && themeOrLayout && themeImageRatio.hasOwnProperty(themeOrLayout)) {
