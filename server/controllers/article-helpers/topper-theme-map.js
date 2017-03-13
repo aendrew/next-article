@@ -14,14 +14,9 @@ const themeImageRatio = {
 const getTopperSettings = (content, flags) => {
 	content.topper = content.topper || {};
 
-	//TODO: change to layout only when migration is complete
-	let themeOrLayout = content.topper.layout || content.topper.theme;
-	//TODO: change to leadImages only when migration is complete
-	let topperOrLeadImages = content.leadImages || content.topper.images;
-
 	//Articles within a package get a slate offset topper if the package has the 'extra' theme
 	if (flags.contentPackages && content.containedIn && content.containedIn.length && content.package && content.package.design.theme === 'extra') {
-		return allProperties('full-bleed-offset', 'offset', 'slate', ['package-extra'], true, topperOrLeadImages);
+		return allProperties('full-bleed-offset', 'offset', 'slate', ['package-extra'], true, content.lead);
 
 	//package landing pages
 	} else if (flags.contentPackages && content.type === 'package' && content.design && content.design.theme) {
@@ -31,13 +26,13 @@ const getTopperSettings = (content, flags) => {
 			'extra': 'slate'
 		};
 		const modifiers = ['package', `package-${content.design.theme}`]
-		return allProperties('split-text-left', 'themed', bgMap[content.design.theme], modifiers, true, topperOrLeadImages);
+		return allProperties('split-text-left', 'themed', bgMap[content.design.theme], modifiers, true);
 	//otherwise use the editorially selected topper if it exists
-	} else if(flags.articleTopper && content.topper && themeOrLayout && themeImageRatio.hasOwnProperty(themeOrLayout)) {
-		const template = themeOrLayout === 'full-bleed-offset' ? 'offset' : 'themed';
-		const hasImage = themeOrLayout !== 'full-bleed-text';
-		const backgroundColour = themeOrLayout === 'full-bleed-offset' ? 'pink' : (content.topper.backgroundColour || 'pink');
-		const topperProperties = allProperties(themeOrLayout, template, backgroundColour, [], hasImage, topperOrLeadImages);
+	} else if(flags.articleTopper && content.topper && content.topper.layout && themeImageRatio.hasOwnProperty(content.topper.layout)) {
+		const template = content.topper.layout === 'full-bleed-offset' ? 'offset' : 'themed';
+		const hasImage = content.topper.layout !== 'full-bleed-text';
+		const backgroundColour = content.topper.layout === 'full-bleed-offset' ? 'pink' : (content.topper.backgroundColour || 'pink');
+		const topperProperties = allProperties(content.topper.layout, template, backgroundColour, [], hasImage);
 
 		return Object.assign(topperProperties);
 
@@ -84,6 +79,8 @@ module.exports = (content, flags) => {
 	return Object.assign({},
 		topper,
 		{
+			images: content.leadImages,
+
 			headline: topper.headline || content.title,
 			standfirst: content.descriptionHTML || topper.standfirst || content.standfirst
 		},
