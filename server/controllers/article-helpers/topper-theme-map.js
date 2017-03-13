@@ -16,7 +16,7 @@ const getTopperSettings = (content, flags) => {
 
 	//Articles within a package get a slate offset topper if the package has the 'extra' theme
 	if (flags.contentPackages && content.containedIn && content.containedIn.length && content.package && content.package.design.theme === 'extra') {
-		return allProperties('full-bleed-offset', 'offset', 'slate', ['package-extra'], true, content.lead);
+		return allProperties('full-bleed-offset', 'offset', 'slate', ['package-extra'], true);
 
 	//package landing pages
 	} else if (flags.contentPackages && content.type === 'package' && content.design && content.design.theme) {
