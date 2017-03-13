@@ -32,9 +32,6 @@ const getTopperSettings = (content, flags) => {
 		};
 		const modifiers = ['package', `package-${content.design.theme}`]
 		return allProperties('split-text-left', 'themed', bgMap[content.design.theme], modifiers, true, topperOrLeadImages);
-	//all other package landing pages get split claret
-	} else if (flags.contentPackages && content.type === 'package') {
-
 	//otherwise use the editorially selected topper if it exists
 	} else if(flags.articleTopper && content.topper && themeOrLayout && themeImageRatio.hasOwnProperty(themeOrLayout)) {
 		const template = themeOrLayout === 'full-bleed-offset' ? 'offset' : 'themed';
