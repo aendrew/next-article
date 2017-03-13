@@ -15,7 +15,6 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const readingHistory = require('./components/reading-history');
 	const tearsheets = require('./components/tearsheets');
 	const onwardJourney = require('./components/onward-journey/main');
-	const toc = require('./components/toc/main');
 	const share = require('./components/share/main');
 	const promotedContent = require('./components/ads/promoted-content');
 	const ftlabsAudioPlayer = require('./components/ftlabs-audio-player/main');
@@ -44,8 +43,6 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	if (flags.get('tearsheetHovers')) {
 		tearsheets.init();
 	}
-
-	toc.init(flags);
 
 	if (flags.get('articleScrollDepthTracking')) {
 		if (document.querySelector('.content__video')) {
