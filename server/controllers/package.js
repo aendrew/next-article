@@ -20,8 +20,6 @@ module.exports = function packageController (req, res, next, content) {
 
 	content.topper = topperThemeMap(content, res.locals.flags);
 
-	content.isSpecialReport = !!content.metadata.find(tag => tag.prefLabel === 'Special Report');
-
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
 			content.contentType = 'article';
