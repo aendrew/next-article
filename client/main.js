@@ -12,7 +12,6 @@ import {init as commentsInit} from './components/comments';
 bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 	const slideshow = require('./components/slideshow/main');
-	const readingHistory = require('./components/reading-history');
 	const onwardJourney = require('./components/onward-journey/main');
 	const share = require('./components/share/main');
 	const promotedContent = require('./components/ads/promoted-content');
@@ -27,12 +26,6 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 	if (document.querySelector('*[data-article-status="error"]')) {
 		return;
-	}
-
-	const uuid = document.querySelector('article[data-content-id]').getAttribute('data-content-id');
-
-	if (uuid) {
-		readingHistory.add(uuid);
 	}
 
 	if (flags.get('articleShareButtons')) {
