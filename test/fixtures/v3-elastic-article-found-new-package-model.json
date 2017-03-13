@@ -6,7 +6,7 @@
 			"_version": 43,
 			"found": true,
 			"_source": {
-				"type": "article",
+				"type": "package",
 				"id": "e484acfc-9772-11e6-a80e-bcd69f323a8b",
 				"title": "Mosul: Voices from a war zone",
 				"alternativeTitles": {
@@ -143,15 +143,9 @@
 					"layout": "full-bleed-image-center",
 					"backgroundColour": "black"
 				},
-				"package": {
-					"design": {
-						"theme": "extra"
-					}
+				"design": {
+					"theme": "basic"
 				},
-				"containedIn": [{
-					"id":"123",
-					"url": "some url"
-				}],
 				"leadImages": [{
 					"title": "",
 					"description": "",
