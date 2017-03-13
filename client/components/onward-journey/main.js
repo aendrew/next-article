@@ -46,15 +46,6 @@ module.exports.init = () => {
 		);
 	}
 
-	let specialReport = hydratedMetadata.moreOns && hydratedMetadata.moreOns.find(tag => tag.taxonomy === 'specialReports');
-
-	if (specialReport) {
-		let url = `/article/${articleId}/special-report?tagId=${encodeURI(specialReport.idV1)}&count=5`;
-
-		fetchPromises = fetchPromises.concat(
-			$('.js-special-report').map(el => createPromise(el, url))
-		);
-	}
 
 	const moreOns = $('.js-more-on');
 

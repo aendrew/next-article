@@ -1,47 +1,34 @@
 <div class="o-grid-container">
 	<div class="o-grid-row">
-		{{#if isSpecialReport}}
-			<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
-			{{#if @root.flags.nativeAdsArticle}}
-				{{> ads/promoted-content }}
-			{{/if}}
-			</div>
-			<div
-				class="js-special-report"
-				data-trackable="special-report"
-				data-o-grid-colspan="12 XL11 XLoffset1"></div>
-		{{else}}
-
-			<div class="related-content" data-o-grid-colspan="12 L8 XL8 XLoffset1">
-				{{#if @root.flags.articleRelatedContent}}
-					<div class="js-story-package" data-trackable="story-package"></div>
-					{{#if moreOns}}
-						{{#slice moreOns limit=1}}
-							{{> related/more-ons-teaser-collection index=0}}
-						{{/slice}}
-						{{#if @root.flags.nativeAdsArticle}}
-							{{> ads/promoted-content }}
-						{{/if}}
-						{{#slice moreOns offset=1}}
-							{{> related/more-ons-teaser-collection index=1}}
-						{{/slice}}
-					{{else}}
-						{{#if @root.flags.nativeAdsArticle}}
-							{{> ads/promoted-content }}
-						{{/if}}
+		<div class="related-content" data-o-grid-colspan="12 L8 XL8 XLoffset1">
+			{{#if @root.flags.articleRelatedContent}}
+				<div class="js-story-package" data-trackable="story-package"></div>
+				{{#if moreOns}}
+					{{#slice moreOns limit=1}}
+						{{> related/more-ons-teaser-collection index=0}}
+					{{/slice}}
+					{{#if @root.flags.nativeAdsArticle}}
+						{{> ads/promoted-content }}
 					{{/if}}
-
+					{{#slice moreOns offset=1}}
+						{{> related/more-ons-teaser-collection index=1}}
+					{{/slice}}
+				{{else}}
 					{{#if @root.flags.nativeAdsArticle}}
 						{{> ads/promoted-content }}
 					{{/if}}
 				{{/if}}
+
+				{{#if @root.flags.nativeAdsArticle}}
+					{{> ads/promoted-content }}
+				{{/if}}
+			{{/if}}
+		</div>
+		{{#ifAll @root.flags.myFtApi tags}}
+			<div data-o-grid-colspan="12 L4 XL3">
+				{{> related/more-ons-tags-collection}}
 			</div>
-			{{#ifAll @root.flags.myFtApi tags}}
-				<div data-o-grid-colspan="12 L4 XL3">
-					{{> related/more-ons-tags-collection}}
-				</div>
-			{{/ifAll}}
-		{{/if}}
+		{{/ifAll}}
 	</div>
 
 	{{#if comments.enabled}}
