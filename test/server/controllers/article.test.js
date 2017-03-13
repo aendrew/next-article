@@ -123,7 +123,7 @@ describe('Article Controller', () => {
 		});
 	});
 
-	context('Has rich journalism content', () => {
+	context.only('Has rich journalism content', () => {
 
 		it('sets the topper on the view model if flag is on', () => {
 			createInstance(null, { articleTopper: true }, fixtureWithTopper);

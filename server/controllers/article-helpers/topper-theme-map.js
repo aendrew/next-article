@@ -12,15 +12,12 @@ const themeImageRatio = {
 };
 
 const getTopperSettings = (content, flags) => {
-	let themeOrLayout;
-	let topperOrLeadImages;
-
 	content.topper = content.topper || {};
 
 	//TODO: change to layout only when migration is complete
-	themeOrLayout = content.topper.layout || content.topper.theme;
+	let themeOrLayout = content.topper.layout || content.topper.theme;
 	//TODO: change to leadImages only when migration is complete
-	topperOrLeadImages = content.leadImages || content.topper.images;
+	let topperOrLeadImages = content.leadImages || content.topper.images;
 
 	//Articles within a package get a slate offset topper if the package has the 'extra' theme
 	if (flags.contentPackages && content.containedIn && content.containedIn.length && content.package && content.package.design.theme === 'extra') {
