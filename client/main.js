@@ -6,7 +6,6 @@ const nUiConfig = require('./n-ui-config');
 const tipDismisser = require('n-ui/tour-tip/lib/dismiss.js');
 
 import {bootstrap} from 'n-ui';
-// import cacheJourney from './components/cache-journey/cache-journey';
 import {init as commentsInit} from './components/comments';
 
 bootstrap(nUiConfig, ({flags, mainCss}) => {
@@ -19,8 +18,6 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const legalCopy = require('./components/legal-copy/main');
 	const Video = require('./components/video/video');
 	const inlineBarrier = require('./components/inline-barrier/main');
-
-	// cacheJourney();
 
 	oViewport.listenTo('resize');
 
