@@ -4,7 +4,6 @@ const relatedBoxExpander = require('./related-box-expander');
 const relatedArticleToTeaser = require('./related-article-to-teaser');
 const ariaHiddenMidContentInterruptions = require('./aria-hidden');
 const lightSignup = require('./light-sign-up');
-const contentPreview = require('./content-preview');
 const inlineAd = require('./inline-ad');
 const extractMainImage = require('./extract-main-image');
 const gcsConflicts = require('./gcs-conflicts');
@@ -41,11 +40,6 @@ module.exports = function (body, flags, options) {
 	}
 
 	Object.assign(resultObject, gcsConflicts(resultObject.bodyHTML));
-
-	// "preview" access — cut article content
-	if (options.previewArticle) {
-		Object.assign(resultObject, contentPreview(resultObject.bodyHTML));
-	}
 
 	return resultObject;
 };

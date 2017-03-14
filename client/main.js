@@ -17,7 +17,6 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const ftlabsAudioPlayer = require('./components/ftlabs-audio-player/main');
 	const legalCopy = require('./components/legal-copy/main');
 	const Video = require('./components/video/video');
-	const inlineBarrier = require('./components/inline-barrier/main');
 
 	oViewport.listenTo('resize');
 
@@ -70,10 +69,6 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 		if (flags.get('ftlabsAudioPlayer')){
 			ftlabsAudioPlayer(flags);
-		}
-
-		if (flags.get('inArticlePreview')) {
-			inlineBarrier(flags);
 		}
 	});
 

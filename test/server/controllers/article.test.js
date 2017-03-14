@@ -202,23 +202,5 @@ describe('Article Controller', () => {
 		});
 	});
 
-	context('article preview layout', () => {
-		beforeEach(() => {
-			result = null;
-
-			createInstance({ headers: { 'ft-access-preview': 'TRUE' }}, { inArticlePreview: true }, null, null, true)
-			result = response._getRenderData()
-		});
-
-		it('renders with an inline barrier', () => {
-			expect(result.inlineBarrier.shouldShow).to.equal(true);
-		});
-
-		it('will not render lightSignup if inArticlePreview flag is on', () => {
-			expect(result.lightSignup.show).to.not.equal(true);
-		});
-
-	});
-
 
 });

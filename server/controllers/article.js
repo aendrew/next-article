@@ -95,12 +95,10 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	res.vary('ft-is-aud-dev');
 	res.vary('ft-blocked-url');
 	res.vary('ft-barrier-type');
-	res.vary('ft-access-preview');
 	res.vary('x-ft-auth-gate-result');
 
 	res.set('x-ft-auth-gate-result', req.get('x-ft-auth-gate-result') || '-');
 	res.set('x-ft-barrier-type', req.get('ft-barrier-type') || '-');
-	res.set('x-ft-access-preview', req.get('ft-access-preview') || '-');
 	res.set('ft-blocked-url', req.get('ft-blocked-url') || '-');
 
 	content.thisYear = new Date().getFullYear();
@@ -122,14 +120,6 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	// Set the canonical URL, it's needed by Open Graph'
 	content.canonicalUrl = getCanonicalUrl(content.webUrl, content.id);
 
-	// Inline barrier page & data
-	const shouldShow = userIsAnonymous && req.get('ft-access-preview') && !req.query.fragment && res.locals.flags.inArticlePreview;
-	content.inlineBarrier = {
-		shouldShow,
-		countryCode: req.get('country-code'),
-		type: 'standard' // TODO - set inline barrier type via preflight decision
-	};
-
 	// Apply content and article specific transforms to bodyHTML
 	Object.assign(
 		content,
@@ -137,7 +127,6 @@ module.exports = function articleV3Controller (req, res, next, content) {
 			fragment: req.query.fragment,
 			adsLayout: content.adsLayout,
 			userIsAnonymous,
-			previewArticle: req.get('ft-access-preview'),
 			contentPackage: Object.assign({ context: content.context }, content.package)
 		})
 	);
@@ -177,7 +166,7 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	content.isPremium = isPremium(content.webUrl);
 	content.withGcs = showGcs(req, res, content.freeArticle);
 	content.lightSignup = {
-		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && res.locals.flags.lightSignupInArticle && !res.locals.flags.inArticlePreview,
+		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && res.locals.flags.lightSignupInArticle,
 		isInferred: res.locals.flags.lsuInferredTopic
 	};
 

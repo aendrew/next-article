@@ -26,6 +26,7 @@ app.use((req, res, next) => {
 });
 
 app.post('^/preview$', bodyParser.json(), require('./controllers/preview'));
+app.post('^/in-article-barrier$', bodyParser.json(), require('./controllers/in-article-barrier'));
 
 // Apply this after the preview controller. Previews should not be cached
 app.use((req, res, next) => {
