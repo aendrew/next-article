@@ -15,11 +15,6 @@
 				{{/ifAll}}
 
 				{{#ifEquals contentType 'article'}}
-					{{#if tocHTML}}
-						<div class="article__body--toc">
-							{{{tocHTML}}}
-						</div>
-					{{/if}}
 					{{> body-article bodyHTML=bodyHTML}}
 					{{#if lightSignup.show}}
 						{{> light-signup tag=primaryTag articleUuid=id isInferred=lightSignup.isInferred}}

@@ -6,14 +6,11 @@ const nUiConfig = require('./n-ui-config');
 const tipDismisser = require('n-ui/tour-tip/lib/dismiss.js');
 
 import {bootstrap} from 'n-ui';
-// import cacheJourney from './components/cache-journey/cache-journey';
 import {init as commentsInit} from './components/comments';
 
 bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 	const slideshow = require('./components/slideshow/main');
-	const readingHistory = require('./components/reading-history');
-	const tearsheets = require('./components/tearsheets');
 	const onwardJourney = require('./components/onward-journey/main');
 	const share = require('./components/share/main');
 	const promotedContent = require('./components/ads/promoted-content');
@@ -22,26 +19,14 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const Video = require('./components/video/video');
 	const inlineBarrier = require('./components/inline-barrier/main');
 
-	// cacheJourney();
-
 	oViewport.listenTo('resize');
 
 	if (document.querySelector('*[data-article-status="error"]')) {
 		return;
 	}
 
-	const uuid = document.querySelector('article[data-content-id]').getAttribute('data-content-id');
-
-	if (uuid) {
-		readingHistory.add(uuid);
-	}
-
 	if (flags.get('articleShareButtons')) {
 		share.init(flags);
-	}
-
-	if (flags.get('tearsheetHovers')) {
-		tearsheets.init();
 	}
 
 	if (flags.get('articleScrollDepthTracking')) {

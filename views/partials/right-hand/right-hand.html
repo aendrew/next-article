@@ -4,7 +4,6 @@
 
 	{{#ifAll package @root.flags.contentPackages}}
 	{{else}}
-		{{{tocHTML}}}
 		{{#if @root.flags.articleSuggestedRead}}
 			{{> right-hand/suggested-reads-teaser-collection items=readNextArticles topic=readNextTopic }}
 		{{/if}}

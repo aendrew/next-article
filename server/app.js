@@ -38,7 +38,6 @@ const uuid = '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}';
 app.get('^/article/:id/story-package', require('./controllers/related/story-package'));
 app.get('^/article/:id/more-on', require('./controllers/related/more-on'));
 app.get('^/content/:id/up-next', require('./controllers/related/video-up-next'));
-app.get('^/article/:id/ad-blocking-articles', require('./controllers/related/ad-blocking-articles'));
 app.get('/embedded-components/slideshow/:id', require('./controllers/slideshow'));
 
 app.get(`^/content/:id(${uuid})$`, (req, res, next) => {
