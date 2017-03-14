@@ -37,7 +37,7 @@ $darkestClaret: #4c071e;
 
 .package__expander-toggle--split:after {
 	@include oGridRespondTo($from: M) {
-		right: 20px;
+		right: 16px;
 	}
 	@include oGridRespondTo($from: L) {
 		width: 80px;

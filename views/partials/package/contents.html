@@ -1,18 +1,11 @@
 <ul class="package__list">
 	{{#each contents}}
-		{{#ifEquals id @root.context.current.id}}
-			<li class="package__content-item package__content-item--current package__text--m">
+		<li class="package__content-item">
+			<a href="{{relativeUrl}}" class="package__link package__text--m" {{#ifEquals id @root.context.current.id}}aria-selected="true" aria-label="Current page"{{/ifEquals}}>
 				{{#if sequenceId}}<div class="package__text--highlit">{{sequenceId}}</div>{{/if}}
-				<div class="package__text--highlit">{{title}}
-			</li>
-		{{else}}
-			<li class="package__content-item">
-				<a href="{{relativeUrl}}" class="package__link package__text--m">
-					{{#if sequenceId}}<div class="package__text--highlit">{{sequenceId}}</div>{{/if}}
-					{{title}}
-				</a>
-			</li>
-		{{/ifEquals}}
+				{{title}}
+			</a>
+		</li>
 	{{/each}}
 </ul>
 {{#if shortened}}

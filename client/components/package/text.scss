@@ -7,6 +7,10 @@
 	font-size: 18px;
 }
 
+.package__text--xm {
+	font-size: 22px;
+}
+
 .package__text--l {
 	font-size: 24px;
 }
@@ -22,6 +26,10 @@
 
 .o-typography--loaded-sansBold .package__text--l {
 	font-size: 24px;
+}
+
+.o-typography--loaded-sansBold .package__text--xm {
+	font-size: 22px;
 }
 // scss-lint:enable SelectorFormat
 
