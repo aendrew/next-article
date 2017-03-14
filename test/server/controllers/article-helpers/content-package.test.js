@@ -15,7 +15,35 @@ describe('Content package', () => {
 	});
 
 	context('unordered', () => {
-		it('should place current one first in contents', () => {
+		it('should place current one second in contents if not first in package and package has enough subsequent pieces of content', () => {
+			const packageArticleStub = {
+				id: '456',
+				containedIn: [{
+					design: { theme: 'special-report' },
+					contains: [
+						{id: '123'},
+						{id: '789'},
+						{id: 'ghi'},
+						{id: '456'},
+						{id: 'jkl'},
+						{id: 'mno'},
+						{id: 'pqr'},
+						{id: 'abc'},
+						{id: 'def'},
+					]
+				}]
+			};
+			expect(subject(packageArticleStub).package.contents).eql([
+				{id: 'ghi'},
+				{id: '456'},
+				{id: 'jkl'},
+				{id: 'mno'},
+				{id: 'pqr'},
+				{id: 'abc'}
+			]);
+		});
+
+		it('should place current one first in contents if first in package', () => {
 			const packageArticleStub = {
 				id: '123',
 				containedIn: [{
@@ -25,11 +53,12 @@ describe('Content package', () => {
 				}]
 			};
 			expect(subject(packageArticleStub).package.contents).eql([
-				{id: '123'},
 				{id: '789'},
-				{id: 'abc'}
+				{id: 'abc'},
+				{id: '123'}
 			]);
 		});
+
 		it('should shorten a package', () => {
 			const packageArticleStub = {
 				id: '456',
@@ -49,12 +78,12 @@ describe('Content package', () => {
 				}]
 			};
 			expect(subject(packageArticleStub).package.contents).eql([
-				{id: '456'},
-				{id: 'abc'},
 				{id: 'def'},
 				{id: 'ghi'},
+				{id: '456'},
 				{id: 'jkl'},
-				{id: 'mno'}
+				{id: 'mno'},
+				{id: 'pqr'}
 			]);
 		});
 	});
