@@ -8,7 +8,6 @@ const fixtureBlog = require('../../fixtures/v3-elastic-article-found-blog').docs
 const fixtureFastFT = require('../../fixtures/v3-elastic-article-found-fastft').docs[0]._source;
 const fixturePremium = require('../../fixtures/v3-elastic-article-found-premium').docs[0]._source;
 const fixtureWithTopper = require('../../fixtures/v3-elastic-article-found-topper').docs[0]._source;
-const fixtureWithNewModel = require('../../fixtures/v3-elastic-article-found-new-model').docs[0]._source;
 const fixtureWithNewPackageModel = require('../../fixtures/v3-elastic-article-found-new-package-model').docs[0]._source;
 
 const stubs = {
@@ -130,7 +129,7 @@ describe('Article Controller', () => {
 			createInstance(null, { articleTopper: true }, fixtureWithTopper);
 			let result = response._getRenderData();
 			expect(result.topper.headline).to.equal('Mosul: Voices from a war zone');
-			expect(result.topper.theme).to.equal('full-bleed-image-center');
+			expect(result.topper.layout).to.equal('full-bleed-image-center');
 			expect(result.topper.themeImageRatio).to.equal('full-bleed');
 			expect(response.statusCode).to.equal(200);
 		});
@@ -152,32 +151,21 @@ describe('Article Controller', () => {
 		});
 
 		context('images', () => {
-			it('are set by topper images field', () => {
+			it('are set by article lead images field', () => {
 				createInstance(null, { articleTopper: true }, fixtureWithTopper)
 				let result = response._getRenderData()
 				expect(result.topper.images.length).to.equal(3);
 			});
 
-			it('are set by article leadImages field', () => {
-				createInstance(null, { articleTopper: true }, fixtureWithNewModel);
-				let result = response._getRenderData()
-				expect(result.topper.images.length).to.equal(3);
-			});
 		});
 
+
 		context('layout', () => {
-			it('is set by topper theme field', () => {
+			it('is set by topper layout field', () => {
 				createInstance(null, { articleTopper: true }, fixtureWithTopper)
 				let result = response._getRenderData()
 				expect(result.topper.layout).to.equal('branded');
 			});
-
-			it('is set by topper layout field', () => {
-				createInstance(null, { articleTopper: true }, fixtureWithNewModel)
-				let result = response._getRenderData()
-				expect(result.topper.layout).to.equal('full-bleed-image-center');
-			});
-
 		});
 
 		context('background colour', () => {
@@ -200,7 +188,7 @@ describe('Article Controller', () => {
 			});
 
 			it('is set to slate if package theme is \'extra\'', () => {
-				createInstance(null, { contentPackages: true }, fixtureWithNewModel)
+				createInstance(null, { contentPackages: true }, fixtureWithTopper)
 				let result = response._getRenderData()
 				expect(result.topper.backgroundColour).to.equal('slate');
 			});

@@ -140,34 +140,43 @@
 				"topper": {
 					"headline": "Mosul: Voices from a war zone",
 					"standfirst": "Optimism and unity abound, but is there a plan for what happens next after the military operation?",
-					"theme": "full-bleed-image-center",
-					"backgroundColour": "black",
-					"images": [{
-						"title": "",
-						"description": "",
-						"url": "http://prod-upp-image-read.ft.com/f3add2e0-dbfa-11e6-a7d5-ce30ecef69c7",
-						"width": 2000,
-						"height": 2000,
-						"ratio": 1,
-						"type": "square"
-					}, {
-						"title": "Larry Fink",
-						"description": "",
-						"url": "http://prod-upp-image-read.ft.com/35059e34-dc33-11e6-86ac-f253db7791c6",
-						"width": 2048,
-						"height": 1152,
-						"ratio": 1.7777777777777777,
-						"type": "standard"
-					}, {
-						"title": "",
-						"description": "",
-						"url": "http://prod-upp-image-read.ft.com/c374c260-dd84-11e6-9d7c-be108f1c1dce",
-						"width": 2350,
-						"height": 1000,
-						"ratio": 2.35,
-						"type": "wide"
-					}]
+					"layout": "full-bleed-image-center",
+					"backgroundColour": "black"
 				},
+				"package": {
+					"design": {
+						"theme": "extra"
+					}
+				},
+				"containedIn": [{
+					"id":"123",
+					"url": "some url"
+				}],
+				"leadImages": [{
+					"title": "",
+					"description": "",
+					"url": "http://prod-upp-image-read.ft.com/f3add2e0-dbfa-11e6-a7d5-ce30ecef69c7",
+					"width": 2000,
+					"height": 2000,
+					"ratio": 1,
+					"type": "square"
+				}, {
+					"title": "Larry Fink",
+					"description": "",
+					"url": "http://prod-upp-image-read.ft.com/35059e34-dc33-11e6-86ac-f253db7791c6",
+					"width": 2048,
+					"height": 1152,
+					"ratio": 1.7777777777777777,
+					"type": "standard"
+				}, {
+					"title": "",
+					"description": "",
+					"url": "http://prod-upp-image-read.ft.com/c374c260-dd84-11e6-9d7c-be108f1c1dce",
+					"width": 2350,
+					"height": 1000,
+					"ratio": 2.35,
+					"type": "wide"
+				}],
 				"mainImage": {
 					"title": "Iraqi soldiers look on as smoke billows from a blast in Qayyarah, south of Mosul",
 					"description": "TOPSHOT - Iraqi soldiers look on as smoke rises from the Qayyarah area, some 60 kilometres (35 miles) south of Mosul, on October 19, 2016, as Iraqi forces take part in an operation against Islamic State (IS) group jihadists to retake the main hub city. In the biggest Iraqi military operation in years, forces have retaken dozens of villages, mostly south and east of Mosul, and are planning multiple assaults for October 20. / AFP PHOTO / YASIN AKGULYASIN AKGUL/AFP/Getty Images",
