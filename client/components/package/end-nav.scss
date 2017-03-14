@@ -1,3 +1,6 @@
+$claret: #B31147;
+$pkgYellow: #ffec1a;
+
 .package__nav--article-end {
 	margin-top: 20px;
 	margin-bottom: 2em;
@@ -12,8 +15,6 @@
 
 .package__article-end-bar {
 	padding-bottom: 40px;
-	border-bottom: 1px solid;
-	border-bottom-color: #979797;
 }
 
 .package__end-title-container {
@@ -50,14 +51,18 @@
 	margin-bottom: 0;
 }
 
+.o-teaser__content.package__highlight-border:hover > h2 {
+	color: $claret;
+}
+
 .package--extra {
 
 	.package__article-end-about {
 		color: getColor('white');
 	}
 
-	.package__article-end-bar {
-		border-bottom-color: rgba(255, 255, 255, 0.2);
+	.o-teaser__content.package__highlight-border:hover > h2 {
+		color: $pkgYellow;
 	}
 
 }

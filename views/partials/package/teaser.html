@@ -1,12 +1,14 @@
 <div class="package__article-end-teaser">
 	<div class="o-teaser o-teaser--large {{#ifEquals design.theme 'extra'}}o-teaser--inverse{{/ifEquals}} o-teaser--has-image package__highlight-background package__no-bottom-margin" data-o-component="o-teaser">
-		<div class="o-teaser__content package__highlight-border">
-			<div class="o-teaser__meta">
-				<span class="o-teaser__tag package__text--highlit package__text--m">UP NEXT</span>
+		<a href="{{relativeUrl}}">
+			<div class="o-teaser__content package__highlight-border">
+				<div class="o-teaser__meta">
+					<span class="o-teaser__tag package__text--highlit package__text--m">UP NEXT</span>
+				</div>
+				<h2 class="o-teaser__heading">{{title}}</h2>
+				<p class="o-teaser__standfirst">{{standfirst}}</p>
 			</div>
-			<h2 class="o-teaser__heading"><a href="{{relativeUrl}}">{{title}}</a></h2>
-			<p class="o-teaser__standfirst">{{standfirst}}</p>
-		</div>
+		</a>
 		<div class="o-teaser__image-container package__highlight-border">
 			<div class="o-teaser__image-placeholder image-placeholder">
 				<img src="{{mainImage.url}}" class="o-teaser__image" alt="demo image"></img>

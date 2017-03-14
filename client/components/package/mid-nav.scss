@@ -1,12 +1,20 @@
 .package__nav--in-article {
-	margin-top: 2.5em;
-	margin-bottom: 2em;
 	border-top: 1px rgba(0, 0, 0, 0.2) solid;
 	border-left: 1px rgba(0, 0, 0, 0.2) solid;
 	padding: 18px 0 0 18px;
 }
 
 .package__in-article-container {
-	display: inline-block;
 	width: 100%;
+	box-sizing: border-box;
+	position: relative;
+	clear: left;
+	margin: 24px 24px 16px 0;
+	float: left;
+}
+
+.package__in-article-container {
+	@media (min-width: 600px) {
+		max-width: 300px;
+	}
 }
