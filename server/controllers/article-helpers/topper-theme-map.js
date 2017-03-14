@@ -48,10 +48,9 @@ const getTopperSettings = (content, flags) => {
 	}
 };
 
-const allProperties = (layout, template, backgroundColour, modifiers, includesImage, images) => {
+const allProperties = (layout, template, backgroundColour, modifiers, includesImage) => {
 	const addOn = {
-		includesImage,
-		images
+		includesImage
 	}
 	return Object.assign(basicProperties(layout, template, backgroundColour, modifiers), addOn)
 }
