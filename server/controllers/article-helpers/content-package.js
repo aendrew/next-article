@@ -31,8 +31,8 @@ const addContents = ({ pkg, currentIndex }) => {
 	const needsSequenceId = pkg.tableOfContents && pkg.tableOfContents.labelType === 'part-number';
 	const contents = needsSequenceId ? addSequenceId(shortenedPackage) : shortenedPackage;
 	const isShortened = contents.length < pkg.contains.length;
-	const goToPLPText = `See all ${pkg.contains.length} stories in the ${pkg.design.theme === 'special-report' ? 'report' : 'series'}`;
-	return { contents, isShortened, goToPLPText };
+	const landingPageLinkText = `See all ${pkg.contains.length} stories in the ${pkg.design.theme === 'special-report' ? 'report' : 'series'}`;
+	return { contents, isShortened, landingPageLinkText };
 };
 
 module.exports = ({ id, containedIn }) => {
