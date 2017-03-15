@@ -24,7 +24,7 @@
 				data-trackable="topic"
 				class="n-content-tag n-content-tag--with-follow">{{prefLabel}}</a>
 			{{#if @root.flags.myFtApi}}
-				{{>n-ui/myft/templates/follow version='3' conceptId=idV1 name=prefLabel}}
+				{{>n-myft-ui/myft/templates/follow version='3' conceptId=idV1 name=prefLabel}}
 			{{/if}}
 		</li>
 		{{/each}}
@@ -46,7 +46,7 @@
 				data-trackable="author"
 				class="n-content-tag n-content-tag--with-follow">{{prefLabel}}</a>
 			{{#if @root.flags.myFtApi}}
-				{{>n-ui/myft/templates/follow version='3' conceptId=idV1 name=prefLabel}}
+				{{>n-myft-ui/myft/templates/follow version='3' conceptId=idV1 name=prefLabel}}
 			{{/if}}
 		</li>
 		{{/each}}
