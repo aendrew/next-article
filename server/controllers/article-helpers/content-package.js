@@ -1,9 +1,5 @@
 const MAX_LENGTH = 6;
 
-const placeFirst = ({ first, all }) => {
-	return [].concat(first, all.filter(x => x !== first));
-};
-
 const getSequenceId = (pkg, currentIndex) => {
 	if (pkg.tableOfContents && pkg.tableOfContents.sequence === 'exact-order' && pkg.tableOfContents.labelType === 'part-number') {
 		return `PART ${currentIndex + 1}`;
@@ -19,35 +15,24 @@ const addContext = ({ pkg, currentIndex }) => ({
 });
 
 const addContents = ({ pkg, currentIndex }) => {
+	const shortenPackage = pkgContents => {
+		if (pkgContents.length <= MAX_LENGTH) return pkgContents;
+		if (currentIndex < 1) return pkgContents.slice(0, MAX_LENGTH);
+		const start = (pkgContents.length - currentIndex < MAX_LENGTH) ? pkgContents.length - MAX_LENGTH : currentIndex - 1;
+		return pkgContents.slice(start, MAX_LENGTH + start);
+	};
 	const addSequenceId = pkgContents => {
 		return pkgContents.map(item => {
 			const sequenceId = `PART ${pkg.contains.indexOf(item) + 1}`;
 			return Object.assign({}, item, { sequenceId });
 		});
 	};
-
-	let shortenedPackage;
-	if (pkg.contains.length > MAX_LENGTH) {
-		const start = currentIndex - (MAX_LENGTH / 2);
-		const end = currentIndex + (MAX_LENGTH / 2);
-		shortenedPackage = (start >= 0) ? pkg.contains.slice(start, end) : pkg.contains.slice(0, MAX_LENGTH);
-	}
-
-	let contents;
-	if (pkg.tableOfContents && pkg.tableOfContents.sequence === 'exact-order' && pkg.tableOfContents.labelType === 'part-number') {
-		contents = !!shortenedPackage ? addSequenceId(shortenedPackage) : addSequenceId(pkg.contains);
-	} else {
-		contents = placeFirst({
-			first: pkg.contains[currentIndex],
-			all: shortenedPackage ? shortenedPackage : pkg.contains
-		});
-	}
-
-	return {
-		contents,
-		shortened: !!shortenedPackage,
-		goToPackagePageText: pkg.design.theme === 'special-report' ? 'See all stories in the report' : 'See all stories in this series'
-	};
+	const shortenedPackage = shortenPackage(pkg.contains);
+	const needsSequenceId = pkg.tableOfContents && pkg.tableOfContents.labelType === 'part-number';
+	const contents = needsSequenceId ? addSequenceId(shortenedPackage) : shortenedPackage;
+	const isShortened = contents.length < pkg.contains.length;
+	const landingPageLinkText = `See all ${pkg.contains.length} stories in the ${pkg.design.theme === 'special-report' ? 'report' : 'series'}`;
+	return { contents, isShortened, landingPageLinkText };
 };
 
 module.exports = ({ id, containedIn }) => {
