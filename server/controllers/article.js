@@ -183,7 +183,6 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	content.topper = topperThemeMap(content, res.locals.flags);
 
 	content.contentType = 'article';
-	content.shouldRenderMyftHint = true;
 	if (req.query.fragment) {
 		res.render('fragment', content);
 	} else {
