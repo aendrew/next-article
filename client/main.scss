@@ -1,11 +1,12 @@
 @import 'n-ui/main';
-@import 'n-ui/myft/main';
-@import 'n-ui/myft-hint/main';
+@import 'n-myft-ui/myft/main';
 $n-notification-is-silent: false;
-@import 'n-ui/notification/main';
+@import 'n-notification/main';
+@import 'n-myft-ui/myft-common/main';
+@include nUiMyftCommon(false);
 
 @include nUiStylesheetStart('head');
-	@import 'n-ui/tour-tip/main';
+	@import 'n-ui/components/n-ui/tour-tip/main';
 	$o-teaser-is-silent: false;
 	@import 'o-teaser/main';
 	$o-teaser-collection-is-silent: false;
