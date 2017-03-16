@@ -2,13 +2,12 @@ const oViewport = require('o-viewport');
 const lightSignup = require('o-email-only-signup');
 const expander = require('o-expander');
 const tracking = require('n-ui/components/n-ui/tracking');
-const nUiConfig = require('./n-ui-config');
 const tipDismisser = require('n-ui/components/n-ui/tour-tip/lib/dismiss.js');
 
 import {bootstrap} from 'n-ui';
 import {init as commentsInit} from './components/comments';
 
-bootstrap(nUiConfig, ({flags, allStylesLoaded}) => {
+bootstrap(({flags, allStylesLoaded}) => {
 
 	const slideshow = require('./components/slideshow/main');
 	const onwardJourney = require('./components/onward-journey/main');

@@ -15,7 +15,8 @@ const app = module.exports = nUi({
 	],
 	helpers: {
 		nTeaserPresenter: require('@financial-times/n-teaser').presenter
-	}
+	},
+	withJsonLd: true
 });
 
 require('./lib/ig-poller').start();
