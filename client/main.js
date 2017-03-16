@@ -7,7 +7,7 @@ const tipDismisser = require('n-ui/components/n-ui/tour-tip/lib/dismiss.js');
 import {bootstrap} from 'n-ui';
 import {init as commentsInit} from './components/comments';
 
-bootstrap(({flags, allStylesLoaded}) => {
+bootstrap({ preset: 'complete' }, ({flags, allStylesLoaded}) => {
 
 	const slideshow = require('./components/slideshow/main');
 	const onwardJourney = require('./components/onward-journey/main');
