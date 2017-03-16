@@ -2,20 +2,15 @@ const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
 const api = require('next-ft-api-client');
 const interactivePoller = require('../lib/ig-poller');
-const shellpromise = require('shellpromise');
 const getOnwardJourneyArticles = require('./article-helpers/onward-journey');
-
-const controllerInteractive = require('./interactive');
-const controllerPodcast = require('./podcast');
-const controllerVideo = require('./video');
-const controllerArticle = require('./article');
+const model = require('../model');
+const getFalconUrl = require('./article-helpers/falcon-url');
 
 function getInteractive (contentId) {
 	return interactivePoller.getData().find(
 		mapping => mapping.articleuuid === contentId
 	);
 }
-
 
 function getArticle (contentId) {
 	return api.content({
@@ -32,14 +27,15 @@ function getArticle (contentId) {
 		});
 }
 
-module.exports = function negotiationController (req, res, next) {
+module.exports = function contentController (req, res, next) {
 	res.set('surrogate-key', `contentUuid:${req.params.id}`);
 
 	const contentPromises = [];
 	let interactive = getInteractive(req.params.id);
 
 	if (interactive) {
-		return controllerInteractive(req, res, next, interactive);
+		res.redirect(interactive.interactiveurl);
+		return;
 	}
 
 	contentPromises.push(getArticle(req.params.id));
@@ -52,9 +48,23 @@ module.exports = function negotiationController (req, res, next) {
 				}));
 	}
 
-	return Promise.all(contentPromises)
-		.then(([article, onwardJourney]) => {
-			const webUrl = article && article.webUrl || '';
+	return Promise.all(contentPromises).then(([content, onwardJourney]) => {
+
+			// TODO: document why content would be null
+			if (!content) {
+				return getFalconUrl(req.params.id).then(falconUrl => {
+					if (!falconUrl) {
+						return res.sendStatus(404);
+					}
+					return res.redirect(302, falconUrl);
+				});
+			}
+
+			if (content.type === 'placeholder') {
+				return res.redirect(content.url);
+			}
+
+			const webUrl = content.webUrl || '';
 
 			// Redirect ftalphaville to old FT.com.  Next is not currently planning to absorb FTAlphaville
 			// and therefore we shouldn't replicate content from FTAlphaville on Next for SEO reasons.
@@ -69,45 +79,51 @@ module.exports = function negotiationController (req, res, next) {
 			}
 
 			// Redirect syndicated / wires content to old FT.com as no treatment on Next yet
-			if (article && article.originatingParty && article.originatingParty !== 'FT') {
+			if (content.originatingParty && content.originatingParty !== 'FT') {
 				return res.redirect(302, `${webUrl}${webUrl.includes('?') ? '&' : '?'}ft_site=falcon&desktop=true`);
 			}
 
-			if (article && onwardJourney) {
-				article.readNextArticle = onwardJourney.readNext;
-				article.readNextArticles = onwardJourney.suggestedReads;
+			if (content.type === 'video' && res.locals.flags.videoArticlePage === 'v2') {
+				return res.redirect(`/video/${req.params.id}`);
+			}
+
+			if (content.type === 'article') {
+				res.vary('ft-is-aud-dev');
+				res.vary('ft-blocked-url');
+				res.vary('ft-barrier-type');
+				res.vary('x-ft-auth-gate-result');
+
+				res.set('x-ft-auth-gate-result', req.get('x-ft-auth-gate-result') || '-');
+				res.set('x-ft-barrier-type', req.get('ft-barrier-type') || '-');
+				res.set('ft-blocked-url', req.get('ft-blocked-url') || '-');
+			}
+
+			if (onwardJourney) {
+				content.readNextArticle = onwardJourney.readNext;
+				content.readNextArticles = onwardJourney.suggestedReads;
 
 				if(onwardJourney.package || onwardJourney.context) {
-					article.package = onwardJourney.package;
-					article.context = onwardJourney.context;
+					content.package = onwardJourney.package;
+					content.context = onwardJourney.context;
 				}
 			}
 
-			if (article) {
-				switch (article.type) {
-					case 'podcast':
-						return controllerPodcast(req, res, next, article);
-					case 'video':
-						return (res.locals.flags.videoArticlePage === 'v2')
-							? res.redirect(`/video/${req.params.id}`)
-							: controllerVideo(req, res, next, article);
-					case 'placeholder':
-						return res.redirect(article.url);
-					default:
-						return controllerArticle(req, res, next, article);
+			function render (data) {
+				if (req.query.fragment) {
+					res.render('fragment', data);
+				} else {
+					content.layout = 'wrapper';
+					content.viewStyle = 'compact';
+					res.render(data.template || 'content', data);
 				}
 			}
 
-			return shellpromise(`curl -s http://www.ft.com/cms/s/${req.params.id}.html -H 'FT-Site: falcon' -I | grep -i location || echo`, { verbose: true })
-				.then(response => {
-					const webUrl = response.replace(/^Location:/i, '').trim();
+			// Type handlers decorate the model with type specific model data.
+			// They return a promise that resolves with the new data
+			const typeHandler = model.getHandler(content.type);
 
-					if (/^http:\/\/www\.ft\.com\//.test(webUrl)) {
-						res.redirect(302, `${webUrl}${webUrl.includes('?') ? '&' : '?'}ft_site=falcon&desktop=true`);
-					} else {
-						res.sendStatus(404);
-					}
-				});
+			// TODO: we shouldn't need to pass in the req, res, and next params
+			return typeHandler(req, res, content, res.locals.flags).then(render);
 		})
 		.catch(error => {
 			logger.error({ event: 'CONTENT_FETCH_FAILED', err: error.toString(), uuid: req.params.id });

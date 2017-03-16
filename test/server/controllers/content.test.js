@@ -8,6 +8,7 @@ const fixtureInteractives = require('../../fixtures/interactive-graphics');
 const fixturePodcast = require('../../fixtures/v3-elastic-podcast-found');
 const fixtureArticle = require('../../fixtures/v3-elastic-article-found');
 const fixtureNotFound = require('../../fixtures/v3-elastic-not-found');
+// const fixturePremium = require('../../fixtures/v3-elastic-article-found-premium').docs[0]._source;
 
 const fixtureOnwardJourney = require('../../fixtures/onward-journey');
 const fixtureOnwardJourneyInPackage = require('../../fixtures/onward-journey-in-package');
@@ -18,23 +19,21 @@ const dependencyStubs = {
 	video: sinon.spy(),
 	article: sinon.spy(),
 	interactive: sinon.spy(),
-	shellpromise: sinon.stub(),
-	onwardJourney: sinon.stub()
+	falconUrl: sinon.stub(),
+	onwardJourney: sinon.stub(),
+	modelHandler: sinon.stub()
 };
 
 nock.disableNetConnect();
 
-const subject = proxyquire('../../../server/controllers/negotiation', {
+const subject = proxyquire('../../../server/controllers/content', {
 	'../lib/ig-poller': dependencyStubs.igPoller,
-	'./podcast': dependencyStubs.podcast,
-	'./video': dependencyStubs.video,
-	'./article': dependencyStubs.article,
-	'./interactive': dependencyStubs.interactive,
-	'shellpromise': dependencyStubs.shellpromise,
+	'./article-helpers/falcon-url': dependencyStubs.falconUrl,
+	'../model': {getHandler: dependencyStubs.modelHandler},
 	'./article-helpers/onward-journey': dependencyStubs.onwardJourney
 });
 
-describe('Negotiation Controller', function () {
+describe('Content Controller', function () {
 
 	let request;
 	let response;
@@ -45,6 +44,8 @@ describe('Negotiation Controller', function () {
 		request = httpMocks.createRequest(params);
 		response = httpMocks.createResponse();
 		response.locals = { flags: flags || {} };
+		// node-mocks-http doesn't support this method
+		response.unvaryAll = sinon.stub();
 		return subject(request, response, next);
 	}
 
@@ -53,7 +54,7 @@ describe('Negotiation Controller', function () {
 			params: {
 				id: '012f81d6-2e2b-11e5-8873-775ba7c2ea3d'
 			}
-		})
+		});
 		expect(response._headers['surrogate-key']).to.equal('contentUuid:012f81d6-2e2b-11e5-8873-775ba7c2ea3d');
 		dependencyStubs.interactive.reset();
 	})
@@ -71,35 +72,43 @@ describe('Negotiation Controller', function () {
 			dependencyStubs.interactive.reset();
 		});
 
-		it('defers to the interactive controller', function () {
-			expect(dependencyStubs.interactive.callCount).to.equal(1);
-			expect(response.statusCode).to.not.equal(404);
+		it('redirects to the interactive URL', function () {
+			expect(dependencyStubs.interactive.callCount).to.equal(0);
+			expect(response.statusCode).to.equal(302);
+			expect(response._getRedirectUrl()).to.equal('http://ig.ft.com/sites/2015/local-cuts-checker/');
 		});
 	});
 
 	describe('when the requested article is a podcast', function () {
+
 		beforeEach(function () {
 
 			nock('https://next-elastic.ft.com')
 				.post('/v3_api_v2/item/_mget')
 				.reply(200, fixturePodcast);
 
+			dependencyStubs.modelHandler.withArgs('podcast').returns(dependencyStubs.podcast)
+			dependencyStubs.onwardJourney.returns(Promise.resolve());
+
 			return createInstance({
 				params: {
 					id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
 				}
-			});
+			}, { articleSuggestedRead: true });
 
 		});
 
 		afterEach(function () {
+			dependencyStubs.modelHandler.reset();
 			dependencyStubs.podcast.reset();
+			dependencyStubs.onwardJourney.reset();
 		});
 
-		it('defers to the podcast controller', function () {
+		it('returns a successful response', function () {
+			expect(response.statusCode).to.equal(200);
 			expect(dependencyStubs.podcast.callCount).to.equal(1);
-			expect(response.statusCode).to.not.equal(404);
 		});
+
 	});
 
 	describe('when the requested article is a video', function () {
@@ -117,6 +126,8 @@ describe('Negotiation Controller', function () {
 					}]
 				});
 
+			dependencyStubs.modelHandler.withArgs('video').returns(dependencyStubs.video);
+
 			return createInstance({
 				params: {
 					id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
@@ -126,9 +137,10 @@ describe('Negotiation Controller', function () {
 
 		afterEach(function () {
 			dependencyStubs.video.reset();
+			dependencyStubs.modelHandler.reset();
 		});
 
-		it('defers to the video controller', function () {
+		it('defers to the video handler', function () {
 			expect(dependencyStubs.video.callCount).to.equal(1);
 			expect(response.statusCode).to.not.equal(404);
 		});
@@ -165,10 +177,11 @@ describe('Negotiation Controller', function () {
 	describe('when dealing with an article', function () {
 		context('and it is found', function () {
 			beforeEach(function () {
-
 				nock('https://next-elastic.ft.com')
 					.post('/v3_api_v2/item/_mget')
 					.reply(200, fixtureArticle);
+
+				dependencyStubs.modelHandler.withArgs('article').returns(dependencyStubs.article);
 
 				return createInstance({
 					params: {
@@ -180,11 +193,45 @@ describe('Negotiation Controller', function () {
 
 			afterEach(function () {
 				dependencyStubs.article.reset();
+				dependencyStubs.modelHandler.reset();
 			});
 
 			it('defers to the article controller', function () {
 				expect(dependencyStubs.article.callCount).to.equal(1);
 				expect(response.statusCode).to.not.equal(404);
+			});
+		});
+
+		context('fragment layout', function () {
+			let modelStub = sinon.stub();
+			beforeEach(function () {
+				nock('https://next-elastic.ft.com')
+					.post('/v3_api_v2/item/_mget')
+					.reply(200, fixtureArticle);
+				modelStub.returns(Promise.resolve({
+					contentType: 'article',
+					template: 'content',
+					layout: 'wrapper'
+				}));
+				dependencyStubs.modelHandler.withArgs('article').returns(modelStub);
+
+				return createInstance({
+					params: { id: '352210c4-7b17-11e5-a1fe-567b37f80b64' },
+					query: { fragment: 1 }
+				});
+
+			});
+
+			afterEach(function () {
+				modelStub.reset();
+				dependencyStubs.modelHandler.reset();
+			});
+
+			it('defers to the article controller', function () {
+				expect(dependencyStubs.modelHandler.callCount).to.equal(1);
+				expect(modelStub.callCount).to.equal(1);
+				expect(response._getRenderView()).to.equal('fragment');
+				expect(response.statusCode).to.equal(200);
 			});
 		});
 
@@ -195,9 +242,10 @@ describe('Negotiation Controller', function () {
 					.post('/v3_api_v2/item/_mget')
 					.reply(200, fixtureNotFound);
 
-				dependencyStubs.shellpromise.returns(
-					Promise.resolve('Location:http://www.ft.com/path/to/article')
+				dependencyStubs.falconUrl.returns(
+					Promise.resolve('http://www.ft.com/path/to/article')
 				);
+				dependencyStubs.modelHandler.withArgs('article').returns(dependencyStubs.article);
 
 				return createInstance({
 					params: {
@@ -208,15 +256,23 @@ describe('Negotiation Controller', function () {
 			});
 
 			afterEach(function () {
-				dependencyStubs.shellpromise.returns(undefined);
 				dependencyStubs.article.reset();
+				dependencyStubs.modelHandler.reset();
+				dependencyStubs.falconUrl.returns(undefined);
 			});
 
 			it('redirects to ft.com', function () {
-				expect(dependencyStubs.article.callCount).to.equal(0);
+				expect(response._getRedirectUrl()).to.equal('http://www.ft.com/path/to/article')
 				expect(response.statusCode).to.equal(302);
+				expect(dependencyStubs.modelHandler.callCount).to.equal(0);
+				expect(dependencyStubs.article.callCount).to.equal(0);
 			});
 		});
+
+		// it('does not add X-Robots-Tag headers for Methode articles', () => {
+		// 	createInstance(null, { openGraph: true }, fixturePremium);
+		// 	expect(response.getHeader('X-Robots-Tag')).to.be.undefined;
+		// });
 
 		context('when it does not exist', function () {
 			beforeEach(function () {
@@ -225,9 +281,10 @@ describe('Negotiation Controller', function () {
 					.post('/v3_api_v2/item/_mget')
 					.reply(200, fixtureNotFound);
 
-				dependencyStubs.shellpromise.returns(
-					Promise.resolve(Promise.resolve(''))
+				dependencyStubs.falconUrl.returns(
+					Promise.resolve(null)
 				);
+				dependencyStubs.modelHandler.withArgs('article').returns(dependencyStubs.article);
 
 				return createInstance({
 					params: {
@@ -238,13 +295,15 @@ describe('Negotiation Controller', function () {
 			});
 
 			afterEach(function () {
-				dependencyStubs.shellpromise.returns(undefined);
 				dependencyStubs.article.reset();
+				dependencyStubs.modelHandler.reset();
+				dependencyStubs.falconUrl.returns(undefined);
 			});
 
 			it('responds with a 404', function () {
-				expect(dependencyStubs.article.callCount).to.equal(0);
+				expect(response._getRedirectUrl()).to.equal('');
 				expect(response.statusCode).to.equal(404);
+				expect(dependencyStubs.article.callCount).to.equal(0);
 			});
 		});
 	});
@@ -259,6 +318,8 @@ describe('Negotiation Controller', function () {
 					.reply(200, fixtureArticle);
 
 				dependencyStubs.onwardJourney.returns(Promise.resolve(fixtureOnwardJourney));
+				dependencyStubs.modelHandler.withArgs('article').returns(dependencyStubs.article);
+
 				return createInstance({
 					params: {
 						id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
@@ -270,18 +331,18 @@ describe('Negotiation Controller', function () {
 			afterEach(function () {
 				dependencyStubs.onwardJourney.reset();
 				dependencyStubs.article.reset();
+				dependencyStubs.modelHandler.reset();
 			});
 
 			it('defers to the article controller after setting read next data', function () {
 				expect(dependencyStubs.onwardJourney.callCount).to.equal(1);
 				expect(dependencyStubs.article.callCount).to.equal(1);
-				expect(dependencyStubs.article.args[0][3].readNextArticle.title).to.equal('FT Health: Welcome to our new newsletter');
-				expect(dependencyStubs.article.args[0][3].readNextArticles.length).to.equal(5);
+				expect(dependencyStubs.article.args[0][2].readNextArticle.title).to.equal('FT Health: Welcome to our new newsletter');
+				expect(dependencyStubs.article.args[0][2].readNextArticles.length).to.equal(5);
 				expect(response.statusCode).to.not.equal(404);
 			});
 
 		});
-
 
 		context('and onward journey fetch fail', () => {
 			beforeEach(function () {
@@ -291,6 +352,7 @@ describe('Negotiation Controller', function () {
 					.reply(200, fixtureArticle);
 
 				dependencyStubs.onwardJourney.returns(Promise.reject());
+				dependencyStubs.modelHandler.withArgs('article').returns(dependencyStubs.article);
 				return createInstance({
 					params: {
 						id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
@@ -302,6 +364,7 @@ describe('Negotiation Controller', function () {
 			afterEach(function () {
 				dependencyStubs.onwardJourney.reset();
 				dependencyStubs.article.reset();
+				dependencyStubs.modelHandler.reset();
 			});
 
 			it('renders the article without the read nexts', function () {
@@ -314,7 +377,6 @@ describe('Negotiation Controller', function () {
 
 		});
 
-
 	});
 
 	describe('with content packages flag on', () => {
@@ -326,6 +388,8 @@ describe('Negotiation Controller', function () {
 					.reply(200, fixtureArticle);
 
 				dependencyStubs.onwardJourney.returns(Promise.resolve(fixtureOnwardJourneyInPackage));
+				dependencyStubs.modelHandler.withArgs('article').returns(dependencyStubs.article);
+
 				return createInstance({
 					params: {
 						id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
@@ -337,20 +401,20 @@ describe('Negotiation Controller', function () {
 			afterEach(function () {
 				dependencyStubs.onwardJourney.reset();
 				dependencyStubs.article.reset();
+				dependencyStubs.modelHandler.reset();
 			});
 
 			it('defers to the article controller after setting read next and package data', function () {
 				expect(dependencyStubs.onwardJourney.callCount).to.equal(1);
 				expect(dependencyStubs.article.callCount).to.equal(1);
-				expect(dependencyStubs.article.args[0][3].readNextArticle.title).to.equal('The End of the Asian Century by Michael Auslin – strategic games');
-				expect(dependencyStubs.article.args[0][3].readNextArticles.length).to.equal(5);
-				expect(dependencyStubs.article.args[0][3].package.title).to.equal('The best books of 2016');
-				expect(dependencyStubs.article.args[0][3].context.current.title).to.equal('Economics');
+				expect(dependencyStubs.article.args[0][2].readNextArticle.title).to.equal('The End of the Asian Century by Michael Auslin – strategic games');
+				expect(dependencyStubs.article.args[0][2].readNextArticles.length).to.equal(5);
+				expect(dependencyStubs.article.args[0][2].package.title).to.equal('The best books of 2016');
+				expect(dependencyStubs.article.args[0][2].context.current.title).to.equal('Economics');
 				expect(response.statusCode).to.not.equal(404);
 			});
 
 		});
-
 
 		context('and onward journey fetch fail', () => {
 			beforeEach(function () {
@@ -360,6 +424,7 @@ describe('Negotiation Controller', function () {
 					.reply(200, fixtureArticle);
 
 				dependencyStubs.onwardJourney.returns(Promise.reject());
+				dependencyStubs.modelHandler.withArgs('article').returns(dependencyStubs.article);
 				return createInstance({
 					params: {
 						id: '352210c4-7b17-11e5-a1fe-567b37f80b64'
@@ -371,15 +436,16 @@ describe('Negotiation Controller', function () {
 			afterEach(function () {
 				dependencyStubs.onwardJourney.reset();
 				dependencyStubs.article.reset();
+				dependencyStubs.modelHandler.reset();
 			});
 
 			//TODO: is this correct behaviour?
 			it('renders the article without the read nexts or navigation', function () {
 				expect(dependencyStubs.onwardJourney.callCount).to.equal(1);
 				expect(dependencyStubs.article.callCount).to.equal(1);
-				expect(dependencyStubs.article.args[0][3].readNextArticle).to.be.undefined;
-				expect(dependencyStubs.article.args[0][3].readNextArticles).to.be.undefined;
-				expect(dependencyStubs.article.args[0][3].package).to.be.undefined;
+				expect(dependencyStubs.article.args[0][2].readNextArticle).to.be.undefined;
+				expect(dependencyStubs.article.args[0][2].readNextArticles).to.be.undefined;
+				expect(dependencyStubs.article.args[0][2].package).to.be.undefined;
 				expect(response.statusCode).to.not.equal(404);
 			});
 

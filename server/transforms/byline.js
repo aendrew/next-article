@@ -1,5 +1,5 @@
 module.exports = (byline, authors) => {
-	if (byline && authors) {
+	if (byline && Array.isArray(authors)) {
 		authors.forEach(author => {
 			byline = byline.replace(
 				new RegExp('\\b(' + author.prefLabel + ')\\b'),

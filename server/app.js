@@ -47,7 +47,7 @@ app.get(`^/content/:id(${uuid})$`, (req, res, next) => {
 	// cache articles for less time than all the related content
 	res.set('Surrogate-Control', res.FT_SHORT_CACHE);
 	next();
-}, require('./controllers/negotiation'));
+}, require('./controllers/content'));
 
 app.get('/__gtg', (req, res) => {
 	res.status(200).end();

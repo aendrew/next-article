@@ -58,6 +58,9 @@ smoke:
 	nht test-urls ${TEST_APP} --throttle 1;
 	export TEST_APP=${TEST_APP}; nht nightwatch test/browser/tests/*
 
+test-smoke-local:
+	nht smoke local.ft.com:3002
+
 build:
 	nui build
 

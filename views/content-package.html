@@ -18,22 +18,23 @@
 	role="main"
 	class="article{{#if designGenre}} article--brand{{/if}}"
 	data-content-id="{{id}}"
-	data-content-sources="{{#if articleV1}}v1{{/if}} {{#if articleV2}}v2{{/if}}"
 	data-syndicatable="{{canBeSyndicated}}"
 >
 
-	{{#ifEquals theme 'specialReport'}}
-		INSERT SPECIAL REPORT HERE
-	{{else}}
-		{{> package/nav}}
 		{{> topper/main}}
 
-		{{#if description}}
-			<p>{{description}}</p>
-		{{/if}}
+		<div class="o-grid-container">
+			<div class="o-grid-row">
+				<div data-o-grid-colspan="12">
+					<ul>
+						{{#slice package.contents offset=1 limit=3}}
+							{{>n-teaser/templates/standard mods=(array 'hero' 'center' 'has-image')}}
+						{{/slice}}
+					</ul>
+				</div>
+			</div>
+		</div>
 
-		{{> body-wrapper}}
-	{{/ifEquals}}
 
 	{{>propensity-messaging-promo-unit}}
 

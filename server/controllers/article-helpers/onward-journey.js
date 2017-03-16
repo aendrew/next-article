@@ -4,7 +4,6 @@ const getSuggestedReads = require('./suggested');
 const getReadNext = require('./read-next');
 const contentPackage = require('./content-package');
 
-
 module.exports = function (articleId, flags) {
 
 	const variables = {
@@ -26,7 +25,7 @@ module.exports = function (articleId, flags) {
 				onwardJourney.suggestedReads = getSuggestedReads(topicArticles, storyPackage);
 			}
 
-			if(article.contains || article.containedIn) {
+			if (article.contains || article.containedIn) {
 				Object.assign(onwardJourney, contentPackage(article));
 			}
 

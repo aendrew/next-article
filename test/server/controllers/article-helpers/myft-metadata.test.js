@@ -1,12 +1,11 @@
-const sinon = require('sinon');
 const expect = require('chai').expect;
 const proxyquire = require('proxyquire');
 const httpMocks = require('node-mocks-http');
 
 const fixtureEsFound = require('../../../fixtures/v3-elastic-article-found').docs[0]._source;
 
-const subject = proxyquire('../../../../server/controllers/article', {
-	'./article-helpers/suggested': () => Promise.resolve(),
+const subject = proxyquire('../../../../server/model/content', {
+	'../controllers/article-helpers/suggested': () => Promise.resolve(),
 	'../transforms/body': (articleHtml) => { return { html: () => articleHtml } }
 });
 
@@ -14,28 +13,24 @@ describe('myFT metadata', () => {
 
 	let request;
 	let response;
-	let next;
 	let result;
 
 	function createInstance (params, flags) {
-		next = sinon.stub();
+		result = null;
 		request = httpMocks.createRequest(params);
 		response = httpMocks.createResponse();
 		response.locals = { flags: flags || {} };
-		return subject(request, response, next, fixtureEsFound);
+		return subject(request, response, fixtureEsFound, response.locals.flags);
 	}
 
 	beforeEach(() => {
-		result = null;
-
 		let flags = {
 			openGraph: true
 		};
 
-		createInstance({query: {
+		return createInstance({query: {
 			myftTopics: 'NTc=-U2VjdGlvbnM=,NTQ=-U2VjdGlvbnM='
-		}}, flags)
-		result = response._getRenderData();
+		}}, flags).then(data => result = data);
 	});
 
 	it('it should promote users myft tags to be displayed', () => {
