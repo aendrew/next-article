@@ -1,5 +1,5 @@
 <picture class="topper__picture">
-	{{#each topper.images}}
+	{{#each leadImages}}
 		{{#ifEquals type 'square'}}<source media="(max-width: 1440px)" srcset="https://www.ft.com/__origami/service/image/v2/images/raw/{{url}}?source=next&fit=scale-down&quality=highest&width=1440 1440w">{{/ifEquals}}
 		{{#ifEquals type 'standard'}}<source media="(min-width: 1440px)" srcset="https://www.ft.com/__origami/service/image/v2/images/raw/{{url}}?source=next&fit=scale-down&quality=highest&width=1440 1440w">{{/ifEquals}}
 	{{/each}}

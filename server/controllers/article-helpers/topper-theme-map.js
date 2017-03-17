@@ -8,6 +8,7 @@ const themeImageRatio = {
 	'full-bleed-image-left': 'full-bleed',
 	'full-bleed-image-right': 'full-bleed',
 	'full-bleed-offset': 'full-bleed',
+	'full-bleed-sliced': 'full-bleed',
 	'full-bleed-text': null
 };
 
@@ -15,26 +16,45 @@ const getTopperSettings = (content, flags) => {
 	content.topper = content.topper || {};
 
 	//Articles within a package get a slate offset topper if the package has the 'extra' theme
-	if (flags.contentPackages && content.containedIn && content.containedIn.length && content.package && content.package.design.theme === 'extra') {
+	if (flags.contentPackages && content.containedIn && content.containedIn.length && content.package && content.package.design.theme.includes('extra')) {
 		return allProperties('full-bleed-offset', 'offset', 'slate', ['package-extra'], true);
 
 	//package landing pages
 	} else if (flags.contentPackages && content.type === 'package' && content.design && content.design.theme) {
-		const bgMap = {
-			'basic': 'warm-1',
-			'special-report': 'claret',
-			'extra': 'slate'
+		const themeMap = {
+			'basic': {
+				bgColour: 'warm-1',
+				layout: 'split-text-left',
+				template: 'themed'
+			},
+			'special-report': {
+				bgColour: 'claret',
+				layout: 'split-text-left',
+				template: 'themed'
+			},
+			'extra': {
+				bgColour: 'slate',
+				layout: 'split-text-left',
+				template: 'themed'
+			},
+			'extra-wide': {
+				bgColour: 'slate',
+				layout: 'full-bleed-sliced',
+				template: 'sliced'
+			}
 		};
+		const selectedTheme = themeMap[content.design.theme];
 		const modifiers = ['package', `package-${content.design.theme}`]
-		return allProperties('split-text-left', 'themed', bgMap[content.design.theme], modifiers, true);
-	//otherwise use the editorially selected topper if it exists
+
+		return allProperties(selectedTheme.layout, selectedTheme.template, selectedTheme.bgColour, modifiers, true);
+
+		//otherwise use the editorially selected topper if it exists
 	} else if(flags.articleTopper && content.topper && content.topper.layout && themeImageRatio.hasOwnProperty(content.topper.layout)) {
 		const template = content.topper.layout === 'full-bleed-offset' ? 'offset' : 'themed';
 		const hasImage = content.topper.layout !== 'full-bleed-text';
 		const backgroundColour = content.topper.layout === 'full-bleed-offset' ? 'pink' : (content.topper.backgroundColour || 'pink');
-		const topperProperties = allProperties(content.topper.layout, template, backgroundColour, [], hasImage);
 
-		return Object.assign(topperProperties);
+		return allProperties(content.topper.layout, template, backgroundColour, [], hasImage);
 
 		//Branded regular toppers
 	} else if(content.designGenre) {
@@ -78,8 +98,6 @@ module.exports = (content, flags) => {
 	return Object.assign({},
 		topper,
 		{
-			images: content.leadImages,
-
 			headline: topper.headline || content.title,
 			standfirst: content.descriptionHTML || topper.standfirst || content.standfirst
 		},
