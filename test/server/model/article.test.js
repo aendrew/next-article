@@ -3,10 +3,10 @@ const expect = require('chai').expect;
 const proxyquire = require('proxyquire');
 const httpMocks = require('node-mocks-http');
 
-const fixture = require('../../fixtures/v3-elastic-article-found').docs[0]._source;
-const fixtureBlog = require('../../fixtures/v3-elastic-article-found-blog').docs[0]._source;
-const fixtureFastFT = require('../../fixtures/v3-elastic-article-found-fastft').docs[0]._source;
-const fixtureWithTopper = require('../../fixtures/v3-elastic-article-found-topper').docs[0]._source;
+const fixture = require('../../fixtures/v3-elastic-article-found')._source;
+const fixtureBlog = require('../../fixtures/v3-elastic-article-found-blog')._source;
+const fixtureFastFT = require('../../fixtures/v3-elastic-article-found-fastft')._source;
+const fixtureWithTopper = require('../../fixtures/v3-elastic-article-found-topper')._source;
 
 const stubs = {
 	onwardJourneyArticles: sinon.stub(),

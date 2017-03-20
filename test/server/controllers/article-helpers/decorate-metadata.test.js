@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const fixtureEsFound = require('../../../fixtures/v3-elastic-article-found').docs[0]._source;
+const fixture = require('../../../fixtures/v3-elastic-article-found')._source;
 const subject = require('../../../../server/controllers/article-helpers/decorate-metadata');
 
 describe('Metadata', () => {
@@ -11,7 +11,7 @@ describe('Metadata', () => {
 
 		beforeEach(() => {
 			// Subject modifies the data given to it so always start fresh
-			fixtureData = JSON.parse(JSON.stringify(fixtureEsFound));
+			fixtureData = JSON.parse(JSON.stringify(fixture));
 			result = subject(fixtureData);
 		});
 
@@ -24,7 +24,7 @@ describe('Metadata', () => {
 		it('decorates the given article with primary theme, section and brand', () => {
 			expect(result.primaryThemeTag.prefLabel).to.equal('Cyber Security');
 			expect(result.primarySectionTag.prefLabel).to.equal('Banks');
-			expect(result.primaryBrandTag.prefLabel).to.equal('Lex');
+			expect(result.primaryBrandTag.prefLabel).to.equal('The World');
 		});
 
 		it('selects the primary tag based on the primaryTag indicator', () => {
@@ -44,7 +44,7 @@ describe('Metadata', () => {
 
 		beforeEach(() => {
 			// Subject modifies the data given to it so always start fresh
-			fixtureData = JSON.parse(JSON.stringify(fixtureEsFound));
+			fixtureData = JSON.parse(JSON.stringify(fixture));
 			result = subject(fixtureData);
 		});
 

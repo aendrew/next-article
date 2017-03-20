@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const proxyquire = require('proxyquire');
 const httpMocks = require('node-mocks-http');
 
-const fixture = require('../../fixtures/v3-elastic-video-found').docs[0]._source;
+const fixture = require('../../fixtures/v3-elastic-video-found')._source;
 
 const stubs = {
 	onwardJourney: sinon.stub(),
