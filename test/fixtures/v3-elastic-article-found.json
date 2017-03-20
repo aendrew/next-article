@@ -1,315 +1,303 @@
 {
-	"docs":[
-		{
-			"_index":"v3_api_v2-2016-07-01",
-			"_type":"item",
-			"_id":"352210c4-7b17-11e5-a1fe-567b37f80b64",
-			"_version":43,
-			"found":true,
-			"_source":{
-				"type":"article",
-				"id":"352210c4-7b17-11e5-a1fe-567b37f80b64",
-				"title":"Bank directors have lack of technology know-how, study finds",
-				"alternativeTitles": { },
-				"standfirst": "Almost half of the world’s biggest financial groups have no board members with any tech experience",
-				"subheading": "Almost half of the world’s biggest financial groups have no board members with any tech experience",
-				"initialPublishedDate":"2015-10-26T10:04:05Z",
-				"publishedDate":"2015-10-26T10:04:05Z",
-				"webUrl":"http://www.ft.com/cms/s/0/352210c4-7b17-11e5-a1fe-567b37f80b64.html",
-				"provenance":[
-					"http://api.ft.com/content/items/v1/352210c4-7b17-11e5-a1fe-567b37f80b64?cb=1471541037380",
-					"http://api.ft.com/enrichedcontent/352210c4-7b17-11e5-a1fe-567b37f80b64"
-				],
-				"storyPackage":[
-
-				],
-				"byline":"Martin Arnold",
-				"comments":{
-					"enabled":true
-				},
-				"standout":{},
-				"metadata":[
-					{
-						"idV1":"M2Y3OGJkYjQtMzQ5OC00NTM2LTg0YzUtY2JmNzZiY2JhZDQz-VG9waWNz",
-						"prefLabel":"Cyber Security",
-						"taxonomy":"topics",
-						"primary":"theme",
-						"primaryTag": true,
-						"attributes":[
-
-						],
-						"url":"https://www.ft.com/stream/topicsId/M2Y3OGJkYjQtMzQ5OC00NTM2LTg0YzUtY2JmNzZiY2JhZDQz-VG9waWNz"
-					},
-					{
-						"idV1":"NTg=-U2VjdGlvbnM=",
-						"prefLabel":"Banks",
-						"taxonomy":"sections",
-						"primary":"section",
-						"attributes":[
-
-						],
-						"url":"https://www.ft.com/companies/banks"
-					},
-					{
-						"idV1":"Nw==-R2VucmVz",
-						"prefLabel":"News",
-						"taxonomy":"genre",
-						"attributes":[
-
-						],
-						"url":"https://www.ft.com/stream/genreId/Nw==-R2VucmVz"
-					},
-					{
-						"idV1": "YzhlNzZkYTctMDJiNy00NTViLTk3NmYtNmJjYTE5NDEyM2Yw-QnJhbmRz",
-						"prefLabel": "Lex",
-						"taxonomy": "brand",
-						"primary": "brand",
-						"attributes":[
-							{
-								"key":"dfpSite",
-								"value":"lex"
-							}
-						],
-						"url":"https://www.ft.com/lex"
-					},
-					{
-						"idV1":"Q0ItMDAwMDcyMw==-QXV0aG9ycw==",
-						"prefLabel":"Martin Arnold",
-						"taxonomy":"authors",
-						"attributes":[
-
-						],
-						"url":"https://www.ft.com/stream/authorsId/Q0ItMDAwMDcyMw==-QXV0aG9ycw=="
-					},
-					{
-						"idV1":"TnN0ZWluX09OX0ZvcnR1bmVDb21wYW55X0FDQ0VOVFVSRQ==-T04=",
-						"prefLabel":"Accenture",
-						"taxonomy":"organisations",
-						"attributes":[
-							{
-								"key":"wsod_key",
-								"value":"us:ACN"
-							},
-							{
-								"key":"is_company",
-								"value":"true"
-							}
-						],
-						"url":"https://www.ft.com/stream/organisationsId/TnN0ZWluX09OX0ZvcnR1bmVDb21wYW55X0FDQ0VOVFVSRQ==-T04="
-					},
-					{
-						"idV1":"TnN0ZWluX09OX0ZvcnR1bmVDb21wYW55X0JBUkM=-T04=",
-						"prefLabel":"Barclays",
-						"taxonomy":"organisations",
-						"attributes":[
-							{
-								"key":"wsod_key",
-								"value":"uk:BARC"
-							},
-							{
-								"key":"is_company",
-								"value":"true"
-							}
-						],
-						"url":"https://www.ft.com/stream/organisationsId/TnN0ZWluX09OX0ZvcnR1bmVDb21wYW55X0JBUkM=-T04="
-					},
-					{
-						"idV1":"TnN0ZWluX0dMX0dC-R0w=",
-						"prefLabel":"United Kingdom",
-						"taxonomy":"regions",
-						"attributes":[
-
-						],
-						"url":"https://www.ft.com/stream/regionsId/TnN0ZWluX0dMX0dC-R0w="
-					},
-					{
-						"idV1":"TnN0ZWluX0dMX1VT-R0w=",
-						"prefLabel":"United States of America",
-						"taxonomy":"regions",
-						"attributes":[
-
-						],
-						"url":"https://www.ft.com/stream/regionsId/TnN0ZWluX0dMX1VT-R0w="
-					},
-					{
-						"idV1":"Mjk=-U2VjdGlvbnM=",
-						"prefLabel":"Companies",
-						"taxonomy":"sections",
-						"attributes":[
-
-						],
-						"url":"https://www.ft.com/companies"
-					},
-					{
-						"idV1":"NTQ=-U2VjdGlvbnM=",
-						"prefLabel":"Science & Environment",
-						"taxonomy":"sections",
-						"attributes":[
-
-						],
-						"url":"https://www.ft.com/science-environment"
-					},
-					{
-						"idV1":"NTc=-U2VjdGlvbnM=",
-						"prefLabel":"Financials",
-						"taxonomy":"sections",
-						"attributes":[
-
-						],
-						"url":"https://www.ft.com/companies/financials"
-					},
-					{
-						"idV1":"NjM=-U2VjdGlvbnM=",
-						"prefLabel":"UK Companies",
-						"taxonomy":"sections",
-						"attributes":[
-
-						],
-						"url":"https://www.ft.com/companies/uk"
-					},
-					{
-						"idV1":"NjU=-U2VjdGlvbnM=",
-						"prefLabel":"US & Canadian Companies",
-						"taxonomy":"sections",
-						"attributes":[
-
-						],
-						"url":"https://www.ft.com/companies/us"
-					}
-				],
-				"annotations":[
-					{
-						"idV2":"6395204c-e187-326b-8d6d-b4747046947c",
-						"prefLabel":"International Business Machines Corp.",
-						"directType":"http://www.ft.com/ontology/company/PublicCompany",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV2":"7049e9c8-d99e-31df-8266-b23fb5743a49",
-						"prefLabel":"Royal Bank of Scotland Group Plc",
-						"directType":"http://www.ft.com/ontology/company/PublicCompany",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV2":"9a1b71ce-8a5b-3b90-a940-0d152e981b16",
-						"prefLabel":"Richard A. Lumb",
-						"directType":"http://www.ft.com/ontology/person/Person",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV2":"a61d2deb-a673-3fd3-897a-670f26fc299c",
-						"prefLabel":"Banco Bilbao Vizcaya Argentaria SA",
-						"directType":"http://www.ft.com/ontology/company/PublicCompany",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV2":"bf5f45c5-ea8b-3142-8728-e84b0240afe1",
-						"prefLabel":"Citigroup, Inc.",
-						"directType":"http://www.ft.com/ontology/company/PublicCompany",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV2":"dac01f07-4b6d-3615-8532-a56752cc7e5f",
-						"prefLabel":"The Financial Times Ltd.",
-						"directType":"http://www.ft.com/ontology/organisation/Organisation",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV2":"1de8b77f-f789-3a91-bf58-1a09e317fc90",
-						"prefLabel":"David Alan Walker",
-						"directType":"http://www.ft.com/ontology/person/Person",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV2":"a2755307-263a-3a1e-a1fa-9359499a8d4f",
-						"prefLabel":"BT Group Plc",
-						"directType":"http://www.ft.com/ontology/company/PublicCompany",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV2":"d20c3417-d54a-3809-8f8a-d6a052527fc1",
-						"prefLabel":"Russell Reynolds Associates, Inc.",
-						"directType":"http://www.ft.com/ontology/organisation/Organisation",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV2":"61ef7a50-7b8d-3875-8c8f-48d17cea560f",
-						"prefLabel":"Allied Irish Banks Plc",
-						"directType":"http://www.ft.com/ontology/company/PublicCompany",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV2":"013f7fa7-aa26-3e20-84f1-fb8e5f7383ff",
-						"prefLabel":"Barclays Plc",
-						"directType":"http://www.ft.com/ontology/company/PublicCompany",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV2":"46653f30-286f-3608-ae30-fcb2e77d88a6",
-						"prefLabel":"Accenture Plc",
-						"directType":"http://www.ft.com/ontology/company/PublicCompany",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV2":"18e8fdf0-57c7-3525-b85b-145601f89d6c",
-						"prefLabel":"Philip Roy Hampton",
-						"directType":"http://www.ft.com/ontology/person/Person",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV2":"f79cb3d0-3c68-3776-b6ac-43a44609a7d6",
-						"prefLabel":"Nationwide Building Society",
-						"directType":"http://www.ft.com/ontology/company/PublicCompany",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV2":"dbb0bdae-1f0c-11e4-b0cb-b2227cce2b54",
-						"prefLabel":"Financial Times",
-						"directType":"http://www.ft.com/ontology/product/Brand",
-						"attributes":[
-
-						]
-					}
-				],
-				"_lastUpdatedDateTime":"2016-08-18T17:23:58.782Z",
-				"url":"https://www.ft.com/content/352210c4-7b17-11e5-a1fe-567b37f80b64",
-				"mainImage":{
-					"title":"",
-					"description":"boardroom",
-					"url":"http://com.ft.imagepublish.prod.s3.amazonaws.com/0c07a8da-5f91-11e5-9846-de406ccb37f2",
-					"width":2048,
-					"height":1152
-				},
-				"bodyHTML":"<figure class=\"n-content-image\"><img src=\"http://com.ft.imagepublish.prod.s3.amazonaws.com/0c07a8da-5f91-11e5-9846-de406ccb37f2\" alt=\"boardroom\" width=\"2048\" height=\"1152\"></figure><p>Only 6 per cent of the directors overseeing the world’s biggest banks have any technology experience even though issues ranging from <a href=\"http://www.ft.com/reports/cyber-security\">cyber security</a> to digital challengers have shot up their boardroom agenda, a study has found.</p><p>Almost half of the world’s 109 biggest banks have no board members with any technology experience and a further quarter of them have only one such director, according to the research by Accenture.</p><p>“Very few banks have technologists on their boards and yet when you look at the big strategic challenges facing their business, particularly from financial technology companies, a lot of banks’ revenue is under threat from this area,” said Richard Lumb, head of financial services at Accenture.</p><p>The study counted up all the bank directors who have ever had senior technology responsibilities in a company, such as chief information officer, or who have had senior responsibilities at a technology company, such as sitting on its board as a non-executive.</p><p>So, for example, <a href=\"/content/c068eaa8-2bae-11e5-8613-e7aedbb7bdb7\">Sir Mike Rake</a>, deputy chairman of Barclays, counted as having technology experience as he is non-executive chairman of telecoms group BT — even though he spent most of his career as an accountant at KPMG.</p><p>Banks in the US and UK scored highest on the proportion of their directors who have such technology experience, but even they only reach 15.7 and 14.3 per cent respectively.</p><p>The lowest figures came from banks in Brazil, Greece, Italy, and Russia, which have no directors with a background in technology. French banks have only 3 per cent of directors with technology experience, while Spanish and Swiss banks have less than 7 per cent.</p><p>Financial services companies compare poorly to most other industries in this area. A recent study by headhunters Russell Reynolds found financial groups had less than a third of the digital experience on their boards than other sectors, such as healthcare and consumer goods.</p><p>“If your main competition now comes from financial technology companies and not banks and the biggest threat you face is cyber security, then technology has become so ingrained in your business that you really need to know something about it,” said Mr Lumb.</p><p>He recommended that banks set up technology committees on their boards, a step only 11 per cent of lenders have taken. Examples of banks that have done so include Nationwide in the UK and Citigroup in the US.</p><p>Many banks have been trying to add technology expertise to their board. Spain’s BBVA, which is run by former IBM executive Francisco González, promoted its head of digital banking to its board this year as president and chief operating officer.</p><p>However, some banks seem to find it hard to attract top technology figures to their boards. <a href=\"/content/e6cf88ac-7fa4-11e4-b4f5-00144feabdc0\">Sir David Walker</a>, the former chairman of Barclays, told the Financial Times that it was hunting for such a person in December, but none has arrived on its board yet.</p><p>Sir Philip Hampton, the former chairman of Royal Bank of Scotland — which has suffered some damaging IT outages in recent years — said this summer that it was looking to add a technology expert to its board, but he added “they are not easy to find”.</p>"
+	"_index": "v3_api_v2-2016-12-20",
+	"_type": "item",
+	"_id": "352210c4-7b17-11e5-a1fe-567b37f80b64",
+	"_version": 20,
+	"found": true,
+	"_source": {
+		"type": "article",
+		"id": "352210c4-7b17-11e5-a1fe-567b37f80b64",
+		"title": "Bank directors have lack of technology know-how, study finds",
+		"standfirst": "Almost half of the world’s biggest financial groups have no board members with any tech experience",
+		"alternativeTitles": {
+			"promotionalTitle": "Bank boards lack tech know-how"
+		},
+		"byline": "Martin Arnold",
+		"publishReference": "tid_w3tvq7jgqh",
+		"publishedDate": "2015-10-26T10:04:05.000Z",
+		"initialPublishedDate": "2015-10-26T10:04:05Z",
+		"annotations": [
+			{
+				"predicate": "http://www.ft.com/ontology/classification/isClassifiedBy",
+				"id": "dbb0bdae-1f0c-11e4-b0cb-b2227cce2b54",
+				"apiUrl": "http://api.ft.com/brands/dbb0bdae-1f0c-11e4-b0cb-b2227cce2b54",
+				"prefLabel": "Financial Times",
+				"type": "BRAND",
+				"directType": "http://www.ft.com/ontology/product/Brand",
+				"idV2": "dbb0bdae-1f0c-11e4-b0cb-b2227cce2b54"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "1541546d-13c7-3440-958f-e692306d55bc",
+				"apiUrl": "http://api.ft.com/organisations/1541546d-13c7-3440-958f-e692306d55bc",
+				"prefLabel": "Accenture Plc",
+				"type": "ORGANISATION",
+				"directType": "http://www.ft.com/ontology/company/PublicCompany",
+				"idV2": "1541546d-13c7-3440-958f-e692306d55bc"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "a0711b03-4b85-31ca-9ebb-5eb3ec5161d3",
+				"apiUrl": "http://api.ft.com/organisations/a0711b03-4b85-31ca-9ebb-5eb3ec5161d3",
+				"prefLabel": "Banco Bilbao Vizcaya Argentaria SA",
+				"type": "ORGANISATION",
+				"directType": "http://www.ft.com/ontology/company/PublicCompany",
+				"idV2": "a0711b03-4b85-31ca-9ebb-5eb3ec5161d3"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "80887f5e-47d8-3be1-a410-b909c30a0b08",
+				"apiUrl": "http://api.ft.com/organisations/80887f5e-47d8-3be1-a410-b909c30a0b08",
+				"prefLabel": "Russell Reynolds Associates, Inc.",
+				"type": "ORGANISATION",
+				"directType": "http://www.ft.com/ontology/organisation/Organisation",
+				"idV2": "80887f5e-47d8-3be1-a410-b909c30a0b08"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "5389c107-ed74-3abe-bdba-49c04c5949ae",
+				"apiUrl": "http://api.ft.com/organisations/5389c107-ed74-3abe-bdba-49c04c5949ae",
+				"prefLabel": "International Business Machines Corp.",
+				"type": "ORGANISATION",
+				"directType": "http://www.ft.com/ontology/company/PublicCompany",
+				"idV2": "5389c107-ed74-3abe-bdba-49c04c5949ae"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "513e0ff8-2952-3561-bfbb-b420dc3c683f",
+				"apiUrl": "http://api.ft.com/organisations/513e0ff8-2952-3561-bfbb-b420dc3c683f",
+				"prefLabel": "BT Group Plc",
+				"type": "ORGANISATION",
+				"directType": "http://www.ft.com/ontology/company/PublicCompany",
+				"idV2": "513e0ff8-2952-3561-bfbb-b420dc3c683f"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "f79cb3d0-3c68-3776-b6ac-43a44609a7d6",
+				"apiUrl": "http://api.ft.com/organisations/f79cb3d0-3c68-3776-b6ac-43a44609a7d6",
+				"prefLabel": "Nationwide Building Society",
+				"type": "ORGANISATION",
+				"directType": "http://www.ft.com/ontology/company/PublicCompany",
+				"idV2": "f79cb3d0-3c68-3776-b6ac-43a44609a7d6"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "18e8fdf0-57c7-3525-b85b-145601f89d6c",
+				"apiUrl": "http://api.ft.com/people/18e8fdf0-57c7-3525-b85b-145601f89d6c",
+				"prefLabel": "Philip Roy Hampton",
+				"type": "PERSON",
+				"directType": "http://www.ft.com/ontology/person/Person",
+				"idV2": "18e8fdf0-57c7-3525-b85b-145601f89d6c"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "013f7fa7-aa26-3e20-84f1-fb8e5f7383ff",
+				"apiUrl": "http://api.ft.com/organisations/013f7fa7-aa26-3e20-84f1-fb8e5f7383ff",
+				"prefLabel": "Barclays Plc",
+				"type": "ORGANISATION",
+				"directType": "http://www.ft.com/ontology/company/PublicCompany",
+				"idV2": "013f7fa7-aa26-3e20-84f1-fb8e5f7383ff"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "61ef7a50-7b8d-3875-8c8f-48d17cea560f",
+				"apiUrl": "http://api.ft.com/organisations/61ef7a50-7b8d-3875-8c8f-48d17cea560f",
+				"prefLabel": "Allied Irish Banks Plc",
+				"type": "ORGANISATION",
+				"directType": "http://www.ft.com/ontology/company/PublicCompany",
+				"idV2": "61ef7a50-7b8d-3875-8c8f-48d17cea560f"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "1de8b77f-f789-3a91-bf58-1a09e317fc90",
+				"apiUrl": "http://api.ft.com/people/1de8b77f-f789-3a91-bf58-1a09e317fc90",
+				"prefLabel": "David Alan Walker",
+				"type": "PERSON",
+				"directType": "http://www.ft.com/ontology/person/Person",
+				"idV2": "1de8b77f-f789-3a91-bf58-1a09e317fc90"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "73cc33b5-d0cb-3815-8347-bc49e1ddbd5c",
+				"apiUrl": "http://api.ft.com/organisations/73cc33b5-d0cb-3815-8347-bc49e1ddbd5c",
+				"prefLabel": "The Financial Times Ltd.",
+				"type": "ORGANISATION",
+				"directType": "http://www.ft.com/ontology/organisation/Organisation",
+				"idV2": "73cc33b5-d0cb-3815-8347-bc49e1ddbd5c"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "84796e73-8cd9-3a5a-b7ee-81b10f35803d",
+				"apiUrl": "http://api.ft.com/organisations/84796e73-8cd9-3a5a-b7ee-81b10f35803d",
+				"prefLabel": "Citigroup, Inc.",
+				"type": "ORGANISATION",
+				"directType": "http://www.ft.com/ontology/company/PublicCompany",
+				"idV2": "84796e73-8cd9-3a5a-b7ee-81b10f35803d"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "9a1b71ce-8a5b-3b90-a940-0d152e981b16",
+				"apiUrl": "http://api.ft.com/people/9a1b71ce-8a5b-3b90-a940-0d152e981b16",
+				"prefLabel": "Richard A. Lumb",
+				"type": "PERSON",
+				"directType": "http://www.ft.com/ontology/person/Person",
+				"idV2": "9a1b71ce-8a5b-3b90-a940-0d152e981b16"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "7049e9c8-d99e-31df-8266-b23fb5743a49",
+				"apiUrl": "http://api.ft.com/organisations/7049e9c8-d99e-31df-8266-b23fb5743a49",
+				"prefLabel": "Royal Bank of Scotland Group Plc",
+				"type": "ORGANISATION",
+				"directType": "http://www.ft.com/ontology/company/PublicCompany",
+				"idV2": "7049e9c8-d99e-31df-8266-b23fb5743a49"
 			}
+		],
+		"webUrl": "http://www.ft.com/cms/s/0/352210c4-7b17-11e5-a1fe-567b37f80b64.html",
+		"provenance": [
+			"http://api.ft.com/content/items/v1/352210c4-7b17-11e5-a1fe-567b37f80b64",
+			"http://api.ft.com/enrichedcontent/352210c4-7b17-11e5-a1fe-567b37f80b64"
+		],
+		"originatingParty": "FT",
+		"storyPackage": [],
+		"standout": {},
+		"realtime": false,
+		"comments": {
+			"enabled": true
+		},
+		"canBeSyndicated": "verify",
+		"_lastUpdatedDateTime": "2017-03-19T01:55:27.969Z",
+		"url": "https://www.ft.com/content/352210c4-7b17-11e5-a1fe-567b37f80b64",
+		"metadata": [
+			{
+				"attributes": [],
+				"taxonomy": "topics",
+				"primary": "theme",
+				"primaryTag": true,
+				"teaserTag": true,
+				"idV1": "M2Y3OGJkYjQtMzQ5OC00NTM2LTg0YzUtY2JmNzZiY2JhZDQz-VG9waWNz",
+				"prefLabel": "Cyber Security",
+				"url": "https://www.ft.com/topics/themes/Cyber_Security"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"primary": "section",
+				"idV1": "NTg=-U2VjdGlvbnM=",
+				"prefLabel": "Banks",
+				"url": "https://www.ft.com/companies/banks"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "authors",
+				"idV1": "Q0ItMDAwMDcyMw==-QXV0aG9ycw==",
+				"prefLabel": "Martin Arnold",
+				"url": "https://www.ft.com/stream/authorsId/Q0ItMDAwMDcyMw==-QXV0aG9ycw=="
+			},
+			{
+				"attributes": [],
+				"taxonomy": "genre",
+				"idV1": "Nw==-R2VucmVz",
+				"prefLabel": "News",
+				"url": "https://www.ft.com/news"
+			},
+			{
+				"attributes": [
+					{
+						"key": "wsod_key",
+						"value": "us:ACN"
+					},
+					{
+						"key": "is_company",
+						"value": "true"
+					}
+				],
+				"taxonomy": "organisations",
+				"idV1": "TnN0ZWluX09OX0ZvcnR1bmVDb21wYW55X0FDQ0VOVFVSRQ==-T04=",
+				"prefLabel": "Accenture",
+				"url": "https://www.ft.com/topics/organisations/Accenture_PLC"
+			},
+			{
+				"attributes": [
+					{
+						"key": "wsod_key",
+						"value": "uk:BARC"
+					},
+					{
+						"key": "is_company",
+						"value": "true"
+					}
+				],
+				"taxonomy": "organisations",
+				"idV1": "TnN0ZWluX09OX0ZvcnR1bmVDb21wYW55X0JBUkM=-T04=",
+				"prefLabel": "Barclays",
+				"url": "https://www.ft.com/topics/organisations/Barclays_PLC"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "regions",
+				"idV1": "TnN0ZWluX0dMX0dC-R0w=",
+				"prefLabel": "United Kingdom",
+				"url": "https://www.ft.com/stream/regionsId/TnN0ZWluX0dMX0dC-R0w="
+			},
+			{
+				"attributes": [],
+				"taxonomy": "regions",
+				"idV1": "TnN0ZWluX0dMX1VT-R0w=",
+				"prefLabel": "United States of America",
+				"url": "https://www.ft.com/topics/places/United_States_of_America"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"idV1": "Mjk=-U2VjdGlvbnM=",
+				"prefLabel": "Companies",
+				"url": "https://www.ft.com/companies"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"idV1": "NTc=-U2VjdGlvbnM=",
+				"prefLabel": "Financials",
+				"url": "https://www.ft.com/companies/financials"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"idV1": "NjM=-U2VjdGlvbnM=",
+				"prefLabel": "UK Companies",
+				"url": "https://www.ft.com/companies/uk"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"idV1": "NjU=-U2VjdGlvbnM=",
+				"prefLabel": "US & Canadian Companies",
+				"url": "https://www.ft.com/companies/us"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "brand",
+				"primary": "brand",
+				"idV1": "YmE1NjE5NjMtNWUzOC00MGVlLWJjNjEtYjY5NmMzYTA1MDBk-QnJhbmRz",
+				"prefLabel": "The World",
+				"url": "https://www.ft.com/the-world"
+			}
+		],
+		"mainImage": {
+			"title": "",
+			"description": "boardroom",
+			"url": "http://prod-upp-image-read.ft.com/0c07a8da-5f91-11e5-9846-de406ccb37f2",
+			"width": 2048,
+			"height": 1152,
+			"ratio": 1.7777777777777777
+		},
+		"bodyHTML": "<figure class=\"n-content-image\"><img src=\"http://com.ft.imagepublish.prod.s3.amazonaws.com/0c07a8da-5f91-11e5-9846-de406ccb37f2\" alt=\"boardroom\" width=\"2048\" height=\"1152\"></figure><p>Only 6 per cent of the directors overseeing the world’s biggest banks have any technology experience even though issues ranging from <a href=\"http://www.ft.com/reports/cyber-security\">cyber security</a> to digital challengers have shot up their boardroom agenda, a study has found.</p><p>Almost half of the world’s 109 biggest banks have no board members with any technology experience and a further quarter of them have only one such director, according to the research by Accenture.</p><p>“Very few banks have technologists on their boards and yet when you look at the big strategic challenges facing their business, particularly from financial technology companies, a lot of banks’ revenue is under threat from this area,” said Richard Lumb, head of financial services at Accenture.</p><p>The study counted up all the bank directors who have ever had senior technology responsibilities in a company, such as chief information officer, or who have had senior responsibilities at a technology company, such as sitting on its board as a non-executive.</p><p>So, for example, <a href=\"/content/c068eaa8-2bae-11e5-8613-e7aedbb7bdb7\">Sir Mike Rake</a>, deputy chairman of Barclays, counted as having technology experience as he is non-executive chairman of telecoms group BT — even though he spent most of his career as an accountant at KPMG.</p><p>Banks in the US and UK scored highest on the proportion of their directors who have such technology experience, but even they only reach 15.7 and 14.3 per cent respectively.</p><p>The lowest figures came from banks in Brazil, Greece, Italy, and Russia, which have no directors with a background in technology. French banks have only 3 per cent of directors with technology experience, while Spanish and Swiss banks have less than 7 per cent.</p><p>Financial services companies compare poorly to most other industries in this area. A recent study by headhunters Russell Reynolds found financial groups had less than a third of the digital experience on their boards than other sectors, such as healthcare and consumer goods.</p><p>“If your main competition now comes from financial technology companies and not banks and the biggest threat you face is cyber security, then technology has become so ingrained in your business that you really need to know something about it,” said Mr Lumb.</p><p>He recommended that banks set up technology committees on their boards, a step only 11 per cent of lenders have taken. Examples of banks that have done so include Nationwide in the UK and Citigroup in the US.</p><p>Many banks have been trying to add technology expertise to their board. Spain’s BBVA, which is run by former IBM executive Francisco González, promoted its head of digital banking to its board this year as president and chief operating officer.</p><p>However, some banks seem to find it hard to attract top technology figures to their boards. <a href=\"/content/e6cf88ac-7fa4-11e4-b4f5-00144feabdc0\">Sir David Walker</a>, the former chairman of Barclays, told the Financial Times that it was hunting for such a person in December, but none has arrived on its board yet.</p><p>Sir Philip Hampton, the former chairman of Royal Bank of Scotland — which has suffered some damaging IT outages in recent years — said this summer that it was looking to add a technology expert to its board, but he added “they are not easy to find”.</p>",
+		"contentStats": {
+			"relatedBoxes": 0,
+			"pullQuotes": 0,
+			"images": 1,
+			"videos": 0
 		}
-	]
+	}
 }

@@ -1,0 +1,74 @@
+{
+	"_index": "v3_api_v2-2016-12-20",
+	"_type": "item",
+	"_id": "6b45b409-7e32-3fd9-8e15-99acafb9f81f",
+	"_version": 20,
+	"found": true,
+	"_source": {
+		"type": "article",
+		"id": "6b45b409-7e32-3fd9-8e15-99acafb9f81f",
+		"title": "Markets Live: Monday, 13th June, 2016",
+		"alternativeTitles": {},
+		"byline": "Paul Murphy",
+		"bodyHTML": "<p>Live markets commentary from FT.com</p>",
+		"publishReference": "tid_36usjusruq",
+		"publishedDate": "2016-06-13T10:01:05.000Z",
+		"initialPublishedDate": "2016-06-13T10:01:05Z",
+		"annotations": [],
+		"webUrl": "http://ftalphaville.ft.com/marketslive/2016-06-13/",
+		"provenance": [
+			"http://api.ft.com/content/items/v1/6b45b409-7e32-3fd9-8e15-99acafb9f81f",
+			"http://api.ft.com/enrichedcontent/6b45b409-7e32-3fd9-8e15-99acafb9f81f"
+		],
+		"originatingParty": "FT",
+		"storyPackage": [],
+		"standout": {},
+		"realtime": true,
+		"comments": {
+			"enabled": true
+		},
+		"canBeSyndicated": "verify",
+		"_lastUpdatedDateTime": "2017-03-16T02:54:49.351Z",
+		"url": "http://ftalphaville.ft.com/?p=2166010",
+		"contentStats": {
+			"relatedBoxes": 0,
+			"pullQuotes": 0,
+			"images": 0,
+			"videos": 0
+		},
+		"metadata": [
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"primary": "section",
+				"primaryTag": true,
+				"teaserTag": true,
+				"idV1": "NzE=-U2VjdGlvbnM=",
+				"prefLabel": "Markets",
+				"url": "https://www.ft.com/markets"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "brand",
+				"primary": "brand",
+				"idV1": "ZDkyYTVhMzYtYjAyOS00OWI1LWI5ZTgtM2QyYTIzYjk4Y2Jj-QnJhbmRz",
+				"prefLabel": "FT Alphaville",
+				"url": "https://ftalphaville.ft.com"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "genre",
+				"idV1": "OA==-R2VucmVz",
+				"prefLabel": "Comment",
+				"url": "https://www.ft.com/stream/genreId/OA==-R2VucmVz"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"idV1": "OTg=-U2VjdGlvbnM=",
+				"prefLabel": "Equities",
+				"url": "https://www.ft.com/markets/equities"
+			}
+		]
+	}
+}

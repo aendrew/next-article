@@ -1,69 +1,242 @@
 {
-	"docs":[
-		{
-			"_index": "v3_api_v2-2016-08-26",
-			"_type": "item",
-			"_id": "6adb986e-339a-3f14-ab82-ed48bd883b84",
-			"_version": 16,
-			"found": true,
-			"_source": {
-				"id": "6adb986e-339a-3f14-ab82-ed48bd883b84",
-				"title": "Linde CFO Denoke out a day after Praxair deal talks end",
-				"alternativeTitles": { },
-				"subheading": "Linde has dismissed its long-serving finance director Georg Denoke, one day after his opposition to a potential $60bn merger with US rival Praxair was identified as a major stumbling block to the failed talks.",
-				"initialPublishedDate": "2016-09-13T15:04:08Z",
-				"publishedDate": "2016-09-13T15:04:08Z",
-				"webUrl": "http://www.ft.com/fastft/2016/09/13/linde-cfo-denoke-out-a-day-after-praxair-deal-talks-end/",
-				"provenance": [
-				"http://api.ft.com/content/items/v1/6adb986e-339a-3f14-ab82-ed48bd883b84?cb=1473779487138",
-				"http://api.ft.com/enrichedcontent/6adb986e-339a-3f14-ab82-ed48bd883b84"
-				],
-				"storyPackage": [
-
-				],
-				"originatingParty": "FT",
-				"byline": "Patrick McGee",
-				"comments": {
-				"enabled": false
-				},
-				"standout": {
-
-				},
-				"metadata": [
-				{
-					"idV1": "Nw==-R2VucmVz",
-					"prefLabel": "News",
-					"taxonomy": "genre",
-					"primary": "section",
-					"attributes": [
-
-					],
-					"url": "https://www.ft.com/news"
-				},
-				{
-					"idV1": "NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz",
-					"prefLabel": "Fast FT",
-					"taxonomy": "brand",
-					"primary": "brand",
-					"attributes": [
-
-					],
-					"url": "https://www.ft.com/fastft"
-				},
-				{
-					"idV1": "Q0ItMDMzNTY4OA==-QXV0aG9ycw==",
-					"prefLabel": "Patrick McGee",
-					"taxonomy": "authors",
-					"attributes": [
-
-					],
-					"url": "https://www.ft.com/stream/authorsId/Q0ItMDMzNTY4OA==-QXV0aG9ycw=="
-				},
-				{
-					"idV1": "TnN0ZWluX09OX0FGVE1fT05fMTgxOTEw-T04=",
-					"prefLabel": "Kemira Oyj",
-					"taxonomy": "organisations",
-					"attributes": [
+	"_index": "v3_api_v2-2016-12-20",
+	"_type": "item",
+	"_id": "6adb986e-339a-3f14-ab82-ed48bd883b84",
+	"_version": 20,
+	"found": true,
+	"_source": {
+		"type": "article",
+		"id": "6adb986e-339a-3f14-ab82-ed48bd883b84",
+		"title": "Linde CFO Denoke out a day after Praxair deal talks end",
+		"alternativeTitles": {},
+		"byline": "Patrick McGee",
+		"publishReference": "tid_4ny8umf36r",
+		"publishedDate": "2016-09-13T15:04:08.000Z",
+		"initialPublishedDate": "2016-09-13T15:04:08Z",
+		"annotations": [
+			{
+				"predicate": "http://www.ft.com/ontology/classification/isClassifiedBy",
+				"id": "5c7592a8-1f0c-11e4-b0cb-b2227cce2b54",
+				"apiUrl": "http://api.ft.com/brands/5c7592a8-1f0c-11e4-b0cb-b2227cce2b54",
+				"prefLabel": "fastFT",
+				"type": "BRAND",
+				"directType": "http://www.ft.com/ontology/product/Brand",
+				"idV2": "5c7592a8-1f0c-11e4-b0cb-b2227cce2b54"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/classification/isClassifiedBy",
+				"id": "dbb0bdae-1f0c-11e4-b0cb-b2227cce2b54",
+				"apiUrl": "http://api.ft.com/brands/dbb0bdae-1f0c-11e4-b0cb-b2227cce2b54",
+				"prefLabel": "Financial Times",
+				"type": "BRAND",
+				"directType": "http://www.ft.com/ontology/product/Brand",
+				"idV2": "dbb0bdae-1f0c-11e4-b0cb-b2227cce2b54"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "9dfe2c4b-b86c-3b5e-a261-eb77848b683c",
+				"apiUrl": "http://api.ft.com/organisations/9dfe2c4b-b86c-3b5e-a261-eb77848b683c",
+				"prefLabel": "Praxair, Inc.",
+				"type": "ORGANISATION",
+				"directType": "http://www.ft.com/ontology/company/PublicCompany",
+				"idV2": "9dfe2c4b-b86c-3b5e-a261-eb77848b683c"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "3498433a-1690-3044-9803-8f6c094d8a18",
+				"apiUrl": "http://api.ft.com/people/3498433a-1690-3044-9803-8f6c094d8a18",
+				"prefLabel": "Sven Schneider",
+				"type": "PERSON",
+				"directType": "http://www.ft.com/ontology/person/Person",
+				"idV2": "3498433a-1690-3044-9803-8f6c094d8a18"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "b32d2561-ed4d-3d61-a0b3-edb21532d1c6",
+				"apiUrl": "http://api.ft.com/organisations/b32d2561-ed4d-3d61-a0b3-edb21532d1c6",
+				"prefLabel": "Kemira Oyj",
+				"type": "ORGANISATION",
+				"directType": "http://www.ft.com/ontology/company/PublicCompany",
+				"idV2": "b32d2561-ed4d-3d61-a0b3-edb21532d1c6"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "23ae675e-0694-34f6-8cb3-770fed914836",
+				"apiUrl": "http://api.ft.com/people/23ae675e-0694-34f6-8cb3-770fed914836",
+				"prefLabel": "Georg Denoke",
+				"type": "PERSON",
+				"directType": "http://www.ft.com/ontology/person/Person",
+				"idV2": "23ae675e-0694-34f6-8cb3-770fed914836"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "69f7d144-7368-3b05-8b3a-144fde2f846f",
+				"apiUrl": "http://api.ft.com/organisations/69f7d144-7368-3b05-8b3a-144fde2f846f",
+				"prefLabel": "Linde AG",
+				"type": "ORGANISATION",
+				"directType": "http://www.ft.com/ontology/company/PublicCompany",
+				"idV2": "69f7d144-7368-3b05-8b3a-144fde2f846f"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "764c81f7-137c-3927-bccd-b5479e2ee7eb",
+				"apiUrl": "http://api.ft.com/people/764c81f7-137c-3927-bccd-b5479e2ee7eb",
+				"prefLabel": "Wolfgang Heinz Büchele",
+				"type": "PERSON",
+				"directType": "http://www.ft.com/ontology/person/Person",
+				"idV2": "764c81f7-137c-3927-bccd-b5479e2ee7eb"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "596056bf-0d6d-3f1b-958e-fb2013b7666b",
+				"apiUrl": "http://api.ft.com/people/596056bf-0d6d-3f1b-958e-fb2013b7666b",
+				"prefLabel": "Wolfgang W. Reitzle",
+				"type": "PERSON",
+				"directType": "http://www.ft.com/ontology/person/Person",
+				"idV2": "596056bf-0d6d-3f1b-958e-fb2013b7666b"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "dd1a0b4c-5123-3d97-a5d0-c385d7531fc0",
+				"apiUrl": "http://api.ft.com/things/dd1a0b4c-5123-3d97-a5d0-c385d7531fc0",
+				"prefLabel": "Danbury, Connecticut",
+				"type": "LOCATION",
+				"directType": "http://www.ft.com/ontology/Location",
+				"idV2": "dd1a0b4c-5123-3d97-a5d0-c385d7531fc0"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/classification/isClassifiedBy",
+				"id": "e716ea29-7b86-3de8-a1b0-2b6466930906",
+				"apiUrl": "http://api.ft.com/things/e716ea29-7b86-3de8-a1b0-2b6466930906",
+				"prefLabel": "Chemicals",
+				"type": "SECTION",
+				"directType": "http://www.ft.com/ontology/Section",
+				"idV2": "e716ea29-7b86-3de8-a1b0-2b6466930906"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/classification/isClassifiedBy",
+				"id": "8e2e0dd7-ef14-3811-a2fe-ee576ed9f422",
+				"apiUrl": "http://api.ft.com/things/8e2e0dd7-ef14-3811-a2fe-ee576ed9f422",
+				"prefLabel": "General News",
+				"type": "SUBJECT",
+				"directType": "http://www.ft.com/ontology/Subject",
+				"idV2": "8e2e0dd7-ef14-3811-a2fe-ee576ed9f422"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/classification/isClassifiedBy",
+				"id": "87e13362-4a6e-39c4-ba4a-f2745b2326ee",
+				"apiUrl": "http://api.ft.com/things/87e13362-4a6e-39c4-ba4a-f2745b2326ee",
+				"prefLabel": "Industrials",
+				"type": "SECTION",
+				"directType": "http://www.ft.com/ontology/Section",
+				"idV2": "87e13362-4a6e-39c4-ba4a-f2745b2326ee"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/classification/isClassifiedBy",
+				"id": "852939c8-859c-361e-8514-f82f6c041580",
+				"apiUrl": "http://api.ft.com/things/852939c8-859c-361e-8514-f82f6c041580",
+				"prefLabel": "Companies",
+				"type": "SECTION",
+				"directType": "http://www.ft.com/ontology/Section",
+				"idV2": "852939c8-859c-361e-8514-f82f6c041580"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "c3e41edf-33c1-3c71-8f58-4f4ace2b355e",
+				"apiUrl": "http://api.ft.com/things/c3e41edf-33c1-3c71-8f58-4f4ace2b355e",
+				"prefLabel": "United States of America",
+				"type": "LOCATION",
+				"directType": "http://www.ft.com/ontology/Location",
+				"idV2": "c3e41edf-33c1-3c71-8f58-4f4ace2b355e"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/classification/isClassifiedBy",
+				"id": "a795685e-d699-357d-80a0-dd9b7186158d",
+				"apiUrl": "http://api.ft.com/things/a795685e-d699-357d-80a0-dd9b7186158d",
+				"prefLabel": "Profit Warnings",
+				"type": "SUBJECT",
+				"directType": "http://www.ft.com/ontology/Subject",
+				"idV2": "a795685e-d699-357d-80a0-dd9b7186158d"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/classification/isClassifiedBy",
+				"id": "9b40e89c-e87b-3d4f-b72c-2cf7511d2146",
+				"apiUrl": "http://api.ft.com/things/9b40e89c-e87b-3d4f-b72c-2cf7511d2146",
+				"prefLabel": "News",
+				"type": "GENRE",
+				"directType": "http://www.ft.com/ontology/Genre",
+				"idV2": "9b40e89c-e87b-3d4f-b72c-2cf7511d2146"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/classification/isClassifiedBy",
+				"id": "84da1094-bb0a-32d1-ad28-5ea47a8b6fc7",
+				"apiUrl": "http://api.ft.com/things/84da1094-bb0a-32d1-ad28-5ea47a8b6fc7",
+				"prefLabel": "Mergers & Acquisitions",
+				"type": "SUBJECT",
+				"directType": "http://www.ft.com/ontology/Subject",
+				"idV2": "84da1094-bb0a-32d1-ad28-5ea47a8b6fc7"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/annotation/mentions",
+				"id": "83c6e77e-d992-3910-bd5b-cf8e84e53c9b",
+				"apiUrl": "http://api.ft.com/things/83c6e77e-d992-3910-bd5b-cf8e84e53c9b",
+				"prefLabel": "Mergers & Acquisitions",
+				"type": "TOPIC",
+				"directType": "http://www.ft.com/ontology/Topic",
+				"idV2": "83c6e77e-d992-3910-bd5b-cf8e84e53c9b"
+			}
+		],
+		"webUrl": "http://www.ft.com/fastft/2016/09/13/linde-cfo-denoke-out-a-day-after-praxair-deal-talks-end/",
+		"provenance": [
+			"http://api.ft.com/content/items/v1/6adb986e-339a-3f14-ab82-ed48bd883b84",
+			"http://api.ft.com/enrichedcontent/6adb986e-339a-3f14-ab82-ed48bd883b84"
+		],
+		"originatingParty": "FT",
+		"storyPackage": [],
+		"standout": {},
+		"realtime": false,
+		"comments": {
+			"enabled": false
+		},
+		"canBeSyndicated": "verify",
+		"_lastUpdatedDateTime": "2017-03-17T12:35:04.229Z",
+		"openingHTML": "<p>Linde has dismissed its long-serving finance director Georg Denoke, one day after his opposition to a potential $60bn merger with US rival Praxair was identified as a major stumbling block to the failed talks.</p>",
+		"bodyHTML": "<p>Linde has dismissed its long-serving finance director Georg Denoke, one day after his opposition to a potential $60bn merger with US rival Praxair was identified as a major stumbling block to the failed talks.</p><p>The 12-member supervisory board of the German industrial gas company held a meeting on Tuesday and voted to let go of Mr Denoke, according to a company statement, <strong>write Patrick McGee and Arash Massoudi.</strong></p><p>By removing him, some people close to Praxair and Linde hope that the merger talks can eventually be revived.</p><p>While both companies on Monday said “preliminary” talks had ended, the three-month period of talks had produced 90 per cent of the terms until discord within Linde drove them to a halt.</p><p>On Monday it became clear Mr Denoke was the key executive fighting the deal from going through.</p><p>Mr Denoke joined Linde in 2004 and was appointed its finance chief in 2006. He was said to have had a good relationship with Wolfgang Reitzle, the current chairman and long-time chief executive from 2003 to 2014, but their relationship deteriorated when he was passed over as a successor in 2014.</p><p>The job instead went to Wolfgang Büchele, who at the time was head of Kemira Oyj, a Finnish chemicals group. Linde has issued two profit warnings since Mr Büchele took over and the idea to join forces with Praxair was originally his, people familiar said.</p><p>One person familiar with the deal contests that Mr Denoke was against the merger for personal reasons. “He’d be a bad CFO if he didn’t scrutinise everything,” this person said, adding that the labour side of the supervisory board was also upset that a merged Praxair-Linde would be headquartered in Danbury, Conn.</p><p>Sven Schneider, head of treasury at Linde, is to be interim CFO.</p>",
+		"contentStats": {
+			"relatedBoxes": 0,
+			"pullQuotes": 0,
+			"images": 0,
+			"videos": 0
+		},
+		"url": "https://www.ft.com/content/6adb986e-339a-3f14-ab82-ed48bd883b84",
+		"metadata": [
+			{
+				"attributes": [],
+				"taxonomy": "authors",
+				"idV1": "Q0ItMDMzNTY4OA==-QXV0aG9ycw==",
+				"prefLabel": "Patrick McGee",
+				"url": "https://www.ft.com/stream/authorsId/Q0ItMDMzNTY4OA==-QXV0aG9ycw=="
+			},
+			{
+				"attributes": [],
+				"taxonomy": "brand",
+				"primary": "brand",
+				"idV1": "NTlhNzEyMzMtZjBjZi00Y2U1LTg0ODUtZWVjNmEyYmU1NzQ2-QnJhbmRz",
+				"prefLabel": "Fast FT",
+				"url": "https://www.ft.com/fastft"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "genre",
+				"primary": "theme",
+				"primaryTag": true,
+				"teaserTag": true,
+				"idV1": "Nw==-R2VucmVz",
+				"prefLabel": "News",
+				"url": "https://www.ft.com/news"
+			},
+			{
+				"attributes": [
 					{
 						"key": "wsod_key",
 						"value": "fi:KRA1V"
@@ -72,14 +245,14 @@
 						"key": "is_company",
 						"value": "true"
 					}
-					],
-					"url": "https://www.ft.com/stream/organisationsId/TnN0ZWluX09OX0FGVE1fT05fMTgxOTEw-T04="
-				},
-				{
-					"idV1": "TnN0ZWluX09OX0FGVE1fT05fMTk1MTA1-T04=",
-					"prefLabel": "Linde",
-					"taxonomy": "organisations",
-					"attributes": [
+				],
+				"taxonomy": "organisations",
+				"idV1": "TnN0ZWluX09OX0FGVE1fT05fMTgxOTEw-T04=",
+				"prefLabel": "Kemira Oyj",
+				"url": "https://www.ft.com/stream/organisationsId/TnN0ZWluX09OX0FGVE1fT05fMTgxOTEw-T04="
+			},
+			{
+				"attributes": [
 					{
 						"key": "wsod_key",
 						"value": "de:LINX"
@@ -88,244 +261,73 @@
 						"key": "is_company",
 						"value": "true"
 					}
-					],
-					"url": "https://www.ft.com/topics/organisations/Linde_AG"
-				},
-				{
-					"idV1": "TnN0ZWluX09OX0FGVE1fT05fNDQ5OQ==-T04=",
-					"prefLabel": "Praxair",
-					"taxonomy": "organisations",
-					"attributes": [
+				],
+				"taxonomy": "organisations",
+				"idV1": "TnN0ZWluX09OX0FGVE1fT05fMTk1MTA1-T04=",
+				"prefLabel": "Linde",
+				"url": "https://www.ft.com/topics/organisations/Linde_AG"
+			},
+			{
+				"attributes": [
 					{
 						"key": "is_company",
 						"value": "false"
 					}
-					],
-					"url": "https://www.ft.com/stream/organisationsId/TnN0ZWluX09OX0FGVE1fT05fNDQ5OQ==-T04="
-				},
-				{
-					"idV1": "Yjc3OTM3ODgtZmM1NC00YjJmLThmOGUtYmVkMTY3MzIyY2Jk-UE4=",
-					"prefLabel": "Wolfgang Reitzle",
-					"taxonomy": "people",
-					"attributes": [
-
-					],
-					"url": "https://www.ft.com/stream/peopleId/Yjc3OTM3ODgtZmM1NC00YjJmLThmOGUtYmVkMTY3MzIyY2Jk-UE4="
-				},
-				{
-					"idV1": "TnN0ZWluX0dMX1VT-R0w=",
-					"prefLabel": "United States of America",
-					"taxonomy": "regions",
-					"attributes": [
-
-					],
-					"url": "https://www.ft.com/topics/places/United_States_of_America"
-				},
-				{
-					"idV1": "TnN0ZWluX0dMX1VTX0NUX011bmljaXBhbGl0eV8yMDY1ODA=-R0w=",
-					"prefLabel": "Danbury, Connecticut",
-					"taxonomy": "regions",
-					"attributes": [
-
-					],
-					"url": "https://www.ft.com/stream/regionsId/TnN0ZWluX0dMX1VTX0NUX011bmljaXBhbGl0eV8yMDY1ODA=-R0w="
-				},
-				{
-					"idV1": "Mjk=-U2VjdGlvbnM=",
-					"prefLabel": "Companies",
-					"taxonomy": "sections",
-					"attributes": [
-
-					],
-					"url": "https://www.ft.com/companies"
-				},
-				{
-					"idV1": "MzQ=-U2VjdGlvbnM=",
-					"prefLabel": "Industrials",
-					"taxonomy": "sections",
-					"attributes": [
-
-					],
-					"url": "https://www.ft.com/companies/industrials"
-				},
-				{
-					"idV1": "MzU=-U2VjdGlvbnM=",
-					"prefLabel": "Chemicals",
-					"taxonomy": "sections",
-					"attributes": [
-
-					],
-					"url": "https://www.ft.com/companies/chemicals"
-				},
-				{
-					"idV1": "Mjk=-VG9waWNz",
-					"prefLabel": "Mergers & Acquisitions",
-					"taxonomy": "topics",
-					"attributes": [
-
-					],
-					"url": "https://www.ft.com/topics/themes/Mergers_and_Acquisitions"
-				}
 				],
-				"annotations": [
-				{
-					"idV2": "5c7592a8-1f0c-11e4-b0cb-b2227cce2b54",
-					"prefLabel": "fastFT",
-					"directType": "http://www.ft.com/ontology/product/Brand",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "dbb0bdae-1f0c-11e4-b0cb-b2227cce2b54",
-					"prefLabel": "Financial Times",
-					"directType": "http://www.ft.com/ontology/product/Brand",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "d6aa2313-06bb-39ee-9e7e-4fe74b697b66",
-					"prefLabel": "Praxair, Inc.",
-					"directType": "http://www.ft.com/ontology/company/PublicCompany",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "69f7d144-7368-3b05-8b3a-144fde2f846f",
-					"prefLabel": "Linde AG",
-					"directType": "http://www.ft.com/ontology/company/PublicCompany",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "764c81f7-137c-3927-bccd-b5479e2ee7eb",
-					"prefLabel": "Wolfgang Heinz Büchele",
-					"directType": "http://www.ft.com/ontology/person/Person",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "596056bf-0d6d-3f1b-958e-fb2013b7666b",
-					"prefLabel": "Wolfgang W. Reitzle",
-					"directType": "http://www.ft.com/ontology/person/Person",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "3498433a-1690-3044-9803-8f6c094d8a18",
-					"prefLabel": "Sven Schneider",
-					"directType": "http://www.ft.com/ontology/person/Person",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "b32d2561-ed4d-3d61-a0b3-edb21532d1c6",
-					"prefLabel": "Kemira Oyj",
-					"directType": "http://www.ft.com/ontology/company/PublicCompany",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "23ae675e-0694-34f6-8cb3-770fed914836",
-					"prefLabel": "Georg Denoke",
-					"directType": "http://www.ft.com/ontology/person/Person",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "dd1a0b4c-5123-3d97-a5d0-c385d7531fc0",
-					"prefLabel": "Danbury, Connecticut",
-					"directType": "http://www.ft.com/ontology/Location",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "e716ea29-7b86-3de8-a1b0-2b6466930906",
-					"prefLabel": "Chemicals",
-					"directType": "http://www.ft.com/ontology/Section",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "8e2e0dd7-ef14-3811-a2fe-ee576ed9f422",
-					"prefLabel": "General News",
-					"directType": "http://www.ft.com/ontology/Subject",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "9b40e89c-e87b-3d4f-b72c-2cf7511d2146",
-					"prefLabel": "News",
-					"directType": "http://www.ft.com/ontology/Genre",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "83c6e77e-d992-3910-bd5b-cf8e84e53c9b",
-					"prefLabel": "Mergers & Acquisitions",
-					"directType": "http://www.ft.com/ontology/Topic",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "84da1094-bb0a-32d1-ad28-5ea47a8b6fc7",
-					"prefLabel": "Mergers & Acquisitions",
-					"directType": "http://www.ft.com/ontology/Subject",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "87e13362-4a6e-39c4-ba4a-f2745b2326ee",
-					"prefLabel": "Industrials",
-					"directType": "http://www.ft.com/ontology/Section",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "852939c8-859c-361e-8514-f82f6c041580",
-					"prefLabel": "Companies",
-					"directType": "http://www.ft.com/ontology/Section",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "c3e41edf-33c1-3c71-8f58-4f4ace2b355e",
-					"prefLabel": "United States of America",
-					"directType": "http://www.ft.com/ontology/Location",
-					"attributes": [
-
-					]
-				},
-				{
-					"idV2": "a795685e-d699-357d-80a0-dd9b7186158d",
-					"prefLabel": "Profit Warnings",
-					"directType": "http://www.ft.com/ontology/Subject",
-					"attributes": [
-
-					]
-				}
-				],
-				"_lastUpdatedDateTime": "2016-09-13T15:11:27.320Z",
-				"bodyHTML": "<p>Linde has dismissed its long-serving finance director Georg Denoke, one day after his opposition to a potential $60bn merger with US rival Praxair was identified as a major stumbling block to the failed talks.</p><p>The 12-member supervisory board of the German industrial gas company held a meeting on Tuesday and voted to let go of Mr Denoke, according to a company statement, <strong>write Patrick McGee and Arash Massoudi.</strong></p><p>By removing him, some people close to Praxair and Linde hope that the merger talks can eventually be revived.</p><p>While both companies on Monday said “preliminary” talks had ended, the three-month period of talks had produced 90 per cent of the terms until discord within Linde drove them to a halt.</p><p>On Monday it became clear Mr Denoke was the key executive fighting the deal from going through.</p><p>Mr Denoke joined Linde in 2004 and was appointed its finance chief in 2006. He was said to have had a good relationship with Wolfgang Reitzle, the current chairman and long-time chief executive from 2003 to 2014, but their relationship deteriorated when he was passed over as a successor in 2014.</p><p>The job instead went to Wolfgang Büchele, who at the time was head of Kemira Oyj, a Finnish chemicals group. Linde has issued two profit warnings since Mr Büchele took over and the idea to join forces with Praxair was originally his, people familiar said.</p><p>One person familiar with the deal contests that Mr Denoke was against the merger for personal reasons. “He’d be a bad CFO if he didn’t scrutinise everything,” this person said, adding that the labour side of the supervisory board was also upset that a merged Praxair-Linde would be headquartered in Danbury, Conn.</p><p>Sven Schneider, head of treasury at Linde, is to be interim CFO.</p>",
-				"openingHTML": "<p>Linde has dismissed its long-serving finance director Georg Denoke, one day after his opposition to a potential $60bn merger with US rival Praxair was identified as a major stumbling block to the failed talks.</p>",
-				"url": "https://www.ft.com/content/6adb986e-339a-3f14-ab82-ed48bd883b84"
+				"taxonomy": "organisations",
+				"idV1": "TnN0ZWluX09OX0FGVE1fT05fNDQ5OQ==-T04=",
+				"prefLabel": "Praxair",
+				"url": "https://www.ft.com/stream/organisationsId/TnN0ZWluX09OX0FGVE1fT05fNDQ5OQ==-T04="
+			},
+			{
+				"attributes": [],
+				"taxonomy": "people",
+				"idV1": "Yjc3OTM3ODgtZmM1NC00YjJmLThmOGUtYmVkMTY3MzIyY2Jk-UE4=",
+				"prefLabel": "Wolfgang Reitzle",
+				"url": "https://www.ft.com/stream/peopleId/Yjc3OTM3ODgtZmM1NC00YjJmLThmOGUtYmVkMTY3MzIyY2Jk-UE4="
+			},
+			{
+				"attributes": [],
+				"taxonomy": "regions",
+				"idV1": "TnN0ZWluX0dMX1VT-R0w=",
+				"prefLabel": "United States of America",
+				"url": "https://www.ft.com/topics/places/United_States_of_America"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "regions",
+				"idV1": "TnN0ZWluX0dMX1VTX0NUX011bmljaXBhbGl0eV8yMDY1ODA=-R0w=",
+				"prefLabel": "Danbury, Connecticut",
+				"url": "https://www.ft.com/stream/regionsId/TnN0ZWluX0dMX1VTX0NUX011bmljaXBhbGl0eV8yMDY1ODA=-R0w="
+			},
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"idV1": "Mjk=-U2VjdGlvbnM=",
+				"prefLabel": "Companies",
+				"url": "https://www.ft.com/companies"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"idV1": "MzQ=-U2VjdGlvbnM=",
+				"prefLabel": "Industrials",
+				"url": "https://www.ft.com/companies/industrials"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"idV1": "MzU=-U2VjdGlvbnM=",
+				"prefLabel": "Chemicals",
+				"url": "https://www.ft.com/companies/chemicals"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "topics",
+				"idV1": "Mjk=-VG9waWNz",
+				"prefLabel": "Mergers & Acquisitions",
+				"url": "https://www.ft.com/topics/themes/Mergers_&_Acquisitions"
 			}
-			}
-	]
+		]
+	}
 }

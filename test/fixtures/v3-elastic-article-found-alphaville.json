@@ -1,0 +1,94 @@
+{
+	"_index": "v3_api_v2-2016-12-20",
+	"_type": "item",
+	"_id": "55349a93-8c28-3d41-be52-486fafb9628a",
+	"_version": 20,
+	"found": true,
+	"_source": {
+		"type": "article",
+		"id": "55349a93-8c28-3d41-be52-486fafb9628a",
+		"title": "Emergency Markets Live: in search of the patriotic relief rally",
+		"alternativeTitles": {},
+		"byline": "John McDermott",
+		"publishReference": "SYNTHETIC-REQ-MON-MIGRATION-WP_55349a93-8c28-3d41-be52-486fafb9628a",
+		"publishedDate": "2011-08-08T18:25:53.000Z",
+		"initialPublishedDate": "2011-08-08T18:25:53Z",
+		"annotations": [
+			{
+				"predicate": "http://www.ft.com/ontology/classification/isClassifiedBy",
+				"id": "89d15f70-640d-11e4-9803-0800200c9a66",
+				"apiUrl": "http://api.ft.com/brands/89d15f70-640d-11e4-9803-0800200c9a66",
+				"prefLabel": "FT Alphaville",
+				"type": "BRAND",
+				"directType": "http://www.ft.com/ontology/product/Brand",
+				"idV2": "89d15f70-640d-11e4-9803-0800200c9a66"
+			},
+			{
+				"predicate": "http://www.ft.com/ontology/classification/isClassifiedBy",
+				"id": "dbb0bdae-1f0c-11e4-b0cb-b2227cce2b54",
+				"apiUrl": "http://api.ft.com/brands/dbb0bdae-1f0c-11e4-b0cb-b2227cce2b54",
+				"prefLabel": "Financial Times",
+				"type": "BRAND",
+				"directType": "http://www.ft.com/ontology/product/Brand",
+				"idV2": "dbb0bdae-1f0c-11e4-b0cb-b2227cce2b54"
+			}
+		],
+		"webUrl": "http://ftalphaville.ft.com/2011/08/08/647146/emergency-markets-live-in-search-of-the-patriotic-relief-rally/",
+		"provenance": [
+			"http://api.ft.com/content/items/v1/55349a93-8c28-3d41-be52-486fafb9628a",
+			"http://api.ft.com/enrichedcontent/55349a93-8c28-3d41-be52-486fafb9628a"
+		],
+		"originatingParty": "FT",
+		"storyPackage": [],
+		"standout": {},
+		"realtime": false,
+		"comments": {
+			"enabled": false
+		},
+		"canBeSyndicated": "verify",
+		"_lastUpdatedDateTime": "2017-03-15T21:24:35.386Z",
+		"url": "http://ftalphaville.ft.com/2011/08/08/647146/emergency-markets-live-in-search-of-the-patriotic-relief-rally/",
+		"bodyHTML": "<p>Bring your tin-hats, burnt fingers and emergency scotch:</p><figure class=\"n-content-image\"><img alt=\"\" src=\"http://markets.ft.com/RESEARCH/API/ChartBuilder?t=indices&amp;p=eyJzeW1ib2wiOiI1OTkzNjJ8NTkzOTMzfDU3OTQzNSIsInJlZ2lvbiI6bnVsbCwiaGVpZ2h0IjoiMjYwIiwid2lkdGgiOiI2MTMiLCJsaW5lU3R5bGUiOiJsaW5lIiwiZHVyYXRpb24iOiIxIiwicHJpbWFyeUxhYmVsIjoiRG93IEpvbmVzIEluZHVzdHJpYWwgQXZlcmFnZSIsInNlY29uZGFyeUxhYmVsIjoiUyZQIDUwMCIsInRlcnRpYXJ5TGFiZWwiOiJOQVNEQVEgQ29tcG9zaXRlIiwicXVhdGVybmFyeUxhYmVsIjoiIn0=\"></figure><p>DJA around 500 points down at pixel time. We’ll be kicking off an emergency <a href=\"http://ftalphaville.ft.com/marketslive/\">Markets Live</a> in 5 minutes.</p>",
+		"contentStats": {
+			"relatedBoxes": 0,
+			"pullQuotes": 0,
+			"images": 1,
+			"videos": 0
+		},
+		"openingHTML": "<p>Bring your tin-hats, burnt fingers and emergency scotch:</p><figure class=\"n-content-image\"><img alt=\"\" src=\"http://markets.ft.com/RESEARCH/API/ChartBuilder?t=indices&amp;p=eyJzeW1ib2wiOiI1OTkzNjJ8NTkzOTMzfDU3OTQzNSIsInJlZ2lvbiI6bnVsbCwiaGVpZ2h0IjoiMjYwIiwid2lkdGgiOiI2MTMiLCJsaW5lU3R5bGUiOiJsaW5lIiwiZHVyYXRpb24iOiIxIiwicHJpbWFyeUxhYmVsIjoiRG93IEpvbmVzIEluZHVzdHJpYWwgQXZlcmFnZSIsInNlY29uZGFyeUxhYmVsIjoiUyZQIDUwMCIsInRlcnRpYXJ5TGFiZWwiOiJOQVNEQVEgQ29tcG9zaXRlIiwicXVhdGVybmFyeUxhYmVsIjoiIn0=\"></figure>",
+		"metadata": [
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"primary": "section",
+				"primaryTag": true,
+				"teaserTag": true,
+				"idV1": "NzE=-U2VjdGlvbnM=",
+				"prefLabel": "Markets",
+				"url": "https://www.ft.com/markets"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "brand",
+				"primary": "brand",
+				"idV1": "ZDkyYTVhMzYtYjAyOS00OWI1LWI5ZTgtM2QyYTIzYjk4Y2Jj-QnJhbmRz",
+				"prefLabel": "FT Alphaville",
+				"url": "https://ftalphaville.ft.com"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "genre",
+				"idV1": "OA==-R2VucmVz",
+				"prefLabel": "Comment",
+				"url": "https://www.ft.com/stream/genreId/OA==-R2VucmVz"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"idV1": "OTg=-U2VjdGlvbnM=",
+				"prefLabel": "Equities",
+				"url": "https://www.ft.com/markets/equities"
+			}
+		]
+	}
+}

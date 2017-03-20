@@ -1,84 +1,64 @@
 {
-	"docs":[
-		{
-			"_index":"v3_api_v2",
-			"_type":"item",
-			"_id":"352210c4-7b17-11e5-a1fe-567b37f80b64",
-			"_version":43,
-			"found":true,
-			"_source":{
-				"type":"podcast",
-				"id":"457bbf3d-99b4-4f61-8aa8-b5db3accb2cd",
-				"title":"The life of a song: Nessun Dorma",
-				"alternativeTitles": { },
-				"subheading": "Jan Dalley tells the story of the aria that united opera and football fans alike in a strange example of the power of posh music. Credits: ZYX Music, Naxos, Monument, Arista.",
-				"bodyHTML":"<p>Jan Dalley tells the story of the aria that united opera and football fans alike in a strange example of the power of posh music. Credits: ZYX Music, Naxos, Monument, Arista.</p>",
-				"byline":"Each week FT Arts brings you interviews and studio discussions about the latest arts stories and cultural trends, with contributions from Financial Times critics and commentators.",
-				"publishedDate":"2015-11-06T15:44:13.000Z",
-				"webUrl":"https://www.acast.com/channels/ft-arts/acasts/thelifeofasong-nessundorma",
-				"provenance":[
-					"http://rss.acast.com/ft-arts"
-				],
-				"attachments":[
-					{
-						"mediaType":"audio/mpeg",
-						"url":"http://rss.acast.com/ft-arts/thelifeofasong-nessundorma/media.mp3"
-					}
-				],
-				"mainImage":{
-					"title":"Logo for FT Arts podcast",
-					"description":"",
-					"url":"http://az592690.vo.msecnd.net/media/v1/6134ca00-5e85-4054-91f0-d8274e8ad994/ft-arts-ig7u7hep.jpg",
-					"width":440,
-					"height":440
-				},
-				"metadata":[
-					{
-						"idV1":"NzA0NWQ2OTUtNDdhZC00ZGMxLWI4MGEtODZkYTY5MjQ0ZTk1-QnJhbmRz",
-						"prefLabel":"FT Arts podcast",
-						"taxonomy":"sections",
-						"primary":"section",
-						"attributes":[
-
-						],
-						"url":"https://www.ft.com/stream/sectionsId/NzA0NWQ2OTUtNDdhZC00ZGMxLWI4MGEtODZkYTY5MjQ0ZTk1-QnJhbmRz"
-					},
-					{
-						"idV1":"MTQ5-U2VjdGlvbnM=",
-						"prefLabel":"Arts",
-						"taxonomy":"sections",
-						"primary":null,
-						"attributes":[
-
-						],
-						"url":"https://www.ft.com/arts"
-					},
-					{
-						"idV1":"MTQ4-U2VjdGlvbnM=",
-						"prefLabel":"Life & Arts",
-						"taxonomy":"sections",
-						"primary":null,
-						"attributes":[
-							{
-								"key":"dfpSite",
-								"value":"life.and.arts"
-							}
-						],
-						"url":"https://www.ft.com/life-arts"
-					},
-					{
-						"idV1":"NjI2MWZlMTEtMTE2NS00ZmI0LWFkMzMtNDhiYjA3YjcxYzIy-U2VjdGlvbnM=",
-						"prefLabel":"Podcasts",
-						"taxonomy":"sections",
-						"primary":null,
-						"attributes":[
-
-						],
-						"url":"https://www.ft.com/stream/sectionsId/NjI2MWZlMTEtMTE2NS00ZmI0LWFkMzMtNDhiYjA3YjcxYzIy-U2VjdGlvbnM="
-					}
-				],
-				"_lastUpdatedDateTime":"2015-11-09T12:51:27.835Z"
+	"_index": "v3_api_v2-2016-12-20",
+	"_type": "item",
+	"_id": "5da36253-a0ce-41ba-879b-7d8213a5b29a",
+	"_version": 98,
+	"found": true,
+	"_source": {
+		"id": "5da36253-a0ce-41ba-879b-7d8213a5b29a",
+		"title": "Problems with railways and the devolution revolution",
+		"titles": [],
+		"summaries": [
+			"With Robert Wright, Andrew Bounds and Henry Mance of the Financial Times, plus rail commentator Christian Wolmar. Presented by Sebastian Payne."
+		],
+		"byline": "Discussion and analysis of U.K. and U.S. politics from the Financial Times' political commentators and correspondents. ",
+		"publishedDate": "2016-08-12T23:38:19.000Z",
+		"webUrl": "https://www.acast.com/ft-politics/railwayproblemswithrailwaysandthedevolutionrevolution",
+		"provenance": [
+			"http://rss.acast.com/ft-uk-general-election-2015"
+		],
+		"attachments": [
+			{
+				"mediaType": "audio/mpeg",
+				"url": "http://media.acast.com/ft-politics/railwayproblemswithrailwaysandthedevolutionrevolution/media.mp3"
 			}
-		}
-	]
+		],
+		"mainImage": {
+			"title": "Logo for FT Politics podcast",
+			"description": "",
+			"url": "http://az592690.vo.msecnd.net/media/v1/8e80ba05-2f15-4479-a6cc-b2f6635a1fe0/1400x1400-politics-iy5xwxvo.png",
+			"width": 1400,
+			"height": 1400,
+			"ratio": 1
+		},
+		"metadata": [
+			{
+				"idV1": "Y2MyOTBmOGQtYWQyMi00NjVhLTkxNmMtNTkwOGY1ZWQwM2Mw-QnJhbmRz",
+				"prefLabel": "FT Politics podcast",
+				"primaryTag": true,
+				"taxonomy": "sections",
+				"teaserTag": true,
+				"url": "https://www.ft.com/stream/sectionsId/Y2MyOTBmOGQtYWQyMi00NjVhLTkxNmMtNTkwOGY1ZWQwM2Mw-QnJhbmRz",
+				"primary": "section"
+			},
+			{
+				"idV1": "MQ==-U2VjdGlvbnM=",
+				"prefLabel": "World",
+				"taxonomy": "sections",
+				"url": "https://www.ft.com/stream/sectionsId/MQ==-U2VjdGlvbnM="
+			},
+			{
+				"idV1": "NjI2MWZlMTEtMTE2NS00ZmI0LWFkMzMtNDhiYjA3YjcxYzIy-U2VjdGlvbnM=",
+				"prefLabel": "Podcasts",
+				"taxonomy": "sections",
+				"url": "https://www.ft.com/stream/sectionsId/NjI2MWZlMTEtMTE2NS00ZmI0LWFkMzMtNDhiYjA3YjcxYzIy-U2VjdGlvbnM="
+			}
+		],
+		"_lastUpdatedDateTime": "2017-03-13T15:16:21.945Z",
+		"url": "https://www.ft.com/content/5da36253-a0ce-41ba-879b-7d8213a5b29a",
+		"bodyHTML": "<p>With Robert Wright, Andrew Bounds and Henry Mance of the Financial Times, plus rail commentator Christian Wolmar. Presented by Sebastian Payne.</p>",
+		"subheading": "With Robert Wright, Andrew Bounds and Henry Mance of the Financial Times, plus rail commentator Christian Wolmar. Presented by Sebastian Payne.",
+		"alternativeTitles": {},
+		"type": "podcast"
+	}
 }

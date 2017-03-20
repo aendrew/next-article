@@ -1,0 +1,78 @@
+{
+	"_index": "v3_api_v2-2016-12-20",
+	"_type": "item",
+	"_id": "7ae5912a-8012-11e6-8e50-8ec15fb462f4",
+	"_version": 3,
+	"found": true,
+	"_source": {
+		"type": "placeholder",
+		"id": "7ae5912a-8012-11e6-8e50-8ec15fb462f4",
+		"title": "Five reasons to live in Highland Park, Illinois",
+		"alternativeTitles": {
+			"promotionalTitle": "Five reasons to live in Highland Park, Illinois"
+		},
+		"publishedDate": "2017-03-06T08:00:46.000Z",
+		"url": "https://propertylistings.ft.com/propertynews/united-states/4973-five-reasons-to-live-in-highland-park-illinois.html",
+		"standfirst": "Follow in the ancient footsteps of woolly mammoths to find architectural gems",
+		"provenance": [
+			"http://api.ft.com/enrichedcontent/7ae5912a-8012-11e6-8e50-8ec15fb462f4"
+		],
+		"_lastUpdatedDateTime": "2017-03-15T20:15:32.904Z",
+		"metadata": [
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"idV1": "MTQ4-U2VjdGlvbnM=",
+				"prefLabel": "Life & Arts",
+				"url": "https://www.ft.com/stream/sectionsId/MTQ4-U2VjdGlvbnM="
+			},
+			{
+				"attributes": [],
+				"taxonomy": "regions",
+				"idV1": "TnN0ZWluX0dMX1VTX0lMX011bmljaXBhbGl0eV80MTAyMjY=-R0w=",
+				"prefLabel": "Highland Park, Illinois",
+				"url": "https://www.ft.com/stream/regionsId/TnN0ZWluX0dMX1VTX0lMX011bmljaXBhbGl0eV80MTAyMjY=-R0w="
+			},
+			{
+				"attributes": [],
+				"taxonomy": "people",
+				"idV1": "TnN0ZWluX1BOX0FGVE1fUE5fNDM1ODQ2-UE4=",
+				"prefLabel": "Frank Lloyd Wright",
+				"url": "https://www.ft.com/stream/peopleId/TnN0ZWluX1BOX0FGVE1fUE5fNDM1ODQ2-UE4="
+			},
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"primary": "section",
+				"primaryTag": true,
+				"teaserTag": true,
+				"idV1": "MTU3-U2VjdGlvbnM=",
+				"prefLabel": "House & Home",
+				"url": "https://www.ft.com/stream/sectionsId/MTU3-U2VjdGlvbnM="
+			},
+			{
+				"attributes": [],
+				"taxonomy": "brand",
+				"primary": "brand",
+				"idV1": "YTQ2OGIyNWUtNmI3ZC00NGRhLWE0MjEtN2IwMDc5NTQ3YTE5-QnJhbmRz",
+				"prefLabel": "Residential",
+				"url": "https://www.ft.com/stream/brandId/YTQ2OGIyNWUtNmI3ZC00NGRhLWE0MjEtN2IwMDc5NTQ3YTE5-QnJhbmRz"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "genre",
+				"idV1": "Nw==-R2VucmVz",
+				"prefLabel": "News",
+				"url": "https://www.ft.com/stream/genreId/Nw==-R2VucmVz"
+			}
+		],
+		"mainImage": {
+			"title": "",
+			"description": "C7055J Monarch butterfly on Milkweed bloom, USA",
+			"url": "http://prod-upp-image-read.ft.com/14ea3c76-f214-11e6-95ee-f14e55513608",
+			"width": 2048,
+			"height": 1152,
+			"ratio": 1.7777777777777777
+		}
+	}
+}
