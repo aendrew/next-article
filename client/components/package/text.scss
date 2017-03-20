@@ -1,5 +1,12 @@
+@import 'colors';
+
 .package__text {
 	@include oTypographySans(m, $load-progressively: true);
+	-webkit-font-smoothing: antialiased;
+}
+
+.package__text--strong {
+	@include oTypographySansBold(m, $load-progressively: true);
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -15,8 +22,12 @@
 	font-size: 24px;
 }
 
-.package__text--strong {
-	@include oTypographySansBold(m, $load-progressively: true);
+.package__text--highlit {
+	color: $claret;
+
+	.package--extra & {
+		color: $yellow;
+	}
 }
 
 // scss-lint:disable SelectorFormat
@@ -32,13 +43,3 @@
 	font-size: 22px;
 }
 // scss-lint:enable SelectorFormat
-
-.package__text--highlit {
-	color: #33302c;
-}
-
-.package--extra {
-	.package__text--highlit {
-		color: $pkgYellow;
-	}
-}

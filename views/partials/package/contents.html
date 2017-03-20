@@ -1,7 +1,7 @@
-<ul class="package__list">
+<ul class="package__reset-ul">
 	{{#each contents}}
-		<li class="package__content-item">
-			<a href="{{relativeUrl}}" class="package__link package__text--m" {{#ifEquals id @root.context.current.id}}aria-selected="true" aria-label="Current page"{{/ifEquals}}>
+		<li class="package__content-border">
+			<a href="{{relativeUrl}}" class="package__content-item package__text--m" {{#ifEquals id @root.context.current.id}}aria-selected="true" aria-label="Current page"{{/ifEquals}}>
 				{{#if sequenceId}}<div class="package__text--highlit">{{sequenceId}}</div>{{/if}}
 				{{title}}
 			</a>
@@ -9,9 +9,7 @@
 	{{/each}}
 </ul>
 {{#if isShortened}}
-	<div class="package__link-container--block">
-		<a href="{{@root.context.home.url}}" class="package__link--block">
-			<span class="package__link-inner--block package__text--m package__text--strong">{{landingPageLinkText}}</span>
-		</a>
-	</div>
+	<a href="{{@root.context.home.url}}" class="package__contents-footer">
+		<div class="package__contents-footer-inner package__text--m package__text--strong">{{landingPageLinkText}}</div>
+	</a>
 {{/if}}

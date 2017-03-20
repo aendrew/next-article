@@ -1,22 +1,22 @@
-<div class="o-grid-container o-grid-container--bleed {{#if design.theme}}package--{{design.theme}}{{/if}}">
+<div class="o-grid-container o-grid-container--bleed">
 	<div class="o-grid-row o-grid-row--compact">
 		<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
-			<div class="package__text package__nav--article-end package__highlight-background">
-				<div class="o-grid-container o-grid-container--bleed package__article-end-bar">
+			<div class="package__text package__nav--end {{#if design.theme}}package--{{design.theme}}{{/if}}">
+				<div class="o-grid-container o-grid-container--bleed package__end-nav-header">
 					<div class="o-grid-row o-grid-row--compact">
 						<div data-o-grid-colspan="12 M6">
-							<div class="package__end-title-container package__highlight-background--light">
-								<span class="package__end-title package__text--m package__text--strong">Explore the series</span>
+							<div class="package__end-nav-title package__text--m package__text--strong">Explore the series</div>
+							<div class="package__end-nav-teaser">
+								{{#if @root.context.next}}
+									{{> package/teaser @root.context.next}}
+								{{else}}
+									{{> package/teaser @root.context.prev}}
+								{{/if}}
 							</div>
-							{{#if @root.context.next}}
-								{{> package/teaser @root.context.next}}
-							{{else}}
-								{{> package/teaser @root.context.prev}}
-							{{/if}}
 						</div>
 						{{#if descriptionHTML}}
 							<div data-o-grid-colspan="hide M6">
-								<div class="package__article-end-about package__text--m">
+								<div class="package__end-nav-description package__text--m">
 									<div>ABOUT THIS SERIES</div>
 									{{{descriptionHTML}}}
 								</div>

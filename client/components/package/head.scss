@@ -1,32 +1,4 @@
 @import 'expander';
 @import 'contents';
 @import 'text';
-
-.package__highlight-background {
-	background-color: #f3dec8;
-}
-
-.package__highlight-background--light {
-	background-color: #B31147;
-	color: getColor('white');
-}
-
-.package--extra {
-	.package__highlight-background {
-		background-color: getColor('slate');
-	}
-
-	.package__highlight-background--light {
-		background-color: $pkgYellow;
-		color: getColor('slate');
-	}
-
-	.package__highlight-border.package__highlight-border,
-	.package__article-end-teaser .package__highlight-border.package__highlight-border:after {
-		border-color: $pkgYellow;
-	}
-
-	.o-teaser__heading {
-		color: getColor('white');
-	}
-}
+@import 'colors';

@@ -1,111 +1,115 @@
-$pkgYellow: #ffec1a;
-$pkgYellowLite: #fff04d;
-$claret: #B31147;
-$darkClaret: #660a28;
+@import 'colors';
 
 .package__contents {
-	width: 100%;
-	position: absolute;
-	right: 0;
-	z-index: 99;
-	@include oGridRespondTo($from: M) {
-		right: 16px;
-		max-width: 320px;
+	background-color: $wheat;
+
+	.package--extra & {
+		background-color: getColor('slate');
+	}
+
+	.package__nav--top & {
+		width: 100%;
+		position: absolute;
+		right: 0;
+		z-index: 99;
+		@include oGridRespondTo($from: M) {
+			right: 16px;
+			max-width: 320px;
+		}
+	}
+}
+
+.package__content-border {
+	border-top: 1px solid;
+	border-top-color: rgba(getColor('grey-tint5'), 0.2);
+
+	.package--extra & {
+		border-top-color: rgba(getColor('white'), 0.2);
 	}
 }
 
 .package__content-item {
-	border-top: 1px solid rgba(51, 51, 51, 0.2);
-}
-
-.package__link[aria-selected="true"] {
-	padding: 1em 1em 1em 10px;
-	border-left: solid 10px;
-	border-left-color: $claret;
-}
-
-.package__link {
-	border: 0;
+	display: block;
 	color: inherit;
-
-	display: block;
+	border-bottom: 0;
 	padding: 15px 15px 15px 20px;
-}
 
-.package__list {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-.package__link--block {
-	background-color: $claret;
-	color: getColor('white');
-	border: 0;
-	height: 40px;
-	display: block;
-	position: relative;
-}
-
-.package__link--block.package__link--block:hover {
-	color: getColor('white');
-	background-color: $darkClaret;
-}
-
-.package__link-container--block {
-	padding: 20px;
-}
-
-.package__link-inner--block {
-	padding: 9px;
-	display: block;
-}
-
-.package__link-inner--block:after {
-	background-repeat: no-repeat;
-	background-position: center;
-	content: "";
-	position: absolute;
-	right: 0;
-	top: 0;
-	height: 100%;
-	width: 50px;
-	background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-right?source=next-article&tint=%23ffffff,%23ffffff&format=svg);
-}
-
-.package--basic .package__link:hover,
-.package--special-report .package__link:hover {
-	color: $claret;
-}
-
-.package--extra {
-
-	.package__link[aria-selected="true"] {
-		color: $pkgYellow;
-		border-left-color: $pkgYellow;
+	&.package__content-item:hover {
+		color: $claret;
 	}
 
-	.package__content-item {
-		border-top: 1px solid rgba(255, 255, 255, 0.2);
+	&[aria-selected="true"] {
+		border-left: solid 10px;
+		border-left-color: $claret;
+		padding-left: 10px;
+	}
+
+	.package--extra & {
 		color: getColor('white');
 	}
 
-	.package__link--block {
-		background-color: $pkgYellow;
+	.package--extra &[aria-selected="true"] {
+		color: $yellow;
+		border-left-color: $yellow;
+	}
+
+	.package--extra &:hover {
+		color: $yellow;
+	}
+}
+
+.package__contents-footer {
+	position: relative;
+	background-color: $claret;
+	height: 40px;
+	margin: 20px;
+	display: inline-block;
+	width: calc(100% - 40px);
+	border-bottom: 0;
+
+	&.package__contents-footer:hover {
+		color: getColor('white');
+		background-color: $claretDark;
+	}
+
+	.package--extra & {
+		background-color: $yellow;
+	}
+
+	.package--extra &:hover {
+		color: getColor('slate');
+		background-color: $yellowLight;
+	}
+
+}
+
+.package__contents-footer-inner {
+	padding: 9px;
+	color: getColor('white');
+
+	&:after {
+		background-repeat: no-repeat;
+		background-position: center;
+		content: "";
+		position: absolute;
+		right: 0;
+		top: 0;
+		height: 100%;
+		width: 50px;
+		background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-right?source=next-article&tint=%23ffffff,%23ffffff&format=svg);
+	}
+
+	.package--extra & {
 		color: getColor('slate');
 	}
 
-	.package__link--block.package__link--block:hover {
-		color: getColor('slate');
-		background-color: $pkgYellowLite;
-	}
-
-	.package__link-inner--block:after {
+	.package--extra &:after {
 		background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-right?source=next-article&tint=%23252830,%23252830&format=svg);
 	}
+}
 
-	.package__link:hover {
-		color: $pkgYellow;
-	}
-
+.package__reset-ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }
