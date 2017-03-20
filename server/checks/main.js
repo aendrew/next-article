@@ -1,17 +1,12 @@
 /*eslint-disable*/
 
-const api = require('next-ft-api-client');
+const signedFetch = require('signed-aws-es-fetch');
 const nHealth = require('n-health');
 
-const ARTICLE_ID = 'd0377096-f290-11e4-b914-00144feab7de';
 const INTERVAL = 60 * 1000;
 
 const statuses = {
-	elastic: {
-		v1: false,
-		v2: false,
-		v3: false
-	},
+	elastic: false,
 	livefyre: false
 };
 
@@ -21,16 +16,15 @@ const statuses = {
  * @method pingServices
  */
 function pingServices () {
-
-	api.content({
-		uuid: ARTICLE_ID
+	signedFetch(`https://next-elastic.ft.com/v3_api_v2/item/_search`, {
+		body: JSON.stringify({ q: 'sort=publishedDate:desc' })
 	})
-		.then(() => { statuses.elastic.v3 = true; })
-		.catch(() => { statuses.elastic.v3 = false; });
+		.then(() => { statuses.elastic = true; })
+		.catch(() => { statuses.elastic = false; });
 
 	fetch('https://session-user-data.webservices.ft.com/v1/livefyre/init?title=Terror+must+not+trample+on+Tunisian+institutions+%E2%80%94+FT.com&url=https%3A%2F%2Fnext.ft.com%2Fcontent%2F4b949d2c-1fdc-11e5-ab0f-6bb9974f25d0&articleId=4b949d2c-1fdc-11e5-ab0f-6bb9974f25d0&el=comments&stream_type=livecomments&callback=jsonp_m49qbwvzpvi0&_=1444384681349')
-	.then((res) => { statuses.livefyre = res.ok; })
-	.catch(() => { statuses.livefyre = false; });
+		.then((res) => { statuses.livefyre = res.ok; })
+		.catch(() => { statuses.livefyre = false; });
 }
 
 /**
