@@ -91,6 +91,7 @@ export default class {
 					const videoPlaceholderListener = () => {
 						this.video.play();
 						this.videoPlaceholderElement.removeEventListener('click', videoPlaceholderListener);
+						this.playing();
 					};
 					this.videoPlaceholderElement.addEventListener('click', videoPlaceholderListener);
 				}
