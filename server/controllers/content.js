@@ -13,14 +13,10 @@ function getInteractive (contentId) {
 }
 
 function getArticle (contentId) {
-	return signedFetch(`https://next-elastic.ft.com/v3_api_v2/item/${contentId}`)
-		.then((response) => {
-			if (response.ok) {
-				return fetchres.json(response);
-			} else {
-				throw new fetchres.BadServerResponseError(response.statusCode);
-			}
-		})
+	const url = `https://next-elastic.ft.com/v3_api_v2/item/${contentId}`;
+
+	return signedFetch(url)
+		.then(fetchres.json)
 		.then((json) => json._source)
 		.catch((error) => {
 			if (fetchres.originatedError(error)) {
