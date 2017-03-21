@@ -19,16 +19,17 @@ const fixtureLiveBlog = require('../../fixtures/v3-elastic-article-found-liveblo
 const fixtureOnwardJourney = require('../../fixtures/onward-journey');
 const fixtureOnwardJourneyInPackage = require('../../fixtures/onward-journey-in-package');
 
-// TODO: use sandbox
+const sandbox = sinon.sandbox.create();
+
 const dependencyStubs = {
 	igPoller: { getData: () => fixtureInteractives },
-	podcast: sinon.spy(),
-	video: sinon.spy(),
-	article: sinon.spy(),
-	interactive: sinon.spy(),
-	falconUrl: sinon.stub(),
-	onwardJourney: sinon.stub(),
-	modelHandler: sinon.stub()
+	podcast: sandbox.spy(),
+	video: sandbox.spy(),
+	article: sandbox.spy(),
+	interactive: sandbox.spy(),
+	falconUrl: sandbox.stub(),
+	onwardJourney: sandbox.stub(),
+	modelHandler: sandbox.stub()
 };
 
 nock.disableNetConnect();
@@ -46,25 +47,30 @@ describe('Content Controller', function () {
 	let response;
 	let next;
 
+	// TODO: use <https://www.npmjs.com/package/express-request-mock>
 	function createInstance (params, flags) {
-		next = sinon.stub();
+		next = sandbox.stub();
 		request = httpMocks.createRequest(params);
 		response = httpMocks.createResponse();
 		response.locals = { flags: flags || {} };
 		// node-mocks-http doesn't support this method
-		response.unvaryAll = sinon.stub();
+		response.unvaryAll = sandbox.stub();
 		return subject(request, response, next);
 	}
 
-	// it('sets surrogate-key', () => {
-	// 	createInstance({
-	// 		params: {
-	// 			id: '012f81d6-2e2b-11e5-8873-775ba7c2ea3d'
-	// 		}
-	// 	});
-	// 	expect(response._headers['surrogate-key']).to.equal('contentUuid:012f81d6-2e2b-11e5-8873-775ba7c2ea3d');
-	// 	dependencyStubs.interactive.reset();
-	// })
+	afterEach(() => {
+		sandbox.reset();
+		nock.cleanAll();
+	});
+
+	it('sets surrogate-key', () => {
+		createInstance({
+			params: {
+				id: '012f81d6-2e2b-11e5-8873-775ba7c2ea3d'
+			}
+		});
+		expect(response._headers['surrogate-key']).to.equal('contentUuid:012f81d6-2e2b-11e5-8873-775ba7c2ea3d');
+	})
 
 	describe('when the requested content maps to an interactive', function () {
 		beforeEach(function () {
@@ -73,10 +79,6 @@ describe('Content Controller', function () {
 					id: '012f81d6-2e2b-11e5-8873-775ba7c2ea3d'
 				}
 			});
-		});
-
-		afterEach(function () {
-			dependencyStubs.interactive.reset();
 		});
 
 		it('redirects to the interactive URL', function () {
@@ -106,12 +108,6 @@ describe('Content Controller', function () {
 
 		});
 
-		afterEach(function () {
-			dependencyStubs.modelHandler.reset();
-			dependencyStubs.podcast.reset();
-			dependencyStubs.onwardJourney.reset();
-		});
-
 		it('returns a successful response', function () {
 			expect(response.statusCode).to.equal(200);
 			expect(dependencyStubs.podcast.callCount).to.equal(1);
@@ -134,11 +130,6 @@ describe('Content Controller', function () {
 					id: CONTENT_ID
 				}
 			});
-		});
-
-		afterEach(function () {
-			dependencyStubs.video.reset();
-			dependencyStubs.modelHandler.reset();
 		});
 
 		it('defers to the video handler', function () {
@@ -183,11 +174,6 @@ describe('Content Controller', function () {
 				});
 			});
 
-			afterEach(function () {
-				dependencyStubs.article.reset();
-				dependencyStubs.modelHandler.reset();
-			});
-
 			it('defers to the article controller', function () {
 				expect(dependencyStubs.article.callCount).to.equal(1);
 				expect(response.statusCode).to.not.equal(404);
@@ -195,7 +181,7 @@ describe('Content Controller', function () {
 		});
 
 		context('and it is requested as a fragment', function () {
-			let modelStub = sinon.stub();
+			let modelStub = sandbox.stub();
 
 			beforeEach(function () {
 				const CONTENT_ID = '352210c4-7b17-11e5-a1fe-567b37f80b64';
@@ -218,11 +204,6 @@ describe('Content Controller', function () {
 				});
 			});
 
-			afterEach(function () {
-				modelStub.reset();
-				dependencyStubs.modelHandler.reset();
-			});
-
 			it('defers to the article controller', function () {
 				expect(dependencyStubs.modelHandler.callCount).to.equal(1);
 				expect(modelStub.callCount).to.equal(1);
@@ -242,18 +223,13 @@ describe('Content Controller', function () {
 				dependencyStubs.falconUrl.returns(
 					Promise.resolve('http://www.ft.com/path/to/article')
 				);
+
 				dependencyStubs.modelHandler.withArgs('article').returns(dependencyStubs.article);
 
 				return createInstance({
 					params: { id: CONTENT_ID }
 				});
 
-			});
-
-			afterEach(function () {
-				dependencyStubs.article.reset();
-				dependencyStubs.modelHandler.reset();
-				dependencyStubs.falconUrl.returns(undefined);
 			});
 
 			it('redirects to ft.com', function () {
@@ -280,18 +256,13 @@ describe('Content Controller', function () {
 				dependencyStubs.falconUrl.returns(
 					Promise.resolve(null)
 				);
+
 				dependencyStubs.modelHandler.withArgs('article').returns(dependencyStubs.article);
 
 				return createInstance({
 					params: { id: CONTENT_ID }
 				});
 
-			});
-
-			afterEach(function () {
-				dependencyStubs.article.reset();
-				dependencyStubs.modelHandler.reset();
-				dependencyStubs.falconUrl.returns(undefined);
 			});
 
 			it('responds with a 404', function () {
@@ -321,12 +292,6 @@ describe('Content Controller', function () {
 
 			});
 
-			afterEach(function () {
-				dependencyStubs.onwardJourney.reset();
-				dependencyStubs.article.reset();
-				dependencyStubs.modelHandler.reset();
-			});
-
 			it('defers to the article controller after setting read next data', function () {
 				expect(dependencyStubs.onwardJourney.callCount).to.equal(1);
 				expect(dependencyStubs.article.callCount).to.equal(1);
@@ -351,12 +316,6 @@ describe('Content Controller', function () {
 					params: { id: CONTENT_ID }
 				}, { articleSuggestedRead: true });
 
-			});
-
-			afterEach(function () {
-				dependencyStubs.onwardJourney.reset();
-				dependencyStubs.article.reset();
-				dependencyStubs.modelHandler.reset();
 			});
 
 			it('renders the article without the read nexts', function () {
@@ -389,12 +348,6 @@ describe('Content Controller', function () {
 
 			});
 
-			afterEach(function () {
-				dependencyStubs.onwardJourney.reset();
-				dependencyStubs.article.reset();
-				dependencyStubs.modelHandler.reset();
-			});
-
 			it('defers to the article controller after setting read next and package data', function () {
 				expect(dependencyStubs.onwardJourney.callCount).to.equal(1);
 				expect(dependencyStubs.article.callCount).to.equal(1);
@@ -421,12 +374,6 @@ describe('Content Controller', function () {
 					params: { id: CONTENT_ID }
 				}, { articleSuggestedRead: true, contentPackages: true });
 
-			});
-
-			afterEach(function () {
-				dependencyStubs.onwardJourney.reset();
-				dependencyStubs.article.reset();
-				dependencyStubs.modelHandler.reset();
 			});
 
 			//TODO: is this correct behaviour?
