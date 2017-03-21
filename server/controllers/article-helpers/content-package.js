@@ -1,5 +1,5 @@
 const getPackageBrand = require('./get-package-brand');
-const MAX_LENGTH = 6;
+const MAX_LENGTH = 9;
 
 const getSequenceId = (pkg, currentIndex) => {
 	if (pkg.tableOfContents && pkg.tableOfContents.sequence === 'exact-order' && pkg.tableOfContents.labelType === 'part-number') {
@@ -32,7 +32,7 @@ const addContents = ({ pkg, currentIndex }) => {
 	const needsSequenceId = pkg.tableOfContents && pkg.tableOfContents.labelType === 'part-number';
 	const contents = needsSequenceId ? addSequenceId(shortenedPackage) : shortenedPackage;
 	const isShortened = contents.length < pkg.contains.length;
-	const landingPageLinkText = `See all ${pkg.contains.length} stories in the ${pkg.design.theme === 'special-report' ? 'report' : 'series'}`;
+	const landingPageLinkText = `See all ${pkg.contains.length} ${needsSequenceId ? 'parts' : 'stories'}`;
 	return { contents, isShortened, landingPageLinkText };
 };
 
