@@ -1,8 +1,6 @@
 const cheerio = require('cheerio');
-const sinon = require('sinon');
-const proxyquire = require('proxyquire');
 require('chai').should();
-	
+
 const subject = require('../../../server/transforms/strip-package-promo-TOCs');
 
 const promoBoxWithTOC = `<aside aria-hidden="true" class="n-content-related-box p402_hide" data-trackable="related-box" role="complementary">
@@ -24,12 +22,12 @@ const promoBoxWithTOC = `<aside aria-hidden="true" class="n-content-related-box 
 	</aside>`;
 
 const promoBoxWithSingleLink = `
-	<aside class="\&quot;n-content-related-box\&quot;" role="\&quot;complementary\&quot;">
-		<h3 class="\&quot;n-content-related-box__title\&quot;"><span class="\&quot;n-content-related-box__title-text\&quot;">Related article</span></h3><a class="\&quot;n-content-related-box__image-link\&quot;" href="/&quot;/content/95d61362-80b0-11e6-bc52-0c7211ef3198/&quot;"><img alt="\&quot;(FILE" data-copyright="\&quot;©" height="\&quot;1152\&quot;" longdesc="/&quot;Mary" src="/&quot;http://com.ft.imagepublish.prod.s3.amazonaws.com/3ba022c2-80b3-11e6-8e50-8ec15fb462f4/&quot;" width="\&quot;2048\&quot;"></a>
-		<div class="\&quot;n-content-related-box__headline\&quot;">
-			<a class="\&quot;n-content-related-box__headline-link\&quot;" href="/&quot;/content/95d61362-80b0-11e6-bc52-0c7211ef3198/&quot;">Mary Berry quits ‘Great British Bake Off’ out of loyalty to BBC</a>
+	<aside class="n-content-related-box" role="complementary">
+		<h3 class="n-content-related-box__title"><span class="n-content-related-box__title-text">Related article</span></h3><a class="n-content-related-box__image-link" href="/&quot;/content/95d61362-80b0-11e6-bc52-0c7211ef3198/&quot;"><img alt="(FILE" data-copyright="©" height="1152" longdesc="/&quot;Mary" src="/&quot;http://com.ft.imagepublish.prod.s3.amazonaws.com/3ba022c2-80b3-11e6-8e50-8ec15fb462f4/&quot;" width="2048"></a>
+		<div class="n-content-related-box__headline">
+			<a class="n-content-related-box__headline-link" href="/&quot;/content/95d61362-80b0-11e6-bc52-0c7211ef3198/&quot;">Mary Berry quits ‘Great British Bake Off’ out of loyalty to BBC</a>
 		</div>
-		<div class="\&quot;n-content-related-box__content\&quot;">
+		<div class="n-content-related-box__content">
 			<p>Turmoil in UK’s most popular show illustrates shifts in entertainment industry</p>
 		</div>
 	</aside>

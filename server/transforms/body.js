@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 
+const stripPackagePromoTOCs = require('./strip-package-promo-TOCs');
 const relatedBoxExpander = require('./related-box-expander');
 const relatedArticleToTeaser = require('./related-article-to-teaser');
 const ariaHiddenMidContentInterruptions = require('./aria-hidden');
@@ -24,6 +25,9 @@ module.exports = function (body, flags, options) {
 
 	const $bodyHTML = cheerio.load(body, { decodeEntities: false });
 	transform($bodyHTML, flags, options)
+		//while AB testing packages, we want to remove the editorially placed promos with
+		// a table of contents, as the TOCs will be represented in the package Nav
+		.with(stripPackagePromoTOCs)
 		.with(relatedArticleToTeaser)
 		.with(relatedBoxExpander)
 		.with(ariaHiddenMidContentInterruptions)
