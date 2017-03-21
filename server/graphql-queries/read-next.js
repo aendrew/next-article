@@ -5,6 +5,7 @@ module.exports = (readNext, contentPackage) => {
 	let query = `
 
 	${teaserFragments.teaserExtraLight}
+	${teaserFragments.teaserStandard}
 	${contentPackage ? teaserFragments.teaserHeavy : ''}
 
 	query ContentPackage (
@@ -66,6 +67,8 @@ module.exports = (readNext, contentPackage) => {
 			...on Package {
 				contains {
 					...TeaserExtraLight
+					...TeaserStandard
+					...TeaserHeavy
 				}
 			}
 		`;

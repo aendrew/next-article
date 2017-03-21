@@ -18,23 +18,58 @@
 	role="main"
 	class="article{{#if designGenre}} article--brand{{/if}}"
 	data-content-id="{{id}}"
-	data-syndicatable="{{canBeSyndicated}}"
->
+	data-syndicatable="{{canBeSyndicated}}">
 
-		{{> topper/main}}
+	{{> topper/main}}
 
-		<div class="o-grid-container">
-			<div class="o-grid-row">
-				<div data-o-grid-colspan="12">
-					<ul>
-						{{#slice package.contents offset=1 limit=3}}
-							{{>n-teaser/templates/standard mods=(array 'hero' 'center' 'has-image')}}
-						{{/slice}}
-					</ul>
+	<div class="o-grid-container">
+		<div class="o-grid-row">
+			<div data-o-grid-colspan="12 L8">
+				{{#bigTeasers}}
+					<div class="o-grid-container o-grid-container--bleed">
+						<div class="o-grid-row o-teaser-collection">
+							{{#each items}}
+								<div data-o-grid-colspan="12 M6" class="o-teaser-collection__item--stretched">
+									{{#if needsSequenceId}}
+										{{itemLabel @index}}
+									{{/if}}
+									{{>n-teaser/templates/heavy mods=(array 'large' 'hero' 'centre' 'stretched')
+													colspan='{"default": 12, "L": 12}' position='{"L": "top"}' widths="[600, 332]"
+													noHeadshot=true isEditorsChoice=false isOpinion=false
+													lazyLoad=(gt @index 1)
+									}}
+								</div>
+							{{/each}}
+						</div>
+					</div>
+				{{/bigTeasers}}
+
+				{{#littleTeasers}}
+					<div class="o-teaser-collection">
+						{{#if title}}
+							<h2 class="o-teaser-collection__heading">{{ title }}</h2>
+						{{/if}}
+						<ol class="o-teaser-collection__items">
+							{{#each items}}
+								<li class="o-teaser-collection__item">
+									{{>n-teaser/templates/heavy mods=(array 'small')
+											widths="[500,335]"
+											noHeadshot=true isEditorsChoice=false
+											isOpinion=false hasImage=true lazyLoad=true}}
+								</li>
+							{{/each}}
+						</ol>
+					</div>
+				{{/littleTeasers}}
+			</div>
+
+			<div data-o-grid-colspan="hide L4" style="text-align:center;" aria-hidden="true">
+				<div style="padding:20px 0;background-color: #f3dec8">
+				{{> ads/mid}}
 				</div>
 			</div>
 		</div>
-
+	</div>
 
 	{{>propensity-messaging-promo-unit}}
 

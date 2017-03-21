@@ -106,6 +106,13 @@ module.exports = function contentController (req, res, next) {
 					content.package = onwardJourney.package;
 					content.context = onwardJourney.context;
 				}
+
+				if (onwardJourney.contains) {
+					content.contains = onwardJourney.contains.map((item, i) => {
+						item.promotionalTitle = content.contains[i].title || item.promotionalTitle || item.title;
+						return item;
+					});
+				}
 			}
 
 			function render (data) {
