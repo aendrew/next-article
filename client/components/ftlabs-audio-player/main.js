@@ -20,7 +20,7 @@ export default () => {
 	};
 
 
-	fetch(`https://ftlabs-audio-available.herokuapp.com/check/${articleUUID}`)
+	fetch(`https://audio-available.ft.com/check/${articleUUID}`)
 		.then(res => {
 			if(res.ok){
 				return res
