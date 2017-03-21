@@ -30,13 +30,10 @@
 						<div class="o-grid-row o-teaser-collection">
 							{{#each items}}
 								<div data-o-grid-colspan="12 M6" class="o-teaser-collection__item--stretched">
-									{{#if needsSequenceId}}
-										{{itemLabel @index}}
-									{{/if}}
-									{{>n-teaser/templates/heavy mods=(array 'hero' 'centre' 'stretched')
+									{{>n-teaser/templates/heavy presenter="	package" mods=(array 'hero' 'centre' 'stretched')
 													colspan='{"default": 12, "L": 12}' position='{"L": "top"}' widths="[600, 332]"
 													noHeadshot=true isEditorsChoice=false isOpinion=false
-													lazyLoad=(gt @index 1)
+													lazyLoad=(gt @index 1) streamProperties=../../primaryBrandTag
 									}}
 								</div>
 							{{/each}}
@@ -49,16 +46,14 @@
 						{{#if title}}
 							<h2 class="o-teaser-collection__heading">{{ title }}</h2>
 						{{/if}}
-						<ol class="o-teaser-collection__items">
-							{{#each items}}
-								<li class="o-teaser-collection__item">
-									{{>n-teaser/templates/heavy mods=(array 'small')
-											widths="[500,335]"
-											noHeadshot=true isEditorsChoice=false
-											isOpinion=false hasImage=true lazyLoad=true}}
-								</li>
-							{{/each}}
-						</ol>
+						{{#each items}}
+							<div class="o-teaser-collection__item">
+								{{>n-teaser/templates/heavy mods=(array 'small')
+										widths="[500,335]" streamProperties=../../primaryBrandTag
+										noHeadshot=true isEditorsChoice=false
+										isOpinion=false hasImage=true lazyLoad=false}}
+							</div>
+						{{/each}}
 					</div>
 				{{/littleTeasers}}
 			</div>
