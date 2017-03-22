@@ -3,7 +3,9 @@
 		<span class="topper__package-sequence-id">{{context.sequenceId}}</span>
 	{{else}}
 		{{#ifEquals type 'package'}}
-			<a href="{{packageBrand.relativeUrl}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="primary-theme" aria-label="posted in category {{packageBrand.prefLabel}}" data-concept-id="{{packageBrand.idV1}}">{{packageBrand.prefLabel}}</a>
+			{{#if packageBrand}}
+				<a href="{{packageBrand.relativeUrl}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="primary-theme" aria-label="posted in category {{packageBrand.prefLabel}}" data-concept-id="{{packageBrand.idV1}}">{{packageBrand.prefLabel}}</a>
+			{{/ifEquals}}
 		{{else}}
 			{{#ifAll withBrand designGenre}}
 				<div class="topper__brand n-content-tag--with-follow" aria-label="part of the {{designGenre.prefLabel}} column">{{designGenre.prefLabel}}</div>
