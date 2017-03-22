@@ -3,6 +3,7 @@ const decorateMetadataHelper = require('../controllers/article-helpers/decorate-
 const addTagTitlePrefix = require('../controllers/article-helpers/tag-title-prefix');
 const topperThemeMap = require('../controllers/article-helpers/topper-theme-map');
 const getMoreOnTags = require('../controllers/article-helpers/get-more-on-tags');
+const getPackageBrand = require('../controllers/article-helpers/get-package-brand');
 const bylineTransform = require('../transforms/byline');
 
 function isUserSignedIn (req) {
@@ -47,7 +48,10 @@ module.exports = function decorateContent (req, res, content, flags) {
 	content.isBusinessEducation = (typeof content.metadata.find(tag => tag.idV1 === 'MTI2-U2VjdGlvbnM=') !== 'undefined');
 	content.adsLayout = req.query.adsLayout || 'default';
 	content.byline = bylineTransform(content.byline, content.metadata.filter(item => item.taxonomy === 'authors'));
-	content.designGenre = articleBranding(content.metadata);
+	content.packageBrand = getPackageBrand(content.metadata);
+	if(!content.packageBrand) {
+		content.designGenre = articleBranding(content.metadata);
+	}
 	content.topper = topperThemeMap(content, flags);
 
 	return Promise.resolve(content);

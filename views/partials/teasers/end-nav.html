@@ -1,5 +1,5 @@
 <div class="package__end-nav-teaser">
-	<div class="o-teaser o-teaser--large-portrait o-teaser--has-image" data-o-component="o-teaser">
+	<div class="o-teaser o-teaser--large-portrait{{#if mainImage}} o-teaser--has-image{{/if}}" data-o-component="o-teaser">
 		<div class="o-teaser__content">
 			<div class="o-teaser__meta">
 				<span class="package__text--highlit package__text--m">UP NEXT</span>
@@ -10,8 +10,9 @@
 			<p class="o-teaser__standfirst">{{standfirst}}</p>
 		</div>
 		<div class="package__end-title-container">
-			<span class="package__end-nav-title package__text--m package__text--strong">Explore the series</span>
+			<span class="package__end-nav-title package__text--m package__text--strong">Explore the {{@root.packageBrand.inSentence}}</span>
 		</div>
+		{{#if mainImage}}
 		<div class="o-teaser__image-container">
 			<div class="o-teaser__image-placeholder image-placeholder">
 				<a href="{{relativeUrl}}">
@@ -19,5 +20,6 @@
 				</a>
 			</div>
 		</div>
+		{{/if}}
 	</div>
 </div>
