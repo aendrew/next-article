@@ -9,7 +9,7 @@ const app = module.exports = nUi({
 	systemCode: 'next-article',
 	name: 'article',
 	healthChecks: [
-		checks.esv3,
+		checks.elastic,
 		checks.livefyre,
 		checks.errorRate
 	],
