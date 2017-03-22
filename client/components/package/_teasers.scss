@@ -1,0 +1,55 @@
+// TODO: needs v2 palette colors/names
+/// inverts text colours, sets hover to 'lemon'
+// this is ultimately the o-teaser--inverse styling, fit to series
+
+// TODO: transfer this styling to o-teaser?
+.package {
+	&--basic,
+	&--special-report {
+		#{$o-hoverable-if-hover-enabled} .o-teaser__heading:hover,
+		.o-teaser__heading:focus,
+		#{$o-hoverable-if-hover-enabled} .o-teaser__tag:hover,
+		.o-teaser__tag:focus {
+			color: $claretDarkest;
+		}
+
+		.o-teaser__content {
+			background-color: $wheat;
+		}
+
+		.package__end-title-container {
+			background: $claret;
+			color: oColorsGetPaletteColor('white');
+		}
+	}
+
+	&--extra {
+		.package__end-title-container {
+			background: $yellow;
+		}
+
+		#{$o-hoverable-if-hover-enabled} .o-teaser__heading:hover,
+		.o-teaser__heading:focus,
+		#{$o-hoverable-if-hover-enabled} .o-teaser__tag:hover,
+		.o-teaser__tag:focus {
+			color: $yellowLight;
+		}
+
+		.o-teaser {
+
+			&__meta,
+			&__heading {
+				color: oColorsGetPaletteColor('white');
+			}
+
+			&__content {
+				background-color: oColorsGetPaletteColor('slate');
+				border-color: $yellow;
+			}
+
+			&__image-container::after {
+				border-color: $yellow;
+			}
+		}
+	}
+}

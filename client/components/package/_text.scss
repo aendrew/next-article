@@ -1,5 +1,3 @@
-@import 'colors';
-
 .package__text {
 	@include oTypographySans(m, $load-progressively: true);
 	-webkit-font-smoothing: antialiased;

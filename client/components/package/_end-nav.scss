@@ -1,0 +1,81 @@
+// this media query overrides o-grid to create a breakpoint somewhere between S & M
+.grid-breach {
+	display: flex;
+	position: relative;
+	top: 50px;
+	margin-bottom: 65px;
+
+	.o-teaser__content {
+		position: relative;
+		z-index: 1;
+	}
+
+	.package__end-nav-description {
+		display: none;
+	}
+
+	.package__end-title-container {
+		position: absolute;
+		left: -20px;
+		top: -75px;
+		width: 100vw;
+		height: 115px;
+	}
+}
+
+@media (min-width: 550px) {
+	.grid-breach {
+		.o-teaser--large-portrait {
+			margin-right: 0;
+			min-width: 245px;
+			max-width: 320px;
+		}
+		.package__end-title-container {
+			width: calc(100% + 20px);
+		}
+		.package__end-nav-description {
+			display: block;
+		}
+	}
+}
+
+.package__nav--end {
+	margin-top: 20px;
+	margin-bottom: 2em;
+	background-color: $wheat;
+
+	@include oGridRespondTo($from: M) {
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+
+	@include oGridRespondTo($from: L) {
+		margin-right: 10px;
+	}
+
+	&.package--extra {
+		background-color: getColor('slate');
+	}
+}
+
+.package__end-nav-title {
+	display: inline-block;
+	box-sizing: border-box;
+	height: 115px;
+	padding: 30px 0 0 20px;
+}
+
+.package__end-nav-teaser {
+	margin: 0 20px;
+}
+
+.package__end-nav-description {
+	padding: 15px 2em;
+	> p {
+		margin: 0;
+	}
+
+	.package--extra & {
+		color: getColor('white');
+	}
+}
