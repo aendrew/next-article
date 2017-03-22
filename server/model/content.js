@@ -3,7 +3,6 @@ const decorateMetadataHelper = require('../controllers/article-helpers/decorate-
 const addTagTitlePrefix = require('../controllers/article-helpers/tag-title-prefix');
 const topperThemeMap = require('../controllers/article-helpers/topper-theme-map');
 const getMoreOnTags = require('../controllers/article-helpers/get-more-on-tags');
-const getPackageBrand = require('../controllers/article-helpers/get-package-brand');
 const bylineTransform = require('../transforms/byline');
 
 function isUserSignedIn (req) {
