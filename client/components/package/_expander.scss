@@ -1,10 +1,16 @@
 @import 'expander-themes';
 
 .package__expander {
-	width: 100%;
 
-	& > i {
-		display: none;
+	&:before {
+		content: '';
+		position: absolute;
+		left: 50%;
+		width: 100vw;
+		margin-left: -50vw;
+		background: inherit;
+		top: 0;
+		height: 100%;
 	}
 
 	&:after {
@@ -16,32 +22,18 @@
 		top: 0;
 		height: 100%;
 		width: 50px;
-	}
-
-	.package__nav--mid & {
-		position: relative;
-	}
-
-	.package__nav--top & {
-		&:before {
-			content: '';
-			position: absolute;
-			left: 50%;
-			width: 100vw;
-			margin-left: -50vw;
-			background: inherit;
-			top: 0;
-			height: 100%;
+		@include oGridRespondTo($from: M) {
+			right: 16px;
 		}
-		&:after {
-			@include oGridRespondTo($from: M) {
-				right: 16px;
-			}
-			@include oGridRespondTo($from: L) {
-				width: 80px;
-			}
+		@include oGridRespondTo($from: L) {
+			width: 80px;
 		}
 	}
+
+	& > i {
+		display: none;
+	}
+
 }
 
 .package__expander-inner {
@@ -55,41 +47,42 @@
 	}
 }
 
-@mixin getExpanderThemes($theme-name, $nav-type) {
+@each $theme-name, $theme in $expander-themes {
 
-	.package--#{$theme-name}.package__nav--#{$nav-type} .package__expander {
+	.package--#{$theme-name} .package__expander {
 
 		& {
-			background-color: getThemeColor($theme-name, $nav-type, 'unexpanded', 'body', 'bg');
-			color: getThemeColor($theme-name, $nav-type, 'unexpanded', 'body', 'fg');
+			background-color: getThemeColor($theme-name, 'unexpanded', 'body', 'bg');
+			color: getThemeColor($theme-name, 'unexpanded', 'body', 'fg');
 		}
 
 		&:after {
-			background-color: getThemeColor($theme-name, $nav-type, 'unexpanded', 'icon', 'bg');
+			background-color: getThemeColor($theme-name, 'unexpanded', 'icon', 'bg');
 			@include oIconsGetIcon(
 				$icon-name: 'arrow-down',
-				$color: getThemeColor($theme-name, $nav-type, 'unexpanded', 'icon', 'fg'),
+				$color: getThemeColor($theme-name, 'unexpanded', 'icon', 'fg'),
 				$apply-base-styles: false,
 				$apply-width-height: false
 			);
 		}
 
 		&[aria-expanded="true"] {
-			background-color: getThemeColor($theme-name, $nav-type, 'expanded', 'body', 'bg');
-			color: getThemeColor($theme-name, $nav-type, 'expanded', 'body', 'fg');
+			background-color: getThemeColor($theme-name, 'expanded', 'body', 'bg');
+			color: getThemeColor($theme-name, 'expanded', 'body', 'fg');
 		}
 
 		&[aria-expanded="true"]:after {
-			background-color: getThemeColor($theme-name, $nav-type, 'expanded', 'icon', 'bg');
+			background-color: getThemeColor($theme-name, 'expanded', 'icon', 'bg');
 
-			$unexpandedColor: getThemeColor($theme-name, $nav-type, 'unexpanded', 'icon', 'fg');
-			$expandedColor: getThemeColor($theme-name, $nav-type, 'expanded', 'icon', 'fg');
+			$unexpandedColor: getThemeColor($theme-name, 'unexpanded', 'icon', 'fg');
+			$expandedColor: getThemeColor($theme-name, 'expanded', 'icon', 'fg');
+
 			@if $expandedColor == $unexpandedColor {
 				transform: rotate(180deg);
 			} @else {
 				@include oIconsGetIcon(
 					$icon-name: 'arrow-up',
-					$color: getThemeColor($theme-name, $nav-type, 'expanded', 'icon', 'fg'),
+					$color: getThemeColor($theme-name, 'expanded', 'icon', 'fg'),
 					$apply-base-styles: false,
 					$apply-width-height: false
 				);
@@ -97,26 +90,21 @@
 		}
 
 		&:hover {
-			background-color: getThemeColor($theme-name, $nav-type, 'unexpanded', 'body', 'hover');
+			background-color: getThemeColor($theme-name, 'unexpanded', 'body', 'hover');
 		}
 
 		&:hover:after {
-			background-color: getThemeColor($theme-name, $nav-type, 'unexpanded', 'icon', 'hover');
+			background-color: getThemeColor($theme-name, 'unexpanded', 'icon', 'hover');
 		}
 
 		&[aria-expanded="true"]:hover {
-			background-color: getThemeColor($theme-name, $nav-type, 'expanded', 'body', 'hover');
+			background-color: getThemeColor($theme-name, 'expanded', 'body', 'hover');
 		}
 
 		&[aria-expanded="true"]:hover:after {
-			background-color: getThemeColor($theme-name, $nav-type, 'expanded', 'icon', 'hover');
+			background-color: getThemeColor($theme-name, 'expanded', 'icon', 'hover');
 		}
 
 	}
 
-}
-
-@each $theme-name, $theme in $themes {
-	@include getExpanderThemes($theme-name, $nav-type: 'top');
-	@include getExpanderThemes($theme-name, $nav-type: 'mid');
 }

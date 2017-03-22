@@ -58,56 +58,8 @@
 
 .package__contents-footer {
 	position: relative;
-	background-color: $claret;
 	height: 40px;
 	margin: 20px;
 	display: inline-block;
 	width: calc(100% - 40px);
-	border-bottom: 0;
-
-	&.package__contents-footer:hover {
-		color: getColor('white');
-		background-color: $claretDark;
-	}
-
-	.package--extra & {
-		background-color: $yellow;
-	}
-
-	.package--extra &:hover {
-		color: getColor('slate');
-		background-color: $yellowLight;
-	}
-
-}
-
-.package__contents-footer-inner {
-	padding: 9px;
-	color: getColor('white');
-
-	&:after {
-		background-repeat: no-repeat;
-		background-position: center;
-		content: "";
-		position: absolute;
-		right: 0;
-		top: 0;
-		height: 100%;
-		width: 50px;
-		background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-right?source=next-article&tint=%23ffffff,%23ffffff&format=svg);
-	}
-
-	.package--extra & {
-		color: getColor('slate');
-	}
-
-	.package--extra &:after {
-		background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrow-right?source=next-article&tint=%23252830,%23252830&format=svg);
-	}
-}
-
-.package__reset-ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
 }

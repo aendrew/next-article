@@ -1,112 +1,72 @@
 @import 'colors';
 
-$themes: (
+$expander-themes: (
 	'basic': (
-		'top': (
-			'unexpanded':(
-				'body': (
-					'fg': $claret,
-					'bg': $wheat
-				),
-				'icon': (
-					'fg': getColor('white'),
-					'bg': $claret,
-					'hover': $claretDark
-				)
+		'unexpanded':(
+			'body': (
+				'fg': $claret,
+				'bg': $wheat
 			),
-			'expanded':(
-				'body': (
-					'fg': $claret,
-					'bg': $wheat
-				),
-				'icon': (
-					'fg': getColor('white'),
-					'bg': $claret,
-					'hover': $claretDark
-				)
+			'icon': (
+				'fg': getColor('white'),
+				'bg': $claret,
+				'hover': $claretDark
 			)
 		),
-		'mid': (
-			'unexpanded': (
+		'expanded':(
+			'body': (
 				'fg': $claret,
 				'bg': $wheat
 			),
-			'expanded': (
-				'fg': $claret,
-				'bg': $wheat
+			'icon': (
+				'fg': getColor('white'),
+				'bg': $claret,
+				'hover': $claretDark
 			)
 		)
 	),
 	'special-report': (
-		'top': (
-			'unexpanded': (
-				'body': (
-					'fg': getColor('white'),
-					'bg': $claret
-				),
-				'icon': (
-					'fg': getColor('white'),
-					'bg': $claretDark,
-					'hover': $claretDarkest
-				)
-			),
-			'expanded': (
-				'body': (
-					'fg': getColor('white'),
-					'bg': $claretDark
-				),
-				'icon': (
-					'fg': getColor('white'),
-					'bg': $claret,
-					'hover': $claretDarkest
-				)
-			)
-		),
-		'mid': (
-			'unexpanded': (
+		'unexpanded': (
+			'body': (
 				'fg': getColor('white'),
-				'bg': $claret,
-				'hover': $claretDark
+				'bg': $claret
 			),
-			'expanded': (
+			'icon': (
 				'fg': getColor('white'),
 				'bg': $claretDark,
-				'hover': $claret
+				'hover': $claretDarkest
+			)
+		),
+		'expanded': (
+			'body': (
+				'fg': getColor('white'),
+				'bg': $claretDark
+			),
+			'icon': (
+				'fg': getColor('white'),
+				'bg': $claret,
+				'hover': $claretDarkest
 			)
 		)
 	),
 	'extra': (
-		'top': (
-			'unexpanded': (
-				'body': (
-					'fg': $yellow,
-					'bg': getColor('slate')
-				),
-				'icon':(
-					'fg': getColor('slate'),
-					'bg': $yellow,
-					'hover': $yellowLight
-				)
+		'unexpanded': (
+			'body': (
+				'fg': $yellow,
+				'bg': getColor('slate')
 			),
-			'expanded': (
-				'body': (
-					'fg': getColor('slate'),
-					'bg': $yellow
-			),
-				'icon':(
-					'fg': $yellow,
-					'bg': getColor('slate'),
-					'hover': getColor('black')
-				)
-			)
-		),
-		'mid': (
-			'unexpanded': (
+			'icon':(
 				'fg': getColor('slate'),
 				'bg': $yellow,
 				'hover': $yellowLight
-			),
-			'expanded': (
+			)
+		),
+		'expanded': (
+			'body': (
+				'fg': getColor('slate'),
+				'bg': $yellow
+		),
+			'icon':(
 				'fg': $yellow,
 				'bg': getColor('slate'),
 				'hover': getColor('black')
@@ -115,14 +75,9 @@ $themes: (
 	)
 );
 
-@function getThemeColor($theme-name, $nav-type, $expanded-state, $sub-element-name, $property) {
-	$theme: map-get($themes, $theme-name);
-	$nav: map-get($theme, $nav-type);
-	$element: map-get($nav, $expanded-state);
-	$sub-element: map-get($element, $sub-element-name);
-	@if $sub-element {
-		@return map-get($sub-element, $property);
-	} @else {
-		@return map-get($element, $property);
-	}
+@function getThemeColor($theme-name, $expanded-state, $element-name, $property) {
+	$theme: map-get($expander-themes, $theme-name);
+	$state: map-get($theme, $expanded-state);
+	$element: map-get($state, $element-name);
+	@return map-get($element, $property);
 };

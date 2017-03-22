@@ -12,5 +12,9 @@ module.exports = (metadata) => {
 		return Object.assign({
 			inSentence: brand.idV1 === FT_SERIES ? 'series' : brand.prefLabel
 		}, brand);
+	} else {
+		return {
+			inSentence: 'series'
+		};
 	}
 }

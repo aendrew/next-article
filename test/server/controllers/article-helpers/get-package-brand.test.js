@@ -33,7 +33,9 @@ describe('Package branding', () => {
 
 		const brand = getPackageBrand([{idV1: 'something'}]);
 
-		expect(brand).to.be.undefined;
+		expect(brand).to.eql({
+			inSentence: 'series'
+		});
 	});
 
 });

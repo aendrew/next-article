@@ -1,6 +1,93 @@
 @import 'teasers';
 @import 'end-nav';
 
+.package__reset-ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.package__reset-link {
+	border-bottom: 0;
+}
+
+.package__cta--plain {
+
+	color: $claret;
+
+	&:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		@include oIconsGetIcon('arrow-right', $claret, 20px);
+	}
+
+	&:hover {
+		color: $claretDark;
+	}
+
+	&:hover:after {
+		@include oIconsGetIcon('arrow-right', $claretDark, 20px);
+	}
+
+	.package--extra & {
+
+		color: getColor('slate');
+
+		&:after {
+			@include oIconsGetIcon('arrow-right', getColor('slate'), 20px);
+		}
+
+		$slateLight: lighten(getColor('slate'), 11%);
+
+		&:hover {
+			color: $slateLight;
+		}
+
+		&:hover:after {
+			@include oIconsGetIcon('arrow-right', $slateLight, 20px);
+		}
+
+	}
+
+}
+
+.package__cta--strong {
+
+	padding: 9px;
+	background-color: $claret;
+	color: getColor('white');
+
+	&:after {
+		content: '';
+		position: absolute;
+		right: 0;
+		top: 0;
+		height: 100%;
+		width: 50px;
+		@include oIconsGetIcon('arrow-right', getColor('white'), $apply-width-height: false);
+	}
+
+	&:hover {
+		background-color: $claretDark;
+	}
+
+	.package--extra & {
+
+		background-color: $yellow;
+		color: getColor('slate');
+
+		&:after {
+			@include oIconsGetIcon('arrow-right', getColor('slate'), $apply-width-height: false);
+		}
+
+		&:hover {
+			background-color: $yellowLight;
+		}
+
+	}
+
+}
 .package__nav--mid {
 	border-top: 1px rgba(getColor('black'), 0.2) solid;
 	border-left: 1px rgba(getColor('black'), 0.2) solid;

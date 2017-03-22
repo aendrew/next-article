@@ -1,12 +1,7 @@
 <div class="package__text package__nav--mid {{#if navigationTheme}}package--{{navigationTheme}}{{/if}}">
-	<div data-o-component="o-expander" class="o-expander" data-o-expander-shrink-to="hidden"
-		data-o-expander-collapsed-toggle-text="<div class='package__expander-inner package__text--m package__text--strong'>Explore the whole series</div>"
-		data-o-expander-expanded-toggle-text="<div class='package__expander-inner package__text--m package__text--strong'>Explore the whole series</div>">
-		<div class="package__text--xm">{{brand.prefLabel}} <span class="package__text--xm package__text--strong">{{title}}</span></div>
-		<div class="package__text--m">{{{descriptionHTML}}}</div>
-		<button class="o-expander__toggle package__expander"><span class="n-util-visually-hidden">Explore the whole series</span></button>
-		<div class="o-expander__content package__contents">
-			{{> package/contents}}
-		</div>
-	</div>
+	<div class="package__text--xm">{{brand.prefLabel}} <span class="package__text--xm package__text--strong">{{title}}</span></div>
+	<div class="package__text--m">{{{descriptionHTML}}}</div>
+	<a class="package__reset-link" href="{{@root.context.home.url}}">
+		<span class="package__cta--plain package__text--m">Explore the whole {{brand.inSentence}}</span>
+	</a>
 </div>
