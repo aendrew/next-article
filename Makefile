@@ -21,7 +21,12 @@ unit-test:
 
 test:
 	make verify
+
+ifeq ($(CIRCLECI),true)
+	make coverage-report && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+else
 	make unit-test
+endif
 
 run:
 	nht run --https
