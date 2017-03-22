@@ -5,11 +5,11 @@ const httpMocks = require('node-mocks-http');
 const fixture = require('../../fixtures/v3-elastic-package-found').docs[0]._source;
 const subject = proxyquire('../../../server/model/package', {});
 
-function cloneFixture() {
+function cloneFixture () {
 	return JSON.parse(JSON.stringify(fixture));
 }
 
-describe.only('Package Handler', () => {
+describe('Package Handler', () => {
 
 	let request;
 	let response;
