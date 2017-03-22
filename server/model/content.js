@@ -48,10 +48,11 @@ module.exports = function decorateContent (req, res, content, flags) {
 	content.isBusinessEducation = (typeof content.metadata.find(tag => tag.idV1 === 'MTI2-U2VjdGlvbnM=') !== 'undefined');
 	content.adsLayout = req.query.adsLayout || 'default';
 	content.byline = bylineTransform(content.byline, content.metadata.filter(item => item.taxonomy === 'authors'));
-	content.packageBrand = getPackageBrand(content.metadata);
-	if(!content.packageBrand) {
+
+	if(!(content.type === 'package' || content.package && content.package.brand)) {
 		content.designGenre = articleBranding(content.metadata);
 	}
+
 	content.topper = topperThemeMap(content, flags);
 
 	return Promise.resolve(content);
