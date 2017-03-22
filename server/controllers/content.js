@@ -87,6 +87,18 @@ module.exports = function contentController (req, res, next) {
 				return res.redirect(`/video/${req.params.id}`);
 			}
 
+			// if (content.type === 'package') {
+			// 	const isIntroArticle = (content.tableOfContents && content.tableOfContents.displayIntroduction) || !!content.bodyHTML;
+			// 	const cannotRender = !onwardJourney && !isIntroArticle;
+			// 	const canRedirect = content.contains && content.contains.length;
+			// 	if (cannotRender && canRedirect) {
+			// 		const uuid = content.contains[0];
+			// 		return res.redirect(
+			// 			`/content/${uuid}`
+			// 		);
+			// 	}
+			// }
+
 			if (content.type === 'article') {
 				res.vary('ft-is-aud-dev');
 				res.vary('ft-blocked-url');
@@ -105,6 +117,13 @@ module.exports = function contentController (req, res, next) {
 				if(onwardJourney.package || onwardJourney.context) {
 					content.package = onwardJourney.package;
 					content.context = onwardJourney.context;
+				}
+
+				if (onwardJourney.contains) {
+					content.contains = onwardJourney.contains.map((item, i) => {
+						item.promotionalTitle = content.contains[i].title || item.promotionalTitle || item.title;
+						return item;
+					});
 				}
 			}
 

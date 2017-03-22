@@ -25,8 +25,12 @@ module.exports = function (articleId, flags) {
 				onwardJourney.suggestedReads = getSuggestedReads(topicArticles, storyPackage);
 			}
 
-			if (article.contains || article.containedIn) {
+			if (article.containedIn) {
 				Object.assign(onwardJourney, contentPackage(article));
+			}
+
+			if (article.contains) {
+				onwardJourney.contains = article.contains;
 			}
 
 			return onwardJourney;

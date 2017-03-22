@@ -96,7 +96,7 @@ describe('Onward Journey with package', () => {
 	});
 
 	it('returns the readNext and suggestedReads and package', () => {
-		expect(result).to.have.keys(['readNext', 'suggestedReads', 'package']);
+		expect(result).to.have.keys(['readNext', 'suggestedReads', 'package', 'contains']);
 	});
 
 });
