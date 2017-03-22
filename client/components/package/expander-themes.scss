@@ -1,0 +1,128 @@
+@import 'colors';
+
+$themes: (
+	'basic': (
+		'top': (
+			'unexpanded':(
+				'body': (
+					'fg': $claret,
+					'bg': $wheat
+				),
+				'icon': (
+					'fg': getColor('white'),
+					'bg': $claret,
+					'hover': $claretDark
+				)
+			),
+			'expanded':(
+				'body': (
+					'fg': $claret,
+					'bg': $wheat
+				),
+				'icon': (
+					'fg': getColor('white'),
+					'bg': $claret,
+					'hover': $claretDark
+				)
+			)
+		),
+		'mid': (
+			'unexpanded': (
+				'fg': $claret,
+				'bg': $wheat
+			),
+			'expanded': (
+				'fg': $claret,
+				'bg': $wheat
+			)
+		)
+	),
+	'special-report': (
+		'top': (
+			'unexpanded': (
+				'body': (
+					'fg': getColor('white'),
+					'bg': $claret
+				),
+				'icon': (
+					'fg': getColor('white'),
+					'bg': $claretDark,
+					'hover': $claretDarkest
+				)
+			),
+			'expanded': (
+				'body': (
+					'fg': getColor('white'),
+					'bg': $claretDark
+				),
+				'icon': (
+					'fg': getColor('white'),
+					'bg': $claret,
+					'hover': $claretDarkest
+				)
+			)
+		),
+		'mid': (
+			'unexpanded': (
+				'fg': getColor('white'),
+				'bg': $claret,
+				'hover': $claretDark
+			),
+			'expanded': (
+				'fg': getColor('white'),
+				'bg': $claretDark,
+				'hover': $claret
+			)
+		)
+	),
+	'extra': (
+		'top': (
+			'unexpanded': (
+				'body': (
+					'fg': $yellow,
+					'bg': getColor('slate')
+				),
+				'icon':(
+					'fg': getColor('slate'),
+					'bg': $yellow,
+					'hover': $yellowLight
+				)
+			),
+			'expanded': (
+				'body': (
+					'fg': getColor('slate'),
+					'bg': $yellow
+			),
+				'icon':(
+					'fg': $yellow,
+					'bg': getColor('slate'),
+					'hover': getColor('black')
+				)
+			)
+		),
+		'mid': (
+			'unexpanded': (
+				'fg': getColor('slate'),
+				'bg': $yellow,
+				'hover': $yellowLight
+			),
+			'expanded': (
+				'fg': $yellow,
+				'bg': getColor('slate'),
+				'hover': getColor('black')
+			)
+		)
+	)
+);
+
+@function getThemeColor($theme-name, $nav-type, $expanded-state, $sub-element-name, $property) {
+	$theme: map-get($themes, $theme-name);
+	$nav: map-get($theme, $nav-type);
+	$element: map-get($nav, $expanded-state);
+	$sub-element: map-get($element, $sub-element-name);
+	@if $sub-element {
+		@return map-get($sub-element, $property);
+	} @else {
+		@return map-get($element, $property);
+	}
+};
