@@ -5,12 +5,11 @@
 		background-color: getColor('slate');
 	}
 
-	.package__nav--top & {
-		width: 100%;
-		position: absolute;
-		right: 0;
-		z-index: 99;
-		@include oGridRespondTo($from: M) {
+	@include oGridRespondTo($from: M) {
+		.package__nav--top & {
+			width: 100%;
+			position: absolute;
+			z-index: 99;
 			right: 16px;
 			max-width: 320px;
 		}
