@@ -10,13 +10,8 @@ const statuses = {
 	livefyre: false
 };
 
-/**
- * Calls Elasticsearch for V1, V2 and V3 and updates [statuses]
- * in the parent scope.
- * @method pingServices
- */
 function pingServices () {
-	signedFetch(`https://next-elastic.ft.com/v3_api_v2/item/_search?size=0`)
+	signedFetch('https://next-elastic.ft.com/v3_api_v2/item/_search?size=0')
 		.then((response) => {
 			if (response.ok) {
 				return response.json();
@@ -24,7 +19,7 @@ function pingServices () {
 				throw new Error(`Elasticsearch returned a ${response.statusCode}`);
 			}
 		})
-		.then((json) => { statuses.elastic = json.hits && json.hits.total; })
+		.then((json) => { statuses.elastic = Boolean(json.hits && json.hits.total); })
 		.catch(() => { statuses.elastic = false; });
 
 	fetch('https://session-user-data.webservices.ft.com/v1/livefyre/init?title=Terror+must+not+trample+on+Tunisian+institutions+%E2%80%94+FT.com&url=https%3A%2F%2Fnext.ft.com%2Fcontent%2F4b949d2c-1fdc-11e5-ab0f-6bb9974f25d0&articleId=4b949d2c-1fdc-11e5-ab0f-6bb9974f25d0&el=comments&stream_type=livecomments&callback=jsonp_m49qbwvzpvi0&_=1444384681349')
@@ -32,17 +27,11 @@ function pingServices () {
 		.catch(() => { statuses.livefyre = false; });
 }
 
-/**
- * Creates a object to be passed to healthchecks. Fetching the latest status from [statuses]
- * @method buildStatus
- * @param  {String}    version The CAPI version; ['v1', 'v2']
- * @return {Object}
- */
-function buildStatus (version) {
+function elasticStatus () {
 	return {
 		getStatus: () => ({
-			name: `elastic:${version} responded successfully.`,
-			ok: statuses.elastic[version],
+			name: 'elasticsearch responded successfully.',
+			ok: statuses.elastic,
 			businessImpact: 'Users may not see article content.',
 			severity: 2,
 			technicalSummary: 'Fetches an article to determine whether the service is running.',
@@ -64,13 +53,12 @@ function livefyreStatus () {
 	};
 }
 
-
 module.exports = {
 	init: function () {
 		pingServices();
 		setInterval(pingServices, INTERVAL);
 	},
-	esv3: buildStatus('v3'),
+	elastic: elasticStatus(),
 	livefyre: livefyreStatus(),
 	errorRate: nHealth.runCheck({
 			type: 'graphiteSpike',
