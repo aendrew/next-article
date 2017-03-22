@@ -5,8 +5,10 @@
 		<div class="o-grid-container o-grid-container--bleed">
 			<div class="o-grid-row o-grid-row--compact">
 				<div data-o-grid-colspan="12">
-					<button class="o-expander__toggle package__expander"><span class="n-util-visually-hidden">Explore this {{@root.packageBrand.inSentence}}</span></button>
-					<div class="o-expander__content package__contents">
+					<button class="o-expander__toggle package__expander" aria-expanded="false">
+						<div class='package__expander-inner package__text--m'>{{@root.packageBrand.prefLabel}} <span class='package__text--m package__text--strong'>{{title}}</span></div>
+					</button>
+					<div class="o-expander__content package__contents" aria-hidden="true">
 						{{> package/contents}}
 					</div>
 				</div>

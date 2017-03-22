@@ -5,7 +5,7 @@
 		{{#ifEquals type 'package'}}
 			{{#if packageBrand}}
 				<a href="{{packageBrand.relativeUrl}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="primary-theme" aria-label="posted in category {{packageBrand.prefLabel}}" data-concept-id="{{packageBrand.idV1}}">{{packageBrand.prefLabel}}</a>
-			{{/ifEquals}}
+			{{/if}}
 		{{else}}
 			{{#ifAll withBrand designGenre}}
 				<div class="topper__brand n-content-tag--with-follow" aria-label="part of the {{designGenre.prefLabel}} column">{{designGenre.prefLabel}}</div>
