@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const proxyquire = require('proxyquire');
 const httpMocks = require('node-mocks-http');
 
-const fixture = require('../../fixtures/v3-elastic-podcast-found').docs[0]._source;
+const fixture = require('../../fixtures/v3-elastic-podcast-found')._source;
 
 const stubs = {
 	onwardJourney: sinon.stub()
@@ -36,7 +36,7 @@ describe('Podcast Handler', () => {
 
 	it('provides related data for podcasts', () => {
 		expect(result.externalLinks).to.be.an('object');
-		expect(result.externalLinks).to.include.keys('itunes', 'stitcher', 'audioboom');
+		expect(result.externalLinks).to.include.keys('rss', 'stitcher', 'audioboom');
 
 		expect(result.media).to.be.an('object');
 		expect(result.media).to.include.keys('mediaType', 'url');

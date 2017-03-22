@@ -1,6 +1,6 @@
-const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
-const api = require('next-ft-api-client');
+const fetchres = require('fetchres');
+const signedFetch = require('signed-aws-es-fetch');
 const interactivePoller = require('../lib/ig-poller');
 const getOnwardJourneyArticles = require('./article-helpers/onward-journey');
 const model = require('../model');
@@ -13,14 +13,14 @@ function getInteractive (contentId) {
 }
 
 function getArticle (contentId) {
-	return api.content({
-		uuid: contentId,
-		index: 'v3_api_v2'
-	})
-	// Some things aren't in CAPI v3 (e.g. Syndicated content)
-		.catch(function (error) {
+	const url = `https://next-elastic.ft.com/v3_api_v2/item/${contentId}`;
+
+	return signedFetch(url)
+		.then(fetchres.json)
+		.then((json) => json._source)
+		.catch((error) => {
 			if (fetchres.originatedError(error)) {
-				return;
+				return null;
 			} else {
 				throw error;
 			}

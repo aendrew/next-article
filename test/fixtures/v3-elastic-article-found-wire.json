@@ -1,0 +1,133 @@
+{
+	"_index": "v3_api_v2-2016-12-20",
+	"_type": "item",
+	"_id": "bd729e4c-644d-11e6-8310-ecf0bddad227",
+	"_version": 21,
+	"found": true,
+	"_source": {
+		"type": "article",
+		"id": "bd729e4c-644d-11e6-8310-ecf0bddad227",
+		"title": "Liz Cheney claims victory in Wyoming primary for US House seat",
+		"alternativeTitles": {
+			"promotionalTitle": "Liz Cheney claims win in Wyoming primary"
+		},
+		"standfirst": "Unofficial results show former vice-president Dick Cheney’s daughter on course to win",
+		"bodyHTML": "<p>CODY, Wyo., August 16 — Liz Cheney, former vice-president Dick Cheney’s eldest daughter, claimed victory late on Tuesday in Wyoming’s Republican primary race for the state’s lone US House of Representatives seat.</p><p>Unofficial early results by 10pm (0400 GMT) showed Cheney with 26,363 votes in the nation’s least populous state. State senator Leland Christensen was running a distant second, with almost 15,000 votes, while her six other Republican competitors each held fewer than 12,000 votes.</p><p>“I’m honoured by the trust Wyoming Republicans have placed in me to serve as our next representative in Congress,” Ms Cheney said in a statement.</p><p>The Casper Star-Tribune newspaper called the race late on Tuesday night.</p><p>Wyoming is a reliably red state, with the Republican primary winner all but assured of a general election victory in November.</p><p>Ms Cheney’s apparent victory comes two years after she launched an unsuccessful bid for a US Senate seat that saw her withdraw from the race early.</p><p>She drew criticism from some establishment Republicans two years ago when she ran against popular incumbent Senator Mike Enzi and was labelled a “carpetbagger” for having only recently established residency in Teton County, one of the country’s wealthiest districts, in a state widely populated by working-class miners, oil, and gas workers.</p><p>She said a family health crisis prompted her to withdraw.</p><p>Ms Cheney, 49, is a lawyer who worked in the US state department while her father was vice-president.</p><p>Her campaign has received strong financial support from former high-ranking government officials, such as former presidents George H.W. Bush and George W Bush, former defence secretary Donald Rumsfeld and former White House political adviser Karl Rove.</p><p>Ms Cheney campaigned as a “strong conservative voice for Wyoming”, promising to protect the state’s pivotal coal industry, defend gun rights, and generally work “to reverse President Obama’s devastating policies”.</p>",
+		"publishedDate": "2016-08-17T08:40:51Z",
+		"initialPublishedDate": "2016-08-17T08:40:51Z",
+		"annotations": [],
+		"webUrl": "http://www.ft.com/cms/s/0/bd729e4c-644d-11e6-8310-ecf0bddad227.html",
+		"provenance": [
+			"http://api.ft.com/content/items/v1/bd729e4c-644d-11e6-8310-ecf0bddad227"
+		],
+		"originatingParty": "Reuters",
+		"storyPackage": [],
+		"mainImage": {
+			"title": "WASHINGTON, DC - DECEMBER 3: Liz Cheney, daughter of former Vice President Dick Cheney, watches as her father and mother unveil a marble bust made in his likeness during a ceremony in Emancipation Hall at the U.S. Capitol December 3, 2015 in Washington, DC. Dick Cheney was Vice President from 2001-2009. (Photo by Keith Lane/Getty Images)",
+			"description": "WASHINGTON, DC - DECEMBER 3: Liz Cheney, daughter of former Vice President Dick Cheney, watches as her father and mother unveil a marble bust made in his likeness during a ceremony in Emancipation Hall at the U.S. Capitol December 3, 2015 in Washington, DC. Dick Cheney was Vice President from 2001-2009. (Photo by Keith Lane/Getty Images)",
+			"url": "http://im.ft-static.com/content/images/209c9e39-205b-4ad9-aa36-b2610120b158.img",
+			"width": 972,
+			"height": 547,
+			"ratio": 1.776965265082267
+		},
+		"standout": {},
+		"realtime": false,
+		"comments": {
+			"enabled": false
+		},
+		"_lastUpdatedDateTime": "2017-03-18T05:42:31.776Z",
+		"contentStats": {
+			"relatedBoxes": 0,
+			"pullQuotes": 0,
+			"images": 0,
+			"videos": 0
+		},
+		"metadata": [
+			{
+				"attributes": [
+					{
+						"key": "is_company",
+						"value": "false"
+					}
+				],
+				"taxonomy": "organisations",
+				"primary": "theme",
+				"primaryTag": true,
+				"idV1": "TnN0ZWluX09OX09yZ2FuaXNhdGlvbnNfVVNfMjAwOTA5MTZfMzc1-T04=",
+				"prefLabel": "Republican Party US",
+				"url": "https://www.ft.com/topics/organisations/Republican_Party_US"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"primary": "section",
+				"teaserTag": true,
+				"idV1": "Mw==-U2VjdGlvbnM=",
+				"prefLabel": "US Politics & Policy",
+				"url": "https://www.ft.com/world/us/politics"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "genre",
+				"idV1": "Nw==-R2VucmVz",
+				"prefLabel": "News",
+				"url": "https://www.ft.com/news"
+			},
+			{
+				"attributes": [
+					{
+						"key": "is_company",
+						"value": "false"
+					}
+				],
+				"taxonomy": "organisations",
+				"idV1": "TnN0ZWluX09OX0FGVE1fT05fMTU0Nzg1-T04=",
+				"prefLabel": "House of Representatives US",
+				"url": "https://www.ft.com/topics/organisations/House_of_Representatives_US"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "people",
+				"idV1": "TnN0ZWluX1BOX0FGVE1fUE5fYWZwXzQ2NzU3-UE4=",
+				"prefLabel": "Liz Cheney",
+				"url": "https://www.ft.com/stream/peopleId/TnN0ZWluX1BOX0FGVE1fUE5fYWZwXzQ2NzU3-UE4="
+			},
+			{
+				"attributes": [],
+				"taxonomy": "regions",
+				"idV1": "TnN0ZWluX0dMX1VTX1d5b21pbmc=-R0w=",
+				"prefLabel": "Wyoming",
+				"url": "https://www.ft.com/topics/places/Wyoming"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"idV1": "MQ==-U2VjdGlvbnM=",
+				"prefLabel": "World",
+				"url": "https://www.ft.com/world"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"idV1": "Mg==-U2VjdGlvbnM=",
+				"prefLabel": "US",
+				"url": "https://www.ft.com/world/us"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "sections",
+				"idV1": "OA==-U2VjdGlvbnM=",
+				"prefLabel": "UK Politics & Policy",
+				"url": "https://www.ft.com/world/uk/politics"
+			},
+			{
+				"attributes": [],
+				"taxonomy": "topics",
+				"idV1": "MWQ0NzlhZDgtYzEyMi00MTlkLTkxMjEtNGY3OTBkY2Y3MjUz-VG9waWNz",
+				"prefLabel": "US presidential election",
+				"url": "https://www.ft.com/us-presidential-election"
+			}
+		],
+		"url": "https://www.ft.com/content/bd729e4c-644d-11e6-8310-ecf0bddad227"
+	}
+}
