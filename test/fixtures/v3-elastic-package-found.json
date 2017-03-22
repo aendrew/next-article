@@ -1,0 +1,107 @@
+{
+	"docs":[
+		{
+			"_index":"v3_api_v2-2016-07-01",
+			"_type":"item",
+			"_id":"352210c4-7b17-11e5-a1fe-567b37f80b64",
+			"_version":43,
+			"found":true,
+			"_source":{
+				"type":"package",
+				"id":"352210c4-7b17-11e5-a1fe-567b37f80b64",
+				"title":"The package title",
+				"alternativeTitles": { },
+				"standfirst": "The standfirst",
+				"subheading": "Almost half of the world’s biggest financial groups have no board members with any tech experience",
+				"initialPublishedDate":"2015-10-26T10:04:05Z",
+				"publishedDate":"2015-10-26T10:04:05Z",
+				"webUrl":"http://www.ft.com/cms/s/0/352210c4-7b17-11e5-a1fe-567b37f80b64.html",
+				"provenance":[
+					"http://api.ft.com/content/items/v1/352210c4-7b17-11e5-a1fe-567b37f80b64?cb=1471541037380",
+					"http://api.ft.com/enrichedcontent/352210c4-7b17-11e5-a1fe-567b37f80b64"
+				],
+				"storyPackage":[
+
+				],
+				"byline":"Martin Arnold",
+				"comments":{
+					"enabled":true
+				},
+				"tableOfContents": {
+					"labelType": "none",
+					"sequence": "none",
+					"displayIntroduction": false
+				},
+				"design": {
+					"theme": "special-report"
+				},
+				"descriptionHTML": "A <em>really</em> nice description",
+				"contains": [
+					{"id":"e6d0cd70-b724-11e6-961e-a1acd97f622d","apiUrl":"http://api.ft.com/enrichedcontent/e6d0cd70-b724-11e6-961e-a1acd97f622d"},
+					{"id":"063f2d4e-b727-11e6-961e-a1acd97f622d","apiUrl":"http://api.ft.com/enrichedcontent/063f2d4e-b727-11e6-961e-a1acd97f622d"},
+					{"id":"ea01d1e2-b724-11e6-961e-a1acd97f622d","apiUrl":"http://api.ft.com/enrichedcontent/ea01d1e2-b724-11e6-961e-a1acd97f622d"},
+					{"id":"128303aa-b727-11e6-961e-a1acd97f622d","apiUrl":"http://api.ft.com/enrichedcontent/128303aa-b727-11e6-961e-a1acd97f622d"},
+					{"id":"436b20f8-b725-11e6-961e-a1acd97f622d","apiUrl":"http://api.ft.com/enrichedcontent/436b20f8-b725-11e6-961e-a1acd97f622d"},
+					{"id":"04084f5e-b729-11e6-961e-a1acd97f622d","apiUrl":"http://api.ft.com/enrichedcontent/04084f5e-b729-11e6-961e-a1acd97f622d"},
+					{"id":"ed349728-b724-11e6-961e-a1acd97f622d","apiUrl":"http://api.ft.com/enrichedcontent/ed349728-b724-11e6-961e-a1acd97f622d"}
+				],
+				"leadImages":[
+					{"title":"","description":"","url":"http://prod-upp-image-read.ft.com/b84610a0-fcf2-11e6-8d8e-a5e3738f9ae4","width":2612,"height":2612,"ratio":1,"type":"square"},
+					{"title":"","description":"","url":"http://prod-upp-image-read.ft.com/b9c980ba-fcf2-11e6-8d8e-a5e3738f9ae4","width":2048,"height":1152,"ratio":1.7777777777777777,"type":"standard"}
+				],
+				"standout":{},
+				"metadata":[
+					{
+						"idV1":"M2Y3OGJkYjQtMzQ5OC00NTM2LTg0YzUtY2JmNzZiY2JhZDQz-VG9waWNz",
+						"prefLabel":"Cyber Security",
+						"taxonomy":"topics",
+						"primary":"theme",
+						"primaryTag": true,
+						"attributes":[
+
+						],
+						"url":"https://www.ft.com/stream/topicsId/M2Y3OGJkYjQtMzQ5OC00NTM2LTg0YzUtY2JmNzZiY2JhZDQz-VG9waWNz"
+					},
+					{
+						"idV1":"NTg=-U2VjdGlvbnM=",
+						"prefLabel":"Banks",
+						"taxonomy":"sections",
+						"primary":"section",
+						"attributes":[
+
+						],
+						"url":"https://www.ft.com/companies/banks"
+					}
+				],
+				"annotations":[
+					{
+						"idV2":"6395204c-e187-326b-8d6d-b4747046947c",
+						"prefLabel":"International Business Machines Corp.",
+						"directType":"http://www.ft.com/ontology/company/PublicCompany",
+						"attributes":[
+
+						]
+					},
+					{
+						"idV2":"7049e9c8-d99e-31df-8266-b23fb5743a49",
+						"prefLabel":"Royal Bank of Scotland Group Plc",
+						"directType":"http://www.ft.com/ontology/company/PublicCompany",
+						"attributes":[
+
+						]
+					}
+				],
+				"_lastUpdatedDateTime":"2016-08-18T17:23:58.782Z",
+				"url":"https://www.ft.com/content/352210c4-7b17-11e5-a1fe-567b37f80b64",
+				"mainImage":{
+					"title":"",
+					"description":"boardroom",
+					"url":"http://com.ft.imagepublish.prod.s3.amazonaws.com/0c07a8da-5f91-11e5-9846-de406ccb37f2",
+					"width":2048,
+					"height":1152
+				},
+				"bodyHTML":""
+			}
+		}
+	]
+}

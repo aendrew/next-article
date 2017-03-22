@@ -4,7 +4,7 @@ function getLabel (labelType, itemIndex, label) {
 
 	if (!labelType || labelType === 'none') return '';
 
-	if (typeof itemIndex !== 'number') {
+	if (Number.isInteger(itemIndex)) {
 		if (labelType === 'part-number') {
 			return `Part ${itemIndex + 1}`;
 		} else if (labelType === 'chapter-number') {
