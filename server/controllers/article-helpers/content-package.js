@@ -1,3 +1,4 @@
+const getPackageBrand = require('./get-package-brand');
 const MAX_LENGTH = 6;
 
 const getSequenceId = (pkg, currentIndex) => {
@@ -11,7 +12,7 @@ const addContext = ({ pkg, currentIndex }) => ({
 	current: pkg.contains[currentIndex],
 	next: pkg.contains[currentIndex + 1],
 	home: pkg,
-	sequenceId: getSequenceId(pkg, currentIndex)
+	sequenceId: getSequenceId(pkg, currentIndex),
 });
 
 const addContents = ({ pkg, currentIndex }) => {
@@ -42,8 +43,9 @@ module.exports = ({ id, containedIn }) => {
 	const contents = addContents({ pkg, currentIndex });
 	const context = addContext({ pkg, currentIndex });
 	const navigationTheme = pkg.design.theme === 'extra-wide' ? 'extra' : pkg.design.theme;
+	const brand = getPackageBrand(pkg.metadata);
 	return {
-		package: Object.assign({}, pkg, contents, { navigationTheme }),
+		package: Object.assign({}, pkg, contents, { navigationTheme, brand }),
 		context
 	};
 };

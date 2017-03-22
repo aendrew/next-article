@@ -1,9 +1,4 @@
 @import 'n-ui/main';
-@import 'n-myft-ui/myft/main';
-$n-notification-is-silent: false;
-@import 'n-notification/main';
-@import 'n-myft-ui/myft-common/main';
-@include nUiMyftCommon(false);
 
 @include nUiStylesheetStart('head');
 	@import 'n-ui/components/n-ui/tour-tip/main';
@@ -33,8 +28,15 @@ $n-notification-is-silent: false;
 	.o-labels {
 		@include oTypographySansBold('xs');
 	}
+
+	@import 'n-myft-ui/myft/main';
+	@import 'n-myft-ui/myft-common/main';
+	@include nUiMyftCommon(false);
+
 @include nUiStylesheetEnd('head');
 
+$nnotification-is-silent: false;
+@import 'n-notification/main';
 @import 'components/share/main';
 @import 'components/ads/main';
 $o-gallery-is-silent: false;

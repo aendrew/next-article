@@ -37,17 +37,12 @@ module.exports = (readNext, contentPackage) => {
 				url
 				...on Package {
 					descriptionHTML
-					primaryTag {
+					metadata {
 						idV1
 						prefLabel
 						taxonomy
 						url
-					}
-					primaryBrandTag {
-						idV1
-						prefLabel
-						taxonomy
-						url
+						relativeUrl
 					}
 					design {
 						theme

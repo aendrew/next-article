@@ -71,6 +71,9 @@
 
 .package__end-nav-description {
 	padding: 15px 2em;
+	> div {
+		text-transform: uppercase;
+	}
 	> p {
 		margin: 0;
 	}
