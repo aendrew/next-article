@@ -3,7 +3,7 @@
 		<span class="topper__package-sequence-id">{{context.sequenceId}}</span>
 	{{else}}
 		{{#ifEquals type 'package'}}
-			{{#if packageBrand}}
+			{{#if packageBrand.idV1}}
 				<a href="{{packageBrand.relativeUrl}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="primary-theme" aria-label="posted in category {{packageBrand.prefLabel}}" data-concept-id="{{packageBrand.idV1}}">{{packageBrand.prefLabel}}</a>
 			{{/if}}
 		{{else}}

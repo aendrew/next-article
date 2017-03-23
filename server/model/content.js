@@ -48,7 +48,10 @@ module.exports = function decorateContent (req, res, content, flags) {
 	content.adsLayout = req.query.adsLayout || 'default';
 	content.byline = bylineTransform(content.byline, content.metadata.filter(item => item.taxonomy === 'authors'));
 
-	if(!(content.type === 'package' || content.package && content.package.brand)) {
+	const articleBrand = articleBranding(content.metadata);
+
+	//if the article brand is the same as the package brand, don't show it twice
+	if(!(articleBrand && content.package && content.package.brand && content.package.brand.idV1 === articleBrand.idV1)) {
 		content.designGenre = articleBranding(content.metadata);
 	}
 
