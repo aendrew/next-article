@@ -32,8 +32,7 @@ module.exports = function (body, flags, options) {
 		.with(relatedBoxExpander)
 		.with(ariaHiddenMidContentInterruptions)
 		.with(inlineAd)
-		.with(lightSignup)
-		.with(series);
+		.with(lightSignup);
 
 	const resultObject = { bodyHTML: $bodyHTML.html() };
 
