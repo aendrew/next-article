@@ -1,0 +1,21 @@
+{{> package/end-nav package}}
+
+<div class="o-grid-container">
+
+	{{#if @root.flags.nativeAdsArticle}}
+	<div class="o-grid-row">
+		<div data-o-grid-colspan="12 L8 XL8 XLoffset1">
+				{{> ads/promoted-content }}
+		</div>
+	</div>
+	{{/if}}
+
+	{{#if comments.enabled}}
+		{{> bottom/comments}}
+	{{else}}
+		<p>Comments have not been enabled for this {{contentType}}.</p>
+	{{/if}}
+
+
+</div>
+

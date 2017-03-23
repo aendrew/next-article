@@ -33,16 +33,10 @@
 
 	{{> body-wrapper}}
 
-	{{#ifAll @root.flags.contentPackages package}}
-		{{> package/end-nav package}}
-	{{/ifAll}}
-
 {{>propensity-messaging-promo-unit}}
 
-{{#ifAll readNextArticle readNextArticle.moreRecent}}
-	{{>read-next-bottom-teaser article=readNextArticle}}
+{{#ifAll @root.flags.contentPackages package}}
+	{{> bottom/bottom-package}}
+{{else}}
+	{{> bottom/bottom}}
 {{/ifAll}}
-
-{{> bottom/bottom}}
-
-<script type="text/json" id="dehydrated-metadata">{{{json dehydratedMetadata}}}</script>
