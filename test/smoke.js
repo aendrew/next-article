@@ -38,7 +38,7 @@ module.exports = [
 	},
 	{
 		timeout: 10000,
-		headers: { 'FT-Flags': 'articleTopper:on,ads:off' },
+		headers: { 'FT-Flags': 'articleTopper:on,ads:off,sourcepoint:off' },
 		urls: {
 			// not in CAPI (redirected to ft.com -> redirected to barrier)
 			'/content/8f88c930-d00a-11da-80fb-0000779e2340': 'http://www.ft.com/cms/s/0/8f88c930-d00a-11da-80fb-0000779e2340.html?ft_site=falcon&desktop=true',
@@ -61,7 +61,7 @@ module.exports = [
 	// sugested reads
 	{
 		timeout: 10000,
-		headers: { 'FT-Flags': 'articleSuggestedRead:off,ads:off' },
+		headers: { 'FT-Flags': 'articleSuggestedRead:off,ads:off,sourcepoint:off' },
 		urls: {
 			// any old article
 			'/content/7a41c98c-fd85-11e6-96f8-3700c5664d30': 200
@@ -70,7 +70,7 @@ module.exports = [
 	// content package
 	{
 		timeout: 10000,
-		headers: { 'FT-Flags': 'contentPackages:on,ads:off' },
+		headers: { 'FT-Flags': 'contentPackages:on,ads:off,sourcepoint:off' },
 		urls: {
 			'/content/aec5898e-b88c-11e6-ba85-95d1533d9a62': 200, //best books of the year, top level package
 			'/content/156f0328-b81e-11e6-ba85-95d1533d9a62': 200, // best books of the year article, in a package
