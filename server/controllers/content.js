@@ -1,16 +1,10 @@
 const logger = require('@financial-times/n-logger').default;
 const fetchres = require('fetchres');
 const signedFetch = require('signed-aws-es-fetch');
-const interactivePoller = require('../lib/ig-poller');
+const getInteractive = require('../lib/ig-poller').lookup;
 const getOnwardJourneyArticles = require('./article-helpers/onward-journey');
 const model = require('../model');
 const getFalconUrl = require('./article-helpers/falcon-url');
-
-function getInteractive (contentId) {
-	return interactivePoller.getData().find(
-		mapping => mapping.articleuuid === contentId
-	);
-}
 
 function getArticle (contentId) {
 	const url = `https://next-elastic.ft.com/v3_api_v2/item/${contentId}`;
@@ -31,10 +25,10 @@ module.exports = function contentController (req, res, next) {
 	res.set('surrogate-key', `contentUuid:${req.params.id}`);
 
 	const contentPromises = [];
-	let interactive = getInteractive(req.params.id);
+	let interactiveUrl = getInteractive(req.params.id);
 
-	if (interactive) {
-		res.redirect(interactive.interactiveurl);
+	if (interactiveUrl) {
+		res.redirect(interactiveUrl);
 		return;
 	}
 

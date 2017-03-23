@@ -4,7 +4,6 @@ const expect = require('chai').expect;
 const proxyquire = require('proxyquire');
 const httpMocks = require('node-mocks-http');
 
-const fixtureInteractives = require('../../fixtures/interactive-graphics');
 const fixtureVideo = require('../../fixtures/v3-elastic-video-found');
 const fixturePodcast = require('../../fixtures/v3-elastic-podcast-found');
 const fixturePlaceholder = require('../../fixtures/v3-elastic-placeholder-found');
@@ -22,7 +21,7 @@ const fixtureOnwardJourneyInPackage = require('../../fixtures/onward-journey-in-
 const sandbox = sinon.sandbox.create();
 
 const dependencyStubs = {
-	igPoller: { getData: () => fixtureInteractives },
+	igPoller: { lookup: sandbox.stub() },
 	podcast: sandbox.spy(),
 	video: sandbox.spy(),
 	article: sandbox.spy(),
@@ -64,6 +63,10 @@ describe('Content Controller', function () {
 	});
 
 	it('sets surrogate-key', () => {
+		dependencyStubs.igPoller.lookup
+			.withArgs('012f81d6-2e2b-11e5-8873-775ba7c2ea3d')
+			.returns('http://ig.ft.com/sites/2015/local-cuts-checker/');
+
 		createInstance({
 			params: {
 				id: '012f81d6-2e2b-11e5-8873-775ba7c2ea3d'
@@ -74,6 +77,9 @@ describe('Content Controller', function () {
 
 	describe('when the requested content maps to an interactive', function () {
 		beforeEach(function () {
+			dependencyStubs.igPoller.lookup
+					.withArgs('012f81d6-2e2b-11e5-8873-775ba7c2ea3d')
+					.returns('http://ig.ft.com/sites/2015/local-cuts-checker/');
 			return createInstance({
 				params: {
 					id: '012f81d6-2e2b-11e5-8873-775ba7c2ea3d'
