@@ -189,6 +189,14 @@ $o-video-is-silent: false;
 	}
 }
 
+//the gridded teaser-collection used on packages need extra spacing between them
+.o-teaser-collection--square {
+	.o-teaser {
+		margin-bottom: 30px;
+	}
+
+}
+
 .read-next-bottom {
 	margin-bottom: 50px;
 }
