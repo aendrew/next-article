@@ -1,7 +1,9 @@
 @import 'expander-themes';
 
 .package__expander {
+
 	position: relative;
+	width: 100%;
 
 	&:before {
 		content: '';
