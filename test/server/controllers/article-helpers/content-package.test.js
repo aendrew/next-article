@@ -30,6 +30,8 @@ describe('Content package', () => {
 						{id: 'pqr'},
 						{id: 'abc'},
 						{id: 'def'},
+						{id: 'hij'},
+						{id: 'klm'}
 					]
 				}]
 			};
@@ -39,7 +41,10 @@ describe('Content package', () => {
 				{id: 'jkl'},
 				{id: 'mno'},
 				{id: 'pqr'},
-				{id: 'abc'}
+				{id: 'abc'},
+				{id: 'def'},
+				{id: 'hij'},
+				{id: 'klm'}
 			]);
 		});
 
@@ -73,7 +78,10 @@ describe('Content package', () => {
 						{id: '456'},
 						{id: 'jkl'},
 						{id: 'mno'},
-						{id: 'pqr'}
+						{id: 'pqr'},
+						{id: 'stu'},
+						{id: 'vwx'},
+						{id: 'yza'}
 					]
 				}]
 			};
@@ -83,7 +91,10 @@ describe('Content package', () => {
 				{id: '456'},
 				{id: 'jkl'},
 				{id: 'mno'},
-				{id: 'pqr'}
+				{id: 'pqr'},
+				{id: 'stu'},
+				{id: 'vwx'},
+				{id: 'yza'}
 			]);
 		});
 	});

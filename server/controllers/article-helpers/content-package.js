@@ -12,7 +12,7 @@ const addContext = ({ pkg, currentIndex }) => ({
 	current: pkg.contains[currentIndex],
 	next: pkg.contains[currentIndex + 1],
 	home: pkg,
-	sequenceId: getSequenceId(pkg, currentIndex),
+	sequenceId: getSequenceId(pkg, currentIndex)
 });
 
 const addContents = ({ pkg, currentIndex }) => {
