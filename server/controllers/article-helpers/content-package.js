@@ -29,10 +29,10 @@ const addContents = ({ pkg, currentIndex }) => {
 		});
 	};
 	const shortenedPackage = shortenPackage(pkg.contains);
-	const needsSequenceId = pkg.tableOfContents && pkg.tableOfContents.labelType === 'part-number';
-	const contents = needsSequenceId ? addSequenceId(shortenedPackage) : shortenedPackage;
+	const hasPartLabel = pkg.tableOfContents && pkg.tableOfContents.labelType === 'part-number';
+	const contents = hasPartLabel ? addSequenceId(shortenedPackage) : shortenedPackage;
 	const isShortened = contents.length < pkg.contains.length;
-	const landingPageLinkText = `See all ${pkg.contains.length} ${needsSequenceId ? 'parts' : 'stories'}`;
+	const landingPageLinkText = `See all ${pkg.contains.length} ${hasPartLabel ? 'parts' : 'stories'}`;
 	return { contents, isShortened, landingPageLinkText };
 };
 
