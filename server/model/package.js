@@ -1,4 +1,5 @@
 const decorateArticle = require('./article');
+const getPackageBrand = require('../controllers/article-helpers/get-package-brand');
 
 function getLabel (labelType, itemIndex, label) {
 
@@ -81,6 +82,8 @@ module.exports = function decoratePackage (req, res, payload, flags) {
 			}
 			return options.inverse(this);
 		}
+
+		content.packageBrand = getPackageBrand(content.metadata);
 
 		return content;
 	});
