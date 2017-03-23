@@ -30,6 +30,9 @@ module.exports = [
 			'/article/02cad03a-844f-11e4-bae9-00144feabdc0/story-package?articleIds=b56232bc-adec-11e4-919e-00144feab7de,8a5c2c02-a47e-11e4-b943-00144feab7de,6bfcdc6e-a0b6-11e4-8ad8-00144feab7de,c0dbd6d6-8072-11e4-9907-00144feabdc0': 200,
 			// related fragments - more-ons
 			'/article/02cad03a-844f-11e4-bae9-00144feabdc0/more-on?tagIds=TnN0ZWluX1BOX1BvbGl0aWNpYW5fMTY4OA==-UE4=,NDdiMzAyNzctMTRlMy00Zjk1LWEyZjYtYmYwZWIwYWU2NzAy-VG9waWNz&index=1': 200,
+			'/content/524fe874-0324-11e7-ace0-1ce02ef0def9': 200, // Doing business in Austria, Special report Package landing page
+			'/content/e26d3c84-8bad-11e6-8cb7-e7ada1d123b1': 200, // Special report articleA
+			'/content/b2050c06-0ee4-11e7-b030-768954394623': 200, //package landing page without a body
 			// articles with not tagged with X
 			'/article/02cad03a-844f-11e4-bae9-00144feabdc0/more-on?tagIds=TnN0ZWluX1BOX1BvbGl0aWNpYW5fMTY4OA==-UE4=,NDdiMzAyNzctMTRlMy00Zjk1LWEyZjYtYmYwZWIwYWU2NzAy-VG9waWNz&index=1': {
 				content: ''
@@ -72,12 +75,17 @@ module.exports = [
 		timeout: 10000,
 		headers: { 'FT-Flags': 'contentPackages:on,ads:off' },
 		urls: {
-			'/content/aec5898e-b88c-11e6-ba85-95d1533d9a62': 200, //best books of the year, top level package
-			'/content/156f0328-b81e-11e6-ba85-95d1533d9a62': 200, // best books of the year article, in a package
+			'/content/524fe874-0324-11e7-ace0-1ce02ef0def9': 200, // Doing business in Austria, Special report Package landing page
+			'/content/e26d3c84-8bad-11e6-8cb7-e7ada1d123b1': 200, // Special report articleA
+			'/content/b2050c06-0ee4-11e7-b030-768954394623': 200, //package landing page without a body
 			'/content/395650fa-5b9c-11e5-a28b-50226830d644': 200, //normal article
 			'/content/5cf687c7-ddb9-4243-8fea-69e50b6b5682': 200, //podcast
 			'/content/c382002a-a839-366c-9b5f-c3e51a25e05d': 200, //video
-			'/content/a85bf481-457c-3bd4-bd49-3801d175d583?fragment=true': 200 //fragment view
+			'/content/a85bf481-457c-3bd4-bd49-3801d175d583?fragment=true': 200, //fragment view
+			// related fragments - story package
+			'/article/02cad03a-844f-11e4-bae9-00144feabdc0/story-package?articleIds=b56232bc-adec-11e4-919e-00144feab7de,8a5c2c02-a47e-11e4-b943-00144feab7de,6bfcdc6e-a0b6-11e4-8ad8-00144feab7de,c0dbd6d6-8072-11e4-9907-00144feabdc0': 200,
+			// related fragments - more-ons
+			'/article/02cad03a-844f-11e4-bae9-00144feabdc0/more-on?tagIds=TnN0ZWluX1BOX1BvbGl0aWNpYW5fMTY4OA==-UE4=,NDdiMzAyNzctMTRlMy00Zjk1LWEyZjYtYmYwZWIwYWU2NzAy-VG9waWNz&index=1': 200,
 		}
 	}
 ];
