@@ -87,18 +87,26 @@ module.exports = function contentController (req, res, next) {
 				return res.redirect(`/video/${req.params.id}`);
 			}
 
-			// if (content.type === 'package') {
-			// 	const isIntroArticle = (content.tableOfContents && content.tableOfContents.displayIntroduction) || !!content.bodyHTML;
-			// 	const cannotRender = !onwardJourney && !isIntroArticle;
-			// 	const canRedirect = content.contains && content.contains.length;
-			// 	if (cannotRender && canRedirect) {
-			// 		const uuid = content.contains[0];
-			// 		return res.redirect(
-			// 			`/content/${uuid}`
-			// 		);
-			// 	}
-			// }
+			if (content.type === 'package') {
 
+				// Allow us to degrade gracefully
+				if (!onwardJourney) {
+					content.degradePackagePage = true;
+				}
+				const isIntroArticle = (content.tableOfContents && content.tableOfContents.displayIntroduction) || !!content.bodyHTML;
+				const cannotRender = content.degradePackagePage || !res.locals.flags.contentPackages;
+				const canRedirect = content.contains && !!content.contains.length;
+
+				// If we're unable to render a decent package page then perhaps we
+				// can at least redirect to the first article page in the package
+				if (!isIntroArticle && cannotRender && canRedirect) {
+					const uuid = content.contains[0].id;
+					return res.redirect(`/content/${uuid}`);
+				}
+
+			}
+
+			// TODO: do we need to do this for package pages?
 			if (content.type === 'article') {
 				res.vary('ft-is-aud-dev');
 				res.vary('ft-blocked-url');

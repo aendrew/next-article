@@ -17,18 +17,23 @@ function getLabel (labelType, itemIndex, label) {
 		return label;
 	}
 
-	return ''
+	return '';
 }
 
 module.exports = function decoratePackage (req, res, payload, flags) {
 	return decorateArticle(req, res, payload, flags).then(content => {
 
-		if (!flags.contentPackages) {
+		// Render a normal article page
+		if (!flags.contentPackages || content.degradePackagePage) {
 			return content;
 		}
 
+		// TODO: contentType is used for both templating stuff and messages
+		// 				to the user so doesn't work so well for packages
 		content.contentType = 'article';
 
+		// some content-patch hacks may not have tableOfContents at the moment
+		// so let's ensure it's missing
 		if (!content.tableOfContents) {
 			content.tableOfContents = {
 				sequence: 'none',
@@ -37,8 +42,10 @@ module.exports = function decoratePackage (req, res, payload, flags) {
 			};
 		}
 
-		if (!content.tableOfContents.displayIntroduction) {
-			content.template = 'content-package';
+		// In ElasticSearch it's currently possible for
+		// package.contains to be undefined, so let's smooth over that
+		if (!Array.isArray(content.contains)) {
+			content.contains = [];
 		}
 
 		content.contains.forEach((item, index) => {
@@ -46,9 +53,14 @@ module.exports = function decoratePackage (req, res, payload, flags) {
 			item.label = getLabel(content.tableOfContents.labelType, index, item.label);
 		});
 
+		const isIntroArticle = content.tableOfContents.displayIntroduction || !!content.bodyHTML;
 		const numChildren = content.contains.length;
 		const minBigTeasers = 4;
 		const maxBigTeasers = 6;
+
+		if (!isIntroArticle) {
+			content.template = 'content-package';
+		}
 
 		content.helpers = content.helpers || {};
 		content.helpers.gt = (a, b) => a > b;
