@@ -8,7 +8,7 @@ module.exports = [
 	},
 	{
 		timeout: 10000,
-		headers: { 'FT-Flags': 'ads:off' },
+		headers: { 'FT-Flags': 'ads:off,sourcepoint:off' },
 		urls: {
 			// not in CAPI (redirected to ft.com -> redirected to barrier)
 			'/content/8f88c930-d00a-11da-80fb-0000779e2340': 'http://www.ft.com/cms/s/0/8f88c930-d00a-11da-80fb-0000779e2340.html?ft_site=falcon&desktop=true',
