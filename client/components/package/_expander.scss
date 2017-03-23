@@ -38,8 +38,8 @@
 
 .package__expander-inner {
 	box-sizing: border-box;
-	padding: 0.5em 0.5em 0.5em 10px;
-	height: 40px;
+	padding: 0.5em 50px 0.5em 10px;
+	min-height: 40px;
 	position: relative;
 	text-align: left;
 	@include oGridRespondTo($from: M) {
