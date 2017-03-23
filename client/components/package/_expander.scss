@@ -1,10 +1,6 @@
 @import 'expander-themes';
 
-.package__expander {
-
-	position: relative;
-	width: 100%;
-
+.package__top-nav-bar {
 	&:before {
 		content: '';
 		position: absolute;
@@ -14,7 +10,26 @@
 		background: inherit;
 		top: 0;
 		height: 100%;
+		z-index: -1;
 	}
+	height: 40px;
+
+	.package--basic & {
+		background-color: $wheat;
+	}
+
+	.package--special-report & {
+		background-color: $claret;
+	}
+
+	.package--extra & {
+		background-color: getColor('slate');
+	}
+
+
+}
+
+.package__expander {
 
 	&:after {
 		background-repeat: no-repeat;
