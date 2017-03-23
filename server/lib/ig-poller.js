@@ -21,7 +21,6 @@ function getData () {
 
 function lookup (id) {
 	const map = poller.getData();
-	if (!map) return;
 	return map.get(id);
 }
 
