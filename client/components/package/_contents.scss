@@ -62,3 +62,13 @@
 	display: inline-block;
 	width: calc(100% - 40px);
 }
+
+[data-package-order="none"] {
+	.package__content-item[aria-selected="true"] {
+		background-color: darken($wheat, 5%);
+
+		.package--extra & {
+			background-color: getColor('black');
+		}
+	}
+}

@@ -8,7 +8,6 @@ const lightSignup = require('./light-sign-up');
 const inlineAd = require('./inline-ad');
 const extractMainImage = require('./extract-main-image');
 const gcsConflicts = require('./gcs-conflicts');
-const series = require('./series');
 
 function transform ($, flags, options) {
 	const proto = {

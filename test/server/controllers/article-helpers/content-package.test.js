@@ -2,23 +2,27 @@ const { expect } = require('chai');
 
 const subject = require('../../../../server/controllers/article-helpers/content-package');
 
-describe('Content package', () => {
+describe('Content package article helper', () => {
 
-	context('guards', () => {
-		it('if empty or nonexistent containedIn', () => {
+	const longPackage = {};
+	const shortPackage = {};
+
+	context('should return an empty object', () => {
+		it('if called with empty or nonexistent containedIn', () => {
 			expect(subject({ id: '123', containedIn: [] })).eql({});
 			expect(subject({ id: '123' })).eql({});
 		});
-		it('if no id', () => {
+		it('if called with id-less content', () => {
 			expect(subject({ containedIn: [{id: '123'}] })).eql({});
 		});
 	});
 
-	context('unordered', () => {
-		it('should place current one second in contents if not first in package and package has enough subsequent pieces of content', () => {
+	context('when content package is part-numbered and current item is not first in list', () => {
+		it('should place current item second in contents and add correct part numbers', () => {
 			const packageArticleStub = {
 				id: '456',
 				containedIn: [{
+					tableOfContents: { labelType: 'part-number' },
 					design: { theme: 'special-report' },
 					contains: [
 						{id: '123'},
@@ -31,20 +35,92 @@ describe('Content package', () => {
 						{id: 'abc'},
 						{id: 'def'},
 						{id: 'hij'},
-						{id: 'klm'}
+						{id: 'klm'},
+						{id: 'nop'}
 					]
 				}]
 			};
 			expect(subject(packageArticleStub).package.contents).eql([
-				{id: 'ghi'},
-				{id: '456'},
+				{id: 'ghi', label: 'PART 3'},
+				{id: '456', label: 'PART 4'},
+				{id: 'jkl', label: 'PART 5'},
+				{id: 'mno', label: 'PART 6'},
+				{id: 'pqr', label: 'PART 7'},
+				{id: 'abc', label: 'PART 8'},
+				{id: 'def', label: 'PART 9'},
+				{id: 'hij', label: 'PART 10'},
+				{id: 'klm', label: 'PART 11'}
+			]);
+		});
+	});
+
+	context('when content package is unordered', () => {
+		it('should place current item first in contents and add \'currently reading\' label', () => {
+			const packageArticleStub = {
+				id: '456',
+				containedIn: [{
+					design: { theme: 'special-report' },
+					tableOfContents: { sequence: 'none' },
+					contains: [
+						{id: '123'},
+						{id: '789'},
+						{id: 'ghi'},
+						{id: '456'},
+						{id: 'jkl'},
+						{id: 'mno'},
+						{id: 'pqr'},
+						{id: 'abc'},
+						{id: 'def'},
+						{id: 'hij'},
+						{id: 'klm'},
+						{id: 'nop'}
+					]
+				}]
+			};
+			expect(subject(packageArticleStub).package.contents).eql([
+				{id: '456', label: 'Currently reading:'},
 				{id: 'jkl'},
 				{id: 'mno'},
 				{id: 'pqr'},
 				{id: 'abc'},
 				{id: 'def'},
 				{id: 'hij'},
-				{id: 'klm'}
+				{id: 'klm'},
+				{id: 'nop'}
+			]);
+		});
+
+		it('if the current article is towards the end of the package', () => {
+			const packageArticleStub = {
+				id: '456',
+				containedIn: [{
+					design: { theme: 'special-report' },
+					tableOfContents: { sequence: 'none' },
+					contains: [
+						{id: '123'},
+						{id: '789'},
+						{id: 'abc'},
+						{id: 'def'},
+						{id: 'hij'},
+						{id: 'klm'},
+						{id: 'ghi'},
+						{id: '456'},
+						{id: 'jkl'},
+						{id: 'mno'},
+						{id: 'pqr'}
+					]
+				}]
+			};
+			expect(subject(packageArticleStub).package.contents).eql([
+				{id: '456', label: 'Currently reading:'},
+				{id: 'abc'},
+				{id: 'def'},
+				{id: 'hij'},
+				{id: 'klm'},
+				{id: 'ghi'},
+				{id: 'jkl'},
+				{id: 'mno'},
+				{id: 'pqr'}
 			]);
 		});
 
@@ -132,9 +208,9 @@ describe('Content package', () => {
 		};
 		const data = subject(packageArticleStub);
 		expect(data.package.contents).eql([
-			{sequenceId: 'PART 1', id: '456'},
-			{sequenceId: 'PART 2', id: '123'},
-			{sequenceId: 'PART 3', id: '789'}
+			{label: 'PART 1', id: '456'},
+			{label: 'PART 2', id: '123'},
+			{label: 'PART 3', id: '789'}
 		]);
 	});
 });
