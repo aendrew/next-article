@@ -2,6 +2,8 @@
 
 .package__expander {
 
+	width: 100vw;
+
 	&:before {
 		content: '';
 		position: absolute;
