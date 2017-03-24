@@ -9,9 +9,9 @@ module.exports = function ($, flags, options) {
 	$relatedBox.replaceWith(i => {
 		let $el = cheerio($relatedBox.eq(i)).clone();
 
-		const $links = $el.find('.n-content-related-box__content a');
+		const $links = $el.find('.n-content-related-box__content a, .n-content-related-box__headline a');
 
-		if($links.length < 2) {
+		if($links.length < 1) {
 			return $el;
 		} else {
 			return '';

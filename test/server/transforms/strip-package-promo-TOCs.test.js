@@ -21,8 +21,7 @@ const promoBoxWithTOC = `<aside aria-hidden="true" class="n-content-related-box 
 		</div>
 	</aside>`;
 
-const promoBoxWithSingleLink = `
-	<aside class="n-content-related-box" role="complementary">
+const promoBoxWithSingleLink = `<aside class="n-content-related-box" role="complementary">
 		<h3 class="n-content-related-box__title"><span class="n-content-related-box__title-text">Related article</span></h3><a class="n-content-related-box__image-link" href="/&quot;/content/95d61362-80b0-11e6-bc52-0c7211ef3198/&quot;"><img alt="(FILE" data-copyright="©" height="1152" longdesc="/&quot;Mary" src="/&quot;http://com.ft.imagepublish.prod.s3.amazonaws.com/3ba022c2-80b3-11e6-8e50-8ec15fb462f4/&quot;" width="2048"></a>
 		<div class="n-content-related-box__headline">
 			<a class="n-content-related-box__headline-link" href="/&quot;/content/95d61362-80b0-11e6-bc52-0c7211ef3198/&quot;">Mary Berry quits ‘Great British Bake Off’ out of loyalty to BBC</a>
@@ -30,8 +29,15 @@ const promoBoxWithSingleLink = `
 		<div class="n-content-related-box__content">
 			<p>Turmoil in UK’s most popular show illustrates shifts in entertainment industry</p>
 		</div>
-	</aside>
-`;
+	</aside>`;
+
+const promoBoxWithNoLink = `<aside class="n-content-related-box" role="complementary">
+		<h3 class="n-content-related-box__title"><span class="n-content-related-box__title-text">Related article</span></h3><a class="n-content-related-box__image-link" href="/&quot;/content/95d61362-80b0-11e6-bc52-0c7211ef3198/&quot;"><img alt="(FILE" data-copyright="©" height="1152" longdesc="/&quot;Mary" src="/&quot;http://com.ft.imagepublish.prod.s3.amazonaws.com/3ba022c2-80b3-11e6-8e50-8ec15fb462f4/&quot;" width="2048"></a>
+		<div class="n-content-related-box__content">
+			<p>Turmoil in UK’s most popular show illustrates shifts in entertainment industry</p>
+		</div>
+	</aside>`;
+
 
 describe('Promo Boxes within content package articles', () => {
 
@@ -42,10 +48,16 @@ describe('Promo Boxes within content package articles', () => {
 		transformed$.html().should.equal('');
 	});
 
-	it('should not strip promo boxes with fewer than 2 links', () => {
+	it('should not strip promo boxes with no link', () => {
+		const $ = cheerio.load(promoBoxWithNoLink, { decodeEntities: false });
+		const transformed$ = subject($, { contentPackages: true }, { contentPackage: { contents: [] }});
+		transformed$.html().should.equal(promoBoxWithNoLink);
+	});
+
+	it('should strip promo boxes with fewer than 2 links', () => {
 		const $ = cheerio.load(promoBoxWithSingleLink, { decodeEntities: false });
 		const transformed$ = subject($, { contentPackages: true }, { contentPackage: { contents: [] }});
-		transformed$.html().should.equal(promoBoxWithSingleLink);
+		transformed$.html().should.equal('');
 	});
 
 	it('should not strip anything from content which is not a package', () => {
