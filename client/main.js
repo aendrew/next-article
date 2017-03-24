@@ -6,6 +6,7 @@ const tipDismisser = require('n-ui/components/n-ui/tour-tip/lib/dismiss.js');
 
 import {bootstrap} from 'n-ui';
 import {init as commentsInit} from './components/comments';
+import * as myftUi from 'n-myft-ui/myft';
 
 bootstrap({ preset: 'complete' }, ({flags, allStylesLoaded}) => {
 
@@ -16,6 +17,17 @@ bootstrap({ preset: 'complete' }, ({flags, allStylesLoaded}) => {
 	const ftlabsAudioPlayer = require('./components/ftlabs-audio-player/main');
 	const legalCopy = require('./components/legal-copy/main');
 	const Video = require('./components/video/video');
+
+	const clientOpts = [];
+
+	if (flags.get('follow')) {
+		clientOpts.push({relationship: 'followed', type: 'concept'});
+	}
+
+	if (flags.get('saveForLater')) {
+		clientOpts.push({relationship: 'saved', type: 'content'});
+	}
+	myftUi.client.init(clientOpts);
 
 	oViewport.listenTo('resize');
 
@@ -48,6 +60,11 @@ bootstrap({ preset: 'complete' }, ({flags, allStylesLoaded}) => {
 			tipContainer: '.tour-tip--article-page',
 			appendDismisserTo: '.tour-tip--article-page',
 			localStorageKey: 'tour-tip-article-dismissed'
+		});
+
+		myftUi.ui.init({
+			anonymous: !(/FTSession=/.test(document.cookie)),
+			flags
 		});
 
 		[...document.querySelectorAll('[data-o-component="o-video"]')].forEach(videoEl => {
