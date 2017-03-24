@@ -30,6 +30,23 @@
 
 .article__main {
 	padding-top: 15px;
+	padding-bottom: 30px;
+	&-content {
+		@include oGridCenter;
+		@include oGridColspan((default: 12, S: 11, L: 8, XL: 7));
+		@include oGridRespondTo(L) {
+			@include oGridUncenter;
+		}
+	}
+
+	&-rail {
+		@include oGridOffset(0);
+		@include oGridColspan((default: hide, L: 4));
+
+		@include oGridRespondTo(XL) {
+			@include oGridPush(1);
+		}
+	}
 }
 .article__media {
 	margin-bottom: 20px;
@@ -70,7 +87,6 @@
 }
 
 .article__aside {
-
 	@include oGridRespondTo($from: L, $until: XL) {
 		width: 310px;
 	}

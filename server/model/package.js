@@ -28,7 +28,7 @@ module.exports = function decoratePackage (req, res, payload, flags) {
 			return content;
 		}
 
-		// TODO: contentType is used for both templating stuff and messages
+		// FIXME: contentType is used for both templating stuff and messages
 		// 				to the user so doesn't work so well for packages
 		content.contentType = 'article';
 
@@ -53,13 +53,17 @@ module.exports = function decoratePackage (req, res, payload, flags) {
 			item.label = getLabel(content.tableOfContents.labelType, index, item.label);
 		});
 
-		const isIntroArticle = content.tableOfContents.displayIntroduction || !!content.bodyHTML;
-		const numChildren = content.contains.length;
-		const minBigTeasers = 4;
-		const maxBigTeasers = 6;
+		content.isIntroArticle = content.tableOfContents.displayIntroduction || !!content.bodyHTML;
 
-		if (!isIntroArticle) {
-			content.template = 'content-package';
+		const numChildren = content.contains.length;
+		let minBigTeasers = 4;
+		let maxBigTeasers = 6;
+
+		if (content.isIntroArticle) {
+			content.template = 'package-intro';
+			minBigTeasers = maxBigTeasers = Infinity;
+		} else {
+			content.template = 'package-index';
 		}
 
 		content.helpers = content.helpers || {};
@@ -67,9 +71,18 @@ module.exports = function decoratePackage (req, res, payload, flags) {
 
 		content.helpers.bigTeasers = function (options) {
 			const items = numChildren > maxBigTeasers ? content.contains.slice(0, minBigTeasers) : content.contains;
+			let title;
+			switch (content.design.theme) {
+				case 'special-report':
+					title = 'Explore the report';
+					break;
+				case 'extra':
+					title = 'Explore the series';
+					break;
+			}
 			if (items.length) {
 				return options.fn({
-					title: null,
+					title,
 					items
 				});
 			}
@@ -83,8 +96,8 @@ module.exports = function decoratePackage (req, res, payload, flags) {
 					case 'special-report':
 						title = 'More from this Special Report';
 						break;
-					case 'special-report':
-						title = 'More in this Series';
+					case 'extra':
+						title = 'Explore the series';
 						break;
 				}
 				return options.fn({

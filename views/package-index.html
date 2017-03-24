@@ -16,7 +16,7 @@
 <article
 	id="site-content"
 	role="main"
-	class="article{{#if designGenre}} article--brand{{/if}}"
+	class="article{{#if designGenre}} article--brand{{/if}}{{#if design.theme}} design-theme--{{design.theme}}{{/if}}"
 	data-content-id="{{id}}"
 	data-syndicatable="{{canBeSyndicated}}">
 
@@ -72,7 +72,7 @@
 				{{/littleTeasers}}
 			</div>
 
-			<div data-o-grid-colspan="hide L4" style="text-align:center;" aria-hidden="true">
+			<div data-o-grid-colspan="0 L4" style="text-align:center;" aria-hidden="true">
 				{{> ads/mid}}
 			</div>
 		</div>
