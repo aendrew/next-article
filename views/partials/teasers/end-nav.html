@@ -1,10 +1,10 @@
 <div class="package__end-nav-teaser">
-	<div class="o-teaser o-teaser--large-portrait{{#if mainImage}} o-teaser--has-image{{/if}}" data-o-component="o-teaser">
+	<div class="o-teaser o-teaser--large-portrait{{#if mainImage}} o-teaser--has-image{{/if}}" data-o-component="o-teaser" data-trackable="teaser">
 		<div class="o-teaser__content">
 			<div class="o-teaser__meta">
 				<span class="package__text--highlit package__text--m">UP NEXT</span>
 			</div>
-			<a href="{{relativeUrl}}">
+			<a href="{{relativeUrl}}" data-trackable="main-link">
 				<h2 class="o-teaser__heading">{{title}}</h2>
 			</a>
 			<p class="o-teaser__standfirst">{{standfirst}}</p>
@@ -14,11 +14,11 @@
 		</div>
 		{{#if mainImage}}
 		<div class="o-teaser__image-container">
-			<div class="o-teaser__image-placeholder image-placeholder">
-				<a href="{{relativeUrl}}">
-					<img src="{{mainImage.url}}" class="o-teaser__image" alt="main image"></img>
+				<a href="{{relativeUrl}}" data-trackable="image" aria-hidden="true" tab-index="-1">
+				{{#nImagePresenter srcSet=mainImage.url wrapperClasses="o-teaser__image-placeholder" classes="o-teaser__image" colspan='{"default": 12, "L": 6}' position='{"default": "bottom"}' widths="[500, 332]" lazyLoad=false}}
+					{{> n-image/templates/image}}
+				{{/nImagePresenter}}
 				</a>
-			</div>
 		</div>
 		{{/if}}
 	</div>
