@@ -5,12 +5,11 @@
 		background-color: getColor('slate');
 	}
 
-	.package__nav--top & {
-		width: 100%;
-		position: absolute;
-		right: 0;
-		z-index: 99;
-		@include oGridRespondTo($from: M) {
+	@include oGridRespondTo($from: M) {
+		.package__nav--top & {
+			width: 100%;
+			position: absolute;
+			z-index: 99;
 			right: 16px;
 			max-width: 320px;
 		}
@@ -34,6 +33,9 @@
 
 	&.package__content-item:hover {
 		color: $claret;
+		border-left: solid 10px;
+		border-left-color: $claretDark;
+		padding-left: 10px;
 	}
 
 	&[aria-selected="true"] {
@@ -53,6 +55,9 @@
 
 	.package--extra &:hover {
 		color: $yellow;
+		border-left: solid 10px;
+		border-left-color: $yellowLight;
+		padding-left: 10px;
 	}
 }
 
@@ -62,4 +67,14 @@
 	margin: 20px;
 	display: inline-block;
 	width: calc(100% - 40px);
+}
+
+[data-package-order="none"] {
+	.package__content-item[aria-selected="true"] {
+		background-color: darken($wheat, 5%);
+
+		.package--extra & {
+			background-color: getColor('black');
+		}
+	}
 }

@@ -8,7 +8,6 @@ const lightSignup = require('./light-sign-up');
 const inlineAd = require('./inline-ad');
 const extractMainImage = require('./extract-main-image');
 const gcsConflicts = require('./gcs-conflicts');
-const series = require('./series');
 
 function transform ($, flags, options) {
 	const proto = {
@@ -32,8 +31,7 @@ module.exports = function (body, flags, options) {
 		.with(relatedBoxExpander)
 		.with(ariaHiddenMidContentInterruptions)
 		.with(inlineAd)
-		.with(lightSignup)
-		.with(series);
+		.with(lightSignup);
 
 	const resultObject = { bodyHTML: $bodyHTML.html() };
 

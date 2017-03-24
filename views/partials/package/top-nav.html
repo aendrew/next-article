@@ -1,13 +1,19 @@
 <div class=" package__text package__nav--top {{#if navigationTheme}}package--{{navigationTheme}}{{/if}}">
-	<div data-o-component="o-expander" class="o-expander" data-o-expander-shrink-to="hidden"
-		data-o-expander-collapsed-toggle-text="<div class='package__expander-inner package__text--m'>{{brand.prefLabel}} <span class='package__text--m package__text--strong'>{{title}}</span></div>"
-				data-o-expander-expanded-toggle-text="<div class='package__expander-inner package__text--m'>{{brand.prefLabel}} <span class='package__text--m package__text--strong'>{{title}}</span></div>">
-				<div class="o-grid-container o-grid-container--bleed">
-					<div class="o-grid-row o-grid-row--compact">
-				<div data-o-grid-colspan="12">
-					<button class="o-expander__toggle package__expander" aria-expanded="false">
-						<div class='package__expander-inner package__text--m'>{{brand.prefLabel}} <span class='package__text--m package__text--strong'>{{title}}</span></div>
-					</button>
+	<div class="o-grid-container o-grid-container--bleed">
+		<div class="o-grid-row o-grid-row--compact">
+			<div data-o-grid-colspan="12">
+				<div data-o-component="o-expander" class="o-expander" data-o-expander-shrink-to="hidden"
+					data-o-expander-collapsed-toggle-text="<span class='n-util-visually-hidden'>Explore the whole {{brand.inSentence}}</span>"
+					data-o-expander-expanded-toggle-text="<span class='n-util-visually-hidden'>Explore the whole {{brand.inSentence}}</span>">
+					<div class="package__top-nav-bar package__text--m">
+						<div class="package__top-nav-bar-title">
+							{{brand.prefLabel}}
+							<a href="{{url}}" class="package__reset-link">
+								<span class='package__text--m package__text--strong'>{{title}}</span>
+							</a>
+						</div>
+						<button class="o-expander__toggle package__expander" aria-expanded="false"><span class="n-util-visually-hidden">Explore the whole {{brand.inSentence}}</span></button>
+					</div>
 					<div class="o-expander__content package__contents" aria-hidden="true">
 						{{> package/contents}}
 					</div>

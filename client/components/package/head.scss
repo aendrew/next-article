@@ -1,4 +1,9 @@
 @import 'colors';
-@import 'expander';
+@import 'top-nav';
 @import 'contents';
 @import 'text';
+
+.package__reset-link {
+	color: inherit;
+	border-bottom: 0;
+}

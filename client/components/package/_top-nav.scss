@@ -1,0 +1,118 @@
+@import 'expander-themes';
+
+.package__top-nav-bar {
+
+	height: 40px;
+	position: relative;
+	padding-left: 10px;
+
+	@include oGridRespondTo($from: M) {
+		padding-left: 16px;
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		left: 50%;
+		width: 100vw;
+		margin-left: -50vw;
+		background: inherit;
+		top: 0;
+		height: 100%;
+		z-index: -1;
+	}
+
+	.package--basic & {
+		background-color: $wheat;
+	}
+
+	.package--special-report & {
+		background-color: $claret;
+	}
+
+	.package--extra & {
+		background-color: getColor('slate');
+	}
+
+}
+
+.package__top-nav-bar-title {
+
+	line-height: 40px;
+
+	.package--basic &,
+	.package--basic & > a:hover {
+		color: $claret;
+	}
+
+	.package--special-report &,
+	.package--special-report & > a:hover {
+		color: getColor('white');
+	}
+
+	.package--extra &,
+	.package--extra & > a:hover {
+		color: $yellow;
+	}
+
+	& > a:hover {
+		text-decoration: underline;
+	}
+
+}
+
+.package__expander {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 100%;
+	width: 50px;
+	@include oGridRespondTo($from: M) {
+		right: 16px;
+	}
+	@include oGridRespondTo($from: L) {
+		width: 80px;
+	}
+
+	&:after {
+		background-repeat: no-repeat;
+		background-position: center;
+		content: "";
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	& > i {
+		display: none;
+	}
+
+}
+
+@each $theme-name, $theme in $expander-themes {
+
+	.package--#{$theme-name} .package__expander {
+
+		&:after {
+			background-color: getThemeColor($theme-name, 'unexpanded', 'icon', 'bg');
+			@include oIconsGetIcon(
+				$icon-name: 'arrow-down',
+				$color: getThemeColor($theme-name, 'unexpanded', 'icon', 'fg'),
+				$apply-base-styles: false,
+				$apply-width-height: false
+			);
+		}
+
+		&[aria-expanded="true"]:after {
+			transform: rotate(180deg);
+		}
+
+		&:hover:after {
+			background-color: getThemeColor($theme-name, 'unexpanded', 'icon', 'hover');
+		}
+
+	}
+
+}
