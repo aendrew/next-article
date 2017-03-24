@@ -104,8 +104,9 @@
 	}
 }
 
+//give extra margin to package teasers because they are in a grid
 .package-teasers--large {
 	.o-teaser {
-		margin-bottom: 15px;
+		margin-bottom: 30px;
 	}
 }
