@@ -33,6 +33,9 @@
 
 	&.package__content-item:hover {
 		color: $claret;
+		border-left: solid 10px;
+		border-left-color: $claretDark;
+		padding-left: 10px;
 	}
 
 	&[aria-selected="true"] {
@@ -52,6 +55,9 @@
 
 	.package--extra &:hover {
 		color: $yellow;
+		border-left: solid 10px;
+		border-left-color: $yellowLight;
+		padding-left: 10px;
 	}
 }
 

@@ -4,9 +4,6 @@ const subject = require('../../../../server/controllers/article-helpers/content-
 
 describe('Content package article helper', () => {
 
-	const longPackage = {};
-	const shortPackage = {};
-
 	context('should return an empty object', () => {
 		it('if called with empty or nonexistent containedIn', () => {
 			expect(subject({ id: '123', containedIn: [] })).eql({});

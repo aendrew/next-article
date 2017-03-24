@@ -1,6 +1,15 @@
 @import 'expander-themes';
 
 .package__top-nav-bar {
+
+	height: 40px;
+	position: relative;
+	padding-left: 10px;
+
+	@include oGridRespondTo($from: M) {
+		padding-left: 16px;
+	}
+
 	&:before {
 		content: '';
 		position: absolute;
@@ -12,7 +21,6 @@
 		height: 100%;
 		z-index: -1;
 	}
-	height: 40px;
 
 	.package--basic & {
 		background-color: $wheat;
@@ -26,6 +34,30 @@
 		background-color: getColor('slate');
 	}
 
+}
+
+.package__top-nav-bar-legend {
+
+	line-height: 40px;
+
+	.package--basic &,
+	.package--basic & > a:hover {
+		color: $claret;
+	}
+
+	.package--special-report &,
+	.package--special-report & > a:hover {
+		color: getColor('white');
+	}
+
+	.package--extra &,
+	.package--extra & > a:hover {
+		color: $yellow;
+	}
+
+	& > a:hover {
+		text-decoration: underline;
+	}
 
 }
 
@@ -54,25 +86,9 @@
 
 }
 
-.package__expander-inner {
-	box-sizing: border-box;
-	padding: 0.5em 0.5em 0.5em 10px;
-	height: 40px;
-	position: relative;
-	text-align: left;
-	@include oGridRespondTo($from: M) {
-		padding-left: 16px;
-	}
-}
-
 @each $theme-name, $theme in $expander-themes {
 
 	.package--#{$theme-name} .package__expander {
-
-		& {
-			background-color: getThemeColor($theme-name, 'unexpanded', 'body', 'bg');
-			color: getThemeColor($theme-name, 'unexpanded', 'body', 'fg');
-		}
 
 		&:after {
 			background-color: getThemeColor($theme-name, 'unexpanded', 'icon', 'bg');
@@ -84,43 +100,12 @@
 			);
 		}
 
-		&[aria-expanded="true"] {
-			background-color: getThemeColor($theme-name, 'expanded', 'body', 'bg');
-			color: getThemeColor($theme-name, 'expanded', 'body', 'fg');
-		}
-
 		&[aria-expanded="true"]:after {
-			background-color: getThemeColor($theme-name, 'expanded', 'icon', 'bg');
-
-			$unexpandedColor: getThemeColor($theme-name, 'unexpanded', 'icon', 'fg');
-			$expandedColor: getThemeColor($theme-name, 'expanded', 'icon', 'fg');
-
-			@if $expandedColor == $unexpandedColor {
-				transform: rotate(180deg);
-			} @else {
-				@include oIconsGetIcon(
-					$icon-name: 'arrow-up',
-					$color: getThemeColor($theme-name, 'expanded', 'icon', 'fg'),
-					$apply-base-styles: false,
-					$apply-width-height: false
-				);
-			}
-		}
-
-		&:hover {
-			background-color: getThemeColor($theme-name, 'unexpanded', 'body', 'hover');
+			transform: rotate(180deg);
 		}
 
 		&:hover:after {
 			background-color: getThemeColor($theme-name, 'unexpanded', 'icon', 'hover');
-		}
-
-		&[aria-expanded="true"]:hover {
-			background-color: getThemeColor($theme-name, 'expanded', 'body', 'hover');
-		}
-
-		&[aria-expanded="true"]:hover:after {
-			background-color: getThemeColor($theme-name, 'expanded', 'icon', 'hover');
 		}
 
 	}

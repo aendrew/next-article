@@ -3,10 +3,14 @@
 		<div class="o-grid-row o-grid-row--compact">
 			<div data-o-grid-colspan="12">
 				<div data-o-component="o-expander" class="o-expander" data-o-expander-shrink-to="hidden"
-					 data-o-expander-collapsed-toggle-text="" data-o-expander-expanded-toggle-text="">
+					data-o-expander-collapsed-toggle-text="" data-o-expander-expanded-toggle-text="">
 					<div class="package__top-nav-bar package__text--m">
-						{{brand.prefLabel}}
-						<a href="{{relativeUrl}}" class="package__reset-link"><span class='package__text--m package__text--strong'>{{title}}</span></a>
+						<div class="package__top-nav-bar-legend">
+							{{brand.prefLabel}}
+							<a href="{{url}}" class="package__reset-link">
+								<span class='package__text--m package__text--strong'>{{title}}</span>
+							</a>
+						</div>
 						<button class="o-expander__toggle package__expander" aria-expanded="false"></button>
 					</div>
 					<div class="o-expander__content package__contents" aria-hidden="true">
