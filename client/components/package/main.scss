@@ -103,3 +103,10 @@
 		max-width: 300px;
 	}
 }
+
+//give extra margin to package teasers because they are in a grid
+.package-teasers--large {
+	.o-teaser {
+		margin-bottom: 30px;
+	}
+}

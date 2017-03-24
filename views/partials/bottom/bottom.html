@@ -1,3 +1,7 @@
+{{#ifAll readNextArticle readNextArticle.moreRecent}}
+	{{>read-next-bottom-teaser article=readNextArticle}}
+{{/ifAll}}
+
 <div class="o-grid-container">
 	<div class="o-grid-row">
 		<div class="related-content" data-o-grid-colspan="12 L8 XL8 XLoffset1">
@@ -38,3 +42,5 @@
 	{{/if}}
 
 </div>
+
+<script type="text/json" id="dehydrated-metadata">{{{json dehydratedMetadata}}}</script>
