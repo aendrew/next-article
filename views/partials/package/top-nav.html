@@ -5,13 +5,13 @@
 				<div data-o-component="o-expander" class="o-expander" data-o-expander-shrink-to="hidden"
 					data-o-expander-collapsed-toggle-text="" data-o-expander-expanded-toggle-text="">
 					<div class="package__top-nav-bar package__text--m">
-						<div class="package__top-nav-bar-legend">
+						<div class="package__top-nav-bar-title">
 							{{brand.prefLabel}}
 							<a href="{{url}}" class="package__reset-link">
 								<span class='package__text--m package__text--strong'>{{title}}</span>
 							</a>
 						</div>
-						<button class="o-expander__toggle package__expander" aria-expanded="false"></button>
+						<button class="o-expander__toggle package__expander" aria-expanded="false"><span class="n-util-visually-hidden">Explore the whole {{brand.inSentence}}</span></button>
 					</div>
 					<div class="o-expander__content package__contents" aria-hidden="true">
 						{{> package/contents}}
