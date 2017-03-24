@@ -68,6 +68,11 @@ module.exports = function decoratePackage (req, res, payload, flags) {
 
 		content.helpers = content.helpers || {};
 		content.helpers.gt = (a, b) => a > b;
+<<<<<<< HEAD
+=======
+
+		const inverseTheme = content.design.theme === 'extra' || content.design.theme === 'extra-wide';
+>>>>>>> 99af18f... Lint
 
 		content.helpers.bigTeasers = function (options) {
 			const items = numChildren > maxBigTeasers ? content.contains.slice(0, minBigTeasers) : content.contains;
