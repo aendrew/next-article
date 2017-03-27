@@ -1,4 +1,4 @@
-module.exports =  (data) => {
+module.exports = (data) => {
 	const stylesheets = {
 		inline: ['shared-head'],
 		blocking: [],
@@ -6,13 +6,13 @@ module.exports =  (data) => {
 	};
 
 	if(data.type === 'package' || data.package) {
-			stylesheets.inline.push('expander');	
-			stylesheets.inline.push('package-head');	
-			stylesheets.inline.push('topper-themed');	
-			stylesheets.lazy.push('package-lazy');	
+			stylesheets.inline.push('expander');
+			stylesheets.inline.push('package-head');
+			stylesheets.inline.push('topper-themed');
+			stylesheets.lazy.push('package-lazy');
 	}
 
-	if(data.type !== 'package' && data.bodyHTML.indexOf('o-expander') >= 0) {
+	if(data.type !== 'package' && data.bodyHTML && data.bodyHTML.indexOf('o-expander') >= 0) {
 		stylesheets.lazy.push('expander');
 	}
 
@@ -22,7 +22,7 @@ module.exports =  (data) => {
 		stylesheets.lazy.push('video');
 	}
 
-	if(data.topper && data.topper.layout !== 'basic') {
+	if(data.topper && data.topper.layout !== 'basic' && !stylesheets.inline.includes('topper-themed')) {
 		stylesheets.inline.push('topper-themed');
 	}
 
@@ -45,5 +45,4 @@ module.exports =  (data) => {
 	}
 
 	return stylesheets;
-}
-
+};
