@@ -1,11 +1,13 @@
 const logger = require('@financial-times/n-logger').default;
 const articleHandler = require('../model/article');
 const getOnwardJourneyArticles = require('./article-helpers/onward-journey');
+const chooseStylesheets = require('../lib/choose-stylesheets');
 
 module.exports = (req, res) => {
 	const { content, barrierHTML } = req.body;
 
 	content.inArticleBarrierHTML = decodeURIComponent(barrierHTML);
+
 
 	getOnwardJourneyArticles(content.id, res.locals.flags)
 		.then((onwardJourney) => {
@@ -23,8 +25,9 @@ module.exports = (req, res) => {
 				if (req.query.fragment) {
 					res.render('fragment', data);
 				} else {
-					content.layout = 'wrapper';
-					content.viewStyle = 'compact';
+					data.layout = 'wrapper';
+					data.viewStyle = 'compact';
+					res.locals.stylesheets = chooseStylesheets(data);
 					res.render(data.template || 'content', data);
 				}
 			}

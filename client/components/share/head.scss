@@ -1,0 +1,110 @@
+$o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
+@import 'o-share/main';
+
+@include oShareBase(o-share);
+
+.article__share {
+	position: relative;
+	padding: 0 0 20px;
+	border-bottom: 1px solid getColor('warm-3');
+	clear: left;
+
+	> * {
+		visibility: hidden;
+	}
+
+	&__count {
+		@include oTypographySansSize(s);
+		overflow: hidden;
+		position: relative;
+		top: -5px;
+		display: none;
+		@include oGridRespondTo(S) {
+			display: inline;
+		}
+	}
+
+	&__comments {
+		@include oTypographySansSize(s);
+		line-height: 40px;
+		position: relative;
+		border-bottom-width: 0;
+		margin-right: 10px;
+		padding-left: 24px;
+	}
+
+	&__print {
+		display: none;
+		position: relative;
+		width: 17px;
+		height: 24px;
+		border-bottom-width: 0;
+		float: left;
+		margin-right: 16px;
+		@include oGridRespondTo(M) {
+			display: block;
+		}
+	}
+
+	&--bottom {
+		clear: left;
+		padding: 20px 0;
+	}
+
+	.comment_plus_save {
+		float: right;
+	}
+
+	.o-share {
+		display: block; // prevent inline-block spacing issue
+	}
+
+	.o-share__action a {
+		border-bottom-width: 0;
+	}
+
+	.o-share__action--twitter a {
+		padding-left: 0;
+	}
+
+	.o-share__action--linkedin {
+		@include oGridRespondTo($until: S) {
+			display: none;
+		}
+	}
+
+	.o-share__action--whatsapp {
+		@include oGridColspan((S: hide));
+		padding: 0;
+	}
+
+	.article__save {
+		float: right;
+	}
+
+	.n-myft-ui__button {
+		@include oButtonsSize(big);
+		min-height: 42px;
+		@include oGridRespondTo($until: S) {
+			padding: 4px 8px;
+		}
+	}
+
+}
+
+.article__main .email-article .email-article__border {
+	border-top: 0;
+}
+
+.core .article__main .article__share-action--email {
+	display: none;
+}
+
+.article__main .article__share-bottom-gutter--top {
+	margin-bottom: 15px;
+}
+
+.article__main .article__share-bottom-gutter--bottom {
+	margin-bottom: 20px;
+}
+

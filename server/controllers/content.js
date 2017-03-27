@@ -2,6 +2,7 @@ const logger = require('@financial-times/n-logger').default;
 const fetchres = require('fetchres');
 const signedFetch = require('signed-aws-es-fetch');
 const getInteractive = require('../lib/ig-poller').lookup;
+const chooseStylesheets = require('../lib/choose-stylesheets');
 const getOnwardJourneyArticles = require('./article-helpers/onward-journey');
 const model = require('../model');
 const getFalconUrl = require('./article-helpers/falcon-url');
@@ -20,6 +21,7 @@ function getArticle (contentId) {
 			}
 		});
 }
+
 
 module.exports = function contentController (req, res, next) {
 	res.set('surrogate-key', `contentUuid:${req.params.id}`);
@@ -133,8 +135,9 @@ module.exports = function contentController (req, res, next) {
 				if (req.query.fragment) {
 					res.render('fragment', data);
 				} else {
-					content.layout = 'wrapper';
-					content.viewStyle = 'compact';
+					data.layout = 'wrapper';
+					data.viewStyle = 'compact';
+					res.locals.stylesheets = chooseStylesheets(data);
 					res.render(data.template || 'content', data);
 				}
 			}

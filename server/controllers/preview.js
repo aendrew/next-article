@@ -1,4 +1,5 @@
 const model = require('../model');
+const chooseStylesheets = require('../lib/choose-stylesheets');
 
 module.exports = (req, res) => {
 	const { body: content } = req;
@@ -7,8 +8,9 @@ module.exports = (req, res) => {
 		if (req.query.fragment) {
 			res.render('fragment', data);
 		} else {
-			content.layout = 'wrapper';
-			content.viewStyle = 'compact';
+			data.layout = 'wrapper';
+			data.viewStyle = 'compact';
+			res.locals.stylesheets = chooseStylesheets(data);
 			res.render(data.template || 'content', data);
 		}
 	}
