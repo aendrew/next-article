@@ -1,5 +1,4 @@
 $navbar-height: 40px;
-$desktop-gutter-width: 16px;
 
 .package__navbar {
 
@@ -8,7 +7,7 @@ $desktop-gutter-width: 16px;
 	height: $navbar-height;
 
 	@include oGridRespondTo($from: M) {
-		padding-left: $desktop-gutter-width;
+		padding-left: oGridGutter(M);
 	}
 
 	&:before {
@@ -44,7 +43,7 @@ $desktop-gutter-width: 16px;
 	right: 0;
 
 	@include oGridRespondTo($from: M) {
-		right: $desktop-gutter-width;
+		right: oGridGutter(M);
 	}
 
 	@include oGridRespondTo($from: L) {
