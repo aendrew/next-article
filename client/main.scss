@@ -17,8 +17,6 @@
 	@import 'components/ads/head';
 	@import 'n-email-article/main';
 
-
-	@import 'n-myft-ui/myft/main';
 	@import 'n-myft-ui/myft-common/main';
 	@include nUiMyftCommon(false);
 
@@ -76,6 +74,7 @@ $n-notification-is-silent: false;
 @import 'components/story-package';
 @import 'components/ftlabs-audio-player/main';
 @import 'components/teasers/main';
+@import 'n-myft-ui/myft/main';
 
 // Print Styling
 @media print {
