@@ -1,21 +1,21 @@
-	$o-teaser-is-silent: false;
-	@import 'o-teaser/main';
-	$o-labels-is-silent: false;
-	@import 'o-labels/main';
-	$o-teaser-collection-is-silent: false;
-	@import 'o-teaser-collection/main';
-	.standalone-teaser-heading {
-		@include font-size(18, 20);
-		font-family: $o-typography-sans;
-		margin: 0 0 20px;
-		font-weight: bold;
-		&:after {
-			content: '';
-			display: block;
-			width: 60px;
-			margin-top: 5px;
-			border-bottom: 4px solid oColorsGetPaletteColor(black);
-			position: absolute;
-			z-index: 1;
-		}
+$o-teaser-is-silent: false;
+@import 'o-teaser/main';
+$o-labels-is-silent: false;
+@import 'o-labels/main';
+$o-teaser-collection-is-silent: false;
+@import 'o-teaser-collection/main';
+.standalone-teaser-heading {
+	@include font-size(18, 20);
+	font-family: $o-typography-sans;
+	margin: 0 0 20px;
+	font-weight: bold;
+	&:after {
+		content: '';
+		display: block;
+		width: 60px;
+		margin-top: 5px;
+		border-bottom: 4px solid oColorsGetPaletteColor(black);
+		position: absolute;
+		z-index: 1;
 	}
+}
