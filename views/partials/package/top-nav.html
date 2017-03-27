@@ -1,4 +1,4 @@
-<div class=" package__text package__nav--top {{#if navigationTheme}}package--{{navigationTheme}}{{/if}}">
+<div class=" package__text package__nav--top {{#if navigationTheme}}package--{{navigationTheme}}{{/if}}" data-trackable="series-navigation-top">
 	<div class="o-grid-container o-grid-container--bleed">
 		<div class="o-grid-row o-grid-row--compact">
 			<div data-o-grid-colspan="12">
@@ -8,11 +8,11 @@
 					<div class="package__navbar package__text--m">
 						<div class="package__navbar-title">
 							{{brand.prefLabel}}
-							<a href="{{url}}" class="package__reset-link">
+							<a href="{{url}}" class="package__reset-link" data-trackable="title">
 								<span class='package__text--m package__text--strong'>{{title}}</span>
 							</a>
 						</div>
-						<button class="o-expander__toggle package__expander" aria-expanded="false"><span class="n-util-visually-hidden">Explore the whole {{brand.inSentence}}</span></button>
+						<button class="o-expander__toggle package__expander" aria-expanded="false" data-trackable="menu-toggle"><span class="n-util-visually-hidden">Explore the whole {{brand.inSentence}}</span></button>
 					</div>
 					<div class="o-expander__content package__contents" aria-hidden="true">
 						{{> package/contents}}
