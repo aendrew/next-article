@@ -82,6 +82,7 @@ module.exports = function decoratePackage (req, res, payload, flags) {
 					title = 'Explore the report';
 					break;
 				case 'extra':
+				case 'extra-wide':
 					title = 'Explore the series';
 					break;
 			}
@@ -100,9 +101,6 @@ module.exports = function decoratePackage (req, res, payload, flags) {
 				switch (content.design.theme) {
 					case 'special-report':
 						title = 'More from this Special Report';
-						break;
-					case 'extra':
-						title = 'Explore the series';
 						break;
 				}
 				return options.fn({

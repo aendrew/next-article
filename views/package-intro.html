@@ -35,8 +35,10 @@
 					{{> ads/mid}}
 				</div>
 			</div>
+		</div>
 
 			{{#bigTeasers}}
+<<<<<<< HEAD
 			<div class="o-grid-row o-teaser-collection">
 				{{#if title}}
 					<h2 class="o-teaser-collection__heading">{{ title }}</h2>
@@ -48,12 +50,29 @@
 										noHeadshot=true isEditorsChoice=false isOpinion=false
 										lazyLoad=(gt @index 1) streamProperties=../../primaryBrandTag
 						}}
+=======
+			<div class="o-teaser-collection package-onward--intropage">
+				<div class="o-grid-container">
+					<div class="o-grid-row">
+					{{#if title}}
+						<div data-o-grid-colspan="12">
+							<h2 class="package-onward__title o-teaser-collection__heading">{{ title }}</h2>
+						</div>
+					{{/if}}
+						{{#each items}}
+							<div data-o-grid-colspan="12 M6 L4" class="o-teaser-collection__item--stretched">
+								{{>n-teaser/templates/heavy presenter="	package" mods=../teaserMods
+												colspan='{"default": 12, "L": 12}' position='{"L": "top"}' widths="[600, 332]"
+												noTag=true noHeadshot=true isEditorsChoice=false isOpinion=false
+												lazyLoad=(gt @index 1) streamProperties=../../primaryBrandTag
+								}}
+							</div>
+						{{/each}}
+>>>>>>> bfaef58... Rudimentary styles
 					</div>
-				{{/each}}
+				</div>
 			</div>
 			{{/bigTeasers}}
-
-		</div>
 	</div>
 
 	{{>propensity-messaging-promo-unit}}
