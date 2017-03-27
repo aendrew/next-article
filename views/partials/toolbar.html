@@ -21,13 +21,15 @@
 						<a target="_blank" rel="noopener" href="whatsapp://send?text={{encode title mode='uriComponent'}}%20-%20{{encode shareUrl mode='uriComponent'}}" data-trackable="whatsapp"><i>Share on Whatsapp (opens new window)</i></a>
 					</li>
 					{{#ifAll signedIn @root.flags.giftArticle}}
-						<li class="o-share__action o-share__action--mail">
+						<li class="o-share__action o-share__action--mail article__share--gift-label">
 							<button
+								class="article__share--gift-label"
 								data-n-article-email-clickable
 								data-n-article-email-container="{{location}}"
 								data-n-article-email-free-article="{{freeArticle}}"
 								data-trackable="email">
 								<i>Email</i>
+									<span class="article__share--gift-label-text">Gift article</span>
 							</button>
 						</li>
 					{{/ifAll}}

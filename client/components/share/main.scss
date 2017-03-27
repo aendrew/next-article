@@ -60,6 +60,13 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 
 		.o-share {
 			display: block; // prevent inline-block spacing issue
+
+			.article__share--gift-label {
+				@include oGridRespondTo(M) {
+					width: 124px;
+				}
+			}
+
 		}
 
 		.o-share__action a {
@@ -79,6 +86,12 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 		.o-share__action--whatsapp {
 			@include oGridColspan((S: hide));
 			padding: 0;
+		}
+
+		.o-share__action--mail .article__share--gift-label {
+			&:hover {
+				color: white;
+			}
 		}
 
 		.article__save {
@@ -109,6 +122,20 @@ $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 
 	.article__main .article__share-bottom-gutter--bottom {
 		margin-bottom: 20px;
+	}
+
+	.article__share--gift-label-text {
+		display: none;
+		@include oGridRespondTo(M) {
+			display: inline;
+		}
+		position: relative;
+		top: 1px;
+		left: -5px;
+		font-size: 18px;
+		line-height: 18px;
+		font-weight: 600;
+		-webkit-font-smoothing: antialiased;
 	}
 
 @include nUiStylesheetEnd('head');
