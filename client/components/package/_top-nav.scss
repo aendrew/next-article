@@ -1,13 +1,14 @@
-@import 'expander-themes';
+$navbar-height: 40px;
+$desktop-gutter-width: 16px;
 
-.package__top-nav-bar {
+.package__navbar {
 
-	height: 40px;
 	position: relative;
 	padding-left: 10px;
+	height: $navbar-height;
 
 	@include oGridRespondTo($from: M) {
-		padding-left: 16px;
+		padding-left: $desktop-gutter-width;
 	}
 
 	&:before {
@@ -22,38 +23,11 @@
 		z-index: -1;
 	}
 
-	.package--basic & {
-		background-color: $wheat;
-	}
-
-	.package--special-report & {
-		background-color: $claret;
-	}
-
-	.package--extra & {
-		background-color: getColor('slate');
-	}
-
 }
 
-.package__top-nav-bar-title {
+.package__navbar-title {
 
-	line-height: 40px;
-
-	.package--basic &,
-	.package--basic & > a:hover {
-		color: $claret;
-	}
-
-	.package--special-report &,
-	.package--special-report & > a:hover {
-		color: getColor('white');
-	}
-
-	.package--extra &,
-	.package--extra & > a:hover {
-		color: $yellow;
-	}
+	line-height: $navbar-height;
 
 	& > a:hover {
 		text-decoration: underline;
@@ -62,14 +36,17 @@
 }
 
 .package__expander {
+
 	position: absolute;
-	right: 0;
-	top: 0;
 	height: 100%;
 	width: 50px;
+	top: 0;
+	right: 0;
+
 	@include oGridRespondTo($from: M) {
-		right: 16px;
+		right: $desktop-gutter-width;
 	}
+
 	@include oGridRespondTo($from: L) {
 		width: 80px;
 	}
@@ -78,9 +55,9 @@
 		background-repeat: no-repeat;
 		background-position: center;
 		content: "";
+		position: absolute;
 		width: 100%;
 		height: 100%;
-		position: absolute;
 		top: 0;
 		right: 0;
 	}
@@ -91,26 +68,76 @@
 
 }
 
-@each $theme-name, $theme in $expander-themes {
+$navbar-themes: (
+	'basic': (
+		'fg': $claret,
+		'bg': $wheat
+	),
+	'special-report': (
+		'fg': getColor('white'),
+		'bg': $claret
+	),
+	'extra': (
+		'fg': $yellow,
+		'bg': getColor('slate')
+	)
+);
+
+$expander-themes: (
+	'basic': (
+		'fg': getColor('white'),
+		'bg': $claret,
+		'hover': $claretDark
+	),
+	'special-report': (
+		'fg': getColor('white'),
+		'bg': $claretDark,
+		'hover': $claretDarkest
+	),
+	'extra': (
+		'fg': getColor('slate'),
+		'bg': $yellow,
+		'hover': $yellowLight
+	)
+);
+
+@each $theme-name, $navbar-theme in $navbar-themes {
+
+	.package--#{$theme-name} {
+
+		.package__navbar {
+			background-color: map-get($navbar-theme, 'bg');
+		}
+
+		.package__navbar-title,
+		.package__navbar-title > a:hover {
+			color: map-get($navbar-theme, 'fg');
+		}
+
+	}
+
+}
+
+@each $theme-name, $expander-theme in $expander-themes {
 
 	.package--#{$theme-name} .package__expander {
 
 		&:after {
-			background-color: getThemeColor($theme-name, 'unexpanded', 'icon', 'bg');
+			background-color: map-get($expander-theme, 'bg');
 			@include oIconsGetIcon(
 				$icon-name: 'arrow-down',
-				$color: getThemeColor($theme-name, 'unexpanded', 'icon', 'fg'),
+				$color: map-get($expander-theme, 'fg'),
 				$apply-base-styles: false,
 				$apply-width-height: false
 			);
 		}
 
-		&[aria-expanded="true"]:after {
-			transform: rotate(180deg);
+		&:hover:after {
+			background-color: map-get($expander-theme, 'hover');
 		}
 
-		&:hover:after {
-			background-color: getThemeColor($theme-name, 'unexpanded', 'icon', 'hover');
+		&[aria-expanded="true"]:after {
+			transform: rotate(180deg);
 		}
 
 	}
