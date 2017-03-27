@@ -1,6 +1,7 @@
 $o-icons-image-service-base-url: 'https://www.ft.com/__origami/service/image';
 @import 'o-share/main';
 @import 'n-email-article/main';
+@import 'n-ui/components/n-ui/tooltip/main';
 
 // todo: this module is pretty grim and needs refactoring or deleting in favour of sticky header
 @include nUiStylesheetStart('head');

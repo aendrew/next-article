@@ -2,11 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { EmailArticleData, emailArticleModes, EmailArticleView } from '@financial-times/n-email-article';
 import OShare from 'o-share';
+import { NToolTip } from 'n-ui/components/n-ui/tooltip';
 
 exports.init = function (flags) {
 	const shareContainer = document.querySelector('[data-o-component=o-share]');
 	if (shareContainer && !shareContainer.classList.contains('data-o-share--js')) {
 		new OShare(shareContainer);
+		const emailShareContainer = document.querySelector('.o-share__action--mail');
+		if (emailShareContainer) {
+			const opts = {
+				showMode: 'load',
+				content: 'Subscribers can gift articles'
+			}
+			new NToolTip(emailShareContainer, opts);
+		}
 	}
 
 	const emailArticle = {}; // we will lazily load the email article stuff when they're needed
