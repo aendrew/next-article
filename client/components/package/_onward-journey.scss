@@ -16,16 +16,16 @@
 
 	.o-teaser-collection__heading {
 		z-index: 0;
-		padding: 30px 10px 10px 10px;
+		padding: 30px 10px 10px;
 		margin-bottom: 30px;
 		box-sizing: border-box;
 		width: unset;
 	}
-	
+
 	.o-teaser-collection__heading:before {
 		bottom: 0;
 		z-index: -1;
-		border: none;
+		border: 0;
 		box-sizing: border-box;
 		width: 100%;
 
