@@ -57,8 +57,7 @@ const addContents = ({ pkg, currentIndex }) => {
 		contents: addLabels({ pkgContents: shortPackage, originalPkg: pkg, currentIndex, order }),
 		isShortened: shortPackage.length < pkg.contains.length,
 		originalPkgLength: pkg.contains.length,
-		groupLabel: order === 'part-number' ? 'parts' : 'stories',
-		order
+		groupLabel: order === 'part-number' ? 'parts' : 'stories'
 	};
 };
 

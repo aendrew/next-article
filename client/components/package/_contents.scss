@@ -11,7 +11,8 @@
 			position: absolute;
 			right: 16px;
 			max-width: 320px;
-			@include nUiZIndexFor('drawer');
+			z-index: 99px;
+			@include oEffectsShadowsElevation('ultralow', getColor('black'));
 		}
 	}
 }
@@ -42,6 +43,7 @@
 		border-left: solid 10px;
 		border-left-color: $claret;
 		padding-left: 10px;
+		background-color: darken($wheat, 5%);
 	}
 
 	.package--extra & {
@@ -51,6 +53,7 @@
 	.package--extra &[aria-selected="true"] {
 		color: $yellow;
 		border-left-color: $yellow;
+		background-color: getColor('black');
 	}
 
 	.package--extra &:hover {
@@ -67,14 +70,4 @@
 	margin: 20px;
 	display: inline-block;
 	width: calc(100% - 40px);
-}
-
-[data-package-order="none"] {
-	.package__content-item[aria-selected="true"] {
-		background-color: darken($wheat, 5%);
-
-		.package--extra & {
-			background-color: getColor('black');
-		}
-	}
 }
