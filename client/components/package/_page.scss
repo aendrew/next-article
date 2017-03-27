@@ -1,8 +1,3 @@
-
-.design-theme--special-report {
-
-}
-
 .design-theme--extra,
 .design-theme--extra-wide {
 	background-color: getColor('slate');
@@ -19,42 +14,6 @@
 		border-color: $yellow;
 	}
 
-		.o-teaser {
-			color: white;
-		}
-
-		.o-teaser__meta {
-			color: $yellow;
-		}
-
-		.o-teaser--hero .o-teaser__meta:after {
-			border-color: $yellow;
-		}
-
-		.o-teaser--hero .o-teaser__content {
-			background-color: getColor('slate');
-			border-color: $yellow;
-			border-width: 0 1px 1px;
-			border-style: solid;
-		}
-
-		.o-teaser--large.o-teaser--has-image .o-teaser__image-container:after,
-		.o-teaser--hero.o-teaser--has-image .o-teaser__image-container:after {
-			background-color: getColor('slate');
-			border-color: $yellow;
-			border-width: 1px 1px 0;
-			border-style: solid;
-		}
-
-		.o-teaser--large.o-teaser--has-image .o-teaser__image-container:after,
-		.o-teaser--hero.o-teaser--has-image .o-teaser__image-container:after {
-			background-color: getColor('slate');
-			border-color: $yellow;
-			border-width: 1px 1px 0;
-			border-style: solid;
-		}
-
-
 	.o-teaser--hero .o-teaser__content {
 		background-color: getColor('slate');
 		border-color: $yellow;
@@ -69,17 +28,4 @@
 		border-width: 1px 1px 0;
 		border-style: solid;
 	}
-
-	.o-teaser--large.o-teaser--has-image .o-teaser__image-container:after, 
-	.o-teaser--hero.o-teaser--has-image .o-teaser__image-container:after {
-		background-color: getColor('slate');
-		border-color: $yellow;
-		border-width: 1px 1px 0 1px;
-		border-style: solid;
-	}
-
-}
-
-.design-theme--basic {
-
 }
