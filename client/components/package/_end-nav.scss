@@ -27,14 +27,13 @@
 	.grid-breach {
 		.o-teaser--large-portrait {
 			margin-right: 0;
-			min-width: 245px;
-			max-width: 320px;
 		}
 		.package__end-title-container {
 			width: calc(100% + 20px);
 		}
 		.package__end-nav-description {
 			display: block;
+			width: 75%;
 		}
 	}
 }
