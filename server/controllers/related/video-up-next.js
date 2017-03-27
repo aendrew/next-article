@@ -54,6 +54,7 @@ module.exports = function (req, res, next) {
 				return res.status(200).end();
 			}
 
+			res.locals.stylesheets = { inline: [], lazy: [], blocking: [] };
 			return res.render('partials/teaser-collections/video-up-next', { items });
 		})
 		.catch(err => next(err));

@@ -23,6 +23,7 @@ module.exports = (req, res) => {
 
 			function render (data) {
 				if (req.query.fragment) {
+					res.locals.stylesheets = { inline: [], lazy: [], blocking: [] };
 					res.render('fragment', data);
 				} else {
 					data.layout = 'wrapper';
