@@ -51,6 +51,7 @@ const showGcs = (req, res, isFreeArticle) => {
 
 module.exports = function decorateArticle (req, res, payload, flags) {
 	const userIsAnonymous = res.locals.anon && res.locals.anon.userIsAnonymous;
+	const isTruncatedArticleBarrier = !!payload.inArticleBarrierHTML;
 
 	return decorateContent(req, res, payload, flags).then(content => {
 
@@ -88,7 +89,7 @@ module.exports = function decorateArticle (req, res, payload, flags) {
 		content.isPremium = isPremium(content.webUrl);
 		content.withGcs = showGcs(req, res, content.freeArticle);
 		content.lightSignup = {
-			show: (res.locals.anon && res.locals.anon.userIsAnonymous) && flags.lightSignupInArticle,
+			show: (res.locals.anon && res.locals.anon.userIsAnonymous) && flags.lightSignupInArticle && !isTruncatedArticleBarrier,
 			isInferred: flags.lsuInferredTopic
 		};
 

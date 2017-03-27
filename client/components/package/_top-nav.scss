@@ -1,0 +1,144 @@
+$navbar-height: 40px;
+
+.package__navbar {
+
+	position: relative;
+	padding-left: 10px;
+	height: $navbar-height;
+
+	@include oGridRespondTo($from: M) {
+		padding-left: oGridGutter(M);
+	}
+
+	&:before {
+		content: '';
+		position: absolute;
+		left: 50%;
+		width: 100vw;
+		margin-left: -50vw;
+		background: inherit;
+		top: 0;
+		height: 100%;
+		z-index: -1;
+	}
+
+}
+
+.package__navbar-title {
+
+	line-height: $navbar-height;
+
+	& > a:hover {
+		text-decoration: underline;
+	}
+
+}
+
+.package__expander {
+
+	position: absolute;
+	height: 100%;
+	width: 50px;
+	top: 0;
+	right: 0;
+
+	@include oGridRespondTo($from: M) {
+		right: oGridGutter(M);
+	}
+
+	@include oGridRespondTo($from: L) {
+		width: 80px;
+	}
+
+	&:after {
+		background-repeat: no-repeat;
+		background-position: center;
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		right: 0;
+	}
+
+	& > i {
+		display: none;
+	}
+
+}
+
+$navbar-themes: (
+	'basic': (
+		'fg': $claret,
+		'bg': $wheat
+	),
+	'special-report': (
+		'fg': getColor('white'),
+		'bg': $claret
+	),
+	'extra': (
+		'fg': $yellow,
+		'bg': getColor('slate')
+	)
+);
+
+$expander-themes: (
+	'basic': (
+		'fg': getColor('white'),
+		'bg': $claret,
+		'hover': $claretDark
+	),
+	'special-report': (
+		'fg': getColor('white'),
+		'bg': $claretDark,
+		'hover': $claretDarkest
+	),
+	'extra': (
+		'fg': getColor('slate'),
+		'bg': $yellow,
+		'hover': $yellowLight
+	)
+);
+
+@each $theme-name, $navbar-theme in $navbar-themes {
+
+	.package--#{$theme-name} {
+
+		.package__navbar {
+			background-color: map-get($navbar-theme, 'bg');
+		}
+
+		.package__navbar-title,
+		.package__navbar-title > a:hover {
+			color: map-get($navbar-theme, 'fg');
+		}
+
+	}
+
+}
+
+@each $theme-name, $expander-theme in $expander-themes {
+
+	.package--#{$theme-name} .package__expander {
+
+		&:after {
+			background-color: map-get($expander-theme, 'bg');
+			@include oIconsGetIcon(
+				$icon-name: 'arrow-down',
+				$color: map-get($expander-theme, 'fg'),
+				$apply-base-styles: false,
+				$apply-width-height: false
+			);
+		}
+
+		&:hover:after {
+			background-color: map-get($expander-theme, 'hover');
+		}
+
+		&[aria-expanded="true"]:after {
+			transform: rotate(180deg);
+		}
+
+	}
+
+}

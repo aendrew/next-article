@@ -1,15 +1,17 @@
-<ul class="package__reset-ul">
-	{{#each contents}}
-		<li class="package__content-border">
-			<a href="{{relativeUrl}}" class="package__content-item package__text--m" {{#ifEquals id @root.context.current.id}}aria-selected="true" aria-label="Current page"{{/ifEquals}}>
-				{{#if sequenceId}}<div class="package__text--highlit">{{sequenceId}}</div>{{/if}}
-				{{title}}
-			</a>
-		</li>
-	{{/each}}
-</ul>
-{{#if isShortened}}
-	<a href="{{@root.context.home.url}}" class="package__reset-link package__contents-footer">
-		<div class="package__cta--strong package__text--m package__text--strong">{{landingPageLinkText}}</div>
-	</a>
-{{/if}}
+<div data-trackable="menu-contents">
+	<ul class="package__reset-ul" data-package-order="{{order}}">
+		{{#each contents}}
+			<li class="package__content-border">
+				<a href="{{relativeUrl}}" class="package__content-item package__text--m" data-trackable="menu-item" {{#ifEquals id @root.context.current.id}}aria-selected="true" aria-label="Current page"{{/ifEquals}}>
+					{{#if label}}<div class="package__text--highlit">{{label}}</div>{{/if}}
+					{{title}}
+				</a>
+			</li>
+		{{/each}}
+	</ul>
+	{{#if isShortened}}
+		<a href="{{@root.context.home.url}}" class="package__reset-link package__contents-footer" data-trackable="see-all-button">
+			<div class="package__cta--strong package__text--m package__text--strong">See all {{originalPkgLength}} {{groupLabel}}</div>
+		</a>
+	{{/if}}
+</div>

@@ -99,6 +99,38 @@ describe('Article Handler', () => {
 			});
 		});
 
+		describe('Light signup - flag present', function () {
+
+			it('SHOW light signup when user is anon', () => {
+				return createInstance(null, { lightSignupInArticle: true, lsuInferredTopic: true }, fixtureWithTopper, true).then(result => {
+					expect(result.lightSignup).to.contain({
+						show: true,
+						isInferred: true
+					});
+				})
+			});
+
+			it('HIDE light signup when user is known', () => {
+				return createInstance(null, { lightSignupInArticle: true }, fixtureWithTopper, false).then(result => {
+					expect(result.lightSignup).to.contain({
+						show: false
+					});
+				})
+			});
+
+			it('HIDE light signup when is in article barrier', () => {
+				const deepClone = JSON.parse(JSON.stringify(fixture));
+				deepClone.inArticleBarrierHTML = '<div>test</div>';
+				return createInstance(null, { lightSignupInArticle: true }, deepClone, true).then(result => {
+					expect(result.lightSignup).to.contain({
+						show: false
+					});
+				})
+			});
+
+
+		});
+
 	});
 
 });
