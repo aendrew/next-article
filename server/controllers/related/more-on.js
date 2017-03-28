@@ -54,6 +54,7 @@ module.exports = function (req, res, next) {
 				.concat(dedupe(moreOnArticlesArray[i]).map(article => article.id));
 			}
 			moreOnArticlesArray[moreOnIndex] = dedupe(moreOnArticlesArray[moreOnIndex]);
+			res.locals.stylesheets = { inline: [], lazy: [], blocking: [] };
 
 			return res.render('partials/teaser-collections/1-3', { items: moreOnArticlesArray[moreOnIndex] });
 

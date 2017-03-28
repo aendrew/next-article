@@ -9,9 +9,9 @@
 		.package__nav--top & {
 			width: 100%;
 			position: absolute;
-			z-index: 99;
 			right: 16px;
 			max-width: 320px;
+			@include nUiZIndexFor('drawer');
 		}
 	}
 }

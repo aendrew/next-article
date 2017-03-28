@@ -22,6 +22,8 @@ module.exports = function (req, res, next) {
 
 			res.set('surrogate-key', storyPackage.map(article => `contentUuid:${article.id}`).join(' '));
 
+			res.locals.stylesheets = { inline: [], lazy: [], blocking: [] };
+
 			return res.render('partials/related/story-package', { items: storyPackage });
 		})
 		.catch(function (err) {

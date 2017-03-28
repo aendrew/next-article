@@ -1,0 +1,60 @@
+//TODO: Putting all the teaser-related CSS here.
+//Can tidy up/put in the corrrect places once everything else is deleted
+
+.article__aside .o-teaser-collection {
+	margin-top: 24px;
+}
+
+.o-teaser .n-image-wrapper--placeholder {
+	height: 0;
+}
+
+//make the myFT follow box look okay with collection styles
+.o-teaser-collection {
+	position: relative;
+
+	.article__myft-logo {
+		width: 48px;
+		height: 24px;
+	}
+	.n-content-tags__intro {
+		margin: 0;
+	}
+	.o-teaser-collection__heading + .n-content-tags__intro {
+		padding-top: 0;
+	}
+	.n-content-tag__list-item--with-follow {
+		margin: 0;
+	}
+}
+
+//make more-on buttons look okay with teaser headings
+.o-teaser-collection__heading + .n-myft-ui--follow {
+	margin: 0 0 10px;
+
+	@include oGridRespondTo('M') {
+		margin: 0;
+		position: absolute;
+		right: 0;
+		top: 18px;
+	}
+}
+
+.read-next-bottom {
+	margin-bottom: 50px;
+}
+
+
+.n-content-related-box .o-teaser {
+	margin: 8px 0;
+}
+
+.n-content-related-box .standalone-teaser-heading {
+	margin-bottom: 0px;
+}
+
+.n-content-related-box--no-border {
+	border: 0;
+	margin-top: 0;
+	padding: 0;
+}

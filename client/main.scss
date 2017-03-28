@@ -1,14 +1,9 @@
 @import 'n-ui/main';
 
-@include nUiStylesheetStart('head');
-	@import 'n-ui/components/n-ui/tour-tip/main';
-	$o-teaser-is-silent: false;
-	@import 'o-teaser/main';
-	$o-teaser-collection-is-silent: false;
-	@import 'o-teaser-collection/main';
-	$o-labels-is-silent: false;
-	@import 'o-labels/main';
-
+/* shared-head.css will always be output in the <head> tag
+	 It should be kept as small as possible, and only contain the styles needed to render the above-the-fold content without things jumping around.
+*/
+@include nUiStylesheetStart('shared-head');
 	[data-o-grid-colspan~=XLoffset1] {
 		@include oGridRespondTo(XL) {
 			@include oGridOffset(1);
@@ -20,39 +15,80 @@
 	@import 'n-image/main';
 	@import 'components/article/main';
 	@import 'components/classifier/main';
+	@import 'components/share/head';
 	@import 'components/topper/main';
-	$o-expander-is-silent: false;
-	@import 'o-expander/main';
-	@import 'components/package/head';
+	@import 'components/ads/head';
+	@import 'n-email-article/main';
 
-	.o-labels {
-		@include oTypographySansBold('xs');
-	}
-
-	@import 'n-myft-ui/myft/main';
 	@import 'n-myft-ui/myft-common/main';
 	@include nUiMyftCommon(false);
 
-@include nUiStylesheetEnd('head');
 
-$nnotification-is-silent: false;
+@include nUiStylesheetEnd('shared-head');
+
+/* The blocks below get output into individual stylesheets, which are then selected in /server/lib/choose-stylesheets, based on when/whether they are needed
+*/
+
+//Teasers will be put in the head if there is a teaser in the topper, otherwise will be lazily loaded
+@include nUiStylesheetStart('teasers');
+	@import 'components/teasers/head';
+@include nUiStylesheetEnd('teasers');
+
+//These will only be loaded on Package articles and landing pages
+@include nUiStylesheetStart('package-head');
+	@import 'components/package/head';
+@include nUiStylesheetEnd('package-head');
+
+@include nUiStylesheetStart('package-lazy');
+	@import 'components/package/main';
+@include nUiStylesheetEnd('package-lazy');
+
+//This will be loaded if the topper has a theme
+@include nUiStylesheetStart('topper-themed');
+	@import 'components/topper/themes';
+@include nUiStylesheetEnd('topper-themed');
+
+//Expander styles currently needed for packages and if there is an expandable related box
+@include nUiStylesheetStart('expander');
+	$o-expander-is-silent: false;
+	@import 'o-expander/main';
+@include nUiStylesheetEnd('expander');
+
+//Video pages and articles with videos in them
+@include nUiStylesheetStart('video');
+	@import 'components/video/main';
+	$o-video-is-silent: false;
+	@import 'o-video/main';
+@include nUiStylesheetEnd('video');
+
+@include nUiStylesheetStart('light-signup');
+	@import 'o-email-only-signup/main';
+	@import 'components/light-signup/light-signup';
+@include nUiStylesheetEnd('light-signup');
+
+//Barriers are needed for in-article-barriers
+@include nUiStylesheetStart('barrier');
+	@import 'n-barriers/main';
+@include nUiStylesheetEnd('barrier');
+
+@include nUiStylesheetStart('gallery');
+	$o-gallery-is-silent: false;
+	@import 'o-gallery/main';
+@include nUiStylesheetEnd('gallery');
+
+/* All the below will be output as main.css and lazily loaded */
+
+$n-notification-is-silent: false;
 @import 'n-notification/main';
 @import 'components/share/main';
 @import 'components/ads/main';
-$o-gallery-is-silent: false;
-@import 'o-gallery/main';
-$o-video-is-silent: false;
-@import 'o-video/main';
-@import 'n-barriers/main';
-@import 'o-email-only-signup/main';
 @import 'components/comments/skeleton';
 @import 'components/onward-journey/main';
 @import 'components/story-package';
-@import 'components/light-signup/light-signup';
-@import 'components/video/main';
 @import 'components/ftlabs-audio-player/main';
-@import 'components/package/main';
 @import 'components/benchmark-survey/main';
+@import 'components/teasers/main';
+@import 'n-myft-ui/myft/main';
 
 // Print Styling
 @media print {
@@ -129,82 +165,4 @@ $o-video-is-silent: false;
 		content: '';
 	}
 	// scss-lint:enable QualifyingElement
-}
-
-//TODO: Putting all the teaser-related CSS here.
-//Can tidy up/put in the corrrect places once everything else is deleted
-
-.article__aside .o-teaser-collection {
-	margin-top: 24px;
-}
-
-.standalone-teaser-heading {
-	@include font-size(18, 20);
-	font-family: $o-typography-sans;
-	margin: 0 0 20px;
-	font-weight: bold;
-	&:after {
-		content: '';
-		display: block;
-		width: 60px;
-		margin-top: 5px;
-		border-bottom: 4px solid oColorsGetPaletteColor(black);
-		position: absolute;
-		z-index: 1;
-	}
-
-}
-
-.o-teaser .n-image-wrapper--placeholder {
-	height: 0;
-}
-
-//make the myFT follow box look okay with collection styles
-.o-teaser-collection {
-	position: relative;
-
-	.article__myft-logo {
-		width: 48px;
-		height: 24px;
-	}
-	.n-content-tags__intro {
-		margin: 0;
-	}
-	.o-teaser-collection__heading + .n-content-tags__intro {
-		padding-top: 0;
-	}
-	.n-content-tag__list-item--with-follow {
-		margin: 0;
-	}
-}
-
-//make more-on buttons look okay with teaser headings
-.o-teaser-collection__heading + .n-myft-ui--follow {
-	margin: 0 0 10px;
-
-	@include oGridRespondTo('M') {
-		margin: 0;
-		position: absolute;
-		right: 0;
-		top: 18px;
-	}
-}
-
-.read-next-bottom {
-	margin-bottom: 50px;
-}
-
-
-.n-content-related-box .o-teaser {
-	margin: 8px 0;
-}
-
-.n-content-related-box .standalone-teaser-heading {
-	margin-bottom: 0px;
-}
-
-.n-content-related-box--no-border {
-	border: 0;
-	margin-top: 0;
-	padding: 0;
 }
