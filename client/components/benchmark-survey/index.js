@@ -8,8 +8,8 @@ import template from './template';
 export default function benchmarkSurvey (flags, opts = {
 	sideboxId: 'benchmark-survey-Mar-2017',
 	headline: 'How do you rate FT.com?',
-	copy: 'Take our short survey and be in the chance to win £250',
-	cta: 'Click to enter',
+	copy: 'Answer a short survey to help us improve',
+	cta: 'Start survey',
 	ctaLink: 'https://www.ftfeedbackforum.com/R.aspx?a=1227&as=PL5Bk1JF4F',
 	tcs: false,
 }) {
