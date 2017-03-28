@@ -1,5 +1,8 @@
 @import 'n-ui/main';
 
+/* shared-head.css will always be output in the <head> tag
+	 It should be kept as small as possible, and only contain the styles needed to render the above-the-fold content without things jumping around.
+*/
 @include nUiStylesheetStart('shared-head');
 	[data-o-grid-colspan~=XLoffset1] {
 		@include oGridRespondTo(XL) {
@@ -23,10 +26,15 @@
 
 @include nUiStylesheetEnd('shared-head');
 
+/* The blocks below get output into individual stylesheets, which are then selected in /server/lib/choose-stylesheets, based on when/whether they are needed
+*/
+
+//Teasers will be put in the head if there is a teaser in the topper, otherwise will be lazily loaded
 @include nUiStylesheetStart('teasers');
 	@import 'components/teasers/head';
 @include nUiStylesheetEnd('teasers');
 
+//These will only be loaded on Package articles and landing pages
 @include nUiStylesheetStart('package-head');
 	@import 'components/package/head';
 @include nUiStylesheetEnd('package-head');
@@ -35,15 +43,18 @@
 	@import 'components/package/main';
 @include nUiStylesheetEnd('package-lazy');
 
+//This will be loaded if the topper has a theme
 @include nUiStylesheetStart('topper-themed');
 	@import 'components/topper/themes';
 @include nUiStylesheetEnd('topper-themed');
 
+//Expander styles currently needed for packages and if there is an expandable related box
 @include nUiStylesheetStart('expander');
 	$o-expander-is-silent: false;
 	@import 'o-expander/main';
 @include nUiStylesheetEnd('expander');
 
+//Video pages and articles with videos in them
 @include nUiStylesheetStart('video');
 	@import 'components/video/main';
 	$o-video-is-silent: false;
@@ -55,15 +66,17 @@
 	@import 'components/light-signup/light-signup';
 @include nUiStylesheetEnd('light-signup');
 
+//Barriers are needed for in-article-barriers
 @include nUiStylesheetStart('barrier');
 	@import 'n-barriers/main';
 @include nUiStylesheetEnd('barrier');
-
 
 @include nUiStylesheetStart('gallery');
 	$o-gallery-is-silent: false;
 	@import 'o-gallery/main';
 @include nUiStylesheetEnd('gallery');
+
+/* All the below will be output as main.css and lazily loaded */
 
 $n-notification-is-silent: false;
 @import 'n-notification/main';
