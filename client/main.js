@@ -17,6 +17,7 @@ bootstrap({ preset: 'complete' }, ({flags, allStylesLoaded}) => {
 	const ftlabsAudioPlayer = require('./components/ftlabs-audio-player/main');
 	const legalCopy = require('./components/legal-copy/main');
 	const Video = require('./components/video/video');
+	const benchmarkSurvey = require('./components/benchmark-survey');
 
 	const clientOpts = [];
 
@@ -85,6 +86,10 @@ bootstrap({ preset: 'complete' }, ({flags, allStylesLoaded}) => {
 
 		if (flags.get('ftlabsAudioPlayer')){
 			ftlabsAudioPlayer(flags);
+		}
+
+		if (flags.get('benchmarkSurvey')) {
+			benchmarkSurvey(flags);
 		}
 	});
 
