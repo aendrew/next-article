@@ -11,7 +11,7 @@
 			position: absolute;
 			right: 16px;
 			max-width: 320px;
-			z-index: 99px;
+			@include nUiZIndexFor('welcome');
 			@include oEffectsShadowsElevation('ultralow', getColor('black'));
 		}
 	}
