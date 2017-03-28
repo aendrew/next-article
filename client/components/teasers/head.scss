@@ -1,9 +1,9 @@
 $o-teaser-is-silent: false;
 @import 'o-teaser/main';
-$o-labels-is-silent: false;
-@import 'o-labels/main';
 $o-teaser-collection-is-silent: false;
 @import 'o-teaser-collection/main';
+$o-labels-is-silent: false;
+@import 'o-labels/main';
 .standalone-teaser-heading {
 	@include font-size(18, 20);
 	font-family: $o-typography-sans;
@@ -18,4 +18,8 @@ $o-teaser-collection-is-silent: false;
 		position: absolute;
 		z-index: 1;
 	}
+}
+
+.o-labels {
+	@include oTypographySansBold('xs');
 }
