@@ -1,6 +1,7 @@
 module.exports = function (req, res, next) {
 	const err = new Error();
 
+	res.locals.stylesheets = { inline: [], lazy: [], blocking: [] };
 	// E.g. 4eb77dd4-9b35-11e4-be20-002128161462
 	return fetch(`https://api.ft.com/content/items/v1/${req.params.id}?apiKey=${process.env.apikey}`)
 		.then(response => {

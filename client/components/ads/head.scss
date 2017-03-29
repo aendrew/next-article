@@ -1,0 +1,24 @@
+.above-header-advert {
+	display: none;
+	@media (min-width:$ad-medium-breakpoint) {
+		display: block;
+		padding: 10px 0;
+		line-height: 0;
+		text-align: center;
+	}
+}
+
+.above-header-advert,
+.in-article-advert,
+.bottom-advert-mobile {
+	&.o-ads--empty,
+	&[data-o-ads-loaded="false"] {
+		height: 0;
+		min-height: 0;
+		padding: 0;
+	}
+}
+
+.bottom-advert {
+	margin-top: 8px;
+}

@@ -16,6 +16,7 @@ describe('Slideshow Controller', () => {
 		next = sinon.stub();
 		request = httpMocks.createRequest(params);
 		response = httpMocks.createResponse();
+		response.locals = {};
 		return subject(request, response, next);
 	}
 
