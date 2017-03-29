@@ -1,8 +1,12 @@
 <div class="package__end-nav-teaser">
-	<div class="o-teaser o-teaser--large-portrait{{#if mainImage}} o-teaser--has-image{{/if}}" data-o-component="o-teaser" data-trackable="teaser">
+	<div class="o-teaser o-teaser--large-portrait {{#if mainImage}}o-teaser--has-image{{/if}}" data-o-component="o-teaser" data-trackable="teaser">
 		<div class="o-teaser__content">
 			<div class="o-teaser__meta">
-				<span class="package__text--highlit package__text--m">UP NEXT</span>
+				{{#if sequenceId}}
+					<span class="package__text--highlit package__text--m">UP NEXT</span> <span class="package__text--strong package__text--highlit package__text--m">{{sequenceId}}</span>
+				{{else}}
+					<span class="package__text--highlit package__text--m">READ MORE</span>
+				{{/if}}
 			</div>
 			<a href="{{relativeUrl}}" data-trackable="main-link">
 				<h2 class="o-teaser__heading">{{title}}</h2>

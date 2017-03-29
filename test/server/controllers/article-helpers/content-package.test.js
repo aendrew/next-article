@@ -182,8 +182,8 @@ describe('Content package article helper', () => {
 			}]
 		};
 		expect(subject(packageArticleStub).context).eql({
-			prev: {id: 'def'},
-			next: {id: 'jkl'},
+			prev: {id: 'def', sequenceId: undefined },
+			next: {id: 'jkl', sequenceId: undefined },
 			home: {id: 'ghi', contains: [{id: 'abc'}, {id: 'def'}, {id: '123'}, {id: 'jkl'}], design: { theme: 'special-report' }},
 			current: {id: '123'},
 			sequenceId: undefined

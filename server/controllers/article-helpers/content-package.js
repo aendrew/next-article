@@ -8,9 +8,9 @@ const getSequenceId = (pkg, currentIndex) => {
 };
 
 const addContext = ({ pkg, currentIndex }) => ({
-	prev: pkg.contains[currentIndex - 1],
+	prev: Object.assign({ sequenceId: getSequenceId(pkg, currentIndex - 1) }, pkg.contains[currentIndex - 1]),
 	current: pkg.contains[currentIndex],
-	next: pkg.contains[currentIndex + 1],
+	next: Object.assign({ sequenceId: getSequenceId(pkg, currentIndex + 1) }, pkg.contains[currentIndex + 1]),
 	home: pkg,
 	sequenceId: getSequenceId(pkg, currentIndex)
 });
