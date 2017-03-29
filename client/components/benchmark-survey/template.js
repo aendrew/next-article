@@ -34,7 +34,7 @@ const template = ({headline = '', copy = '', cta = '', tcs = false}) =>
 </div>
 <h2 class="o-overlay--benchmark-survey__headline o-typography-subhead">${headline}</h2>
 <p class="o-overlay--benchmark-survey__copy">${copy}</p>
-<button class="o-overlay--benchmark-survey__cta">${cta}</button>
+<button class="o-overlay--benchmark-survey__cta" data-trackable="benchmark-survey">${cta}</button>
 ${tcs ? `<p class="o-overlay--benchmark-survey__tcs"><a href="${tcs}">T&Cs apply</a></p>`: ''}`;
 
 export default template;

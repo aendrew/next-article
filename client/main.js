@@ -89,7 +89,7 @@ bootstrap({ preset: 'complete' }, ({flags, allStylesLoaded}) => {
 		}
 
 		if (flags.get('benchmarkSurvey')) {
-			benchmarkSurvey(flags);
+			benchmarkSurvey();
 		}
 	});
 
