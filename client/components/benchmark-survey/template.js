@@ -4,10 +4,11 @@
  * @param  {String} [headline=''] Headline copy
  * @param  {String} [copy='']     Main descriptive microcopy
  * @param  {String} [cta='']      Button call-to-action text
+ * @param  {String} [ctaLink='']   Link URL for CTA button
  * @param  {Boolean|String} [tcs=false}]  Either `false` or a URL to a Terms & Conditions page
  * @return String                 Rendered template code
  */
-const template = ({headline = '', copy = '', cta = '', tcs = false}) =>
+const template = ({headline = '', copy = '', cta = '', ctaLink = '', tcs = false}) =>
 `<i class="o-overlay--benchmark-survey__close-button"></i>
 <div class="o-overlay--benchmark-survey__graphic-header">
 	<svg width="57px" height="50px" viewBox="0 0 57 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -34,7 +35,9 @@ const template = ({headline = '', copy = '', cta = '', tcs = false}) =>
 </div>
 <h2 class="o-overlay--benchmark-survey__headline o-typography-subhead">${headline}</h2>
 <p class="o-overlay--benchmark-survey__copy">${copy}</p>
-<button class="o-overlay--benchmark-survey__cta" data-trackable="benchmark-survey">${cta}</button>
+<a aria-role="button" href="${ctaLink}" class="o-overlay--benchmark-survey__cta" data-trackable="benchmark-survey" target="_blank">
+	${cta}
+</a>
 ${tcs ? `<p class="o-overlay--benchmark-survey__tcs"><a href="${tcs}">T&Cs apply</a></p>`: ''}`;
 
 export default template;

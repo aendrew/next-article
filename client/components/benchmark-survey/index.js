@@ -30,8 +30,6 @@ export default function benchmarkSurvey (flags, opts = {
 			const surveyOverlay = new Overlay('benchmark-survey', {
 				html: template(opts),
 				modal: false,
-				// compact: true,
-				customclose: true,
 				parentNode: '.n-layout__row--content > .o-grid-container > .o-grid-row',
 				nested: true,
 				noFocus: true,
@@ -53,9 +51,11 @@ export default function benchmarkSurvey (flags, opts = {
 
 					document.addEventListener('oOverlay.ready', () => {
 						const el = surveyOverlay.wrapper;
-						el.querySelector('.o-overlay--benchmark-survey__cta')
+
+						el.querySelector('.o-overlay--benchmark-survey__close-button')
 							.addEventListener('click', () => {
-								window.location.href = opts.ctaLink;
+								window.localStorage.setItem(`${opts.sideboxId}-ad-removed`, true);
+								surveyOverlay.close();
 							});
 
 						el.classList.add('visible');
