@@ -1,5 +1,5 @@
 <div data-trackable="menu-contents">
-	<ul class="package__reset-ul" data-package-order="{{order}}">
+	<ul class="package__reset-ul">
 		{{#each contents}}
 			<li class="package__content-border">
 				<a href="{{relativeUrl}}" class="package__content-item package__text--m" data-trackable="menu-item" {{#ifEquals id @root.context.current.id}}aria-selected="true" aria-label="Current page"{{/ifEquals}}>
