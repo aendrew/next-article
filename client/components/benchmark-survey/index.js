@@ -13,6 +13,7 @@ export default function benchmarkSurvey (flags, opts = {
 	cta: 'Start survey',
 	ctaLink: 'https://www.ftfeedbackforum.com/R.aspx?a=1227&as=PL5Bk1JF4F',
 	tcs: false,
+	maxShowCount: 3,
 }) {
 	let hasLocalStorage;
 	try {
@@ -25,7 +26,7 @@ export default function benchmarkSurvey (flags, opts = {
 	let shownCount = Number(window.localStorage.getItem(`${opts.sideboxId}-show-count`)) || 0;
 	const isRemoved = window.localStorage.getItem(`${opts.sideboxId}-ad-removed`) || false;
 
-	if (hasLocalStorage && !isRemoved && shownCount <= 5 ) {
+	if (hasLocalStorage && !isRemoved && shownCount <= opts.maxShowCount ) {
 		return new Promise((resolve) => {
 			const surveyOverlay = new Overlay('benchmark-survey', {
 				html: template(opts),
@@ -56,6 +57,11 @@ export default function benchmarkSurvey (flags, opts = {
 							.addEventListener('click', () => {
 								window.localStorage.setItem(`${opts.sideboxId}-ad-removed`, true);
 								surveyOverlay.close();
+							});
+						el.querySelector('.o-overlay--benchmark-survey__cta')
+							.addEventListener('click', () => {
+								window.localStorage.setItem(`${opts.sideboxId}-ad-removed`, true);
+								window.location.href = opts.ctaLink;
 							});
 
 						el.classList.add('visible');

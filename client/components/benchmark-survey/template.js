@@ -9,7 +9,7 @@
  * @return String                 Rendered template code
  */
 const template = ({headline = '', copy = '', cta = '', ctaLink = '', tcs = false}) =>
-`<i class="o-overlay--benchmark-survey__close-button"></i>
+`<i class="o-overlay--benchmark-survey__close-button" data-trackable="benchmark-survey-dismiss"></i>
 <div class="o-overlay--benchmark-survey__graphic-header">
 	<svg width="57px" height="50px" viewBox="0 0 57 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<defs>
@@ -35,9 +35,9 @@ const template = ({headline = '', copy = '', cta = '', ctaLink = '', tcs = false
 </div>
 <h2 class="o-overlay--benchmark-survey__headline o-typography-subhead">${headline}</h2>
 <p class="o-overlay--benchmark-survey__copy">${copy}</p>
-<a aria-role="button" href="${ctaLink}" class="o-overlay--benchmark-survey__cta" data-trackable="benchmark-survey" target="_blank">
+<button class="o-overlay--benchmark-survey__cta" data-trackable="benchmark-survey-link">
 	${cta}
-</a>
+</button>
 ${tcs ? `<p class="o-overlay--benchmark-survey__tcs"><a href="${tcs}">T&Cs apply</a></p>`: ''}`;
 
 export default template;
