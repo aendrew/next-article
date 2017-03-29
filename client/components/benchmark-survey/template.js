@@ -4,11 +4,10 @@
  * @param  {String} [headline=''] Headline copy
  * @param  {String} [copy='']     Main descriptive microcopy
  * @param  {String} [cta='']      Button call-to-action text
- * @param  {String} [ctaLink='']   Link URL for CTA button
  * @param  {Boolean|String} [tcs=false}]  Either `false` or a URL to a Terms & Conditions page
  * @return String                 Rendered template code
  */
-const template = ({headline = '', copy = '', cta = '', ctaLink = '', tcs = false}) =>
+const template = ({headline = '', copy = '', cta = '', tcs = false}) =>
 `<i class="o-overlay--benchmark-survey__close-button" data-trackable="benchmark-survey-dismiss"></i>
 <div class="o-overlay--benchmark-survey__graphic-header">
 	<svg width="57px" height="50px" viewBox="0 0 57 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
