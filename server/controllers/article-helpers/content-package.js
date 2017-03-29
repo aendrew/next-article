@@ -65,10 +65,13 @@ module.exports = ({ id, containedIn }) => {
 	if (!id || !containedIn || !containedIn.length) return {};
 	const pkg = containedIn[0];
 	const currentIndex = pkg.contains.findIndex(item => item.id === id);
+	if (!currentIndex) return {};
+
 	const contents = addContents({ pkg, currentIndex });
 	const context = addContext({ pkg, currentIndex });
 	const navigationTheme = pkg.design.theme === 'extra-wide' ? 'extra' : pkg.design.theme;
 	const brand = getPackageBrand(pkg.metadata);
+
 	return {
 		package: Object.assign({}, pkg, contents, { navigationTheme, brand }),
 		context
