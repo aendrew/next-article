@@ -65,7 +65,7 @@ module.exports = ({ id, containedIn }) => {
 	if (!id || !containedIn || !containedIn.length) return {};
 	const pkg = containedIn[0];
 	const currentIndex = pkg.contains.findIndex(item => item.id === id);
-	if (!currentIndex) return {};
+	if (currentIndex < 0) return {};
 
 	const contents = addContents({ pkg, currentIndex });
 	const context = addContext({ pkg, currentIndex });

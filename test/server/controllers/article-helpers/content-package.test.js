@@ -12,6 +12,9 @@ describe('Content package article helper', () => {
 		it('if called with id-less content', () => {
 			expect(subject({ containedIn: [{id: '123'}] })).eql({});
 		});
+		it('if thing is not actually in its package', () => {
+			expect(subject({ id: '123', containedIn: [{ contains: [{id: '321'}] }] })).eql({});
+		});
 	});
 
 	context('when content package is part-numbered and current item is not first in list', () => {
