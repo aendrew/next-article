@@ -2,7 +2,7 @@ const cheerio = require('cheerio');
 
 module.exports = function ($, flags, options) {
 
-	if (!flags || !flags.contentPackages || !options || options.fragment || !options.contentPackage || !options.contentPackage.contents) return $;
+	if (!flags || !flags.contentPackages || !options || options.fragment || !options.isContentPackage) return $;
 
 	const $relatedBox = $('.n-content-related-box');
 

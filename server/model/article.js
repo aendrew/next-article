@@ -68,7 +68,7 @@ module.exports = function decorateArticle (req, res, payload, flags) {
 				fragment: req.query.fragment,
 				adsLayout: content.adsLayout,
 				userIsAnonymous,
-				contentPackage: Object.assign({ context: content.context }, content.package)
+				isContentPackage: content.type === 'package' || (content.package && content.package.contains)
 			})
 		);
 

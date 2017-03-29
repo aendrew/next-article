@@ -44,37 +44,37 @@ describe('Promo Boxes within content package articles', () => {
 
 	it('should be stripped if there is more than one link, as it is likely to be duplicated navigation', () => {
 		const $ = cheerio.load(promoBoxWithTOC, { decodeEntities: false });
-		const transformed$ = subject($, { contentPackages: true }, { contentPackage: { contents: [] }});
+		const transformed$ = subject($, { contentPackages: true }, { isContentPackage: true});
 		transformed$.html().should.equal('');
 	});
 
 	it('should not strip promo boxes with no link', () => {
 		const $ = cheerio.load(promoBoxWithNoLink, { decodeEntities: false });
-		const transformed$ = subject($, { contentPackages: true }, { contentPackage: { contents: [] }});
+		const transformed$ = subject($, { contentPackages: true }, { isContentPackage: true});
 		transformed$.html().should.equal(promoBoxWithNoLink);
 	});
 
 	it('should strip promo boxes with fewer than 2 links', () => {
 		const $ = cheerio.load(promoBoxWithSingleLink, { decodeEntities: false });
-		const transformed$ = subject($, { contentPackages: true }, { contentPackage: { contents: [] }});
+		const transformed$ = subject($, { contentPackages: true }, { isContentPackage: true});
 		transformed$.html().should.equal('');
 	});
 
 	it('should not strip anything from content which is not a package', () => {
 		const $ = cheerio.load(promoBoxWithTOC, { decodeEntities: false });
-		const transformed$ = subject($, { contentPackages: true }, { contentPackage: null });
+		const transformed$ = subject($, { contentPackages: true }, { isContentPackage: false });
 		transformed$.html().should.equal(promoBoxWithTOC);
 	});
 
 	it('should not strip anything if the contentPackages flag is off', () => {
 		const $ = cheerio.load(promoBoxWithTOC, { decodeEntities: false });
-		const transformed$ = subject($, { contentPackages: false }, { contentPackage: { contents: [] } });
+		const transformed$ = subject($, { contentPackages: false }, { isContentPackage: true });
 		transformed$.html().should.equal(promoBoxWithTOC);
 	});
 
 	it('should not strip anything from the fragment view', () => {
 		const $ = cheerio.load(promoBoxWithTOC, { decodeEntities: false });
-		const transformed$ = subject($, { contentPackages: true }, { fragment: true, contentPackage: { contents: [] } });
+		const transformed$ = subject($, { contentPackages: true }, { fragment: true, isContentPackage: true });
 		transformed$.html().should.equal(promoBoxWithTOC);
 	});
 
