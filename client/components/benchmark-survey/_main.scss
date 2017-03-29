@@ -1,0 +1,65 @@
+/**
+ * Styles for Benchmark Survey o-overlay component
+ */
+
+.o-overlay--benchmark-survey {
+	@include oEffectsShadowsElevation($elevation: 'mid', $color: #666666);
+
+	&.o-overlay {
+		display: block;
+		text-align: center;
+		position: relative;
+		background: white;
+		box-sizing: border-box;
+		margin: 10px 0 10px 10px;
+		padding: 10px;
+		width: 100%;
+		right: 100%;
+		bottom: 2em;
+		transition: right 0.5s $o-visual-effects-transition-slide;
+
+		// Needs to be above breakpoints for specificity effect
+		&.visible {
+			right: 0;
+		}
+
+		@include oGridRespondTo($from: L) { // scss-lint:disable DeclarationOrder
+			max-width: 306px;
+			position: absolute;
+			margin: 0;
+			right: -321px;
+			bottom: 12em;
+
+			&.visible {
+				right: 16px;
+			}
+		}
+
+		@include oGridRespondTo($from: XL) {
+			max-width: 286px;
+		}
+	}
+
+	[data-next-is-logged-in="false"] & { // Probably unnecessary
+		display: none;
+	}
+
+	&__close-button {
+		@include oIconsGetIcon('cross', oColorsGetPaletteColor('grey-tint1'), 32);
+		position: absolute;
+		right: 0;
+		top: 0;
+		cursor: pointer;
+	}
+
+	&__headline {
+		color: oColorsGetPaletteColor('teal-1');
+		margin-top: 0.1em;
+	}
+
+	&__cta {
+		@include oButtons($theme: standout);
+		@include oButtonsSize(medium);
+		cursor: pointer;
+	}
+}
