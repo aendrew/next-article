@@ -21,7 +21,8 @@
     "o-viewport": "^3.0.2",
     "superstore": "^2.1.0",
     "o-video": "^2.4.7",
-    "n-myft-ui": "^1.2.1"
+    "n-myft-ui": "^1.2.1",
+    "o-overlay": "1.16.1"
   },
   "resolutions": {
     "o-icons": "^5.2.2",

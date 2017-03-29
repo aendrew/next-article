@@ -4,6 +4,7 @@
  */
 
 import template from './template';
+import Overlay from 'o-overlay';
 
 export default function benchmarkSurvey (flags, opts = {
 	sideboxId: 'benchmark-survey-Mar-2017',
@@ -20,17 +21,23 @@ export default function benchmarkSurvey (flags, opts = {
 		hasLocalStorage = false;
 		return;
 	}
-	const el = document.createElement('aside');
-	el.classList.add('benchmark-survey');
-
-	const parent = document.querySelector('.read-next-bottom').parentNode;
-	parent.insertBefore(el, parent.querySelector('.read-next-bottom'));
 
 	let shownCount = Number(window.localStorage.getItem(`${opts.sideboxId}-show-count`)) || 0;
 	const isRemoved = window.localStorage.getItem(`${opts.sideboxId}-ad-removed`) || false;
 
 	if (hasLocalStorage && !isRemoved && shownCount <= 5 ) {
 		return new Promise((resolve) => {
+			const surveyOverlay = new Overlay('benchmark-survey', {
+				html: template(opts),
+				modal: false,
+				// compact: true,
+				customclose: true,
+				parentNode: '.n-layout__row--content > .o-grid-container > .o-grid-row',
+				nested: true,
+				noFocus: true,
+			});
+
+
 			let surveyLoadEvents = [
 				checkDepthOnInitialScrollEvent(opts),
 				initObserver({
@@ -39,35 +46,34 @@ export default function benchmarkSurvey (flags, opts = {
 				})
 			];
 
-			el.innerHTML = template(opts);
-			window.localStorage.setItem(`${opts.sideboxId}-show-count`, shownCount++);
+			Promise.race(surveyLoadEvents)
+				.then(reason => {
+					surveyOverlay.open();
+					window.localStorage.setItem(`${opts.sideboxId}-show-count`, ++shownCount);
 
-			el.querySelector('.benchmark-survey--cta')
-				.addEventListener('click', () => {
-					window.location.href = opts.ctaLink;
-				});
+					document.addEventListener('oOverlay.ready', () => {
+						const el = surveyOverlay.wrapper;
+						el.querySelector('.o-overlay--benchmark-survey__cta')
+							.addEventListener('click', () => {
+								window.location.href = opts.ctaLink;
+							});
 
-			el.querySelector('.benchmark-survey--close-button')
-				.addEventListener('click', () => {
-					el.remove();
-					window.localStorage.setItem(`${opts.sideboxId}-ad-removed`, true);
-				});
-
-			return Promise.race(surveyLoadEvents)
-			.then(reason => {
-				el.classList.add('visible');
-				// resolve with first event to trigger
-				resolve({
-					el,
-					opts,
-					info: {
-						hasLocalStorage,
-						reason,
-						shownCount,
-					}
+						el.classList.add('visible');
+						// resolve with first event to trigger
+						resolve({
+							surveyOverlay,
+							opts,
+							info: {
+								hasLocalStorage,
+								reason,
+								shownCount,
+							}
+						});
+					});
 				});
 			});
-		});
+	} else {
+		return;
 	}
 };
 

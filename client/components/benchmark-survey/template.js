@@ -8,8 +8,8 @@
  * @return String                 Rendered template code
  */
 const template = ({headline = '', copy = '', cta = '', tcs = false}) =>
-`<i class="benchmark-survey--close-button"></i>
-<div class="benchmark-survey--graphic-header">
+`<i class="o-overlay--benchmark-survey__close-button"></i>
+<div class="o-overlay--benchmark-survey__graphic-header">
 	<svg width="57px" height="50px" viewBox="0 0 57 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<defs>
 					<rect id="path-1" x="0" y="0" width="335" height="260"></rect>
@@ -32,9 +32,9 @@ const template = ({headline = '', copy = '', cta = '', tcs = false}) =>
 			</g>
 	</svg>
 </div>
-<h2 class="benchmark-survey--headline o-typography-subhead">${headline}</h2>
-<p class="benchmark-survey--copy">${copy}</p>
-<button class="benchmark-survey--cta">${cta}</button>
-${tcs ? `<p class="benchmark-survey--tcs"><a href="${tcs}">T&Cs apply</a></p>`: ''}`;
+<h2 class="o-overlay--benchmark-survey__headline o-typography-subhead">${headline}</h2>
+<p class="o-overlay--benchmark-survey__copy">${copy}</p>
+<button class="o-overlay--benchmark-survey__cta">${cta}</button>
+${tcs ? `<p class="o-overlay--benchmark-survey__tcs"><a href="${tcs}">T&Cs apply</a></p>`: ''}`;
 
 export default template;
