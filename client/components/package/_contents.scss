@@ -43,7 +43,7 @@
 		border-left: solid 10px;
 		border-left-color: $claret;
 		padding-left: 10px;
-		background-color: darken($wheat, 5%);
+		background-color: $wheatDark;
 	}
 
 	.package--extra & {
