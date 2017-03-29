@@ -52,7 +52,7 @@ describe('Package Handler', () => {
 		});
 
 		it('uses the package template', () => {
-			expect(result.template).to.equal('content-package');
+			expect(result.template).to.equal('package-index');
 			expect(result.contains.every(e => Number.isInteger(e.packageIndex))).to.be.true;
 			result.contains.forEach(e => expect(e.label).to.equal(''));
 		});

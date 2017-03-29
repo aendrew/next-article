@@ -1,0 +1,67 @@
+{{#defineBlock 'globalDataAttributes'}}data-content-id="{{id}}"{{/defineBlock}}
+{{#defineBlock 'head'}}
+{{> rel-canonical}}
+{{> rel-alternate}}
+{{#unless @root.flags.newSchema}}
+{{> schemaDotOrg}}
+{{/unless}}
+{{#if isPremium}}
+<meta name="robots" content="noindex">
+{{/if}}
+<link rel="amphtml" href="https://amp.ft.com/content/{{id}}" />
+<meta name="description" content="{{description}}"/>
+<link rel="stylesheet" href="https://build.origami.ft.com/v2/bundles/css?modules=o-expander@^4.2.2" />
+<script src="https://build.origami.ft.com/v2/bundles/js?modules=o-expander@^4.2.2"></script>
+{{/defineBlock}}
+<article
+	id="site-content"
+	role="main"
+	class="article{{#if designGenre}} article--brand{{/if}}{{#if design.theme}} design-theme--{{design.theme}}{{/if}}"
+	data-content-id="{{id}}"
+	data-syndicatable="{{canBeSyndicated}}">
+
+	{{> topper/main}}
+
+	<div class="article__wrapper">
+		<div class="o-grid-container">
+
+			<div class="article__main o-grid-row">
+				<div class="article__main__content">
+					{{> master-image-byline}}
+					{{> body-article bodyHTML=bodyHTML}}
+					{{> copyright-notice}}
+				</div>
+				<div class="article__main__rail" aria-hidden="true">
+					{{> ads/mid}}
+				</div>
+			</div>
+		</div>
+
+			{{#bigTeasers}}
+			<div class="o-teaser-collection package-onward--intropage">
+				<div class="o-grid-container">
+					<div class="o-grid-row">
+					{{#if title}}
+						<div data-o-grid-colspan="12">
+							<h2 class="package-onward__title o-teaser-collection__heading">{{ title }}</h2>
+						</div>
+					{{/if}}
+						{{#each items}}
+							<div data-o-grid-colspan="12 M6 L4" class="o-teaser-collection__item--stretched">
+								{{>n-teaser/templates/heavy presenter="	package" mods=../teaserMods
+												colspan='{"default": 12, "L": 12}' position='{"L": "top"}' widths="[600, 332]"
+												noTag=true noHeadshot=true isEditorsChoice=false isOpinion=false
+												lazyLoad=(gt @index 1)
+								}}
+							</div>
+						{{/each}}
+					</div>
+				</div>
+			</div>
+			{{/bigTeasers}}
+	</div>
+
+	{{>propensity-messaging-promo-unit}}
+
+	<script type="text/json" id="dehydrated-metadata">{{{json dehydratedMetadata}}}</script>
+</article>

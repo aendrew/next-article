@@ -8,7 +8,6 @@
 {{#if isPremium}}
 <meta name="robots" content="noindex">
 {{/if}}
-<link rel="amphtml" href="https://amp.ft.com/content/{{id}}" />
 <meta name="description" content="{{description}}"/>
 <link rel="stylesheet" href="https://build.origami.ft.com/v2/bundles/css?modules=o-expander@^4.2.2" />
 <script src="https://build.origami.ft.com/v2/bundles/js?modules=o-expander@^4.2.2"></script>
@@ -16,7 +15,7 @@
 <article
 	id="site-content"
 	role="main"
-	class="article{{#if designGenre}} article--brand{{/if}}"
+	class="article{{#if designGenre}} article--brand{{/if}}{{#if design.theme}} design-theme--{{design.theme}}{{/if}}"
 	data-content-id="{{id}}"
 	data-syndicatable="{{canBeSyndicated}}">
 
@@ -30,49 +29,63 @@
 						<div class="o-grid-row o-teaser-collection package-teasers--large">
 							{{#each items}}
 								<div data-o-grid-colspan="12 M6" class="o-teaser-collection__item--stretched">
-									{{>n-teaser/templates/heavy presenter="	package" mods=(array 'hero' 'centre' 'stretched')
+									{{>n-teaser/templates/heavy presenter="	package" mods=../teaserMods
 													colspan='{"default": 12, "L": 12}' position='{"L": "top"}' widths="[600, 332]"
-													noHeadshot=true isEditorsChoice=false isOpinion=false
-													lazyLoad=(gt @index 1) streamProperties=../../primaryBrandTag
+													noTag=true noHeadshot=true isEditorsChoice=false isOpinion=false
+													lazyLoad=(gt @index 1)
 									}}
 								</div>
 							{{/each}}
+							<div data-o-grid-colspan="12 M0 center">
+								<div class="o-ads in-article-advert advert"
+										data-o-ads-name="first-mpu"
+										data-o-ads-center="true"
+										data-o-ads-label="true"
+										data-o-ads-targeting="pos=top;"
+										data-o-ads-formats-default="MediumRectangle,Responsive"
+										data-o-ads-formats-small="MediumRectangle,Responsive"
+										data-o-ads-formats-medium="false"
+										data-o-ads-formats-large="false"
+										data-o-ads-formats-extra="false"
+										data-o-ads-collapse-empty="true"
+										aria-hidden="true">
+								</div>
+							</div>
 						</div>
 					</div>
 				{{/bigTeasers}}
 
 				{{#littleTeasers}}
-
-					<div class="o-ads in-article-advert advert"
-								data-o-ads-name="second-mpu"
-								data-o-ads-center="true"
-								data-o-ads-label="true"
-								data-o-ads-targeting="pos=mid;"
-								data-o-ads-formats-default="MediumRectangle,Responsive"
-								data-o-ads-formats-small="MediumRectangle,Responsive"
-								data-o-ads-formats-medium="false"
-								data-o-ads-formats-large="false"
-								data-o-ads-formats-extra="false"
-								data-o-ads-collapse-empty="true"
-								aria-hidden="true"></div>
-
 					<div class="o-teaser-collection">
 						{{#if title}}
 							<h2 class="o-teaser-collection__heading">{{ title }}</h2>
 						{{/if}}
 						{{#each items}}
 							<div class="o-teaser-collection__item">
-								{{>n-teaser/templates/heavy mods=(array 'small')
-										widths="[500,335]" streamProperties=../../primaryBrandTag
-										noHeadshot=true isEditorsChoice=false
+								{{>n-teaser/templates/heavy mods=../teaserMods
+										widths="[500,335]"
+										noTag=true noHeadshot=true isEditorsChoice=false
 										isOpinion=false hasImage=true lazyLoad=false}}
 							</div>
 						{{/each}}
 					</div>
+					<div class="o-ads in-article-advert advert"
+							data-o-ads-name="second-mpu"
+							data-o-ads-center="true"
+							data-o-ads-label="true"
+							data-o-ads-targeting="pos=mid;"
+							data-o-ads-formats-default="MediumRectangle,Responsive"
+							data-o-ads-formats-small="MediumRectangle,Responsive"
+							data-o-ads-formats-medium="false"
+							data-o-ads-formats-large="false"
+							data-o-ads-formats-extra="false"
+							data-o-ads-collapse-empty="true"
+							aria-hidden="true">
+					</div>
 				{{/littleTeasers}}
 			</div>
 
-			<div data-o-grid-colspan="hide L4" style="text-align:center;" aria-hidden="true">
+			<div data-o-grid-colspan="0 L4" style="text-align:center;" aria-hidden="true">
 				{{> ads/mid}}
 			</div>
 		</div>
