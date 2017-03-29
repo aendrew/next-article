@@ -16,10 +16,12 @@
 
 	.o-teaser-collection__heading {
 		z-index: 0;
-		padding: 30px 10px 10px;
-		margin-bottom: 30px;
 		box-sizing: border-box;
 		width: unset;
+		font-size: 22px;
+		padding: 34px 15px 15px;
+		font-weight: 600;
+		margin-bottom: 50px;
 	}
 
 	.o-teaser-collection__heading:before {
