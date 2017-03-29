@@ -5,8 +5,13 @@
 	margin-top: 24px;
 }
 
+// TODO: Refactor o-teaser and n-image so attributes need not be overriden for specific app cases.
 .o-teaser .n-image-wrapper--placeholder {
 	height: 0;
+
+	&.n-image-wrapper--square-placeholder {
+		padding-bottom: 100%;
+	}
 }
 
 //make the myFT follow box look okay with collection styles
