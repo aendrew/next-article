@@ -103,7 +103,7 @@ module.exports = function contentController (req, res, next) {
 			}
 
 			// TODO: do we need to do this for package pages?
-			if (content.type === 'article') {
+			if (content.type === 'article' || content.type === 'package') {
 				res.vary('ft-is-aud-dev');
 				res.vary('ft-blocked-url');
 				res.vary('ft-barrier-type');
