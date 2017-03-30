@@ -23,7 +23,7 @@ const getTopperSettings = (content, flags) => {
 	} else if (flags.contentPackages && content.type === 'package' && content.design && content.design.theme) {
 		const themeMap = {
 			'basic': {
-				bgColour: 'warm-1',
+				bgColour: 'wheat',
 				layout: 'split-text-left',
 				template: 'themed'
 			},
