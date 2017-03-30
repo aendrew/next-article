@@ -8,7 +8,7 @@
  * @return String                 Rendered template code
  */
 const template = ({headline = '', copy = '', cta = '', tcs = false}) =>
-`<i class="o-overlay--benchmark-survey__close-button" data-trackable="benchmark-survey-dismiss"></i>
+`<button class="o-overlay--benchmark-survey__close-button" data-trackable="benchmark-survey-dismiss"></button>
 <div class="o-overlay--benchmark-survey__graphic-header">
 	<svg width="57px" height="50px" viewBox="0 0 57 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<defs>
