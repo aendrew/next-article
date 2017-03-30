@@ -4,7 +4,7 @@ $navbar-height: 40px;
 
 	position: relative;
 	padding-left: 10px;
-	height: $navbar-height;
+	min-height: $navbar-height;
 
 	@include oGridRespondTo($from: M) {
 		padding-left: oGridGutter(M);
@@ -26,7 +26,8 @@ $navbar-height: 40px;
 
 .package__navbar-title {
 
-	line-height: $navbar-height;
+	line-height: 24px;
+	padding: 8px 60px 8px 0;
 
 	& > a:hover {
 		text-decoration: underline;
