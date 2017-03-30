@@ -1,21 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { EmailArticleData, emailArticleModes, EmailArticleView } from '@financial-times/n-email-article';
+import { $$ } from 'n-ui-foundations';
 import OShare from 'o-share';
 
 exports.init = function (flags) {
 
-	const shareContainers = document.querySelectorAll('[data-o-component=o-share]');
-
-	for (let i = 0; i < shareContainers.length; i++) {
-
-		if (shareContainers[i] && !shareContainers[i].classList.contains('data-o-share--js')) {
-
-			new OShare(shareContainers[i]);
-
-		}
-
-	}
+	$$('[data-o-component=o-share]')
+		.filter(shareContainer => !shareContainer.classList.contains('data-o-share--js'))
+		.forEach(shareContainer => new OShare(shareContainer));
 
 	const emailArticle = {}; // we will lazily load the email article stuff when they're needed
 	[...document.querySelectorAll('[data-n-article-email-clickable]')].forEach(button => {
