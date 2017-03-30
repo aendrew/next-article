@@ -4,9 +4,17 @@ import { EmailArticleData, emailArticleModes, EmailArticleView } from '@financia
 import OShare from 'o-share';
 
 exports.init = function (flags) {
-	const shareContainer = document.querySelector('[data-o-component=o-share]');
-	if (shareContainer && !shareContainer.classList.contains('data-o-share--js')) {
-		new OShare(shareContainer);
+
+	const shareContainers = document.querySelectorAll('[data-o-component=o-share]');
+
+	for (let i = 0; i < shareContainers.length; i++) {
+
+		if (shareContainers[i] && !shareContainers[i].classList.contains('data-o-share--js')) {
+
+			new OShare(shareContainers[i]);
+
+		}
+
 	}
 
 	const emailArticle = {}; // we will lazily load the email article stuff when they're needed
