@@ -26,7 +26,7 @@ export default function benchmarkSurvey (flags, opts = {
 
 	let shownCount = Number(window.localStorage.getItem(`${opts.sideboxId}-show-count`)) || 0;
 	const isRemoved = window.localStorage.getItem(`${opts.sideboxId}-ad-removed`) || false;
-	const isLoggedInUser = !!~document.cookie.indexOf('FT_User'); // Show only if authenticated user
+	const isLoggedInUser = !!~document.cookie.indexOf('FTSession'); // Show only if authenticated user
 	if (isLoggedInUser && hasLocalStorage && !isRemoved && shownCount <= opts.maxShowCount ) {
 		return new Promise((resolve) => {
 			const surveyOverlay = new Overlay('benchmark-survey', {
