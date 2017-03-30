@@ -44,6 +44,10 @@
 		display: none;
 	}
 
+	.o-overlay__content {
+		overflow: hidden;
+	}
+
 	&__close-button {
 		@include oIconsGetIcon('cross', oColorsGetPaletteColor('grey-tint1'), 32);
 		position: absolute;
