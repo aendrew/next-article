@@ -79,7 +79,7 @@ module.exports = function contentController (req, res, next) {
 				return res.redirect(302, `${webUrl}${webUrl.includes('?') ? '&' : '?'}ft_site=falcon&desktop=true`);
 			}
 
-			if (content.type === 'video' && res.locals.flags.newVideoPage) {
+			if (content.type === 'video' && res.locals.flags.newVideoPage === 'variant') {
 				return res.redirect(`/video/${req.params.id}`);
 			}
 
