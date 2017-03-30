@@ -62,6 +62,8 @@ export default function benchmarkSurvey (flags, opts = {
 					document.addEventListener('oOverlay.ready', () => {
 						const el = surveyOverlay.wrapper;
 
+						el.parentNode.style.overflow = 'hidden'; // Needed to prevent IE jankiness
+
 						el.querySelector('.o-overlay--benchmark-survey__close-button')
 							.addEventListener('click', () => {
 								window.localStorage.setItem(`${opts.sideboxId}-ad-removed`, true);
