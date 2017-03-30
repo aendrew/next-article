@@ -92,9 +92,14 @@ const handleResponse = (el, response) => {
 	const idNormalized = response.id ? '' + response.id : response.advertiser.split(' ').join('-').toLowerCase();
 	el.dataset.trackable = `type-${response.type} | id-${idNormalized}`;
 
-	const container = document.querySelector('.promoted-content')
+	const container = document.querySelector('.promoted-content');
 	container.classList.add('promoted-content--loaded');
 	container.classList.add(`promoted-content--${response.type}`);
+
+	const titleContainer = document.querySelector('.promoted-content__heading');
+	if (titleContainer) {
+		titleContainer.innerHTML = response.type === 'special-report' ? 'Special Reports' : 'Promoted Content';
+	}
 
 	response.colspan = '{"default": 12, "L": 6}';
 	response.position = '{"default": "embedded"}';
