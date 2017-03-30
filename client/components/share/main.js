@@ -6,8 +6,7 @@ import OShare from 'o-share';
 
 exports.init = function (flags) {
 
-	$$('[data-o-component=o-share]')
-		.filter(shareContainer => !shareContainer.classList.contains('data-o-share--js'))
+	$$('[data-o-component=o-share]:not(.data-o-share--js)')
 		.forEach(shareContainer => new OShare(shareContainer));
 
 	const emailArticle = {}; // we will lazily load the email article stuff when they're needed
