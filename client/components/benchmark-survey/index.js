@@ -72,7 +72,7 @@ export default function benchmarkSurvey (flags, opts = {
 						el.querySelector('.o-overlay--benchmark-survey__cta')
 							.addEventListener('click', () => {
 								window.localStorage.setItem(`${opts.sideboxId}-ad-removed`, true);
-								window.location.href = opts.ctaLink;
+								window.open(opts.ctaLink, '_blank');
 							});
 
 						el.classList.add('visible');
